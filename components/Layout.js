@@ -7,7 +7,7 @@ const Layout = (props) => (
     <Head>
       <title>
         {props.title ? `${props.title} | ` : ""}
-        Fi Studio
+        Néstor López Portfolio
       </title>
       {props.description ? (
         <meta name="description" content={props.description} />
@@ -27,12 +27,18 @@ const Layout = (props) => (
         box-sizing: border-box;
       }
 
+      html,
       body {
+        background-image:
+          radial-gradient(#0099FF33 1px, transparent 1px),
+          radial-gradient(#0099FF33 1px, transparent 1px);
+        background-position: 0 0, 25px 25px;
+        background-size: 50px 50px;
+        padding: 0;
         margin: 0;
         font-size: 20px;
         line-height: 1.7;
         font-weight: 400;
-        background: #fff;
         color: #454545;
         font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI",
           "Fira Sans", Avenir, "Helvetica Neue", "Lucida Grande", sans-serif;

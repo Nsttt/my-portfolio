@@ -3,16 +3,16 @@ import Gallery from "../components/Gallery";
 
 const Portfolio = () => {
   const images = [];
-  const imageCount = 14;
+  const imageCount = 0;
 
   for (let i = imageCount; i > 0; i--) {
-    images.push(`/static/portfolio/${i}.jpg`);
+    images.push(`/portfolio/${i}.jpg`);
   }
 
   return (
     <Layout title="Portfolio">
       <h1>Portfolio</h1>
-      <Gallery images={images} />
+      <Gallery images={images} /> 
     </Layout>
   );
 };

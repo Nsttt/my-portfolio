@@ -3,20 +3,20 @@ import Layout from "../components/Layout";
 import Gallery from "../components/Gallery";
 
 const images = [
-  "/static/portfolio/14.jpg",
-  "/static/portfolio/13.jpg",
-  "/static/portfolio/12.jpg",
-  "/static/portfolio/11.jpg",
+  "/portfolio/14.jpg",
+  "/portfolio/13.jpg",
+  "/portfolio/12.jpg",
+  "/portfolio/11.jpg",
 ];
 
 const Homepage = () => (
   <Layout>
     <div className="cover">
       <div className="hello">
-        <h1>Hi, we're Fi</h1>
-        <div>A fictional photography studio</div>
+        <h1>Hi, I'm Néstor</h1>
+        <div>A software engineering student.</div>
         <Link href="/services">
-          <a className="view-more">What we do</a>
+          <a className="view-more">What I do</a>
         </Link>
       </div>
     </div>
@@ -33,7 +33,7 @@ const Homepage = () => (
       .cover {
         position: relative;
         min-height: 600px;
-        background: transparent url(/static/cover.jpg) no-repeat center center;
+        background: transparent url(/cover.jpg) no-repeat center center;
         background-size: cover;
       }
       .hello {

@@ -1,13 +1,16 @@
 {
   "name": "nextjs-portfolio",
   "version": "0.1.0",
+  "description": "My portfolio made in Next.js",
+  "authors": "Nsttt",
   "private": true,
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export -o public"
+    "export": "next build && next export -o build"
   },
   "dependencies": {
     "global": "^4.4.0",

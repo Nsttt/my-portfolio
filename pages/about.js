@@ -1,25 +1,12 @@
 import Layout from "../components/Layout";
 
 const About = () => (
-  <Layout title="About us">
-    <h1>About Us</h1>
-    <ul className="company-info">
-      <li>
-        <span className="company">Fi Studio Inc</span>
-      </li>
-      <li>101 Elm Street</li>
-      <li>San Francisco, CA</li>
-      <li>
-        <a href="mailto:hi@fi.studio">hi@fi.studio</a>
-      </li>
-    </ul>
+  <Layout title="About Me">
+    <h1>About Me</h1>
     <div className="about-text">
-      <img src="/static/studio.jpg" />
+      <img src="/picture.jpg" />
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut est
-        euismod, iaculis ante efficitur, sodales nisl. Nulla non orci vitae nibh
-        ullamcorper finibus. Morbi a nisl tempor, sodales ex quis, aliquet
-        neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Hello! My Name is Néstor, I'm a software engineering student from Spain and I 
       </p>
       <p>
         Praesent gravida a diam ut faucibus. Class aptent taciti sociosqu ad
@@ -35,14 +22,22 @@ const About = () => (
         Nulla enim augue, placerat id malesuada at, maximus sed tortor.
       </p>
     </div>
+    <ul className="info">
+      <li>
+        <span className="email">Send me a Mail !</span>
+      </li>
+      <li>
+        <a href="mailto:nestor@nstlopez.com">nestor@nstlopez.com</a>
+      </li>
+    </ul>
     <style jsx>{`
-      .company-info {
-        margin: 0 0 100px 0;
+      .info {
+        margin: 0 0 50px 0;
         padding: 0;
         list-style: none;
         font-size: 18px;
       }
-      .company {
+      .email {
         font-weight: 700;
         font-size: 24px;
       }
@@ -50,7 +45,7 @@ const About = () => (
         color: #777;
         text-align: left;
         max-width: 800px;
-        margin: 0 auto 100px;
+        margin: 0 auto 30px;
         padding: 20px;
       }
       img {

@@ -1,6 +1,6 @@
 const Footer = () => (
   <div className="footer-wrapper">
-    <div className="copyright">© {new Date().getFullYear()} Fi Studio.</div>
+    <div className="copyright">© {new Date().getFullYear()} Nestor Lopez.</div>
     <style jsx>{`
       .footer-wrapper {
         text-align: center;
