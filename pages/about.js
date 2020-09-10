@@ -6,7 +6,8 @@ const About = () => (
     <div className="about-text">
       <img src="/picture.jpg" />
       <p>
-        Hello! My Name is Néstor, I'm a software engineering student from Spain and I 
+        Hello! My Name is Néstor, I'm a software engineering student from Spain
+        and I
       </p>
       <p>
         Praesent gravida a diam ut faucibus. Class aptent taciti sociosqu ad
@@ -14,6 +15,7 @@ const About = () => (
         a ipsum sagittis finibus ac in magna. Curabitur id mauris quis nulla
         commodo tristique.
       </p>
+      Í
       <p>
         Nunc eu mi et justo sodales vehicula. Vestibulum velit erat, tincidunt
         sed tortor id, viverra egestas felis. Cras in ullamcorper ex. Etiam diam

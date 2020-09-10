@@ -8,7 +8,7 @@ const Menu = () => (
       </Link>
     </li>
     <li>
-      <Link href="/services">
+      <Link href="/blog">
         <a>Services</a>
       </Link>
     </li>
