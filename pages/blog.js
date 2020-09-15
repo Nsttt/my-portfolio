@@ -1,60 +1,43 @@
-import fs from "fs";
-import matter from "gray-matter";
-
 import Layout from "../components/Layout";
 
-const Blog = (posts) => {
-<Layout title="`Blog`">
-    {posts.map(({ frontmatter: { title, description, date }, slug }) => (
-        <article key={slug}>
-          <header>
-            <h3 className="">
-              <Link href={"/post/[slug]"} as={`/post/${slug}`}>
-                <a className="">
-                  {title}
-                </a>
-              </Link>
-            </h3>
-            <span className="">{date}</span>
-          </header>
-          <section>
-            <p className="">{description}</p>
-          </section>
-        </article>
-      ))}
-</Layout>;
-}
-
-export async function getStaticProps() {
-  const files = fs.readdirSync(`${process.cwd()}/public/posts`);
-
-  const posts = files.map((filename) => {
-    const markdownWithMetadata = fs
-      .readFileSync(`public/posts/${filename}`)
-      .toString();
-
-    const { data } = matter(markdownWithMetadata);
-
-    // Convert post date to format: Month day, Year
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const formattedDate = data.date.toLocaleDateString("en-US", options);
-
-    const frontmatter = {
-      ...data,
-      date: formattedDate,
-    };
-
-    return {
-      slug: filename.replace(".md", ""),
-      frontmatter,
-    };
-  });
-
-  return {
-    props: {
-      posts,
-    },
-  };
-}
+const Blog = () => (
+  <Layout title="Blog">
+    <h1>Blog</h1>
+    <h1>Under construction...</h1>
+    <style jsx>{`
+      .blog {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .blog-list {
+        padding: 0 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .blog .item {
+        padding: 20px;
+        margin-bottom: 40px;
+        width: 50%;
+      }
+      img {
+        max-width: 100%;
+      }
+      h2 {
+        margin: 0 0 5px 0;
+      }
+      p {
+        font-size: 18px;
+        color: #777;
+      }
+      @media (max-width: 600px) {
+        .blog .item {
+          width: auto;
+          padding: 10px 20px;
+        }
+      }
+    `}</style>
+  </Layout >
+);
 
 export default Blog;

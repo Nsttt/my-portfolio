@@ -3,10 +3,8 @@ import Layout from "../components/Layout";
 import Gallery from "../components/Gallery";
 
 const images = [
-  "/portfolio/14.jpg",
-  "/portfolio/13.jpg",
-  "/portfolio/12.jpg",
-  "/portfolio/11.jpg",
+  "/portfolio/4.jpg",
+  "/portfolio/5.jpg"
 ];
 
 const Homepage = () => (

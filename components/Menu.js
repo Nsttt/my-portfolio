@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+
 const Menu = () => (
   <ul className="menu">
     <li>
@@ -9,7 +10,7 @@ const Menu = () => (
     </li>
     <li>
       <Link href="/blog">
-        <a>Services</a>
+        <a>Blog</a>
       </Link>
     </li>
     <li>
