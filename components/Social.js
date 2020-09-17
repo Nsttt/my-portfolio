@@ -1,12 +1,31 @@
-import Link from "next/link";
-import { FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaInstagram, FaTwitter, FaTwitch, FaGithub, } from "react-icons/fa";
 
 const Social = () => (
   <ul className="social">
     <li>
-      <Link href="https://discord.com/invite/qDXCrK4">
+      <a href="https://www.discord.com/invite/qDXCrK4" target="_blank">
         <FaDiscord />
-      </Link>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.github.com/nsttt" target="_blank">
+        <FaGithub />
+      </a>
+    </li>
+    <li>
+      <a href="https://www.twitch.tv/nesteansttt" target="_blank">
+        <FaTwitch />
+      </a>
+    </li>
+    <li>
+      <a href="https://www.instagram.com/nstlopez" target="_blank">
+        <FaInstagram />
+      </a>
+    </li>
+    <li>
+      <a href="https://www.twitter.com/nesteahd4k" target="_blank">
+        <FaTwitter />
+      </a>
     </li>
     <style jsx>{`
       .social {
@@ -14,6 +33,7 @@ const Social = () => (
         padding: 0;
         list-style: none;
         display: flex;
+        justify-content: center;
       }
       .social li {
         align-items: center;

@@ -1,11 +1,18 @@
 import Logo from "../components/Logo";
 import Menu from "../components/Menu";
+import Social from "../components/Social"
 
 const Header = () => (
   <div className="header-wrapper">
     <Logo />
+    <Social />
     <Menu />
     <style jsx>{`
+      .Social {
+        justify-content: center ;
+        
+      }
+
       .header-wrapper {
         padding: 30px;
         display: flex;

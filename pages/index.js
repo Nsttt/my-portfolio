@@ -13,7 +13,8 @@ const Homepage = () => (
       <div className="hello">
         <h1>Hi, I'm Néstor</h1>
         <div>A software engineering student.</div>
-        <Link href="/services">
+        <div>And development enthusiast.</div>
+        <Link href="/portfolio">
           <a className="view-more">What I do</a>
         </Link>
       </div>
