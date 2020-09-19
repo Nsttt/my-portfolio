@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import Contact from "../components/Contact"
 import Link from "next/link";
 
 const About = () => (
@@ -45,6 +46,10 @@ const About = () => (
           src="https://img.shields.io/badge/-Github_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white"
         />
         <img
+          alt="html5"
+          src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"
+        />
+        <img
           alt="Javascript"
           src="https://img.shields.io/badge/-Javascript-F6DB17?style=flat-square&logo=Javascript&logoColor=black"
         />
@@ -71,10 +76,6 @@ const About = () => (
         <img
           alt="Heroku"
           src="https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=heroku&logoColor=white"
-        />
-        <img
-          alt="redux"
-          src="https://img.shields.io/badge/-Redux-764ABC?style=flat-square&logo=redux&logoColor=white"
         />
         <img
           alt="GraphQL"
@@ -105,10 +106,6 @@ const About = () => (
           src="https://img.shields.io/badge/-Yarn-99c1de?style=flat-square&logo=yarn&logoColor=black"
         />
         <img
-          alt="html5"
-          src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"
-        />
-        <img
           alt="Prettier"
           src="https://img.shields.io/badge/-Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black"
         />
@@ -127,14 +124,15 @@ const About = () => (
       </div>
     </div>
 
-    <ul className="info">
+    <Contact />
+    {/* <ul className="info">
       <li>
         <span className="email">Send me a Mail !</span>
       </li>
       <li>
         <a href="mailto:nestor@nstlopez.com">nestor@nstlopez.com</a>
       </li>
-    </ul>
+    </ul> */}
     <style jsx>{`
       .info {
         margin: 0 0 50px 0;
