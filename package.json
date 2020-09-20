@@ -13,13 +13,12 @@
     "export": "next build && next export -o build"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "@sendgrid/mail": "^7.2.6",
+    "dotenv": "^8.2.0",
     "global": "^4.4.0",
     "next": "9.5.3",
-    "nodemailer": "^6.4.11",
-    "react": "16.13.1",
-    "react-autosize-textarea": "^7.1.0",
-    "react-dom": "16.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
     "react-markdown": "^4.3.1"
   },
