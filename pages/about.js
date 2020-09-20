@@ -123,16 +123,10 @@ const About = () => (
         />
       </div>
     </div>
-
-    <Contact />
-    {/* <ul className="info">
-      <li>
-        <span className="email">Send me a Mail !</span>
-      </li>
-      <li>
-        <a href="mailto:nestor@nstlopez.com">nestor@nstlopez.com</a>
-      </li>
-    </ul> */}
+    <div>
+      <span className="mail">Send me a Mail!</span>
+      <Contact />
+    </div>
     <style jsx>{`
       .info {
         margin: 0 0 50px 0;
@@ -155,6 +149,7 @@ const About = () => (
         float: right;
         margin: 10px 0 20px 20px;
       }
+      .mail,
       .code-with {
         margin: 0 0 50px 0;
         padding: 0;
