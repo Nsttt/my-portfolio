@@ -13,6 +13,8 @@
     "export": "next build && next export -o build"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.6.18",
+    "@next/mdx": "^9.5.3",
     "@sendgrid/mail": "^7.2.6",
     "dotenv": "^8.2.0",
     "global": "^4.4.0",

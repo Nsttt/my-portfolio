@@ -29,7 +29,7 @@ const Social = () => (
     </li>
     <style jsx>{`
       .social {
-        margin: 10px 0 0;
+        margin: 5px 0 0;
         padding: 0;
         list-style: none;
         display: flex;

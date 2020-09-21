@@ -5,7 +5,7 @@ import Social from "../components/Social"
 const Header = () => (
   <div className="header-wrapper">
     <Logo />
-    <Social className="social-bar"/>
+    <Social className="social"/>
     <Menu />
     <style jsx>{`
       .header-wrapper {
@@ -14,13 +14,16 @@ const Header = () => (
         justify-content: space-between;
         align-items: center;
       }
-      .social-bar {
-        align-items: left;
+      .social {
+        justify-content: left;
       }
       @media (max-width: 600px) {
         .header-wrapper {
           display: block;
           text-align: center;
+        }
+        .social {
+          
         }
       }
     `}</style>
