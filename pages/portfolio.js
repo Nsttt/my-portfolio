@@ -84,7 +84,9 @@ const Portfolio = () => (
         width: 50%;
       }
       img {
-        max-width: 100%;
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
       }
       h2 {
         margin: 0 0 5px 0;
