@@ -23,7 +23,7 @@ const Social = () => (
       </a>
     </li>
     <li>
-      <a href="https://www.twitter.com/nesteahd4k" target="_blank">
+      <a href="https://www.twitter.com/nstlopez" target="_blank">
         <FaTwitter />
       </a>
     </li>
