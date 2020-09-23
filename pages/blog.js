@@ -1,13 +1,9 @@
 import Layout from "../components/Layout";
-import { Post } from "../components/Post";
-import { posts } from "../getPosts";
 
 const Blog = () => (
   <Layout title="Blog">
     <h1>Blog</h1>
-    {posts.map((post) => (
-      <Post key={post.link} post={post} />
-    ))}
+    <h2>Under development...</h2>
     <style jsx>{``}</style>
   </Layout>
 );

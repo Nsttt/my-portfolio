@@ -1,6 +1,6 @@
-import Layout from "../components/Layout";
-import Contact from "../components/Contact"
 import Link from "next/link";
+import Layout from "../components/Layout";
+import Contact from "../components/Contact";
 
 const About = () => (
   <Layout title="About Me">
