@@ -6,7 +6,7 @@ const Portfolio = () => (
     <div className="portfolio">
       <div className="portfolio-list">
         <div className="item">
-          <a href="https://github.com/nsttt/githunter" target="_blank">
+          <a href="https://githunter.nstlopez.com" target="_blank">
             <img src="/portfolio/4.jpg" />
             <h2>Githunter: Starred Project Hunter</h2>
           </a>
@@ -30,7 +30,19 @@ const Portfolio = () => (
           </p>
         </div>
         <div className="item">
-          <a href="https://bdosa.nstlopez.com" target="_blank">
+          <a href="https://demonharem.nstlopez.com" target="_blank">
+            <img src="/portfolio/3.png" />
+            <h2>DemonHarem: A Helltaker fanpage</h2>
+          </a>
+          <p>
+            When Helltaker came out I loved it, the design of all the characters
+            seemed so original to me that I had to something about it. So I came
+            out with the idea of making a <del>shitpost</del> proper page about
+            it. It's made with Gulp, HTML & SASS and Javascript.
+          </p>
+        </div>
+        <div className="item">
+          <a href="https://scores.nstlopez.com" target="_blank">
             <img src="/portfolio/6.jpg" />
             <h2>BDO Score Analyzer</h2>
           </a>
@@ -39,6 +51,18 @@ const Portfolio = () => (
             when it comes to keeping track of their KDA, this app does the job.
             Transform any image you pass to a printable pdf. Made with Node and
             Tesseract.js.
+          </p>
+        </div>
+        <div className="item">
+          <a href="https://todo.nstlopez.com" target="_blank">
+            <img src="/portfolio/7.png" />
+            <h2>Yet another React Todo List</h2>
+          </a>
+          <p>
+            Not that much of a deal, it's one of my practices with React that I
+            actually found convenient to have, it was a good practice for me
+            since it made me work around and get used to LocalStorage on the
+            browser. It's made with pure React.
           </p>
         </div>
         <div className="item">
