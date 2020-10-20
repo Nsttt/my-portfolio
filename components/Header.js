@@ -1,7 +1,12 @@
 import Logo from "../components/Logo";
 import Menu from "../components/Menu";
-import { FaDiscord, FaInstagram, FaTwitter, FaTwitch, FaGithub, } from "react-icons/fa";
-
+import {
+  FaDiscord,
+  FaInstagram,
+  FaTwitter,
+  FaTwitch,
+  FaGithub,
+} from "react-icons/fa";
 
 const Header = () => (
   <div className="header-wrapper">
@@ -49,8 +54,6 @@ const Header = () => (
         .header-wrapper {
           display: block;
           text-align: center;
-        }
-        .social {
         }
       }
     `}</style>

@@ -13,19 +13,9 @@ const Layout = (props) => (
         <meta name="description" content={props.description} />
       ) : null}
     </Head>
-
     <Header />
-
     <div className="content-wrapper">{props.children}</div>
-
     <Footer />
-
-    <script
-      src="//instant.page/5.1.0"
-      type="module"
-      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"
-    ></script>
-
     <style jsx global>{`
       *,
       *::before,
@@ -80,9 +70,6 @@ const Layout = (props) => (
       img {
         max-width: 100%;
       }
-
-      /* Layout */
-
       .content-wrapper {
         min-height: 600px;
         text-align: center;

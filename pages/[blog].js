@@ -7,13 +7,16 @@ const Blog = ({ content, data }) => {
   const frontmatter = data;
 
   return (
-    <>
       <Layout>
         <h1>{frontmatter.title}</h1>
         <h3>{frontmatter.description}</h3>
         <ReactMarkdown escapeHtml={true} source={content} />
+        <style jsx>{`
+          h1{
+            color: blue;
+          }
+          `}</style>
       </Layout>
-    </>
   );
 };
 
