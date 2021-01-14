@@ -10,7 +10,7 @@ export default function Home() {
       </Head>
 
       <main>
-        On dev.
+        THIS IS A TEST FOR BEBSA NEUE.
       </main>
     </div>
   )
