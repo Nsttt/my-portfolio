@@ -1,9 +1,10 @@
-import Footer from "../components/core/Footer";
-import Header from "../components/core/Header";
-import "../styles/globals.css";
+import { GlobalStyles } from "../styles/global-styles";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </>
+  );
 }
-
-export default MyApp;
