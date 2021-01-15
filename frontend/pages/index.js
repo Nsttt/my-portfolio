@@ -1,18 +1,23 @@
 import Head from 'next/head'
 import { getAllProjects } from '../services/project/project.service'
+import { Header } from '../components';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        THIS IS A TEST FOR BEBSA NEUE.
-      </main>
-    </div>
+      <Header>
+        <Header.Frame>
+          <Header.Group>
+            <Header.Logo>NST Lopez</Header.Logo>
+          </Header.Group>
+        </Header.Frame>
+      </Header>
+    </>
   )
 }
 
