@@ -4,8 +4,7 @@ export const Background = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #301934;
-  background-image:
-    radial-gradient(#4f2956 1px, transparent 1px),
+  background-image: radial-gradient(#4f2956 1px, transparent 1px),
     radial-gradient(#4f2956 1px, transparent 1px);
   background-position: 0 0, 25px 25px;
   background-size: 50px 50px;
@@ -24,10 +23,11 @@ export const Container = styled.div`
 `;
 //TODO: Make logo display an image instead.
 export const Logo = styled.h2`
+  font-family: "BebasNeue";
   font-size: 32px;
   margin-right: 40px;
   cursor: pointer;
-  @media (min-width 1440px) {
+  @media (min-width: 1440px) {
     font-size: 26px;
   }
 `;
@@ -43,4 +43,14 @@ export const TextLink = styled.p`
 export const Group = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const SocialIcon = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  img {
+    filter: brightness(0) invert(1);
+    width: 16px;
+  }
 `;
