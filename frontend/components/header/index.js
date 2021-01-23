@@ -1,6 +1,13 @@
 import { BackgroundColor } from "chalk";
 import Link from "next/link";
-import { Logo, TextLink, Container, Group, Background } from "./styles/Header";
+import {
+  Logo,
+  TextLink,
+  Container,
+  Group,
+  Background,
+  SocialIcon,
+} from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
   return <Background {...restProps}>{children}</Background>;
@@ -27,5 +34,13 @@ Header.TextLink = function HeaderTextLink({ href, children, ...restProps }) {
     <Link href={href}>
       <TextLink {...restProps}>{children}</TextLink>
     </Link>
+  );
+};
+
+Header.SocialIcon = function HeaderSocialIcon({ href, src, ...restProps }) {
+  return (
+    <SocialIcon href={href} target="_blank" {...restProps} >
+      <img src={src} />
+    </SocialIcon>
   );
 };

@@ -45,12 +45,13 @@ export const Group = styled.div`
   align-items: center;
 `;
 
-export const SocialIcon = styled.button`
+export const SocialIcon = styled.a`
   cursor: pointer;
   background-color: transparent;
   border: 0;
+  margin: 10px;
   img {
-    filter: brightness(0) invert(1);
-    width: 16px;
+    width: 24px;
   }
 `;
+
