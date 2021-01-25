@@ -1,4 +1,3 @@
-import { BackgroundColor } from "chalk";
 import Link from "next/link";
 import {
   Logo,
