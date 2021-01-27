@@ -1,4 +1,4 @@
-import { Container, Title, SubTitle, FocusWord1, FocusWord2 } from './styles/Feature';
+import { Container, Title, SubTitle, FocusWord1, FocusWord2, CallToAction } from './styles/Feature';
 
 export default function Feature({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -17,3 +17,7 @@ Feature.Title = function FeatureTitle({ ...restProps }) {
 Feature.SubTitle = function FeatureSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
+
+Feature.CallToAction = function FeatureCallToAction({ children, ...restProps}) {
+  return <CallToAction {...restProps}>{children}</CallToAction>
+}

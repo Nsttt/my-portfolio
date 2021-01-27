@@ -8,12 +8,6 @@ export default function Home() {
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="preload"
-          href="../public/fonts/BebasNeue.ttf"
-          as="font"
-          crossOrigin=""
-        />
       </Head>
 
       <Header>
@@ -45,6 +39,7 @@ export default function Home() {
         <Feature>
           <Feature.Title>Esto es una prueba</Feature.Title>
           <Feature.SubTitle>PAra ver que tal se ve todo esto.</Feature.SubTitle>
+          <Feature.CallToAction>Click me</Feature.CallToAction>
         </Feature>
       </Header>
     </>

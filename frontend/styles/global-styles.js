@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 html, body {
-  font-family: Arial, sans-serif;
+  font-family: Arial;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: white;
@@ -14,8 +14,6 @@ html, body {
 
 @font-face {
   font-family: "BebasNeue";
-  src: url("../public/fonts/BebasNeue.ttf");
-  font-style: normal;
-  font-weight: 400;
+  src: url("/fonts/BebasNeue.ttf");
 }
 `;
