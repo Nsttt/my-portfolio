@@ -37,8 +37,8 @@ export default function Home() {
           </Header.Group>
         </Header.Frame>
         <Feature>
-          <Feature.Title>Esto es una prueba</Feature.Title>
-          <Feature.SubTitle>PAra ver que tal se ve todo esto.</Feature.SubTitle>
+          <Feature.Title />
+          <Feature.SubTitle>Learn more about me below</Feature.SubTitle>
           <Feature.CallToAction>Click me</Feature.CallToAction>
         </Feature>
       </Header>

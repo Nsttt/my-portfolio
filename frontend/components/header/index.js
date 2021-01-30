@@ -6,6 +6,7 @@ import {
   Group,
   Background,
   SocialIcon,
+  FocusWord
 } from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
@@ -19,11 +20,14 @@ Header.Frame = function HeaderFrame({ children, ...restProps }) {
 Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
-//TODO: Make logo display an image instead.
+
 Header.Logo = function HeaderLogo({ children, ...restProps }) {
   return (
     <Link href="/">
-      <Logo {...restProps}>{children}</Logo>
+      <Logo {...restProps}>
+        <FocusWord>Nst </FocusWord>
+        Lopez
+      </Logo>
     </Link>
   );
 };
