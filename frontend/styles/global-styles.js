@@ -5,7 +5,7 @@ html, body {
   font-family: Arial, "BebasNeue";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: white;
+    background-color: #000000;
     color: #ffffff;
     font-size: 16px;
     margin: 0;

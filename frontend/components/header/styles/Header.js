@@ -27,11 +27,6 @@ export const Logo = styled.h2`
   font-size: 26px;
   margin-right: 40px;
   cursor: pointer;
-  transition: .05s ease-in;
-
-  &:hover {
-    border-bottom: solid #d11c54;
-  }
 
   @media (min-width: 1449px) {
     font-size: 46px;
@@ -40,6 +35,11 @@ export const Logo = styled.h2`
 
 export const FocusWord = styled.span`
   color: #d11c54;
+
+  ${Logo}:hover & {
+    transition: .1s ease-in;
+    color: white;
+  }
 `;
 
 export const TextLink = styled.a`

@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import apolloClient from "../core/apolloClient.service";
+import apolloClient from "./apolloClient.service";
 
 export async function getAllProjects() {
   return apolloClient

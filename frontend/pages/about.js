@@ -1,16 +1,15 @@
 import { NextSeo } from "next-seo";
-import { getAllProjects } from "../services/project.service";
-import { Header, Feature } from "../components";
+import { Header } from "../components";
 
-export default function Home() {
+export default function About() {
   return (
     <>
-      <NextSeo title="Nestor Lopez Portfolio" />
+      <NextSeo />
 
       <Header>
         <Header.Frame>
           <Header.Group>
-            <Header.Logo>NST Lopez</Header.Logo>
+            <Header.Logo />
             <Header.TextLink href="/">Home</Header.TextLink>
             <Header.TextLink href="/portfolio">Portfolio</Header.TextLink>
             <Header.TextLink href="/about">About me</Header.TextLink>
@@ -33,18 +32,7 @@ export default function Home() {
             />
           </Header.Group>
         </Header.Frame>
-        <Feature>
-          <Feature.Title />
-          <Feature.SubTitle>Learn more about me below</Feature.SubTitle>
-          <Feature.CallToAction>Click me</Feature.CallToAction>
-        </Feature>
       </Header>
     </>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: { projects: await getAllProjects() },
-  };
 }
