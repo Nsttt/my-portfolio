@@ -1,10 +1,11 @@
-import { Container, Title, SubTitle, FocusWord1, FocusWord2, Button, Tag, Glitch } from './styles/Feature';
+import { Container, Title, SubTitle, FocusWord1, FocusWord2, Button, NotFound } from './styles/Feature';
+import Link from 'next/link';
 
 export default function Feature({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
 
-Feature.Title = function FeatureTitle({ ...restProps }) {
+Feature.MainTitle = function FeatureMainTitle({ ...restProps }) {
   return (
   <Title {...restProps}>
       Building<br />
@@ -14,14 +15,29 @@ Feature.Title = function FeatureTitle({ ...restProps }) {
   );
 };
 
+Feature.Title = function FeatureTitle({ children, ...restProps }) {
+  return (
+  <Title {...restProps}>{children}
+  </Title>
+  );
+};
 Feature.SubTitle = function FeatureSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
-Feature.CallToAction = function FeatureCallToAction({ children, ...restProps}) {
+Feature.Button = function FeatureButton({ href, children, ...restProps}) {
   return (
-  <Button {...restProps}>
-   {children}
-  </Button>
+    <Link href={href}>
+      <Button {...restProps}>
+        {children}
+      </Button>
+    </Link>
     )
 }
+
+Feature.NotFound = function FeatureNotFound({children, ...restProps}) {
+  return (
+    <NotFound {...restProps}>{children}</NotFound>
+  )
+}
+

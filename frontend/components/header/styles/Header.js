@@ -17,9 +17,19 @@ export const Container = styled.div`
   padding: 18px 0;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 1000px) {
     margin: 0 30px;
   }
+
+  @media (max-width: 527px) {
+    flex-direction: column;
+  }
+`;
+
+export const Group = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Logo = styled.h2`
@@ -28,8 +38,12 @@ export const Logo = styled.h2`
   margin-right: 40px;
   cursor: pointer;
 
-  @media (min-width: 1449px) {
+  @media (min-width: 1000px) {
     font-size: 46px;
+  }
+
+  @media (max-width: 527px) {
+    margin: 0;
   }
 `;
 
@@ -37,22 +51,21 @@ export const FocusWord = styled.span`
   color: #d11c54;
 
   ${Logo}:hover & {
-    transition: .1s ease-in;
+    transition: 0.1s ease-in;
     color: white;
   }
 `;
 
 export const TextLink = styled.a`
-  font-size: 22px;
+  font-size: 16px;
   line-height: normal;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   cursor: pointer;
   margin: 10px;
-`;
 
-export const Group = styled.div`
-  display: flex;
-  align-items: center;
+  @media (min-width: 1000px) {
+    font-size: 22px;
+  }
 `;
 
 export const SocialIcon = styled.a`
@@ -60,15 +73,22 @@ export const SocialIcon = styled.a`
   background-color: transparent;
   border: 0;
   margin: 10px;
-  opacity: .50;
-  transition: opacity .25s ease-in;
+  opacity: 0.5;
+  transition: opacity 0.25s ease-in;
 
   img {
-    width: 24px;
+    width: 18px;
+
+    @media (min-width: 1000px) {
+      width: 24px;
+    }
   }
 
   &:hover {
-    opacity: .95;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 527px) {
+    display: none;
   }
 `;
-

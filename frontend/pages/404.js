@@ -1,3 +1,17 @@
+import { Feature } from "../components";
+import HeaderContainer from "../containers/header";
+
 export default function PageNotFound() {
-  return <h1>not found</h1>;
+  return (
+    <>
+      <HeaderContainer>
+        <Feature>
+          <Feature.NotFound>
+            <Feature.Title>404 not found</Feature.Title>
+            <Feature.Button>Go Back</Feature.Button>
+          </Feature.NotFound>
+        </Feature>
+      </HeaderContainer>
+    </>
+  );
 }

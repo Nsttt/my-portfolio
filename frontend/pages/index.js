@@ -1,44 +1,19 @@
 import { NextSeo } from "next-seo";
 import { getAllProjects } from "../services/project.service";
-import { Header, Feature } from "../components";
+import { Feature } from "../components";
+import HeaderContainer from "../containers/header";
 
 export default function Home() {
   return (
     <>
       <NextSeo title="Nestor Lopez Portfolio" />
-
-      <Header>
-        <Header.Frame>
-          <Header.Group>
-            <Header.Logo>NST Lopez</Header.Logo>
-            <Header.TextLink href="/">Home</Header.TextLink>
-            <Header.TextLink href="/portfolio">Portfolio</Header.TextLink>
-            <Header.TextLink href="/about">About me</Header.TextLink>
-          </Header.Group>
-          <Header.Group>
-            <Header.SocialIcon
-              alt="LinkedIn"
-              src="/linkedin.png"
-              href="https://www.linkedin.com/in/nestorlopezlopez/"
-            />
-            <Header.SocialIcon
-              alt="Github"
-              src="/github.png"
-              href="https://github.com/Nsttt/"
-            />
-            <Header.SocialIcon
-              alt="Twitter"
-              src="/twitter.png"
-              href="https://twitter.com/nstlopez/"
-            />
-          </Header.Group>
-        </Header.Frame>
+      <HeaderContainer>
         <Feature>
-          <Feature.Title />
+          <Feature.MainTitle />
           <Feature.SubTitle>Learn more about me below</Feature.SubTitle>
-          <Feature.CallToAction>Click me</Feature.CallToAction>
+          <Feature.Button href="/portfolio">Click me</Feature.Button>
         </Feature>
-      </Header>
+      </HeaderContainer>
     </>
   );
 }
