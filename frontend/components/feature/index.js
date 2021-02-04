@@ -1,5 +1,4 @@
 import { Container, Title, SubTitle, FocusWord1, FocusWord2, Button, NotFound } from './styles/Feature';
-import Link from 'next/link';
 
 export default function Feature({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -25,13 +24,11 @@ Feature.SubTitle = function FeatureSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
-Feature.Button = function FeatureButton({ href, children, ...restProps}) {
+Feature.Button = function FeatureButton({children, ...restProps}) {
   return (
-    <Link href={href}>
       <Button {...restProps}>
         {children}
       </Button>
-    </Link>
     )
 }
 

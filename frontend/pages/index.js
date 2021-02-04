@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
+import Link from "next/link";
 import { getAllProjects } from "../services/project.service";
-import { Feature } from "../components";
+import { Feature, Hero } from "../components";
 import HeaderContainer from "../containers/header";
 
 export default function Home() {
@@ -11,8 +12,16 @@ export default function Home() {
         <Feature>
           <Feature.MainTitle />
           <Feature.SubTitle>Learn more about me below</Feature.SubTitle>
-          <Feature.Button href="/portfolio">Click me</Feature.Button>
+          <Link href="/portfolio">
+            <Feature.Button>Click me</Feature.Button>
+          </Link>
         </Feature>
+        <Hero>
+          <Hero.Container>
+            <Hero.Featured>Featured Project</Hero.Featured>
+            <Hero.Title>This is a test.</Hero.Title>
+          </Hero.Container>
+        </Hero>
       </HeaderContainer>
     </>
   );

@@ -61,7 +61,7 @@ export const Button = styled.a`
   text-align: center;
   max-width: 160px;
   padding: 12px 0;
-  margin: 80px 10% 500px 10%;
+  margin: 80px 10% 420px 10%;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;

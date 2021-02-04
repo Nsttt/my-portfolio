@@ -23,6 +23,9 @@
     },
     "description": {
       "type": "text"
+    },
+    "HeroProject": {
+      "type": "boolean"
     }
   }
 }
