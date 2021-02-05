@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export const Container = styled.div`
   display: grid;
@@ -61,7 +60,7 @@ export const Button = styled.a`
   text-align: center;
   max-width: 160px;
   padding: 12px 0;
-  margin: 80px 10% 420px 10%;
+  margin: 80px 10% 14em 10%;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
