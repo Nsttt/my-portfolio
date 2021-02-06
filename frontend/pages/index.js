@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import { getAllProjects } from "../services/project.service";
 import { Feature, Hero, Cards } from "../components";
 import HeaderContainer from "../containers/header";
+import FooterContainer from "../containers/footer";
 
 export default function Home() {
   return (
@@ -27,12 +28,13 @@ export default function Home() {
               calle ustée se calle ustée al ataquerl me cago en tus muelas.
             </Hero.Description>
           </Hero.Container>
-          <Hero.Image src="/featured.png"/>
+          <Hero.Image src="/featured.png" />
         </Hero>
         <Cards>
           <Cards.Container></Cards.Container>
         </Cards>
       </HeaderContainer>
+      <FooterContainer />
     </>
   );
 }
