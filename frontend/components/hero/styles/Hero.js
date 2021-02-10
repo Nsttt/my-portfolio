@@ -42,10 +42,12 @@ export const Description = styled.p`
 `;
 
 export const Image = styled.img`
+  overflow: hidden;
+  float: right;
   transform: translateX(10em);
-  max-width: 1000px;
-  max-height: 450px;
+  max-height: 600px;
   z-index: 100;
   border-radius: 20px;
   margin-top: 60px;
+  margin-bottom: 60px;
 `;

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Title = styled.h1`
@@ -10,11 +12,10 @@ export const Title = styled.h1`
   max-width: 640px;
   font-size: 110px;
   font-weight: 200;
-  text-align: left;
+  text-align: center;
   margin: 190px 10% 0 10%;
 
   @media (max-width: 600px) {
-    text-align: center;
     font-size: 35px;
     margin: 0 10% 0 10%;
   }
@@ -44,6 +45,7 @@ export const FocusWord2 = styled.span`
 export const SubTitle = styled.h2`
   color: white;
   font-size: 26px;
+  text-align: center;
   font-weight: normal;
   max-width: 640px;
   margin: 50px 10% 0px 10%;
@@ -58,7 +60,7 @@ export const SubTitle = styled.h2`
 export const Button = styled.a`
   display: block;
   text-align: center;
-  max-width: 160px;
+  min-width: 160px;
   padding: 12px 0;
   margin: 80px 10% 14em 10%;
   font-family: inherit;
