@@ -1,17 +1,19 @@
 import { NextSeo } from "next-seo";
 import { getAllProjects } from "../services/project.service";
-import { Feature, Hero, Cards } from "../components";
+import { Feature, Hero, Gallery } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
-export default function Home() {
+export default function Home({ projects }) {
   return (
     <>
       <NextSeo title="Nestor Lopez Portfolio" />
       <HeaderContainer>
         <Feature>
           <Feature.MainTitle />
-          <Feature.SubTitle>Learn more about me below</Feature.SubTitle>
+          <Feature.SubTitle>
+            Hello, I'm Nestor, a passionate software engineer student.
+          </Feature.SubTitle>
           <Feature.Button>Click me</Feature.Button>
         </Feature>
         <Hero>
@@ -30,9 +32,16 @@ export default function Home() {
           </Hero.Container>
           <Hero.Image src="/featured.png" />
         </Hero>
-        <Cards>
-          <Cards.Container></Cards.Container>
-        </Cards>
+        <Gallery>
+          <Gallery.Container>
+            <Gallery.Title>Check out my latest projects</Gallery.Title>
+            <Gallery.Group>
+              <Gallery.Card></Gallery.Card>
+              <Gallery.Card></Gallery.Card>
+              <Gallery.Card></Gallery.Card>
+            </Gallery.Group>
+          </Gallery.Container>
+        </Gallery>
       </HeaderContainer>
       <FooterContainer />
     </>
