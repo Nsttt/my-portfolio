@@ -1,4 +1,12 @@
-import { Background, Card, Container, Group, Title, Image } from "./styles/Gallery";
+import {
+  Background,
+  Card,
+  Container,
+  Group,
+  Title,
+  Image,
+  Button,
+} from "./styles/Gallery";
 
 export default function Gallery({ children, ...restProps }) {
   return <Background {...restProps}>{children}</Background>;
@@ -14,12 +22,16 @@ Gallery.Group = function GalleryGroup({ children, ...restProps }) {
 
 Gallery.Card = function GalleryCard({ src, ...restProps }) {
   return (
-  <Card {...restProps}>
-    <Image src="/featured.png" />
-  </Card>
+    <Card {...restProps}>
+      <Image src="/featured.png" />
+    </Card>
   );
 };
 
 Gallery.Title = function GalleryTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Gallery.Button = function GalleryButton({ children, ...restProps }) {
+  return <Button {...restProps}>{children}</Button>;
 };

@@ -34,12 +34,13 @@ export default function Home({ projects }) {
         </Hero>
         <Gallery>
           <Gallery.Container>
-            <Gallery.Title>Check out my latest projects</Gallery.Title>
+            <Gallery.Title>Latest Projects</Gallery.Title>
             <Gallery.Group>
               <Gallery.Card></Gallery.Card>
               <Gallery.Card></Gallery.Card>
               <Gallery.Card></Gallery.Card>
             </Gallery.Group>
+            <Gallery.Button>See more</Gallery.Button>
           </Gallery.Container>
         </Gallery>
       </HeaderContainer>

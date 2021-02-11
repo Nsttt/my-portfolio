@@ -15,7 +15,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 0 10%;
-  height: 570px;
+  height: auto;
 `;
 
 export const Group = styled.div`
@@ -28,16 +28,18 @@ export const Card = styled.div`
   height: 400px;
   width: 450px;
   transition: 0.4s ease-out;
-  box-shadow: 0px 7px 10px rgba(black, 0.5);
-  
+
   &:hover {
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
 `;
 
 export const Title = styled.h2`
+  color: white;
+  font-weight: 500;
   font-family: "BebasNeue";
-  font-size: 40px;
+  font-size: 46px;
+  margin: 0.5em 10% 0.3em 10%;
 `;
 
 export const Image = styled.img`
@@ -45,4 +47,31 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 25px;
+`;
+
+export const Button = styled.a`
+  display: block;
+  text-align: center;
+  min-width: 160px;
+  padding: 12px 0;
+  margin: 2em 10% 2em 10%;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #e5195f;
+  border: 0;
+  border-radius: 35px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+  &:hover {
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
+    transform: translate(0, -5px);
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
