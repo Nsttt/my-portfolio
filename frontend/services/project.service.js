@@ -13,6 +13,10 @@ export async function getAllProjects() {
             description
             created_at
             id
+            HeroProject
+            Image {
+              url
+            }
           }
         }
       `,
