@@ -25,7 +25,8 @@
       "type": "text"
     },
     "HeroProject": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "Image": {
       "model": "file",
