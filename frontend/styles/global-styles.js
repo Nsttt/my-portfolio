@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import { normalize } from "styled-normalize";
 
+// eslint-disable-next-line import/prefer-default-export
 export const GlobalStyles = createGlobalStyle`
+${normalize}
 html, body {
   font-family: Arial, "BebasNeue";
     -webkit-font-smoothing: antialiased;

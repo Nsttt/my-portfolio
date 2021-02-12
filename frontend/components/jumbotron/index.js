@@ -11,8 +11,18 @@ export default function Jumbotron({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
 
-Jumbotron.Group = function JumboGroup({ children, ...restProps }) {
-  return <Group {...restProps}>{children}</Group>;
+Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
+  const API_URL = process.env.NEXT_PUBLIC_STRAPI_HOST;
+
+  return (
+    <Group {...restProps}>
+      {projects.map((project) => (
+        <Project key={project.id}>
+          <Image src={API_URL + project.Image.url} />
+        </Project>
+      ))}
+    </Group>
+  );
 };
 
 Jumbotron.Title = function JumboTitle({ children, ...restProps }) {

@@ -5,7 +5,7 @@ import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
 export default function Portfolio({ projects }) {
-  console.log(projects);
+  // console.log(projects);
 
   return (
     <>
@@ -16,17 +16,7 @@ export default function Portfolio({ projects }) {
           <Jumbotron.Description>
             Here is a list of all my projects.
           </Jumbotron.Description>
-          <Jumbotron.Group>
-            {projects.map((project) => {
-              return (
-                <Jumbotron.Project key={project.id}>
-                  <Jumbotron.Image
-                    src={`${process.env.STRAPI_HOST + project.Image.url}`}
-                  />
-                </Jumbotron.Project>
-              );
-            })}
-          </Jumbotron.Group>
+          <Jumbotron.Group projects={projects} />
         </Jumbotron>
       </HeaderContainer>
       <FooterContainer />
@@ -34,7 +24,7 @@ export default function Portfolio({ projects }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: { projects: await getAllProjects() },
   };

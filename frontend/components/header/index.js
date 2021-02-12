@@ -6,7 +6,7 @@ import {
   Group,
   Background,
   SocialIcon,
-  FocusWord
+  FocusWord,
 } from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
@@ -40,10 +40,15 @@ Header.TextLink = function HeaderTextLink({ href, children, ...restProps }) {
   );
 };
 
-Header.SocialIcon = function HeaderSocialIcon({ href, src, ...restProps }) {
+Header.SocialIcon = function HeaderSocialIcon({
+  href,
+  src,
+  alt,
+  ...restProps
+}) {
   return (
-    <SocialIcon href={href} target="_blank" {...restProps} >
-      <img src={src} />
+    <SocialIcon href={href} target="_blank" {...restProps}>
+      <img src={src} alt={alt} />
     </SocialIcon>
   );
 };

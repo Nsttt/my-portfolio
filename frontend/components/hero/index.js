@@ -28,5 +28,5 @@ Hero.Description = function HeroDescription({ children, ...restProps }) {
 };
 
 Hero.Image = function HeroImage({ src, ...restProps }) {
-  return <Image src={src} {...restProps}></Image>;
+  return <Image src={src} {...restProps} />;
 };

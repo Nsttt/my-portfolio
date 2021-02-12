@@ -4,7 +4,7 @@ import { Feature, Hero, Gallery } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
-export default function Home({ projects }) {
+export default function Home({ projects, heroproject }) {
   return (
     <>
       <NextSeo title="Nestor Lopez Portfolio" />
@@ -19,26 +19,20 @@ export default function Home({ projects }) {
         <Hero>
           <Hero.Container>
             <Hero.Featured>Featured Project</Hero.Featured>
-            <Hero.Title>This is a test.</Hero.Title>
-            <Hero.Description>
-              Lorem fistrum papaar papaar pecador de la pradera diodenoo
-              quietooor al ataquerl quietooor. Me cago en tus muelas quietooor
-              jarl no te digo trigo por no llamarte Rodrigor ahorarr pecador te
-              va a hasé pupitaa. Apetecan apetecan va usté muy cargadoo te voy a
-              borrar el cerito. No puedor condemor mamaar mamaar al ataquerl a
-              gramenawer me cago en tus muelas de la pradera. Ese hombree se
-              calle ustée se calle ustée al ataquerl me cago en tus muelas.
-            </Hero.Description>
+            <Hero.Title>{heroproject.title}</Hero.Title>
+            <Hero.Description>{heroproject.description}</Hero.Description>
           </Hero.Container>
-          <Hero.Image src="/featured.png" />
+          <Hero.Image
+            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject.Image.url}
+          />
         </Hero>
         <Gallery>
           <Gallery.Container>
             <Gallery.Title>Latest Projects</Gallery.Title>
             <Gallery.Group>
-              <Gallery.Card></Gallery.Card>
-              <Gallery.Card></Gallery.Card>
-              <Gallery.Card></Gallery.Card>
+              <Gallery.Card />
+              <Gallery.Card />
+              <Gallery.Card />
             </Gallery.Group>
             <Gallery.Button>See more</Gallery.Button>
           </Gallery.Container>
@@ -50,7 +44,10 @@ export default function Home({ projects }) {
 }
 
 export async function getStaticProps() {
+  const getAll = await getAllProjects();
+  const getHero = getAll.find((project) => project.HeroProject === true);
+
   return {
-    props: { projects: await getAllProjects() },
+    props: { projects: getAll, heroproject: getHero },
   };
 }

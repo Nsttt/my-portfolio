@@ -6,7 +6,7 @@ export default function About() {
     <>
       <NextSeo />
 
-      <HeaderContainer></HeaderContainer>
+      <HeaderContainer />
     </>
   );
 }

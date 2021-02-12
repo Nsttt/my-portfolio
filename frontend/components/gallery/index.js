@@ -23,7 +23,7 @@ Gallery.Group = function GalleryGroup({ children, ...restProps }) {
 Gallery.Card = function GalleryCard({ src, ...restProps }) {
   return (
     <Card {...restProps}>
-      <Image src="/featured.png" />
+      <Image src={src} />
     </Card>
   );
 };
