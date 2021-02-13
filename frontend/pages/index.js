@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { getAllProjects } from "../services/project.service";
+import { getAllProjects, getHeroProject } from "../services/project.service";
 import { Feature, Hero, Gallery } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
@@ -19,20 +19,23 @@ export default function Home({ projects, heroproject }) {
         <Hero>
           <Hero.Container>
             <Hero.Featured>Featured Project</Hero.Featured>
-            <Hero.Title>{heroproject.title}</Hero.Title>
-            <Hero.Description>{heroproject.description}</Hero.Description>
+            <Hero.Title>{heroproject[0].title}</Hero.Title>
+            <Hero.Description>{heroproject[0].description}</Hero.Description>
           </Hero.Container>
           <Hero.Image
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject.Image.url}
+            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject[0].Image.url}
           />
         </Hero>
         <Gallery>
           <Gallery.Container>
             <Gallery.Title>Latest Projects</Gallery.Title>
             <Gallery.Group>
-              <Gallery.Card />
-              <Gallery.Card />
-              <Gallery.Card />
+              {projects.slice(0, 3).map((project) => (
+                <Gallery.Card
+                  key={project.id}
+                  src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url}
+                />
+              ))}
             </Gallery.Group>
             <Gallery.Button>See more</Gallery.Button>
           </Gallery.Container>
@@ -45,9 +48,9 @@ export default function Home({ projects, heroproject }) {
 
 export async function getStaticProps() {
   const getAll = await getAllProjects();
-  const getHero = getAll.find((project) => project.HeroProject === true);
+  const getHero = await getHeroProject();
 
   return {
-    props: { projects: getAll, heroproject: getHero },
+    props: { heroproject: getHero, projects: getAll },
   };
 }

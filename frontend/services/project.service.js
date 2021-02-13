@@ -38,3 +38,21 @@ export async function getByPermaLink() {
     })
     .then((result) => result.data.articleByPermaLink);
 }
+
+export async function getHeroProject() {
+  return apolloClient
+    .query({
+      query: gql`
+        {
+          projects(where: { HeroProject: true }) {
+            title
+            description
+            Image {
+              url
+            }
+          }
+        }
+      `,
+    })
+    .then((result) => result.data.projects);
+}
