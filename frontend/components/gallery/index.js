@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Background,
   Card,
@@ -20,11 +21,13 @@ Gallery.Group = function GalleryGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Gallery.Card = function GalleryCard({ src, ...restProps }) {
+Gallery.Card = function GalleryCard({ imgSrc, href, as, ...restProps }) {
   return (
-    <Card {...restProps}>
-      <Image src={src} />
-    </Card>
+    <Link href={`/project/[id]?id=${href}`} as={`/project/${as}`}>
+      <Card {...restProps}>
+        <Image src={imgSrc} />
+      </Card>
+    </Link>
   );
 };
 

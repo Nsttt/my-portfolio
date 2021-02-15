@@ -49,7 +49,6 @@ export const Logo = styled.h2`
 
 export const FocusWord = styled.span`
   color: #d11c54;
-
   ${Logo}:hover & {
     transition: 0.1s ease-in;
     color: white;
