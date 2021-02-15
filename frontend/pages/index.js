@@ -33,7 +33,11 @@ export default function Home({ projects, heroproject }) {
               {projects.slice(0, 3).map((project) => (
                 <Gallery.Card
                   key={project.id}
-                  src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url}
+                  href={project.permalink}
+                  as={project.permalink}
+                  imgSrc={
+                    process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url
+                  }
                 />
               ))}
             </Gallery.Group>

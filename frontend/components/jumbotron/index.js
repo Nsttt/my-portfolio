@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Container,
   Image,
@@ -17,9 +18,15 @@ Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
   return (
     <Group {...restProps}>
       {projects.map((project) => (
-        <Project key={project.id}>
-          <Image src={API_URL + project.Image.url} />
-        </Project>
+        <Link
+          key={project.id}
+          href={`/project/[id]?id=${project.permalink}`}
+          as={`/project/${project.permalink}`}
+        >
+          <Project>
+            <Image src={API_URL + project.Image.url} />
+          </Project>
+        </Link>
       ))}
     </Group>
   );

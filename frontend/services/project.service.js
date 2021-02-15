@@ -24,19 +24,22 @@ export async function getAllProjects() {
     .then((result) => result.data.projects);
 }
 
-export async function getByPermaLink() {
+export async function getByPermaLink(permalink) {
   return apolloClient
     .query({
       query: gql`
         {
-          projectByPermaLink(permalink: "primer-proyecto") {
+          projectByPermaLink(permalink: "${permalink}") {
             title
             body
+            Image {
+              url
+            }
           }
         }
       `,
     })
-    .then((result) => result.data.articleByPermaLink);
+    .then((result) => result.data.projectByPermaLink);
 }
 
 export async function getHeroProject() {
