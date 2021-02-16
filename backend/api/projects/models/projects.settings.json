@@ -38,6 +38,11 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "categories": {
+      "collection": "category",
+      "via": "projects",
+      "dominant": true
     }
   }
 }
