@@ -1,17 +1,10 @@
-import { useRouter } from "next/router";
 import marked from "marked";
-import Modal from "react-modal";
 import { Project } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
-import ModalContainer from "../../containers/modal";
-
-Modal.setAppElement("#__next");
 
 export default function ProjectPage({ project }) {
-  const router = useRouter();
-
   return (
     <>
       <HeaderContainer>
@@ -24,17 +17,6 @@ export default function ProjectPage({ project }) {
         </Project>
       </HeaderContainer>
       <FooterContainer />
-
-      <Modal
-        isOpen={!!router.query.id}
-        onRequestClose={() => router.push("/portfolio")}
-      >
-        <ModalContainer
-          title={project.title}
-          body={project.body}
-          imageUrl={project.Image.url}
-        />
-      </Modal>
     </>
   );
 }

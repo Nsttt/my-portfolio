@@ -5,8 +5,6 @@ import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
 export default function Portfolio({ projects }) {
-  // console.log(projects);
-
   return (
     <>
       <NextSeo />

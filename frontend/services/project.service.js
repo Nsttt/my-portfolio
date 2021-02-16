@@ -59,3 +59,21 @@ export async function getHeroProject() {
     })
     .then((result) => result.data.projects);
 }
+
+export async function getGallery() {
+  return apolloClient
+    .query({
+      query: gql`
+        {
+          projects(limit: 3) {
+            id
+            permalink
+            Image {
+              url
+            }
+          }
+        }
+      `,
+    })
+    .then((result) => result.data.projects);
+}

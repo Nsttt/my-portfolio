@@ -5,4 +5,3 @@ export { default as Gallery } from "./gallery";
 export { default as Footer } from "./footer";
 export { default as Jumbotron } from "./jumbotron";
 export { default as Project } from "./project";
-export { default as Modal } from "./modal";

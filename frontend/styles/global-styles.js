@@ -15,6 +15,13 @@ html, body {
     padding: 0;
 }
 
+a {
+  color: #ed2e61;
+  :hover {
+    color: white;
+  }
+}
+
 @font-face {
   font-family: "BebasNeue";
   src: url("/fonts/BebasNeue.ttf");

@@ -50,7 +50,7 @@ export const Logo = styled.h2`
 export const FocusWord = styled.span`
   color: #d11c54;
   ${Logo}:hover & {
-    transition: 0.1s ease-in;
+    transition: 1s ease-in;
     color: white;
   }
 `;
@@ -61,9 +61,15 @@ export const TextLink = styled.a`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   cursor: pointer;
   margin: 10px;
+  transition: all 1s;
+
+  :hover {
+    color: white;
+    background-color: #d11c54;
+  }
 
   @media (min-width: 1000px) {
-    font-size: 22px;
+    font-size: 24px;
   }
 `;
 

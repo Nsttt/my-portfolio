@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { getAllProjects, getHeroProject } from "../services/project.service";
+import { getGallery, getHeroProject } from "../services/project.service";
 import { Feature, Hero, Gallery } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
@@ -30,7 +30,7 @@ export default function Home({ projects, heroproject }) {
           <Gallery.Container>
             <Gallery.Title>Latest Projects</Gallery.Title>
             <Gallery.Group>
-              {projects.slice(0, 3).map((project) => (
+              {projects.map((project) => (
                 <Gallery.Card
                   key={project.id}
                   href={project.permalink}
@@ -51,10 +51,10 @@ export default function Home({ projects, heroproject }) {
 }
 
 export async function getStaticProps() {
-  const getAll = await getAllProjects();
-  const getHero = await getHeroProject();
-
   return {
-    props: { heroproject: getHero, projects: getAll },
+    props: {
+      heroproject: await getHeroProject(),
+      projects: await getGallery(),
+    },
   };
 }

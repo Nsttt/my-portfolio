@@ -20,5 +20,4 @@ export const TextLink = styled.a`
   margin-right: 20px;
   color: white;
   font-size: 17px;
-  text-decoration: none;
 `;
