@@ -24,15 +24,24 @@ export const Title = styled.h1`
   font-size: 60px;
   letter-spacing: 0.5rem;
   color: #ed2e61;
+  margin-bottom: 0px;
 `;
 
-export const SubTitle = styled.h2``;
+export const SubTitle = styled.h2`
+  margin-top: 5px;
+  margin-bottom: 40px;
+  font-size: 20px;
+`;
 
 export const Body = styled.div`
   font-size: 22px;
 `;
 
-export const Label = styled.img``;
+export const Label = styled.img`
+  margin-right: 5px;
+  height: 25px;
+  width: 80px;
+`;
 
 export const Group = styled.div``;
 

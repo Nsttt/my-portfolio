@@ -43,6 +43,9 @@
       "collection": "category",
       "via": "projects",
       "dominant": true
+    },
+    "subtitle": {
+      "type": "string"
     }
   }
 }

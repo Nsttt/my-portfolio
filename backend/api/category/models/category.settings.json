@@ -11,10 +11,10 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "category": {
+    "name": {
       "type": "string"
     },
-    "label": {
+    "icon": {
       "model": "file",
       "via": "related",
       "allowedTypes": [

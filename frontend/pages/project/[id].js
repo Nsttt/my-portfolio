@@ -13,6 +13,19 @@ export default function ProjectPage({ project }) {
             src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url}
           />
           <Project.Title>{project.title}</Project.Title>
+          {project.subtitle ? (
+            <Project.SubTitle>{project.subtitle}</Project.SubTitle>
+          ) : (
+            ""
+          )}
+          <Project.Group>
+            {project.categories.map((label) => (
+              <Project.Label
+                id={label.name}
+                src={process.env.NEXT_PUBLIC_STRAPI_HOST + label.icon.url}
+              />
+            ))}
+          </Project.Group>
           <Project.Body body={project.body} />
         </Project>
       </HeaderContainer>

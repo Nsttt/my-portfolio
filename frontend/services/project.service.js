@@ -31,9 +31,16 @@ export async function getByPermaLink(permalink) {
         {
           projectByPermaLink(permalink: "${permalink}") {
             title
+            subtitle
             body
             Image {
               url
+            }
+            categories {
+              icon {
+                url
+              }
+              name
             }
           }
         }
