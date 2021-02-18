@@ -10,7 +10,7 @@ export default function ProjectPage({ project }) {
       <HeaderContainer>
         <Project>
           <Project.TopImage
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url}
+            src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.image.url}
           />
           <Project.Title>{project.title}</Project.Title>
           {project.subtitle ? (
@@ -19,13 +19,26 @@ export default function ProjectPage({ project }) {
             ""
           )}
           <Project.Group>
+            <Project.Button
+              alt="GitHub"
+              href={project.git}
+              color="#E219E6"
+              imgSrc="/github.png"
+            >
+              See code
+            </Project.Button>
+            <Project.Button alt="Web" color="#e5195f" imgSrc="/globe.svg">
+              Open
+            </Project.Button>
+          </Project.Group>
+          <Project.LabelGroup>
             {project.categories.map((label) => (
               <Project.Label
-                id={label.name}
+                key={label.name}
                 src={process.env.NEXT_PUBLIC_STRAPI_HOST + label.icon.url}
               />
             ))}
-          </Project.Group>
+          </Project.LabelGroup>
           <Project.Body body={project.body} />
         </Project>
       </HeaderContainer>

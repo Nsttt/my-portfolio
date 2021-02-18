@@ -13,8 +13,8 @@ export async function getAllProjects() {
             description
             created_at
             id
-            HeroProject
-            Image {
+            heroproject
+            image {
               url
             }
           }
@@ -33,14 +33,16 @@ export async function getByPermaLink(permalink) {
             title
             subtitle
             body
-            Image {
+            link
+            git
+            image {
               url
             }
             categories {
+              name
               icon {
                 url
               }
-              name
             }
           }
         }
@@ -54,10 +56,10 @@ export async function getHeroProject() {
     .query({
       query: gql`
         {
-          projects(where: { HeroProject: true }) {
+          projects(where: { heroproject: true }) {
             title
             description
-            Image {
+            image {
               url
             }
           }
@@ -75,7 +77,7 @@ export async function getGallery() {
           projects(limit: 3) {
             id
             permalink
-            Image {
+            image {
               url
             }
           }

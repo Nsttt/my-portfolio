@@ -23,7 +23,7 @@ export default function Home({ projects, heroproject }) {
             <Hero.Description>{heroproject[0].description}</Hero.Description>
           </Hero.Container>
           <Hero.Image
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject[0].Image.url}
+            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject[0].image.url}
           />
         </Hero>
         <Gallery>
@@ -36,7 +36,7 @@ export default function Home({ projects, heroproject }) {
                   href={project.permalink}
                   as={project.permalink}
                   imgSrc={
-                    process.env.NEXT_PUBLIC_STRAPI_HOST + project.Image.url
+                    process.env.NEXT_PUBLIC_STRAPI_HOST + project.image.url
                   }
                 />
               ))}

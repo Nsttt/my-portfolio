@@ -24,11 +24,11 @@
     "description": {
       "type": "text"
     },
-    "HeroProject": {
+    "heroproject": {
       "type": "boolean",
       "default": false
     },
-    "Image": {
+    "image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
@@ -45,6 +45,12 @@
       "dominant": true
     },
     "subtitle": {
+      "type": "string"
+    },
+    "git": {
+      "type": "string"
+    },
+    "link": {
       "type": "string"
     }
   }

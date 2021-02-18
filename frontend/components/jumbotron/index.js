@@ -24,7 +24,7 @@ Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
           as={`/project/${project.permalink}`}
         >
           <Project>
-            <Image src={API_URL + project.Image.url} />
+            <Image src={API_URL + project.image.url} />
           </Project>
         </Link>
       ))}
