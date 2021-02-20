@@ -6,16 +6,25 @@ export async function getAllProjects() {
     .query({
       query: gql`
         {
-          projects {
+          projects(sort: "created_at:desc") {
             permalink
+            heroproject
+            git
+            link
             title
+            subtitle
             body
             description
             created_at
             id
-            heroproject
             image {
               url
+            }
+            categories {
+              name
+              icon {
+                url
+              }
             }
           }
         }
@@ -74,7 +83,7 @@ export async function getGallery() {
     .query({
       query: gql`
         {
-          projects(limit: 3) {
+          projects(sort: "created_at:desc", limit: 3) {
             id
             permalink
             image {
