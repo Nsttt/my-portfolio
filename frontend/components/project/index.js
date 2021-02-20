@@ -44,12 +44,16 @@ Project.Button = function ProjectButton({
   ...restProps
 }) {
   return (
-    <a href={href} target="_blank" rel="noreferrer">
-      <Button color={color} {...restProps}>
-        <Icon src={imgSrc} alt={alt} />
-        {children}
-      </Button>
-    </a>
+    <Button
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      color={color}
+      {...restProps}
+    >
+      <Icon src={imgSrc} alt={alt} />
+      {children}
+    </Button>
   );
 };
 

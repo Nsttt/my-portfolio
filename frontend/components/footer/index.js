@@ -10,7 +10,7 @@ Footer.Container = function FooterContainer({ children, ...restProps }) {
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
   return (
-    <TextLink href={href} {...restProps}>
+    <TextLink href={href} target="__blank" {...restProps}>
       {children}
     </TextLink>
   );

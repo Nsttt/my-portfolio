@@ -50,9 +50,10 @@ export const Label = styled.img`
   width: 80px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
+  display: inline-block;
+  min-width: 160px;
   text-align: center;
-  min-width: 150px;
   margin: 0 20px 30px 0;
   padding: 12px 0;
   font-size: 18px;
