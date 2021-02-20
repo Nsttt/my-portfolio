@@ -6,6 +6,8 @@ import {
   Description,
   Project,
   Group,
+  InnerTitle,
+  InnerDesc,
 } from "./styles/Jumbotron";
 
 export default function Jumbotron({ children, ...restProps }) {
@@ -24,6 +26,12 @@ Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
           as={`/project/${project.permalink}`}
         >
           <Project>
+            <InnerTitle>
+              {project.title}
+              <br />
+              <InnerDesc>{project.subtitle}</InnerDesc>
+            </InnerTitle>
+
             <Image src={API_URL + project.image.url} />
           </Project>
         </Link>

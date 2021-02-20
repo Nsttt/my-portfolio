@@ -16,16 +16,20 @@ export const Group = styled.div`
 export const Title = styled.h1`
   font-family: "BebasNeue";
   text-align: center;
+  font-size: 60px;
 `;
 
 export const Description = styled.p`
   text-align: center;
+  font-size: 22px;
 `;
 
 export const Project = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  background-color: black;
+  border-radius: 15px;
+  align-items: center;
 `;
 
 export const Image = styled.img`
@@ -34,4 +38,25 @@ export const Image = styled.img`
   height: 100%;
   border-radius: 15px;
   cursor: pointer;
+  transition: all 0.3s;
+
+  :hover {
+    opacity: 0.1;
+  }
+`;
+
+export const InnerTitle = styled.h2`
+  display: none;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  transition: ease-in 2s;
+
+  ${Project}:hover & {
+    display: block;
+  }
+`;
+
+export const InnerDesc = styled.span`
+  font-size: 16px;
 `;

@@ -12,7 +12,7 @@ export default function Portfolio({ projects }) {
         <Jumbotron>
           <Jumbotron.Title>Project List</Jumbotron.Title>
           <Jumbotron.Description>
-            Here is a list of all my projects.
+            All projects I've made so far, detailed.
           </Jumbotron.Description>
           <Jumbotron.Group projects={projects} />
         </Jumbotron>
