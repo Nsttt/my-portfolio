@@ -44,3 +44,20 @@ export async function getEmail() {
     })
     .then((result) => result.data.email.email);
 }
+
+export async function getLabels() {
+  return apolloClient
+    .query({
+      query: gql`
+        {
+          categories {
+            name
+            icon {
+              url
+            }
+          }
+        }
+      `,
+    })
+    .then((result) => result.data.categories);
+}

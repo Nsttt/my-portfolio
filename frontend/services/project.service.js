@@ -66,6 +66,7 @@ export async function getHeroProject() {
       query: gql`
         {
           projects(where: { heroproject: true }) {
+            permalink
             title
             description
             image {
@@ -86,6 +87,8 @@ export async function getGallery() {
           projects(sort: "created_at:desc", limit: 3) {
             id
             permalink
+            title
+            subtitle
             image {
               url
             }
