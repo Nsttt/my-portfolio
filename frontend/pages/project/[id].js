@@ -23,7 +23,7 @@ export default function ProjectPage({ project }) {
               alt="GitHub"
               href={project.git}
               color="#E219E6"
-              imgSrc="/github.png"
+              imgSrc="/github.svg"
             >
               See code
             </Project.Button>

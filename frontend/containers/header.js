@@ -13,17 +13,17 @@ export default function HeaderContainer({ children }) {
         <Header.Group>
           <Header.SocialIcon
             alt="LinkedIn"
-            src="/linkedin.png"
+            src="/linkedin.svg"
             href="https://www.linkedin.com/in/nestorlopezlopez/"
           />
           <Header.SocialIcon
             alt="Github"
-            src="/github.png"
+            src="/github.svg"
             href="https://github.com/Nsttt/"
           />
           <Header.SocialIcon
             alt="Twitter"
-            src="/twitter.png"
+            src="/twitter.svg"
             href="https://twitter.com/nstlopez/"
           />
         </Header.Group>
