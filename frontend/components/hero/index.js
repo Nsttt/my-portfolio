@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Background,
   Container,
@@ -15,8 +16,12 @@ Hero.Container = function HeroContainer({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 };
 
-Hero.Title = function HeroTitle({ children, ...restProps }) {
-  return <Title {...restProps}>{children}</Title>;
+Hero.Title = function HeroTitle({ href, as, children, ...restProps }) {
+  return (
+    <Link href={`/project/[id]?id=${href}`} as={`/project/${as}`}>
+      <Title {...restProps}>{children}</Title>
+    </Link>
+  );
 };
 
 Hero.Featured = function HeroFeatured({ children, ...restProps }) {

@@ -12,14 +12,19 @@ export default function Home({ projects, heroproject }) {
         <Feature>
           <Feature.MainTitle />
           <Feature.SubTitle>
-            Hello, I'm Nestor, a passionate software engineer student.
+            Hello, I'm Nestor, a passionate full-stack software engineer.
           </Feature.SubTitle>
           <Feature.Button>Click me</Feature.Button>
         </Feature>
         <Hero>
           <Hero.Container>
             <Hero.Featured>Featured Project</Hero.Featured>
-            <Hero.Title>{heroproject[0].title}</Hero.Title>
+            <Hero.Title
+              href={heroproject[0].permalink}
+              as={heroproject[0].permalink}
+            >
+              {heroproject[0].title}
+            </Hero.Title>
             <Hero.Description>{heroproject[0].description}</Hero.Description>
           </Hero.Container>
           <Hero.Image
@@ -38,6 +43,8 @@ export default function Home({ projects, heroproject }) {
                   imgSrc={
                     process.env.NEXT_PUBLIC_STRAPI_HOST + project.image.url
                   }
+                  title={project.title}
+                  subtitle={project.subtitle}
                 />
               ))}
             </Gallery.Group>

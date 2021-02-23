@@ -19,26 +19,48 @@ export const Container = styled.div`
 `;
 
 export const Group = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
 `;
 
 export const Card = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
+  border-radius: 25px;
   height: 400px;
   width: 450px;
-  transition: 0.4s ease-out;
+  transition: 0.4s all;
+  background-color: black;
 
   &:hover {
-    transform: translateY(10px);
+    transform: translateY(-10px);
   }
 `;
 
-export const Title = styled.h2`
+export const InnerTitle = styled.h2`
+  display: none;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  transition: ease-in 2s;
+
+  ${Card}:hover & {
+    display: block;
+  }
+`;
+
+export const InnerDesc = styled.span`
+  font-size: 16px;
+`;
+
+export const Title = styled.h1`
   color: white;
   font-weight: 500;
   font-family: "BebasNeue";
-  font-size: 46px;
+  font-size: 52px;
   margin: 0.5em 10% 0.3em 10%;
 `;
 
@@ -48,6 +70,10 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 25px;
+
+  &:hover {
+    opacity: 0.1;
+  }
 `;
 
 export const Button = styled.a`

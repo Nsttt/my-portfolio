@@ -33,6 +33,12 @@ export const Title = styled.h2`
   font-size: 60px;
   text-align: left;
   margin: 0;
+  cursor: pointer;
+  transition: 1s all;
+
+  &:hover {
+    color: #ed2e61;
+  }
 `;
 
 export const Description = styled.p`
@@ -42,6 +48,7 @@ export const Description = styled.p`
 `;
 
 export const Image = styled.img`
+  position: relative;
   overflow: hidden;
   float: right;
   transform: translateX(10em);

@@ -3,16 +3,36 @@ import marked from "marked";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 import { Biography } from "../components";
-import { getBiography, getEmail, getPhoto } from "../services/about.service";
+import {
+  getBiography,
+  getEmail,
+  getLabels,
+  getPhoto,
+} from "../services/about.service";
 
-export default function About({ email, photo, body }) {
+export default function About({ email, photo, body, labels }) {
   return (
     <>
       <NextSeo />
       <HeaderContainer>
         <Biography>
-          <Biography.Title>Test</Biography.Title>
-          <Biography.Body body={body.body} />
+          <Biography.Title>About me</Biography.Title>
+          <Biography.Image
+            src={process.env.NEXT_PUBLIC_STRAPI_HOST + photo.url}
+          />
+          <Biography.Body body={body} />
+          <Biography.SubTitle>
+            I have experience working with
+          </Biography.SubTitle>
+          <Biography.Labels>
+            {labels.map((label) => (
+              <Biography.Label
+                key={label.name}
+                src={process.env.NEXT_PUBLIC_STRAPI_HOST + label.icon.url}
+                alt={label.name}
+              />
+            ))}
+          </Biography.Labels>
         </Biography>
       </HeaderContainer>
       <FooterContainer />
@@ -21,18 +41,17 @@ export default function About({ email, photo, body }) {
 }
 
 export async function getStaticProps() {
-  const email = await getEmail();
-  const photo = await getPhoto();
   const biography = await getBiography();
-
-  const body = marked(biography, {
-    baseUrl: process.env.NEXT_PUBLIC_STRAPI_HOST,
-  });
+  const parsedBody = () =>
+    marked(biography, {
+      baseUrl: process.env.NEXT_PUBLIC_STRAPI_HOST,
+    });
   return {
     props: {
-      email: { email },
-      photo: { photo },
-      body: { body },
+      email: await getEmail(),
+      photo: await getPhoto(),
+      body: parsedBody(),
+      labels: await getLabels(),
     },
   };
 }

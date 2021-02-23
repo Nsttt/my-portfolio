@@ -7,6 +7,8 @@ import {
   Title,
   Image,
   Button,
+  InnerTitle,
+  InnerDesc,
 } from "./styles/Gallery";
 
 export default function Gallery({ children, ...restProps }) {
@@ -21,10 +23,22 @@ Gallery.Group = function GalleryGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Gallery.Card = function GalleryCard({ imgSrc, href, as, ...restProps }) {
+Gallery.Card = function GalleryCard({
+  imgSrc,
+  href,
+  as,
+  title,
+  subtitle,
+  ...restProps
+}) {
   return (
     <Link href={`/project/[id]?id=${href}`} as={`/project/${as}`}>
       <Card {...restProps}>
+        <InnerTitle>
+          {title}
+          <br />
+          <InnerDesc>{subtitle}</InnerDesc>
+        </InnerTitle>
         <Image src={imgSrc} />
       </Card>
     </Link>

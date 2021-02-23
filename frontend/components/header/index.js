@@ -47,7 +47,7 @@ Header.SocialIcon = function HeaderSocialIcon({
   ...restProps
 }) {
   return (
-    <SocialIcon href={href} target="_blank" {...restProps}>
+    <SocialIcon href={href} target="_blank" rel="noreferrer" {...restProps}>
       <img src={src} alt={alt} />
     </SocialIcon>
   );
