@@ -3,6 +3,7 @@ import { Project } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
+import NewsletterContainer from "../../containers/newsletter";
 
 export default function ProjectPage({ project }) {
   return (
@@ -27,7 +28,12 @@ export default function ProjectPage({ project }) {
             >
               See code
             </Project.Button>
-            <Project.Button alt="Web" color="#e5195f" imgSrc="/globe.svg">
+            <Project.Button
+              alt="Web"
+              href={project.link}
+              color="#e5195f"
+              imgSrc="/globe.svg"
+            >
               Open
             </Project.Button>
           </Project.Group>
@@ -40,6 +46,7 @@ export default function ProjectPage({ project }) {
             ))}
           </Project.LabelGroup>
           <Project.Body body={project.body} />
+          <NewsletterContainer />
         </Project>
       </HeaderContainer>
       <FooterContainer />
