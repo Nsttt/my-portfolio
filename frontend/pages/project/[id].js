@@ -1,9 +1,8 @@
 import marked from "marked";
-import { Project } from "../../components";
+import { Project, Coffee } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
-import NewsletterContainer from "../../containers/newsletter";
 
 export default function ProjectPage({ project }) {
   return (
@@ -20,22 +19,31 @@ export default function ProjectPage({ project }) {
             ""
           )}
           <Project.Group>
-            <Project.Button
-              alt="GitHub"
-              href={project.git}
-              color="#E219E6"
-              imgSrc="/github.svg"
-            >
-              See code
-            </Project.Button>
-            <Project.Button
-              alt="Web"
-              href={project.link}
-              color="#e5195f"
-              imgSrc="/globe.svg"
-            >
-              Open
-            </Project.Button>
+            {project.git ? (
+              <Project.Button
+                alt="GitHub"
+                href={project.git}
+                color="#E219E6"
+                imgSrc="/github.svg"
+              >
+                See code
+              </Project.Button>
+            ) : (
+              ""
+            )}
+            {project.link ? (
+              <Project.Button
+                alt="Web"
+                href={project.link}
+                color="#e5195f"
+                imgSrc="/globe.svg"
+              >
+                Open
+              </Project.Button>
+            ) : (
+              ""
+            )}
+            <Coffee />
           </Project.Group>
           <Project.LabelGroup>
             {project.categories.map((label) => (
@@ -46,7 +54,6 @@ export default function ProjectPage({ project }) {
             ))}
           </Project.LabelGroup>
           <Project.Body body={project.body} />
-          <NewsletterContainer />
         </Project>
       </HeaderContainer>
       <FooterContainer />

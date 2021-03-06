@@ -55,13 +55,13 @@ export const Button = styled.a`
   min-width: 160px;
   text-align: center;
   margin: 0 20px 30px 0;
-  padding: 12px 0;
+  padding: 0.7rem 1rem 0.7rem 1rem;
   font-size: 18px;
   font-weight: 700;
   color: #fff;
   background: ${(props) => props.color};
   border: 0;
-  border-radius: 3px;
+  border-radius: 5px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
