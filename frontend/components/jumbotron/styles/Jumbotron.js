@@ -11,6 +11,14 @@ export const Group = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   margin: 0 10%;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 527px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const Title = styled.h1`
@@ -22,6 +30,10 @@ export const Title = styled.h1`
 export const Description = styled.p`
   text-align: center;
   font-size: 22px;
+
+  @media (max-width: 1000px) {
+    font-size: 18px;
+  }
 `;
 
 export const Project = styled.div`

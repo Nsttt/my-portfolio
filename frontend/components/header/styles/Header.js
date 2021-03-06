@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   display: flex;
+  min-height: 88.7vh;
   flex-direction: column;
   background-color: #301934;
   background-image: radial-gradient(#4f2956 1px, transparent 1px),
@@ -34,15 +35,16 @@ export const Group = styled.div`
 
 export const Logo = styled.h2`
   font-family: "BebasNeue";
-  font-size: 26px;
+  font-size: 46px;
   margin-right: 40px;
   cursor: pointer;
 
-  @media (min-width: 1000px) {
-    font-size: 46px;
+  @media (max-width: 1000px) {
+    font-size: 26px;
   }
 
   @media (max-width: 527px) {
+    text-align: center;
     margin: 0;
   }
 `;
@@ -50,26 +52,26 @@ export const Logo = styled.h2`
 export const FocusWord = styled.span`
   color: #d11c54;
   ${Logo}:hover & {
-    transition: 1s ease-in;
+    transition: 0.5s ease-in;
     color: white;
   }
 `;
 
 export const TextLink = styled.a`
-  font-size: 16px;
+  font-size: 24px;
   line-height: normal;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   cursor: pointer;
   margin: 10px;
-  transition: all 1s;
+  transition: all 0.5s;
 
   :hover {
     color: white;
     background-color: #d11c54;
   }
 
-  @media (min-width: 1000px) {
-    font-size: 24px;
+  @media (max-width: 1000px) {
+    font-size: 16px;
   }
 `;
 
@@ -82,10 +84,10 @@ export const SocialIcon = styled.a`
   transition: opacity 0.25s ease-in;
 
   img {
-    width: 18px;
+    width: 24px;
 
-    @media (min-width: 1000px) {
-      width: 24px;
+    @media (max-width: 1000px) {
+      width: 18px;
     }
   }
 

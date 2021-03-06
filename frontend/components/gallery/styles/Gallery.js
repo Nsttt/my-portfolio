@@ -22,6 +22,10 @@ export const Group = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const Card = styled.div`
@@ -31,7 +35,6 @@ export const Card = styled.div`
   margin: 10px;
   border-radius: 25px;
   height: 400px;
-  width: 450px;
   transition: 0.4s all;
   background-color: black;
 
@@ -57,6 +60,7 @@ export const InnerDesc = styled.span`
 `;
 
 export const Title = styled.h1`
+  text-align: center;
   color: white;
   font-weight: 500;
   font-family: "BebasNeue";

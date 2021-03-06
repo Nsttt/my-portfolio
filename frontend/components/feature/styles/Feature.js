@@ -9,14 +9,13 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-family: "BebasNeue";
   color: white;
-  max-width: 640px;
   font-size: 110px;
   font-weight: 200;
   text-align: center;
   margin: 190px 10% 0 10%;
 
   @media (max-width: 600px) {
-    font-size: 35px;
+    font-size: 70px;
     margin: 0 10% 0 10%;
   }
 `;
@@ -28,7 +27,7 @@ export const FocusWord1 = styled.span`
   font-weight: 500;
   margin: auto;
   @media (max-width: 600px) {
-    font-size: 35px;
+    font-size: 70px;
   }
 `;
 
@@ -38,7 +37,7 @@ export const FocusWord2 = styled.span`
   font-weight: 500;
   margin: auto;
   @media (max-width: 600px) {
-    font-size: 35px;
+    font-size: 70px;
   }
 `;
 
@@ -80,7 +79,6 @@ export const Button = styled.a`
   }
 
   @media (max-width: 600px) {
-    display: none;
   }
 `;
 

@@ -26,6 +26,10 @@ export const Featured = styled.h3`
   color: #ed2e61;
   letter-spacing: 0.3rem;
   margin-bottom: 1px;
+
+  @media (max-width: 1000px) {
+    text-align: center;
+  }
 `;
 
 export const Title = styled.h2`
@@ -40,12 +44,20 @@ export const Title = styled.h2`
   &:hover {
     color: #ed2e61;
   }
+
+  @media (max-width: 1000px) {
+    text-align: center;
+  }
 `;
 
 export const Description = styled.p`
   font-size: 20px;
   text-align: left;
   max-width: 600px;
+
+  @media (max-width: 1000px) {
+    text-align: center;
+  }
 `;
 
 export const Image = styled.img`
@@ -63,5 +75,9 @@ export const Image = styled.img`
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  @media (max-width: 1200px) {
+    display: none;
   }
 `;

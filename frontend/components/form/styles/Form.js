@@ -18,6 +18,7 @@ export const Title = styled.h1`
 
 export const SubTitle = styled.h2`
   font-size: 26px;
+  text-align: center;
 `;
 
 export const Input = styled.input`
@@ -38,6 +39,10 @@ export const Input = styled.input`
   &:focus {
     border-bottom-color: #e5195f;
     outline: 0;
+  }
+
+  @media (max-width: 690px) {
+    width: 40vh;
   }
 `;
 
@@ -62,6 +67,10 @@ export const Body = styled.textarea`
     border-bottom-color: #e5195f;
     outline: 0;
   }
+
+  @media (max-width: 690px) {
+    width: 40vh;
+  }
 `;
 
 export const Button = styled.button`
@@ -83,8 +92,4 @@ export const Button = styled.button`
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -5px);
   }
-`;
-
-export const Message = styled.div`
-  display: none;
 `;
