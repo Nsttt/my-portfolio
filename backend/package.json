@@ -11,7 +11,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.17.0"
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^8.1.0",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "knex": "<0.20.0",
