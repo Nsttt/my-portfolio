@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Container,
   Title,
@@ -18,7 +19,7 @@ Feature.MainTitle = function FeatureMainTitle({ ...restProps }) {
       Building
       <br />
       <FocusWord1>software</FocusWord1>
-      for
+      &nbsp;for
       <br />
       <FocusWord2>humans</FocusWord2>
     </Title>
@@ -32,8 +33,12 @@ Feature.SubTitle = function FeatureSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
-Feature.Button = function FeatureButton({ children, ...restProps }) {
-  return <Button {...restProps}>{children}</Button>;
+Feature.Button = function FeatureButton({ children, href, ...restProps }) {
+  return (
+    <Link href={href}>
+      <Button {...restProps}>{children}</Button>
+    </Link>
+  );
 };
 
 Feature.NotFound = function FeatureNotFound({ children, ...restProps }) {

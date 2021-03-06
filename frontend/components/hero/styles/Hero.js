@@ -31,6 +31,7 @@ export const Featured = styled.h3`
 export const Title = styled.h2`
   font-family: "BebasNeue";
   font-size: 60px;
+  letter-spacing: 0.2rem;
   text-align: left;
   margin: 0;
   cursor: pointer;
@@ -42,7 +43,7 @@ export const Title = styled.h2`
 `;
 
 export const Description = styled.p`
-  font-size: 18px;
+  font-size: 20px;
   text-align: left;
   max-width: 600px;
 `;
@@ -51,10 +52,16 @@ export const Image = styled.img`
   position: relative;
   overflow: hidden;
   float: right;
+  cursor: pointer;
   transform: translateX(10em);
   max-height: 600px;
   z-index: 100;
   border-radius: 20px;
   margin-top: 60px;
   margin-bottom: 60px;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;

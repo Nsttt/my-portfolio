@@ -32,6 +32,10 @@ Hero.Description = function HeroDescription({ children, ...restProps }) {
   return <Description {...restProps}>{children}</Description>;
 };
 
-Hero.Image = function HeroImage({ src, ...restProps }) {
-  return <Image src={src} {...restProps} />;
+Hero.Image = function HeroImage({ src, href, as, ...restProps }) {
+  return (
+    <Link href={`/project/[id]?id=${href}`} as={`/project/${as}`}>
+      <Image src={src} {...restProps} />
+    </Link>
+  );
 };

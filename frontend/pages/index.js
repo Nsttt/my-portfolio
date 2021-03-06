@@ -14,7 +14,7 @@ export default function Home({ projects, heroproject }) {
           <Feature.SubTitle>
             Hello, I'm Nestor, a passionate full-stack software engineer.
           </Feature.SubTitle>
-          <Feature.Button>Click me</Feature.Button>
+          <Feature.Button href="/contact">Say hi 👋</Feature.Button>
         </Feature>
         <Hero>
           <Hero.Container>
@@ -29,6 +29,8 @@ export default function Home({ projects, heroproject }) {
           </Hero.Container>
           <Hero.Image
             src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject[0].image.url}
+            href={heroproject[0].permalink}
+            as={heroproject[0].permalink}
           />
         </Hero>
         <Gallery>

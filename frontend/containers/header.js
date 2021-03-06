@@ -8,7 +8,8 @@ export default function HeaderContainer({ children }) {
           <Header.Logo>NST Lopez</Header.Logo>
           <Header.TextLink href="/">Home</Header.TextLink>
           <Header.TextLink href="/portfolio">Portfolio</Header.TextLink>
-          <Header.TextLink href="/about">About me</Header.TextLink>
+          <Header.TextLink href="/about">About</Header.TextLink>
+          <Header.TextLink href="/contact">Contact</Header.TextLink>
         </Header.Group>
         <Header.Group>
           <Header.SocialIcon

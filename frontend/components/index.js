@@ -7,3 +7,5 @@ export { default as Jumbotron } from "./jumbotron";
 export { default as Project } from "./project";
 export { default as Biography } from "./biography";
 export { default as Newsletter } from "./newsletter";
+export { default as Form } from "./form";
+export { default as Coffee } from "./coffee";
