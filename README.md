@@ -1,3 +1,1 @@
-New version of my portfolio.
-
-Still work in progress.
+Readme still not ready.
