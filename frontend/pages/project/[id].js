@@ -11,9 +11,7 @@ export default function ProjectPage({ project }) {
       <NextSeo title={project.title} />
       <HeaderContainer>
         <Project>
-          <Project.TopImage
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + project.image.url}
-          />
+          <Project.TopImage src={project.image.url} />
           <Project.Title>{project.title}</Project.Title>
           {project.subtitle ? (
             <Project.SubTitle>{project.subtitle}</Project.SubTitle>
@@ -49,10 +47,7 @@ export default function ProjectPage({ project }) {
           </Project.Group>
           <Project.LabelGroup>
             {project.categories.map((label) => (
-              <Project.Label
-                key={label.name}
-                src={process.env.NEXT_PUBLIC_STRAPI_HOST + label.icon.url}
-              />
+              <Project.Label key={label.name} src={label.icon.url} />
             ))}
           </Project.LabelGroup>
           <Project.Body body={project.body} />

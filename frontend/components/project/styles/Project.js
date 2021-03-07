@@ -47,7 +47,6 @@ export const Label = styled.img`
   vertical-align: middle;
   margin-right: 5px;
   height: 25px;
-  width: 80px;
 `;
 
 export const Button = styled.a`

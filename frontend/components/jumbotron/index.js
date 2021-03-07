@@ -15,8 +15,6 @@ export default function Jumbotron({ children, ...restProps }) {
 }
 
 Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
-  const API_URL = process.env.NEXT_PUBLIC_STRAPI_HOST;
-
   return (
     <Group {...restProps}>
       {projects.map((project) => (
@@ -32,7 +30,7 @@ Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
               <InnerDesc>{project.subtitle}</InnerDesc>
             </InnerTitle>
 
-            <Image src={API_URL + project.image.url} />
+            <Image src={project.image.url} />
           </Project>
         </Link>
       ))}

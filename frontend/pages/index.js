@@ -28,7 +28,7 @@ export default function Home({ projects, heroproject }) {
             <Hero.Description>{heroproject[0].description}</Hero.Description>
           </Hero.Container>
           <Hero.Image
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + heroproject[0].image.url}
+            src={heroproject[0].image.url}
             href={heroproject[0].permalink}
             as={heroproject[0].permalink}
           />
@@ -42,9 +42,7 @@ export default function Home({ projects, heroproject }) {
                   key={project.id}
                   href={project.permalink}
                   as={project.permalink}
-                  imgSrc={
-                    process.env.NEXT_PUBLIC_STRAPI_HOST + project.image.url
-                  }
+                  imgSrc={project.image.url}
                   title={project.title}
                   subtitle={project.subtitle}
                 />

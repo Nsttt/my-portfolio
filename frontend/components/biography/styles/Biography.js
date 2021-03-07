@@ -21,9 +21,9 @@ export const Labels = styled.div``;
 
 export const Label = styled.img`
   vertical-align: middle;
-  margin-right: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   height: 25px;
-  width: 80px;
 `;
 
 export const Image = styled.img`

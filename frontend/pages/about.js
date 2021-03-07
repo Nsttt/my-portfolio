@@ -12,9 +12,7 @@ export default function About({ photo, body, labels }) {
       <HeaderContainer>
         <Biography>
           <Biography.Title>About me</Biography.Title>
-          <Biography.Image
-            src={process.env.NEXT_PUBLIC_STRAPI_HOST + photo.url}
-          />
+          <Biography.Image src={photo.url} />
           <Biography.Body body={body} />
           <Biography.SubTitle>
             I have experience working with
@@ -23,7 +21,7 @@ export default function About({ photo, body, labels }) {
             {labels.map((label) => (
               <Biography.Label
                 key={label.name}
-                src={process.env.NEXT_PUBLIC_STRAPI_HOST + label.icon.url}
+                src={label.icon.url}
                 alt={label.name}
               />
             ))}
