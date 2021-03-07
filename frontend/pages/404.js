@@ -8,7 +8,7 @@ export default function PageNotFound() {
         <Feature>
           <Feature.NotFound>
             <Feature.Title>404 not found</Feature.Title>
-            <Feature.Button>Go Back</Feature.Button>
+            <Feature.Button href="/">Go Back</Feature.Button>
           </Feature.NotFound>
         </Feature>
       </HeaderContainer>
