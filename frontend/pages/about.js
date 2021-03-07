@@ -3,17 +3,12 @@ import marked from "marked";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 import { Biography } from "../components";
-import {
-  getBiography,
-  getEmail,
-  getLabels,
-  getPhoto,
-} from "../services/about.service";
+import { getBiography, getLabels, getPhoto } from "../services/about.service";
 
-export default function About({ email, photo, body, labels }) {
+export default function About({ photo, body, labels }) {
   return (
     <>
-      <NextSeo />
+      <NextSeo title="About" />
       <HeaderContainer>
         <Biography>
           <Biography.Title>About me</Biography.Title>
@@ -48,7 +43,6 @@ export async function getStaticProps() {
     });
   return {
     props: {
-      email: await getEmail(),
       photo: await getPhoto(),
       body: parsedBody(),
       labels: await getLabels(),

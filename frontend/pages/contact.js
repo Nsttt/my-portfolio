@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { NextSeo } from "next-seo";
 import { Form } from "../components";
 import FooterContainer from "../containers/footer";
 import HeaderContainer from "../containers/header";
 
 export default function Contact() {
-  const [status, setStatus] = useState({
+  const [state, setState] = useState({
     submitted: false,
     submitting: false,
     info: { error: false, msg: null },
@@ -17,7 +18,7 @@ export default function Contact() {
 
   const handleRespose = (status, msg) => {
     if (status === 200) {
-      setStatus({
+      setState({
         submitted: true,
         submitting: false,
         info: { error: false, msg },
@@ -28,7 +29,7 @@ export default function Contact() {
         message: "",
       });
     } else {
-      setStatus({
+      setState({
         info: { error: true, msg },
       });
     }
@@ -40,7 +41,7 @@ export default function Contact() {
       ...prev,
       [e.target.id]: e.target.value,
     }));
-    setStatus({
+    setState({
       submitted: false,
       submitting: false,
       info: { error: false, msg: null },
@@ -49,7 +50,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
+    setState((prevState) => ({ ...prevState, submitting: true }));
     const res = await fetch("/api/sendMail", {
       method: "POST",
       header: {
@@ -63,6 +64,7 @@ export default function Contact() {
 
   return (
     <>
+      <NextSeo title="Contact" />
       <HeaderContainer>
         <Form>
           <Form.Title>Contact me</Form.Title>

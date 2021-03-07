@@ -7,7 +7,7 @@ import FooterContainer from "../containers/footer";
 export default function Home({ projects, heroproject }) {
   return (
     <>
-      <NextSeo title="Nestor Lopez Portfolio" />
+      <NextSeo title="Home" />
       <HeaderContainer>
         <Feature>
           <Feature.MainTitle />

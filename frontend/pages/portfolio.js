@@ -7,7 +7,7 @@ import FooterContainer from "../containers/footer";
 export default function Portfolio({ projects }) {
   return (
     <>
-      <NextSeo />
+      <NextSeo title="Portfolio" />
       <HeaderContainer>
         <Jumbotron>
           <Jumbotron.Title>Project List</Jumbotron.Title>
