@@ -49,6 +49,10 @@ Gallery.Title = function GalleryTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
 };
 
-Gallery.Button = function GalleryButton({ children, ...restProps }) {
-  return <Button {...restProps}>{children}</Button>;
+Gallery.Button = function GalleryButton({ children, href, ...restProps }) {
+  return (
+    <Link href={href}>
+      <Button {...restProps}>{children}</Button>
+    </Link>
+  );
 };

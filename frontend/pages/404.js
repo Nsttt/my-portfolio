@@ -1,9 +1,12 @@
+import { NextSeo } from "next-seo";
 import { Feature } from "../components";
 import HeaderContainer from "../containers/header";
+import FooterContainer from "../containers/footer";
 
 export default function PageNotFound() {
   return (
     <>
+      <NextSeo title="404" />
       <HeaderContainer>
         <Feature>
           <Feature.NotFound>
@@ -12,6 +15,7 @@ export default function PageNotFound() {
           </Feature.NotFound>
         </Feature>
       </HeaderContainer>
+      <FooterContainer />
     </>
   );
 }

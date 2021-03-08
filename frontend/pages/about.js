@@ -14,9 +14,7 @@ export default function About({ photo, body, labels }) {
           <Biography.Title>About me</Biography.Title>
           <Biography.Image src={photo.url} />
           <Biography.Body body={body} />
-          <Biography.SubTitle>
-            I have experience working with
-          </Biography.SubTitle>
+          <Biography.SubTitle>I have experience coding with</Biography.SubTitle>
           <Biography.Labels>
             {labels.map((label) => (
               <Biography.Label

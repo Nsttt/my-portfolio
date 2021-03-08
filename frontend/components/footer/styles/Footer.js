@@ -22,6 +22,11 @@ export const TextLink = styled.a`
   margin-right: 20px;
   color: white;
   font-size: 17px;
+  transition: all 0.5s;
+
+  &:hover {
+    color: #d11c54;
+  }
 `;
 
 export const Button = styled.a`

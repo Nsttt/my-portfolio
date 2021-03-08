@@ -48,7 +48,7 @@ export default function Home({ projects, heroproject }) {
                 />
               ))}
             </Gallery.Group>
-            <Gallery.Button>See more</Gallery.Button>
+            <Gallery.Button href="/portfolio">See more</Gallery.Button>
           </Gallery.Container>
         </Gallery>
       </HeaderContainer>

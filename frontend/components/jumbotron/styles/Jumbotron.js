@@ -42,7 +42,7 @@ export const Project = styled.div`
   background-color: black;
   border-radius: 15px;
   align-items: center;
-  max-height: 20em;
+  height: 25vh;
 `;
 
 export const Image = styled.img`

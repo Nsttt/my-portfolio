@@ -31,5 +31,6 @@ export const Image = styled.img`
 export const Text = styled.span`
   margin-left: 15px;
   font-size: 18px;
+  font-weight: 700;
   vertical-align: middle;
 `;
