@@ -22,6 +22,7 @@ export const Title = styled.h1`
 
 export const FocusWord1 = styled.span`
   color: white;
+  padding: 0 10px 0 10px;
   background-color: #d11c54;
   max-width: 640px;
   font-weight: 500;
