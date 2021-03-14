@@ -2,21 +2,22 @@ export default {
   defaultTitle: "NSTlopez",
   titleTemplate: "%s | NSTlopez",
   description:
-    "My personal portfolio where I display all my projects and write about them.",
+    "My personal portfolio where I feature all my projects and write about them.",
   canonical: "https://nstlopez.com",
 
   openGraph: {
     type: "website",
     url: "http://nstlopez.com",
-    site_name: "Nestor Lopez Portfolio",
+    site_name: "nstlopez",
     title: "Nestor Lopez Portfolio",
-    description: "Building software for humans",
+    description:
+      "My personal portfolio where I feature all my projects and write about them.",
     images: [
       {
-        url: "/image_medium.png",
-        width: 800,
-        height: 600,
-        alt: "With love from Nestor.",
+        url: "./public/android-chrome-256x256.png",
+        width: 256,
+        height: 256,
+        alt: "Logo Icon",
       },
     ],
   },
