@@ -10,6 +10,7 @@ module.exports = ({ env }) => ({
         database: env('DATABASE_NAME', 'portfolio-db'),
         username: env('DATABASE_USERNAME', ''),
         password: env('DATABASE_PASSWORD', ''),
+        ssl: { rejectUnauthorized: false },
       },
       options: {
         ssl: false,
