@@ -26,5 +26,6 @@ a {
 @font-face {
   font-family: "BebasNeue";
   src: url("/fonts/BebasNeue.ttf");
+  font-display: swap;
 }
 `;
