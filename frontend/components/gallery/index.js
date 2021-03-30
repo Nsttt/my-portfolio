@@ -39,7 +39,7 @@ Gallery.Card = function GalleryCard({
           <br />
           <InnerDesc>{subtitle}</InnerDesc>
         </InnerTitle>
-        <Image src={imgSrc} />
+        <Image alt="Gallery Image" src={imgSrc} />
       </Card>
     </Link>
   );

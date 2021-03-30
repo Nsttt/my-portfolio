@@ -85,9 +85,11 @@ export const SocialIcon = styled.a`
 
   img {
     width: 24px;
+    height: 24px;
 
     @media (max-width: 1000px) {
       width: 18px;
+      height: 18px;
     }
   }
 

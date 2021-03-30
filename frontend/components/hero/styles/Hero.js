@@ -67,6 +67,8 @@ export const Image = styled.img`
   cursor: pointer;
   transform: translateX(10em);
   max-height: 600px;
+  width: 900px;
+  height: 450px;
   z-index: 100;
   border-radius: 20px;
   margin-top: 60px;

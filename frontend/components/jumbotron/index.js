@@ -30,7 +30,7 @@ Jumbotron.Group = function JumboGroup({ projects, ...restProps }) {
               <InnerDesc>{project.subtitle}</InnerDesc>
             </InnerTitle>
 
-            <Image src={project.image.url} />
+            <Image alt="Project Image" src={project.image.url} />
           </Project>
         </Link>
       ))}
