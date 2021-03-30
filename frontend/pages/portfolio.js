@@ -22,8 +22,9 @@ export default function Portfolio({ projects }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   return {
     props: { projects: await getAllProjects() },
+    revalidate: 86400,
   };
 }
