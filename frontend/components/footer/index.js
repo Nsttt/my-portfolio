@@ -1,5 +1,19 @@
 import Link from "next/link";
-import { Background, Button, Container, TextLink } from "./styles/Footer";
+import {
+  Background,
+  Logo,
+  Container,
+  TextLink,
+  Copyright,
+  Bar,
+  Newsletter,
+  Contact,
+  Project,
+  Title,
+  Group,
+  FocusWord,
+  Links,
+} from "./styles/Footer";
 
 export default function Footer({ children, ...restProps }) {
   return <Background {...restProps}>{children}</Background>;
@@ -7,6 +21,38 @@ export default function Footer({ children, ...restProps }) {
 
 Footer.Container = function FooterContainer({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
+};
+
+Footer.Group = function FooterGroup({ children, ...restProps }) {
+  return <Group {...restProps}>{children}</Group>;
+};
+
+Footer.Links = function FooterLinks({ children, ...restProps }) {
+  return <Links {...restProps}>{children}</Links>;
+};
+
+Footer.Newsletter = function FooterNewsletter({ children, ...restProps }) {
+  return <Newsletter {...restProps}>{children}</Newsletter>;
+};
+
+Footer.Bar = function FooterBar({ ...restProps }) {
+  return <Bar {...restProps} />;
+};
+
+Footer.Copyright = function FooterCopyright({ children, ...restProps }) {
+  return <Copyright {...restProps}>{children}</Copyright>;
+};
+
+Footer.Logo = function FooterLogo({ src, ...restProps }) {
+  return <Logo src={src} alt="Logo" {...restProps} />;
+};
+
+Footer.FocusWord = function FooterFocusWord({ children, ...restProps }) {
+  return <FocusWord {...restProps}>{children}</FocusWord>;
+};
+
+Footer.Title = function FooterTitle({ children, ...restProps }) {
+  return <Title {...restProps}>{children}</Title>;
 };
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
@@ -17,10 +63,10 @@ Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
   );
 };
 
-Footer.Button = function FooterButton({ children, href, ...restProps }) {
-  return (
-    <Link href={href}>
-      <Button {...restProps}>{children}</Button>
-    </Link>
-  );
+Footer.Contact = function FooterContact({ children, ...restProps }) {
+  return <Contact {...restProps}>{children}</Contact>;
+};
+
+Footer.Project = function FooterProject({ children, ...restProps }) {
+  return <Project {...restProps}>{children}</Project>;
 };
