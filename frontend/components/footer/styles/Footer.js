@@ -13,38 +13,61 @@ export const Container = styled.div`
   margin: 0 10%;
 
   @media (max-width: 527px) {
-    display: flex;
-    flex-direction: column;
   }
 `;
 
-export const TextLink = styled.a`
+export const Group = styled.div``;
+
+export const Links = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const FocusWord = styled.h2`
+  display: inline;
+  font-size: 50px;
+  font-family: "BebasNeue";
+  color: #d11c64;
+`;
+
+export const Title = styled.span`
+  font-family: "BebasNeue";
+  color: white;
+`;
+
+export const Copyright = styled.p`
+  text-align: center;
+`;
+
+export const Bar = styled.hr`
+  width: 100%;
+  border-color: #d11c54;
+`;
+
+export const Logo = styled.img`
+  width: 80px;
+  height: 80px;
+`;
+
+export const Newsletter = styled.div``;
+
+export const Contact = styled.a``;
+
+export const Project = styled.li`
+  padding-left: 10px;
+  color: white;
+  list-style-type: none;
+`;
+
+export const TextLink = styled.li`
+  list-style-type: none;
   margin-right: 20px;
   color: white;
-  font-size: 17px;
+  font-size: 32px;
   transition: all 0.5s;
+  cursor: pointer;
 
   &:hover {
     color: #d11c54;
-  }
-`;
-
-export const Button = styled.a`
-  display: block;
-  float: right;
-  text-align: center;
-  width: 160px;
-  padding: 12px 0;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  background-color: #e5195f;
-  border-radius: 35px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-
-  @media (max-width: 600px) {
-    display: none;
   }
 `;
