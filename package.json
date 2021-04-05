@@ -1,0 +1,13 @@
+{
+  "name": "my-portfolio",
+  "version": "1.0.0",
+  "repository": "https://github.com/Nsttt/my-portfolio.git",
+  "author": "Nestor <elnestinatorHD@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "commitlint": "^12.1.1",
+    "husky": "^6.0.0"
+  }
+}
