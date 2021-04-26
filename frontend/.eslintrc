@@ -21,6 +21,7 @@
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/jsx-props-no-spreading": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "import/prefer-default-export": "off"
   }
 }
