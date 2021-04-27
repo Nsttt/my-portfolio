@@ -13,6 +13,8 @@ import {
   Group,
   FocusWord,
   Links,
+  TextGroup,
+  ListItem,
 } from "./styles/Footer";
 
 export default function Footer({ children, ...restProps }) {
@@ -25,6 +27,10 @@ Footer.Container = function FooterContainer({ children, ...restProps }) {
 
 Footer.Group = function FooterGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+Footer.TextGroup = function FooterTextGroup({ children, ...restProps }) {
+  return <TextGroup {...restProps}>{children}</TextGroup>;
 };
 
 Footer.Links = function FooterLinks({ children, ...restProps }) {
@@ -57,9 +63,11 @@ Footer.Title = function FooterTitle({ children, ...restProps }) {
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
   return (
-    <TextLink href={href} target="__blank" rel="noreferrer" {...restProps}>
-      {children}
-    </TextLink>
+    <ListItem {...restProps}>
+      <TextLink href={href} target="__blank" rel="noreferrer">
+        {children}
+      </TextLink>
+    </ListItem>
   );
 };
 
