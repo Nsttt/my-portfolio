@@ -33,7 +33,7 @@ export default function BackToTop({ ...restProps }) {
           scrollToTop();
         }}
       >
-        <Icon src="arrow.svg" alt="Go to top" />
+        <Icon src="/arrow.svg" alt="Go to top" />
       </Container>
     )
   );
