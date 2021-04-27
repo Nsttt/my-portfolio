@@ -1,6 +1,6 @@
 import marked from "marked";
 import { NextSeo } from "next-seo";
-import { Project, Coffee } from "../../components";
+import { Project, Coffee, BackToTop } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
@@ -9,6 +9,7 @@ export default function ProjectPage({ project }) {
   return (
     <>
       <NextSeo title={project.title} />
+      <BackToTop />
       <HeaderContainer>
         <Project>
           <Project.TopImage src={project.image.url} />

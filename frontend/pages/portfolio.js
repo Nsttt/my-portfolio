@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import { getAllProjects } from "../services/project.service";
-import { Jumbotron } from "../components";
+import { Jumbotron, BackToTop } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
@@ -8,6 +8,7 @@ export default function Portfolio({ projects }) {
   return (
     <>
       <NextSeo title="Portfolio" />
+      <BackToTop />
       <HeaderContainer>
         <Jumbotron>
           <Jumbotron.Title>Project List</Jumbotron.Title>

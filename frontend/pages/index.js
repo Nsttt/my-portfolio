@@ -1,6 +1,6 @@
 import { NextSeo } from "next-seo";
 import { getGallery, getHeroProject } from "../services/project.service";
-import { Feature, Hero, Gallery } from "../components";
+import { Feature, Hero, Gallery, BackToTop } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
@@ -8,6 +8,7 @@ export default function Home({ projects, heroproject }) {
   return (
     <>
       <NextSeo title="Home" />
+      <BackToTop />
       <HeaderContainer>
         <Feature>
           <Feature.MainTitle />
