@@ -1,12 +1,13 @@
 import Link from "next/link";
 import {
-  Logo,
+  Title,
   TextLink,
   Container,
   Group,
   Background,
   SocialIcon,
   FocusWord,
+  Logo,
 } from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
@@ -21,15 +22,19 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Header.Logo = function HeaderLogo({ children, ...restProps }) {
+Header.Title = function HeaderTitle({ children, ...restProps }) {
   return (
     <Link href="/">
-      <Logo {...restProps}>
+      <Title {...restProps}>
         <FocusWord>Nst </FocusWord>
         Lopez
-      </Logo>
+      </Title>
     </Link>
   );
+};
+
+Header.Logo = function HeaderLogo({ src, ...restProps }) {
+  return <Logo {...restProps} src={src} alt="Logo" />;
 };
 
 Header.TextLink = function HeaderTextLink({ href, children, ...restProps }) {
