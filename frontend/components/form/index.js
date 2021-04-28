@@ -1,4 +1,12 @@
-import { Body, Button, Container, Input, SubTitle, Title } from "./styles/Form";
+import {
+  Body,
+  Button,
+  Container,
+  Input,
+  SubTitle,
+  Title,
+  Success,
+} from "./styles/Form";
 
 export default function Form({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -22,4 +30,8 @@ Form.Body = function FormBody({ ...restProps }) {
 
 Form.Button = function FormButton({ children, ...restProps }) {
   return <Button {...restProps}>{children}</Button>;
+};
+
+Form.Success = function FormSuccess({ children, ...restProps }) {
+  return <Success {...restProps}>{children}</Success>;
 };
