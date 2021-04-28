@@ -32,38 +32,40 @@ export default function NewsletterContainer() {
   return (
     <Newsletter>
       <Newsletter.Title>Subscribe to the newsletter.</Newsletter.Title>
-      <Newsletter.SubTitle>
-        I won't send you spam, I promise.
-      </Newsletter.SubTitle>
-      <Newsletter.Input
-        type="text"
-        id="name"
-        placeholder="Your name"
-        name="Name"
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-        required
-      />
-      <Newsletter.Input
-        type="email"
-        id="email"
-        placeholder="your@mail.com"
-        name="Email"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-        required
-      />
-      {!message && (
-        <Newsletter.Button onClick={handleSubmit}>Send</Newsletter.Button>
-      )}
       {message ? (
         <Newsletter.Success>{message}</Newsletter.Success>
       ) : (
-        <Newsletter.SmallText>
-          You can unsubscribe at any time.
-        </Newsletter.SmallText>
+        <>
+          <Newsletter.SubTitle>
+            I won't send you spam, I promise.
+          </Newsletter.SubTitle>
+          <Newsletter.Input
+            type="text"
+            id="newsletter_name"
+            placeholder="Your name"
+            name="Name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+          <Newsletter.Input
+            type="email"
+            id="newsletter_email"
+            placeholder="your@mail.com"
+            name="Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+          />
+          {!message && (
+            <Newsletter.Button onClick={handleSubmit}>Send</Newsletter.Button>
+          )}
+          <Newsletter.SmallText>
+            You can unsubscribe at any time.
+          </Newsletter.SmallText>
+        </>
       )}
     </Newsletter>
   );
