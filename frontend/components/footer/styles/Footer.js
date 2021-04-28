@@ -17,6 +17,9 @@ export const Container = styled.div`
 
   @media (max-width: 527px) {
   }
+
+  @media (max-width: 1000px) {
+  }
 `;
 
 export const Group = styled.div`
@@ -24,15 +27,29 @@ export const Group = styled.div`
   padding-right: 50px;
   padding-top: 30px;
   flex-grow: 2;
+
+  @media (max-width: 1000px) {
+    padding: 0;
+  }
 `;
 
 export const TextGroup = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
 `;
 
-export const Links = styled.ul``;
+export const Links = styled.ul`
+  @media (max-width: 1000px) {
+    margin: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+`;
 
 export const FocusWord = styled.h2`
   display: inline;
@@ -81,6 +98,10 @@ export const Contact = styled.a`
   :hover {
     background-color: #d11c54;
   }
+
+  @media (max-width: 1111px) {
+    display: none;
+  }
 `;
 
 export const Project = styled.li`
@@ -91,7 +112,7 @@ export const Project = styled.li`
 
 export const TextLink = styled.a`
   color: white;
-  font-size: 24px;
+  font-size: 22px;
   transition: all 0.5s;
 
   :hover {
@@ -102,4 +123,8 @@ export const TextLink = styled.a`
 export const ListItem = styled.li`
   list-style-type: none;
   cursor: pointer;
+
+  @media (max-width: 1111px) {
+    text-align: center;
+  }
 `;
