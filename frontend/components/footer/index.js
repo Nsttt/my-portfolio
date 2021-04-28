@@ -6,9 +6,7 @@ import {
   TextLink,
   Copyright,
   Bar,
-  Newsletter,
   Contact,
-  Project,
   Title,
   Group,
   FocusWord,
@@ -35,10 +33,6 @@ Footer.TextGroup = function FooterTextGroup({ children, ...restProps }) {
 
 Footer.Links = function FooterLinks({ children, ...restProps }) {
   return <Links {...restProps}>{children}</Links>;
-};
-
-Footer.Newsletter = function FooterNewsletter({ children, ...restProps }) {
-  return <Newsletter {...restProps}>{children}</Newsletter>;
 };
 
 Footer.Bar = function FooterBar({ ...restProps }) {
@@ -71,10 +65,10 @@ Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
   );
 };
 
-Footer.Contact = function FooterContact({ children, ...restProps }) {
-  return <Contact {...restProps}>{children}</Contact>;
-};
-
-Footer.Project = function FooterProject({ children, ...restProps }) {
-  return <Project {...restProps}>{children}</Project>;
+Footer.Contact = function FooterContact({ href, children, ...restProps }) {
+  return (
+    <Link href={href}>
+      <Contact {...restProps}>{children}</Contact>
+    </Link>
+  );
 };
