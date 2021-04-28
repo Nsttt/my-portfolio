@@ -15,6 +15,7 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [send, setSend] = useState(false);
 
   const handleRespose = (status, msg) => {
     if (status === 200) {
@@ -28,6 +29,7 @@ export default function Contact() {
         email: "",
         message: "",
       });
+      setSend(true);
     } else {
       setState({
         info: { error: true, msg },
@@ -68,37 +70,46 @@ export default function Contact() {
       <HeaderContainer>
         <Form>
           <Form.Title>Contact me</Form.Title>
-          <Form.SubTitle>
-            Thanks for taking the time to reach out. How can I help you today?
-          </Form.SubTitle>
-          <Form.Input
-            type="text"
-            id="name"
-            placeholder="Name"
-            name="Name"
-            onChange={handleChange}
-            value={inputs.name}
-            required
-          />
-          <Form.Input
-            type="email"
-            id="email"
-            placeholder="Email"
-            name="Email"
-            onChange={handleChange}
-            value={inputs.email}
-            required
-          />
-          <Form.Body
-            type="text"
-            id="message"
-            placeholder="Message"
-            name="Message"
-            onChange={handleChange}
-            value={inputs.message}
-            required
-          />
-          <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+          {send ? (
+            <Form.Success>
+              Thanks for reaching out. I usually answer within 72 hours ❤️
+            </Form.Success>
+          ) : (
+            <>
+              <Form.SubTitle>
+                Thanks for taking the time to reach out. How can I help you
+                today?
+              </Form.SubTitle>
+              <Form.Input
+                type="text"
+                id="name"
+                placeholder="Name"
+                name="Name"
+                onChange={handleChange}
+                value={inputs.name}
+                required
+              />
+              <Form.Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                name="Email"
+                onChange={handleChange}
+                value={inputs.email}
+                required
+              />
+              <Form.Body
+                type="text"
+                id="message"
+                placeholder="Message"
+                name="Message"
+                onChange={handleChange}
+                value={inputs.message}
+                required
+              />
+              <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+            </>
+          )}
         </Form>
       </HeaderContainer>
       <FooterContainer />
