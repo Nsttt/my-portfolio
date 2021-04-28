@@ -25,6 +25,11 @@ export const SmallText = styled.h3`
   font-size: 14px;
 `;
 
+export const SuccessText = styled.h3`
+  color: #e5195f;
+  font-size: 14px;
+`;
+
 export const Label = styled.label``;
 
 export const Input = styled.input`

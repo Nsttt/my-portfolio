@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   SmallText,
+  SuccessText,
 } from "./styles/Newsletter";
 
 export default function Newsletter({ children, ...restProps }) {
@@ -32,4 +33,8 @@ Newsletter.Input = function NewsletterInput({ children, ...restProps }) {
 
 Newsletter.Button = function NewsletterButton({ children, ...restProps }) {
   return <Button {...restProps}>{children}</Button>;
+};
+
+Newsletter.Success = function NewsletterSuccess({ children, ...restProps }) {
+  return <SuccessText {...restProps}>{children}</SuccessText>;
 };
