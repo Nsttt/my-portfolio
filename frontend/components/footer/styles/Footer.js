@@ -82,8 +82,6 @@ export const Logo = styled.img`
   height: 50px;
 `;
 
-export const Newsletter = styled.div``;
-
 export const Contact = styled.a`
   align-self: center;
   padding: 7px;
@@ -102,12 +100,6 @@ export const Contact = styled.a`
   @media (max-width: 1111px) {
     display: none;
   }
-`;
-
-export const Project = styled.li`
-  padding-left: 10px;
-  color: white;
-  list-style-type: none;
 `;
 
 export const TextLink = styled.a`
