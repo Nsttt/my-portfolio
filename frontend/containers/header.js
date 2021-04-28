@@ -5,7 +5,8 @@ export default function HeaderContainer({ children }) {
     <Header>
       <Header.Frame>
         <Header.Group>
-          <Header.Logo>NST Lopez</Header.Logo>
+          <Header.Logo src="/android-chrome-192x192.png" />
+          <Header.Title>NST Lopez</Header.Title>
           <Header.TextLink href="/">Home</Header.TextLink>
           <Header.TextLink href="/portfolio">Portfolio</Header.TextLink>
           <Header.TextLink href="/about">About</Header.TextLink>
