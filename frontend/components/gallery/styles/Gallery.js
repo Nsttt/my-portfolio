@@ -6,7 +6,7 @@ export const Background = styled.div`
   background-color: #ad6db9;
   background-image: radial-gradient(#d7b7dc 1px, transparent 1px),
     radial-gradient(#d7b7dc 1px, transparent 1px);
-  background-position: 0 0, 25px 22px;
+  background-position: 0 0, 25px 24px;
   background-size: 50px 50px;
 `;
 
