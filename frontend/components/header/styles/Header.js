@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   display: flex;
-  min-height: 88.7vh;
+  min-height: 63vh;
   flex-direction: column;
   background-color: #301934;
   background-image: radial-gradient(#4f2956 1px, transparent 1px),
@@ -33,25 +33,25 @@ export const Group = styled.div`
   align-items: center;
 `;
 
-export const Logo = styled.h2`
+export const Title = styled.h2`
   font-family: "BebasNeue";
   font-size: 46px;
   margin-right: 40px;
   cursor: pointer;
+  padding-left: 5px;
 
   @media (max-width: 1000px) {
     font-size: 26px;
   }
 
   @media (max-width: 527px) {
-    text-align: center;
-    margin: 0;
+    display: none;
   }
 `;
 
 export const FocusWord = styled.span`
   color: #d11c54;
-  ${Logo}:hover & {
+  ${Title}:hover & {
     transition: 0.5s ease-in;
     color: white;
   }
@@ -99,5 +99,18 @@ export const SocialIcon = styled.a`
 
   @media (max-width: 527px) {
     display: none;
+  }
+`;
+
+export const Logo = styled.img`
+  width: 55px;
+
+  @media (max-width: 1000px) {
+    width: 30px;
+  }
+
+  @media (max-width: 527px) {
+    padding-right: 20px;
+    width: 45px;
   }
 `;
