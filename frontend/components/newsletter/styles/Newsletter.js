@@ -26,8 +26,9 @@ export const SmallText = styled.h3`
 `;
 
 export const SuccessText = styled.h3`
-  color: #e5195f;
-  font-size: 14px;
+  color: white;
+  font-size: 26px;
+  padding-top: 25px;
 `;
 
 export const Label = styled.label``;
@@ -54,15 +55,15 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   display: block;
-  min-width: 200px;
+  min-width: 100px;
   padding: 12px 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
   background-color: #e5195f;
   border: 0;
-  border-radius: 35px;
+  border-radius: 5px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);

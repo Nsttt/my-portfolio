@@ -83,6 +83,7 @@ export const Logo = styled.img`
 `;
 
 export const Contact = styled.a`
+  font-family: "BebasNeue";
   align-self: center;
   padding: 7px;
   cursor: pointer;

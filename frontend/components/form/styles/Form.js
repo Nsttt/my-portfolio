@@ -26,7 +26,7 @@ export const Input = styled.input`
   background-color: #432349;
   margin-bottom: 15px;
   color: white;
-  padding: 7px 0;
+  padding: 7px 0 7px 5px;
   width: 62vh;
   font-family: inherit;
   font-size: 20px;
@@ -52,7 +52,7 @@ export const Body = styled.textarea`
   background-color: #432349;
   margin-bottom: 15px;
   color: white;
-  padding: 7px 0;
+  padding: 7px 0 0 5px;
   width: 62vh;
   height: 150px;
   font-family: inherit;
@@ -75,15 +75,15 @@ export const Body = styled.textarea`
 
 export const Button = styled.button`
   display: block;
-  width: 200px;
+  width: 120px;
   padding: 12px 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
   background-color: #e5195f;
   border: 0;
-  border-radius: 35px;
+  border-radius: 5px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
@@ -92,4 +92,8 @@ export const Button = styled.button`
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -5px);
   }
+`;
+
+export const Success = styled.h3`
+  font-size: 24px;
 `;
