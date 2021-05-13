@@ -1,10 +1,14 @@
 import { NextSeo } from "next-seo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { getGallery, getHeroProject } from "../services/project.service";
 import { Feature, Hero, Gallery, BackToTop } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
 export default function Home({ projects, heroproject }) {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <NextSeo title="Home" />
@@ -19,7 +23,7 @@ export default function Home({ projects, heroproject }) {
         </Feature>
         <Hero>
           <Hero.Container>
-            <Hero.Featured>Featured Project</Hero.Featured>
+            <Hero.Featured>{t("hero")}</Hero.Featured>
             <Hero.Title
               href={heroproject[0].permalink}
               as={heroproject[0].permalink}
@@ -58,11 +62,12 @@ export default function Home({ projects, heroproject }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   return {
     props: {
       heroproject: await getHeroProject(),
       projects: await getGallery(),
+      ...(await serverSideTranslations(locale, ["common", "footer", "header"])),
     },
   };
 }
