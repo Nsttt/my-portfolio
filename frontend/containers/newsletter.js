@@ -62,7 +62,7 @@ export default function NewsletterContainer() {
           />
           {!message && (
             <Newsletter.Button onClick={handleSubmit}>
-              {t("button")}
+              {t("newsletter_button")}
             </Newsletter.Button>
           )}
           <Newsletter.SmallText>
