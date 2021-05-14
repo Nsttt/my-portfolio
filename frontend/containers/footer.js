@@ -1,7 +1,10 @@
+import { useTranslation } from "next-i18next";
 import { Footer } from "../components";
 import NewsletterContainer from "./newsletter";
 
 export default function FooterContainer() {
+  const { t } = useTranslation("common");
+
   return (
     <Footer>
       <Footer.Container>
@@ -40,14 +43,16 @@ export default function FooterContainer() {
                 Hackernoon
               </Footer.TextLink>
             </Footer.Links>
-            <Footer.Contact href="/contact">Contact</Footer.Contact>
+            <Footer.Contact href="/contact">
+              {t("footer_button")}
+            </Footer.Contact>
           </Footer.TextGroup>
           <Footer.Bar />
         </Footer.Group>
         <NewsletterContainer />
       </Footer.Container>
       <Footer.Copyright>
-        Copyright {new Date().getFullYear()}. With ❤ from Nestor.
+        Copyright {new Date().getFullYear()}. {t("footer_copyright")}
       </Footer.Copyright>
     </Footer>
   );
