@@ -1,11 +1,15 @@
 import marked from "marked";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
+import { useTranslation } from "next-i18next";
 import { Project, Coffee, BackToTop } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
 
 export default function ProjectPage({ project }) {
+  const { t } = useTranslation("project");
+
   return (
     <>
       <NextSeo title={project.title} />
@@ -27,7 +31,7 @@ export default function ProjectPage({ project }) {
                 color="#E219E6"
                 imgSrc="/github.svg"
               >
-                See code
+                {t("code")}
               </Project.Button>
             ) : (
               ""
@@ -39,12 +43,12 @@ export default function ProjectPage({ project }) {
                 color="#e5195f"
                 imgSrc="/globe.svg"
               >
-                Open
+                {t("page")}
               </Project.Button>
             ) : (
               ""
             )}
-            <Coffee />
+            <Coffee text={t("coffee")} />
           </Project.Group>
           <Project.LabelGroup>
             {project.categories.map((label) => (
@@ -72,12 +76,15 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ locale, params }) {
   const getProject = await getByPermaLink(params.id);
   const body = marked(getProject.body, {
     baseUrl: process.env.NEXT_PUBLIC_STRAPI_HOST,
   });
   return {
-    props: { project: { ...getProject, body } },
+    props: {
+      project: { ...getProject, body },
+      ...(await serverSideTranslations(locale, ["project", "common"])),
+    },
   };
 }
