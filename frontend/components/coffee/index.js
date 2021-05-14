@@ -1,6 +1,6 @@
 import { Container, Image, Text } from "./styles/Coffee";
 
-export default function Coffee({ ...restProps }) {
+export default function Coffee({ text, ...restProps }) {
   return (
     <Container
       href="https://www.buymeacoffee.com/nstlopez"
@@ -11,7 +11,7 @@ export default function Coffee({ ...restProps }) {
         src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
         alt="Buy me a coffee"
       />
-      <Text>Buy me a coffee</Text>
+      <Text>{text}</Text>
     </Container>
   );
 }
@@ -30,6 +30,6 @@ Coffee.Image = function CoffeeImage({ ...restProps }) {
   );
 };
 
-Coffee.Text = function CoffeeText({ ...restProps }) {
-  return <Text {...restProps}>Buy me a coffee</Text>;
+Coffee.Text = function CoffeeText({ text, ...restProps }) {
+  return <Text {...restProps}>{text}</Text>;
 };
