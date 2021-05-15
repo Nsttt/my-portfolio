@@ -12,7 +12,24 @@ export default function ProjectPage({ project }) {
 
   return (
     <>
-      <NextSeo title={project.title} />
+      <NextSeo
+        title={project.title}
+        description={project.description}
+        canonical={`https://nstlopez.com/project/${project.permalink}`}
+        openGraph={{
+          url: `https://nstlopez.com/project/${project.permalink}`,
+          title: project.title,
+          description: project.subtitle,
+          images: [
+            {
+              url: project.image.url,
+              width: 1920,
+              height: 1080,
+              alt: "Og",
+            },
+          ],
+        }}
+      />
       <BackToTop />
       <HeaderContainer>
         <Project>
