@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import { Footer } from "../components";
 import NewsletterContainer from "./newsletter";
 
-export default function FooterContainer() {
+export default function FooterContainer({ showNewsletter = true }) {
   const { t } = useTranslation("common");
 
   return (
@@ -49,7 +49,7 @@ export default function FooterContainer() {
           </Footer.TextGroup>
           <Footer.Bar />
         </Footer.Group>
-        <NewsletterContainer />
+        {showNewsletter === true ? <NewsletterContainer /> : null}
       </Footer.Container>
       <Footer.Copyright>
         Copyright {new Date().getFullYear()}. {t("footer_copyright")}
