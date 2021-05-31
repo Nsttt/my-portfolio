@@ -6,6 +6,10 @@
 <h1 align="center">NSTlopez: Personal Portfolio</h1>
 <p align="center">My portfolio for showing off all my projects nicely with a few paragraphs of explanation.</p>
 <p align="center"><a href="https://nstlopez.com">Check it out !</a></p>
+<div align="center">
+
+[![Contributions](https://img.shields.io/badge/contributions-welcome-blue?style=flat-square)](https://github.com/nsttt/my-portfolio/compare/) [![Issues](https://img.shields.io/github/issues/nsttt/my-portfolio?style=flat-square)](https://github.com/Nsttt/my-portfolio/issues) [![License](https://img.shields.io/github/license/nsttt/my-portfolio?style=flat-square)](https://github.com/Nsttt/my-portfolio/blob/master/LICENSE.txt)
+</div>
 <br />
 <br>
 <p align="center">
