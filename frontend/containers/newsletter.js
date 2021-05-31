@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { Newsletter } from "../components";
 
@@ -5,6 +6,8 @@ export default function NewsletterContainer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const { t } = useTranslation("common");
 
   const handleSubmit = async () => {
     const res = await fetch("/api/subscribe", {
@@ -26,23 +29,21 @@ export default function NewsletterContainer() {
     }
     setEmail("");
     setName("");
-    setMessage("Thanks for subscribing ❤️");
+    setMessage(t("newsletter_success"));
   };
 
   return (
     <Newsletter>
-      <Newsletter.Title>Subscribe to the newsletter.</Newsletter.Title>
+      <Newsletter.Title>{t("newsletter_title")}</Newsletter.Title>
       {message ? (
         <Newsletter.Success>{message}</Newsletter.Success>
       ) : (
         <>
-          <Newsletter.SubTitle>
-            I won't send you spam, I promise.
-          </Newsletter.SubTitle>
+          <Newsletter.SubTitle>{t("newsletter_subtitle")}</Newsletter.SubTitle>
           <Newsletter.Input
             type="text"
             id="newsletter_name"
-            placeholder="Your name"
+            placeholder={t("newsletter_name_input")}
             name="Name"
             onChange={(e) => {
               setName(e.target.value);
@@ -52,7 +53,7 @@ export default function NewsletterContainer() {
           <Newsletter.Input
             type="email"
             id="newsletter_email"
-            placeholder="your@mail.com"
+            placeholder={t("newsletter_email_input")}
             name="Email"
             onChange={(e) => {
               setEmail(e.target.value);
@@ -60,10 +61,12 @@ export default function NewsletterContainer() {
             required
           />
           {!message && (
-            <Newsletter.Button onClick={handleSubmit}>Send</Newsletter.Button>
+            <Newsletter.Button onClick={handleSubmit}>
+              {t("newsletter_button")}
+            </Newsletter.Button>
           )}
           <Newsletter.SmallText>
-            You can unsubscribe at any time.
+            {t("newsletter_bottom_text")}
           </Newsletter.SmallText>
         </>
       )}
