@@ -16,7 +16,7 @@ export default function Portfolio({ projects }) {
       <HeaderContainer>
         <Jumbotron>
           <Jumbotron.Title>{t("title")}</Jumbotron.Title>
-          <Jumbotron.Description>{t("description")}</Jumbotron.Description>
+          <Jumbotron.Description>{t("subtitle")}</Jumbotron.Description>
           <Jumbotron.Group projects={projects} />
         </Jumbotron>
       </HeaderContainer>
