@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { NextSeo } from "next-seo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { Form } from "../components";
 import FooterContainer from "../containers/footer";
 import HeaderContainer from "../containers/header";
 
 export default function Contact() {
+  const { t } = useTranslation("contact");
+
   const [state, setState] = useState({
     submitted: false,
     submitting: false,
@@ -69,21 +73,16 @@ export default function Contact() {
       <NextSeo title="Contact" />
       <HeaderContainer>
         <Form>
-          <Form.Title>Contact me</Form.Title>
+          <Form.Title>{t("title")}</Form.Title>
           {send ? (
-            <Form.Success>
-              Thanks for reaching out. I usually answer within 72 hours ❤️
-            </Form.Success>
+            <Form.Success>{t("success")}</Form.Success>
           ) : (
             <>
-              <Form.SubTitle>
-                Thanks for taking the time to reach out. How can I help you
-                today?
-              </Form.SubTitle>
+              <Form.SubTitle>{t("subtitle")}</Form.SubTitle>
               <Form.Input
                 type="text"
                 id="name"
-                placeholder="Name"
+                placeholder={t("name_placeholder")}
                 name="Name"
                 onChange={handleChange}
                 value={inputs.name}
@@ -92,7 +91,7 @@ export default function Contact() {
               <Form.Input
                 type="email"
                 id="email"
-                placeholder="Email"
+                placeholder={t("email_placeholder")}
                 name="Email"
                 onChange={handleChange}
                 value={inputs.email}
@@ -101,13 +100,13 @@ export default function Contact() {
               <Form.Body
                 type="text"
                 id="message"
-                placeholder="Message"
+                placeholder={t("body_placeholder")}
                 name="Message"
                 onChange={handleChange}
                 value={inputs.message}
                 required
               />
-              <Form.Button onClick={handleSubmit}>Submit</Form.Button>
+              <Form.Button onClick={handleSubmit}> {t("button")}</Form.Button>
             </>
           )}
         </Form>
@@ -115,4 +114,12 @@ export default function Contact() {
       <FooterContainer />
     </>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["contact", "common"])),
+    },
+  };
 }
