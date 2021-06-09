@@ -60,6 +60,16 @@ SEDNGRID_API_KEY="APIKEY"
 
 You will need to link a DB to Strapi as well, you can find more info on how to do that [here](https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#database).
 
+**Update 06/2021:** Due to some config on PostgreSQL, you might need to comment a line in `./backend/config/database.js` in order for Strapi to work on a development enviroment.
+
+```js
+        username: env('DATABASE_USERNAME', ''),
+        password: env('DATABASE_PASSWORD', ''),
+        ssl: { rejectUnauthorized: false }, --> Comment this line.
+      },
+```
+
+
 ## License
 
 See the [LICENSE](./LICENSE) file for licensing information.
