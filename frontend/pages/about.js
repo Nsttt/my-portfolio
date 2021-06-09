@@ -1,20 +1,24 @@
 import { NextSeo } from "next-seo";
 import marked from "marked";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 import { Biography } from "../components";
 import { getBiography, getLabels, getPhoto } from "../services/about.service";
 
 export default function About({ photo, body, labels }) {
+  const { t } = useTranslation("about");
+
   return (
     <>
       <NextSeo title="About" />
       <HeaderContainer>
         <Biography>
-          <Biography.Title>About me</Biography.Title>
+          <Biography.Title>{t("title")}</Biography.Title>
           <Biography.Image src={photo.url} />
           <Biography.Body body={body} />
-          <Biography.SubTitle>I have experience coding with</Biography.SubTitle>
+          <Biography.SubTitle>{t("subtitle")}</Biography.SubTitle>
           <Biography.Labels>
             {labels.map((label) => (
               <Biography.Label
@@ -31,7 +35,7 @@ export default function About({ photo, body, labels }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   const biography = await getBiography();
   const parsedBody = () =>
     marked(biography, {
@@ -42,6 +46,7 @@ export async function getStaticProps() {
       photo: await getPhoto(),
       body: parsedBody(),
       labels: await getLabels(),
+      ...(await serverSideTranslations(locale, ["about", "common"])),
     },
   };
 }

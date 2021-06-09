@@ -1,10 +1,14 @@
 import { NextSeo } from "next-seo";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { getGallery, getHeroProject } from "../services/project.service";
 import { Feature, Hero, Gallery, BackToTop } from "../components";
 import HeaderContainer from "../containers/header";
 import FooterContainer from "../containers/footer";
 
 export default function Home({ projects, heroproject }) {
+  const { t } = useTranslation("home");
+
   return (
     <>
       <NextSeo title="Home" />
@@ -12,14 +16,12 @@ export default function Home({ projects, heroproject }) {
       <HeaderContainer>
         <Feature>
           <Feature.MainTitle />
-          <Feature.SubTitle>
-            Hello, I'm Nestor, a passionate full-stack software engineer.
-          </Feature.SubTitle>
-          <Feature.Button href="/contact">Say hi 👋</Feature.Button>
+          <Feature.SubTitle>{t("subtitle")}</Feature.SubTitle>
+          <Feature.Button href="/contact">{t("button_title")}</Feature.Button>
         </Feature>
         <Hero>
           <Hero.Container>
-            <Hero.Featured>Featured Project</Hero.Featured>
+            <Hero.Featured>{t("hero")}</Hero.Featured>
             <Hero.Title
               href={heroproject[0].permalink}
               as={heroproject[0].permalink}
@@ -36,7 +38,7 @@ export default function Home({ projects, heroproject }) {
         </Hero>
         <Gallery>
           <Gallery.Container>
-            <Gallery.Title>Latest Projects</Gallery.Title>
+            <Gallery.Title>{t("gallery")}</Gallery.Title>
             <Gallery.Group>
               {projects.map((project) => (
                 <Gallery.Card
@@ -49,7 +51,9 @@ export default function Home({ projects, heroproject }) {
                 />
               ))}
             </Gallery.Group>
-            <Gallery.Button href="/portfolio">See more</Gallery.Button>
+            <Gallery.Button href="/portfolio">
+              {t("button_gallery")}
+            </Gallery.Button>
           </Gallery.Container>
         </Gallery>
       </HeaderContainer>
@@ -58,11 +62,12 @@ export default function Home({ projects, heroproject }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   return {
     props: {
       heroproject: await getHeroProject(),
       projects: await getGallery(),
+      ...(await serverSideTranslations(locale, ["home", "common"])),
     },
   };
 }

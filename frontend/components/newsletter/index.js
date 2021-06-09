@@ -6,6 +6,10 @@ import {
   Button,
   SmallText,
   SuccessText,
+  PageContainer,
+  PageTitle,
+  PageSubtitle,
+  PageInput,
 } from "./styles/Newsletter";
 
 export default function Newsletter({ children, ...restProps }) {
@@ -37,4 +41,32 @@ Newsletter.Button = function NewsletterButton({ children, ...restProps }) {
 
 Newsletter.Success = function NewsletterSuccess({ children, ...restProps }) {
   return <SuccessText {...restProps}>{children}</SuccessText>;
+};
+
+Newsletter.PageContainer = function NewsletterPageContainer({
+  children,
+  ...restProps
+}) {
+  return <PageContainer {...restProps}>{children}</PageContainer>;
+};
+
+Newsletter.PageTitle = function NewsletterPageTitle({
+  children,
+  ...restProps
+}) {
+  return <PageTitle {...restProps}>{children}</PageTitle>;
+};
+
+Newsletter.PageSubtitle = function NewsletterPageSubtitle({
+  children,
+  ...restProps
+}) {
+  return <PageSubtitle {...restProps}>{children}</PageSubtitle>;
+};
+
+Newsletter.PageInput = function NewsletterPageInput({
+  children,
+  ...restProps
+}) {
+  return <PageInput {...restProps}>{children}</PageInput>;
 };

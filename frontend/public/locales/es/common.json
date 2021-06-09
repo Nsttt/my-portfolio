@@ -1,0 +1,15 @@
+{
+  "header_home": "Home",
+  "header_portfolio": "Portfolio",
+  "header_about": "Sobre mí",
+  "header_contact": "Contacto",
+  "footer_button": "Contacto",
+  "footer_copyright": "Con ❤ de Nestor.",
+  "newsletter_title": "Suscribete al boletín",
+  "newsletter_subtitle": "No te enviaré spam, lo prometo.",
+  "newsletter_name_input": "Tu nombre",
+  "newsletter_email_input": "tu@mail.com",
+  "newsletter_button": "Enviar",
+  "newsletter_bottom_text": "Puedes darte de baja en cualquier momento.",
+  "newsletter_success": "Gracias por suscribirte ❤️"
+}
