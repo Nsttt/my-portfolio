@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
             rel="preload"
             href="/fonts/BebasNeue.ttf"
             as="font"
+            type="font/ttf"
             crossOrigin=""
           />
           <link rel="manifest" href="/manifest.json" />
