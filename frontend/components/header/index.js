@@ -22,7 +22,7 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Header.Title = function HeaderTitle({ children, ...restProps }) {
+Header.Title = function HeaderTitle({ ...restProps }) {
   return (
     <Link href="/">
       <Title {...restProps}>
