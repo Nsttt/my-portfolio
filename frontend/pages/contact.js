@@ -71,46 +71,45 @@ export default function Contact() {
   return (
     <>
       <NextSeo title="Contact" />
-      <HeaderContainer>
-        <Form>
-          <Form.Title>{t("title")}</Form.Title>
-          {send ? (
-            <Form.Success>{t("success")}</Form.Success>
-          ) : (
-            <>
-              <Form.SubTitle>{t("subtitle")}</Form.SubTitle>
-              <Form.Input
-                type="text"
-                id="name"
-                placeholder={t("name_placeholder")}
-                name="Name"
-                onChange={handleChange}
-                value={inputs.name}
-                required
-              />
-              <Form.Input
-                type="email"
-                id="email"
-                placeholder={t("email_placeholder")}
-                name="Email"
-                onChange={handleChange}
-                value={inputs.email}
-                required
-              />
-              <Form.Body
-                type="text"
-                id="message"
-                placeholder={t("body_placeholder")}
-                name="Message"
-                onChange={handleChange}
-                value={inputs.message}
-                required
-              />
-              <Form.Button onClick={handleSubmit}> {t("button")}</Form.Button>
-            </>
-          )}
-        </Form>
-      </HeaderContainer>
+      <HeaderContainer />
+      <Form>
+        <Form.Title>{t("title")}</Form.Title>
+        {send ? (
+          <Form.Success>{t("success")}</Form.Success>
+        ) : (
+          <>
+            <Form.SubTitle>{t("subtitle")}</Form.SubTitle>
+            <Form.Input
+              type="text"
+              id="name"
+              placeholder={t("name_placeholder")}
+              name="Name"
+              onChange={handleChange}
+              value={inputs.name}
+              required
+            />
+            <Form.Input
+              type="email"
+              id="email"
+              placeholder={t("email_placeholder")}
+              name="Email"
+              onChange={handleChange}
+              value={inputs.email}
+              required
+            />
+            <Form.Body
+              type="text"
+              id="message"
+              placeholder={t("body_placeholder")}
+              name="Message"
+              onChange={handleChange}
+              value={inputs.message}
+              required
+            />
+            <Form.Button onClick={handleSubmit}> {t("button")}</Form.Button>
+          </>
+        )}
+      </Form>
       <FooterContainer />
     </>
   );

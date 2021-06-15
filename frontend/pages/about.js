@@ -13,23 +13,22 @@ export default function About({ photo, body, labels }) {
   return (
     <>
       <NextSeo title="About" />
-      <HeaderContainer>
-        <Biography>
-          <Biography.Title>{t("title")}</Biography.Title>
-          <Biography.Image src={photo.url} />
-          <Biography.Body body={body} />
-          <Biography.SubTitle>{t("subtitle")}</Biography.SubTitle>
-          <Biography.Labels>
-            {labels.map((label) => (
-              <Biography.Label
-                key={label.name}
-                src={label.icon.url}
-                alt={label.name}
-              />
-            ))}
-          </Biography.Labels>
-        </Biography>
-      </HeaderContainer>
+      <HeaderContainer />
+      <Biography>
+        <Biography.Title>{t("title")}</Biography.Title>
+        <Biography.Image src={photo.url} />
+        <Biography.Body body={body} />
+        <Biography.SubTitle>{t("subtitle")}</Biography.SubTitle>
+        <Biography.Labels>
+          {labels.map((label) => (
+            <Biography.Label
+              key={label.name}
+              src={label.icon.url}
+              alt={label.name}
+            />
+          ))}
+        </Biography.Labels>
+      </Biography>
       <FooterContainer />
     </>
   );

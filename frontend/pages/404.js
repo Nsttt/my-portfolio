@@ -11,14 +11,13 @@ export default function PageNotFound() {
   return (
     <>
       <NextSeo title="404" />
-      <HeaderContainer>
-        <Feature>
-          <Feature.NotFound>
-            <Feature.Title>{t("title")}</Feature.Title>
-            <Feature.Button href="/">{t("button")}</Feature.Button>
-          </Feature.NotFound>
-        </Feature>
-      </HeaderContainer>
+      <HeaderContainer />
+      <Feature>
+        <Feature.NotFound>
+          <Feature.Title>{t("title")}</Feature.Title>
+          <Feature.Button href="/">{t("button")}</Feature.Button>
+        </Feature.NotFound>
+      </Feature>
       <FooterContainer />
     </>
   );
