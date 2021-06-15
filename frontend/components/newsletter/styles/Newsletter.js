@@ -84,7 +84,6 @@ export const PageTitle = styled.h1`
   font-family: "BebasNeue";
   letter-spacing: 2px;
   font-size: 42px;
-  /* color: #ed2e61; */
   margin-bottom: 0;
 `;
 
