@@ -1,8 +1,8 @@
 import Link from "next/link";
 import {
-  Background,
-  Logo,
   Container,
+  Content,
+  Logo,
   TextLink,
   Copyright,
   Bar,
@@ -16,11 +16,11 @@ import {
 } from "./styles/Footer";
 
 export default function Footer({ children, ...restProps }) {
-  return <Background {...restProps}>{children}</Background>;
+  return <Container {...restProps}>{children}</Container>;
 }
 
-Footer.Container = function FooterContainer({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
+Footer.Content = function FooterContent({ children, ...restProps }) {
+  return <Content {...restProps}>{children}</Content>;
 };
 
 Footer.Group = function FooterGroup({ children, ...restProps }) {

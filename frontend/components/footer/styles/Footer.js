@@ -1,20 +1,16 @@
 import styled from "styled-components/";
 
-export const Background = styled.div`
-  padding: 20px 0;
+export const Container = styled.div`
+  width: 100%;
+  bottom: 0;
 `;
 
-export const Container = styled.div`
+export const Content = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+  padding: 20px 0;
   margin: 0 10%;
-
-  @media (max-width: 527px) {
-  }
-
-  @media (max-width: 1000px) {
-  }
 `;
 
 export const Group = styled.div`
