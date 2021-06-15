@@ -7,7 +7,11 @@ html, body {
   font-family: Arial, "BebasNeue";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: block;
+  /* flex-direction: column; */
   color: #ffffff;
+  height: 100%;
+  overflow: auto;
   font-size: 16px;
   margin: 0;
   padding: 0;
