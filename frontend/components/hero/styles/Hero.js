@@ -4,10 +4,9 @@ export const Background = styled.div`
   display: flex;
   overflow: hidden;
   background-color: #432349;
-  background-image: radial-gradient(#783f83 1px, transparent 1px),
-    radial-gradient(#783f83 1px, transparent 1px);
-  background-position: 0 0, 25px 24px;
-  background-size: 50px 50px;
+  background-image: radial-gradient(#783f83 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 30px 30px;
   min-height: 550px;
 `;
 

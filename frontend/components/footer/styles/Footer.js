@@ -2,11 +2,6 @@ import styled from "styled-components/";
 
 export const Background = styled.div`
   padding: 20px 0;
-  background-color: #301934;
-  background-image: radial-gradient(#4f2956 1px, transparent 1px),
-    radial-gradient(#4f2956 1px, transparent 1px);
-  background-position: 0 0, 25px 24px;
-  background-size: 50px 50px;
 `;
 
 export const Container = styled.div`

@@ -4,10 +4,9 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   background-color: #ad6db9;
-  background-image: radial-gradient(#d7b7dc 1px, transparent 1px),
-    radial-gradient(#d7b7dc 1px, transparent 1px);
-  background-position: 0 0, 25px 24px;
-  background-size: 50px 50px;
+  background-image: radial-gradient(#d7b7dc 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 30px 30px;
 `;
 
 export const Container = styled.div`
