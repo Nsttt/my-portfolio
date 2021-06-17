@@ -8,7 +8,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: block;
-  /* flex-direction: column; */
   color: #ffffff;
   height: 100%;
   overflow: auto;
