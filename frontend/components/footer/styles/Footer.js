@@ -1,7 +1,6 @@
 import styled from "styled-components/";
 
 export const Container = styled.div`
-  width: 100%;
   bottom: 0;
 `;
 
@@ -42,20 +41,6 @@ export const Links = styled.ul`
   }
 `;
 
-export const FocusWord = styled.h2`
-  display: inline;
-  padding-left: 10px;
-  vertical-align: middle;
-  font-size: 40px;
-  font-family: "BebasNeue";
-  color: #d11c64;
-`;
-
-export const Title = styled.span`
-  font-family: "BebasNeue";
-  color: white;
-`;
-
 export const Copyright = styled.p`
   text-align: center;
 `;
@@ -65,12 +50,6 @@ export const Bar = styled.hr`
   margin-bottom: 20px;
   width: 100%;
   border-color: #d11c54;
-`;
-
-export const Logo = styled.img`
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
 `;
 
 export const Contact = styled.a`
@@ -112,3 +91,23 @@ export const ListItem = styled.li`
     text-align: center;
   }
 `;
+
+// export const FocusWord = styled.h2`
+//   display: inline;
+//   padding-left: 10px;
+//   vertical-align: middle;
+//   font-size: 40px;
+//   font-family: "BebasNeue";
+//   color: #d11c64;
+// `;
+
+// export const Title = styled.span`
+//   font-family: "BebasNeue";
+//   color: white;
+// `;
+
+// export const Logo = styled.img`
+//   vertical-align: middle;
+//   width: 50px;
+//   height: 50px;
+// `;

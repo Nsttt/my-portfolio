@@ -2,14 +2,11 @@ import Link from "next/link";
 import {
   Container,
   Content,
-  Logo,
   TextLink,
   Copyright,
   Bar,
   Contact,
-  Title,
   Group,
-  FocusWord,
   Links,
   TextGroup,
   ListItem,
@@ -41,18 +38,6 @@ Footer.Bar = function FooterBar({ ...restProps }) {
 
 Footer.Copyright = function FooterCopyright({ children, ...restProps }) {
   return <Copyright {...restProps}>{children}</Copyright>;
-};
-
-Footer.Logo = function FooterLogo({ src, ...restProps }) {
-  return <Logo src={src} alt="Logo" {...restProps} />;
-};
-
-Footer.FocusWord = function FooterFocusWord({ children, ...restProps }) {
-  return <FocusWord {...restProps}>{children}</FocusWord>;
-};
-
-Footer.Title = function FooterTitle({ children, ...restProps }) {
-  return <Title {...restProps}>{children}</Title>;
 };
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {

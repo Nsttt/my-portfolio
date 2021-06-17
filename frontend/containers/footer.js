@@ -10,10 +10,6 @@ export default function FooterContainer({ showNewsletter = true }) {
       <Footer>
         <Footer.Content>
           <Footer.Group>
-            <Footer.Logo src="/android-chrome-512x512.png" />
-            <Footer.FocusWord>
-              NST <Footer.Title>Lopez</Footer.Title>
-            </Footer.FocusWord>
             <Footer.Bar />
             <Footer.TextGroup>
               <Footer.Links>
@@ -26,9 +22,6 @@ export default function FooterContainer({ showNewsletter = true }) {
                 <Footer.TextLink href="https://www.twitter.com/nstlopez/">
                   Twitter
                 </Footer.TextLink>
-                <Footer.TextLink href="https://discord.com/invite/qDXCrK4">
-                  Discord
-                </Footer.TextLink>
               </Footer.Links>
               <Footer.Links>
                 <Footer.TextLink href="https://www.instagram.com/nstlopez">
@@ -37,12 +30,6 @@ export default function FooterContainer({ showNewsletter = true }) {
                 <Footer.TextLink href="https://dev.to/nstlopez">
                   Dev.to
                 </Footer.TextLink>
-                <Footer.TextLink href="https://medium.com/@nstlopez">
-                  Medium
-                </Footer.TextLink>
-                <Footer.TextLink href="https://hackernoon.com/u/nstlopez">
-                  Hackernoon
-                </Footer.TextLink>
               </Footer.Links>
               <Footer.Contact href="/contact">
                 {t("footer_button")}
@@ -50,7 +37,6 @@ export default function FooterContainer({ showNewsletter = true }) {
             </Footer.TextGroup>
             <Footer.Bar />
           </Footer.Group>
-          {showNewsletter === true ? <NewsletterContainer /> : null}
         </Footer.Content>
         <Footer.Copyright>
           Copyright {new Date().getFullYear()}. {t("footer_copyright")}
