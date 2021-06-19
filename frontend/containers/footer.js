@@ -1,8 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { Footer } from "../components";
-import NewsletterContainer from "./newsletter";
 
-export default function FooterContainer({ showNewsletter = true }) {
+export default function FooterContainer() {
   const { t } = useTranslation("common");
 
   return (
