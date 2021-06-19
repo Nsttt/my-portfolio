@@ -12,7 +12,6 @@ export const Group = styled.div``;
 export const LabelGroup = styled.div`
   padding: 5px;
   border-radius: 3px;
-  /* background: rgba(255, 255, 255, 0.2); */
 `;
 
 export const TopImage = styled.img`
@@ -23,12 +22,16 @@ export const TopImage = styled.img`
   height: 100%;
   max-width: 1400px;
   max-height: 750px;
+
+  @media (max-width: 527px) {
+    display: none;
+  }
 `;
 
 export const Title = styled.h1`
   font-family: "BebasNeue";
   font-size: 60px;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.2rem;
   color: #ed2e61;
   margin-bottom: 0px;
 `;

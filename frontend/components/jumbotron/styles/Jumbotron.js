@@ -23,6 +23,9 @@ export const Group = styled.div`
 
 export const Title = styled.h1`
   font-family: "BebasNeue";
+  margin-bottom: 0.1em;
+  letter-spacing: 0.2rem;
+  color: #d11c54;
   text-align: center;
   font-size: 60px;
 `;

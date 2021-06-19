@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
+  height: 60vh;
   align-items: center;
   flex-direction: column;
   margin: 0 10%;
+
+  @media (max-width: 527px) {
+    height: 100%;
+  }
 `;
 
 export const Title = styled.h1`
   font-family: "BebasNeue";
   letter-spacing: 2px;
-  font-size: 42px;
+  font-size: 60px;
   color: #ed2e61;
   margin-bottom: 0;
 `;
