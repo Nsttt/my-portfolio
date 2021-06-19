@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { Project, Coffee, BackToTop } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
+import NewsletterContainer from "../../containers/newsletter";
 import { getByPermaLink, getAllProjects } from "../../services/project.service";
 
 export default function ProjectPage({ project }) {
@@ -73,6 +74,7 @@ export default function ProjectPage({ project }) {
           ))}
         </Project.LabelGroup>
         <Project.Body body={project.body} />
+        <NewsletterContainer />
       </Project>
       <FooterContainer />
     </>
