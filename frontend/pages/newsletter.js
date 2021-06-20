@@ -44,7 +44,7 @@ export default function NewsletterPage() {
           {t("common:newsletter_bottom_text")}
         </Newsletter.SmallText>
       </Newsletter.PageContainer>
-      <FooterContainer showNewsletter={false} />
+      <FooterContainer />
     </>
   );
 }
