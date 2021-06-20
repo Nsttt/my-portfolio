@@ -29,7 +29,11 @@ Header.Title = function HeaderTitle({ ...restProps }) {
 };
 
 Header.Logo = function HeaderLogo({ src, ...restProps }) {
-  return <Logo {...restProps} src={src} alt="Logo" />;
+  return (
+    <Link href="/">
+      <Logo {...restProps} src={src} alt="Logo" />
+    </Link>
+  );
 };
 
 Header.TextLink = function HeaderTextLink({ href, children, ...restProps }) {
