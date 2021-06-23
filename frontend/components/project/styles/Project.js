@@ -7,7 +7,12 @@ export const Container = styled.div`
   margin: 0 10% 0 10%;
 `;
 
-export const Group = styled.div``;
+export const Group = styled.div`
+  @media (max-width: 527px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 export const LabelGroup = styled.div`
   padding: 5px;
@@ -19,8 +24,6 @@ export const TopImage = styled.img`
   vertical-align: middle;
   border-radius: 15px;
   width: 100%;
-  height: 100%;
-  max-width: 1400px;
   max-height: 750px;
 
   @media (max-width: 527px) {
@@ -34,12 +37,20 @@ export const Title = styled.h1`
   letter-spacing: 0.2rem;
   color: #ed2e61;
   margin-bottom: 0px;
+
+  @media (max-width: 527px) {
+    text-align: center;
+  }
 `;
 
 export const SubTitle = styled.h2`
   margin-top: 5px;
   margin-bottom: 20px;
   font-size: 20px;
+
+  @media (max-width: 527px) {
+    text-align: center;
+  }
 `;
 
 export const Body = styled.div`
@@ -50,6 +61,10 @@ export const Label = styled.img`
   vertical-align: middle;
   margin-right: 5px;
   height: 25px;
+
+  @media (max-width: 527px) {
+    margin-top: 5px;
+  }
 `;
 
 export const Button = styled.a`
@@ -71,6 +86,12 @@ export const Button = styled.a`
   &:hover {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -5px);
+  }
+
+  @media (max-width: 527px) {
+    justify-content: center;
+    align-self: center;
+    margin: 0 10px 10px 0;
   }
 `;
 
