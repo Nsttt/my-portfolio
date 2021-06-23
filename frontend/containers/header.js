@@ -16,6 +16,7 @@ export default function HeaderContainer() {
         <Header.TextLink href="/contact">{t("header_contact")}</Header.TextLink>
       </Header.Group>
       <Header.Group>
+        <Header.Burger />
         <Header.SocialIcon
           alt="LinkedIn"
           src="/linkedin.svg"

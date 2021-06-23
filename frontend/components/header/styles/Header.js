@@ -13,13 +13,18 @@ export const Container = styled.div`
   }
 
   @media (max-width: 527px) {
-    flex-direction: column;
+    flex-direction: row;
   }
 `;
 
 export const Group = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 527px) {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Brand = styled.div`
@@ -67,6 +72,10 @@ export const TextLink = styled.a`
   @media (max-width: 1000px) {
     font-size: 16px;
   }
+
+  @media (max-width: 527px) {
+    display: none;
+  }
 `;
 
 export const SocialIcon = styled.a`
@@ -104,7 +113,39 @@ export const Logo = styled.img`
   }
 
   @media (max-width: 527px) {
-    padding-right: 20px;
+    padding-right: 5px;
     width: 45px;
+  }
+`;
+
+export const Burger = styled.button`
+  display: none;
+  background: transparent;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+
+  &:focus {
+    outline: none;
+  }
+  @media (max-width: 527px) {
+    display: flex;
+    align-content: flex-end;
+  }
+
+  div {
+    width: 2rem;
+    height: 0.25rem;
+    background: #d11c54;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
   }
 `;

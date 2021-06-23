@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useBurgerContext } from "../../context/burger";
 import {
   Title,
   TextLink,
@@ -8,6 +9,7 @@ import {
   SocialIcon,
   FocusWord,
   Logo,
+  Burger,
 } from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
@@ -50,5 +52,17 @@ Header.SocialIcon = function HeaderSocialIcon({
     <SocialIcon href={href} target="_blank" rel="noreferrer" {...restProps}>
       <img src={src} alt={alt} />
     </SocialIcon>
+  );
+};
+
+Header.Burger = function HeaderBurger({ children, ...restProps }) {
+  const BurgerContext = useBurgerContext();
+
+  return (
+    <Burger {...restProps} onClick={BurgerContext.toggleMenu}>
+      <div />
+      <div />
+      <div />
+    </Burger>
   );
 };
