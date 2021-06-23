@@ -1,14 +1,13 @@
 import { useTranslation } from "next-i18next";
 import { Header } from "../components";
 
-export default function HeaderContainer({ children }) {
+export default function HeaderContainer() {
   const { t } = useTranslation("common");
 
   return (
     <Header>
       <Header.Group>
-        <Header.Logo src="/android-chrome-192x192.png" />
-        <Header.Title />
+        <Header.Brand src="/android-chrome-192x192.png" />
         <Header.TextLink href="/">{t("header_home")}</Header.TextLink>
         <Header.TextLink href="/portfolio">
           {t("header_portfolio")}

@@ -22,6 +22,11 @@ export const Group = styled.div`
   align-items: center;
 `;
 
+export const Brand = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const Title = styled.h2`
   font-family: "BebasNeue";
   font-size: 46px;
@@ -30,11 +35,11 @@ export const Title = styled.h2`
   padding-left: 5px;
 
   @media (max-width: 1000px) {
-    font-size: 26px;
+    font-size: 34px;
   }
 
   @media (max-width: 527px) {
-    display: none;
+    /* display: none; */
   }
 `;
 
