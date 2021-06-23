@@ -66,7 +66,14 @@ export default function ProjectPage({ project }) {
           ) : (
             ""
           )}
-          <Coffee text={t("coffee")} />
+          <Project.Button
+            alt="Coffee"
+            href="https://www.buymeacoffee.com/nstlopez"
+            color="#ff813f"
+            imgSrc="/coffee.svg"
+          >
+            {t("coffee")}
+          </Project.Button>
         </Project.Group>
         <Project.LabelGroup>
           {project.categories.map((label) => (
