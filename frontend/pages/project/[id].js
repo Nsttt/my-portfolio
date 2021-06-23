@@ -2,7 +2,7 @@ import marked from "marked";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import { useTranslation } from "next-i18next";
-import { Project, Coffee, BackToTop } from "../../components";
+import { Project, BackToTop } from "../../components";
 import HeaderContainer from "../../containers/header";
 import FooterContainer from "../../containers/footer";
 import NewsletterContainer from "../../containers/newsletter";
