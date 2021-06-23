@@ -4,6 +4,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 60rem;
+
+  @media (max-width: 527px) {
+    height: 45rem;
+    justify-content: center;
+  }
 `;
 
 export const Title = styled.h1`
@@ -14,7 +20,7 @@ export const Title = styled.h1`
   text-align: center;
   margin: 190px 10% 0 10%;
 
-  @media (max-width: 600px) {
+  @media (max-width: 527px) {
     font-size: 70px;
     margin: 0 10% 0 10%;
   }
@@ -27,7 +33,7 @@ export const FocusWord1 = styled.span`
   max-width: 640px;
   font-weight: 500;
   margin: auto;
-  @media (max-width: 600px) {
+  @media (max-width: 527px) {
     font-size: 70px;
   }
 `;
@@ -37,7 +43,7 @@ export const FocusWord2 = styled.span`
   max-width: 640px;
   font-weight: 500;
   margin: auto;
-  @media (max-width: 600px) {
+  @media (max-width: 527px) {
     font-size: 70px;
   }
 `;
@@ -50,10 +56,10 @@ export const SubTitle = styled.h2`
   max-width: 640px;
   margin: 50px 10% 0px 10%;
 
-  @media (max-width: 600px) {
+  @media (max-width: 527px) {
     margin: 10px 10% 0px 10%;
     text-align: center;
-    font-size: 18px;
+    font-size: 22px;
   }
 `;
 
@@ -62,7 +68,7 @@ export const Button = styled.a`
   text-align: center;
   min-width: 160px;
   padding: 12px 0;
-  margin: 80px 10% 14em 10%;
+  margin: 80px 10% 5em 10%;
   font-family: inherit;
   font-size: 18px;
   font-weight: 700;
@@ -77,9 +83,6 @@ export const Button = styled.a`
   &:hover {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -5px);
-  }
-
-  @media (max-width: 600px) {
   }
 `;
 
