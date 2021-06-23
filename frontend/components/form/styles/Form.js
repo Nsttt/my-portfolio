@@ -2,21 +2,26 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
+  height: 60vh;
   align-items: center;
   flex-direction: column;
   margin: 0 10%;
+
+  @media (max-width: 527px) {
+    height: 100%;
+  }
 `;
 
 export const Title = styled.h1`
   font-family: "BebasNeue";
   letter-spacing: 2px;
-  font-size: 42px;
+  font-size: 60px;
   color: #ed2e61;
   margin-bottom: 0;
 `;
 
 export const SubTitle = styled.h2`
+  max-width: 62vh;
   font-size: 26px;
   text-align: center;
 `;
@@ -25,6 +30,7 @@ export const Input = styled.input`
   display: block;
   background-color: #432349;
   margin-bottom: 15px;
+  border-radius: 5px;
   color: white;
   padding: 7px 0 7px 5px;
   width: 62vh;
@@ -42,13 +48,14 @@ export const Input = styled.input`
   }
 
   @media (max-width: 690px) {
-    width: 40vh;
+    width: 37vh;
   }
 `;
 
 export const Body = styled.textarea`
   display: block;
   resize: none;
+  border-radius: 5px;
   background-color: #432349;
   margin-bottom: 15px;
   color: white;
@@ -69,7 +76,7 @@ export const Body = styled.textarea`
   }
 
   @media (max-width: 690px) {
-    width: 40vh;
+    width: 37vh;
   }
 `;
 

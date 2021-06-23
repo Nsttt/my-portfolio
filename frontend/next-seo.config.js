@@ -1,17 +1,16 @@
 export default {
-  defaultTitle: "NstLopez | Nestor Lopez Full-stack Software Engineer ",
+  defaultTitle: "NstLopez | Nestor Lopez Full-stack Software developer ",
   titleTemplate: "%s | NstLopez",
   description:
-    "A full-stack software engineer based on Spain. Building software for humans.",
+    "A full-stack software developer based on Spain. Building software for humans.",
   canonical: "https://nstlopez.com",
   openGraph: {
     url: "http://nstlopez.com",
     title: "Nestor Lopez Portfolio",
-    description: "A full-stack software engineer based on Spain.",
+    description: "A full-stack software developer based on Spain.",
     images: [
       {
-        url:
-          "https://strapiportfolioimages.s3.eu-west-3.amazonaws.com/OpenGraph.jpg",
+        url: "https://strapiportfolioimages.s3.eu-west-3.amazonaws.com/OpenGraph.jpg",
         width: 800,
         height: 800,
         alt: "OG Logo",

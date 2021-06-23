@@ -1,16 +1,5 @@
 import styled from "styled-components";
 
-export const Background = styled.div`
-  display: flex;
-  min-height: 63vh;
-  flex-direction: column;
-  background-color: #301934;
-  background-image: radial-gradient(#4f2956 1px, transparent 1px),
-    radial-gradient(#4f2956 1px, transparent 1px);
-  background-position: 0 0, 25px 24px;
-  background-size: 50px 50px;
-`;
-
 export const Container = styled.div`
   display: flex;
   margin: 0 10%;
@@ -33,6 +22,11 @@ export const Group = styled.div`
   align-items: center;
 `;
 
+export const Brand = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const Title = styled.h2`
   font-family: "BebasNeue";
   font-size: 46px;
@@ -41,7 +35,7 @@ export const Title = styled.h2`
   padding-left: 5px;
 
   @media (max-width: 1000px) {
-    font-size: 26px;
+    font-size: 34px;
   }
 
   @media (max-width: 527px) {

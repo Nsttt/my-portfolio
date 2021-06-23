@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 350px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+
+  @media (max-width: 527px) {
+    width: 270px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -74,32 +78,39 @@ export const Button = styled.button`
 
 export const PageContainer = styled.div`
   display: flex;
-  justify-content: center;
+  height: 60vh;
   align-items: center;
   flex-direction: column;
   margin: 0 10%;
+
+  @media (max-width: 527px) {
+    height: 100%;
+  }
 `;
 
 export const PageTitle = styled.h1`
   font-family: "BebasNeue";
   letter-spacing: 2px;
-  font-size: 42px;
-  /* color: #ed2e61; */
+  color: #e5195f;
+  font-size: 60px;
   margin-bottom: 0;
 `;
 
 export const PageSubtitle = styled.p`
-  font-size: 20px;
+  max-width: 62vh;
+  font-size: 26px;
+  text-align: center;
 `;
 
 export const PageInput = styled.input`
   background-color: #432349;
   margin-bottom: 15px;
+  border-radius: 5px;
   color: white;
   padding: 7px 0;
   width: 62vh;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 20px;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #ddd;
@@ -111,7 +122,7 @@ export const PageInput = styled.input`
     outline: 0;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 690px) {
     width: 37vh;
   }
 `;

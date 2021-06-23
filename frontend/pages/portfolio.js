@@ -13,13 +13,12 @@ export default function Portfolio({ projects }) {
     <>
       <NextSeo title="Portfolio" />
       <BackToTop />
-      <HeaderContainer>
-        <Jumbotron>
-          <Jumbotron.Title>{t("title")}</Jumbotron.Title>
-          <Jumbotron.Description>{t("subtitle")}</Jumbotron.Description>
-          <Jumbotron.Group projects={projects} />
-        </Jumbotron>
-      </HeaderContainer>
+      <HeaderContainer />
+      <Jumbotron>
+        <Jumbotron.Title>{t("title")}</Jumbotron.Title>
+        <Jumbotron.Description>{t("subtitle")}</Jumbotron.Description>
+        <Jumbotron.Group projects={projects} />
+      </Jumbotron>
       <FooterContainer />
     </>
   );

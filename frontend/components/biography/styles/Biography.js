@@ -1,13 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  height: 59vh;
   margin: 0 10%;
+
+  @media (max-width: 527px) {
+    height: 100%;
+  }
 `;
 
 export const Title = styled.h1`
   font-family: "BebasNeue";
+  color: #d11c54;
   letter-spacing: 3px;
-  font-size: 40px;
+  font-size: 60px;
+
+  @media (max-width: 527px) {
+    text-align: center;
+  }
 `;
 
 export const SubTitle = styled.h2``;
@@ -30,6 +40,12 @@ export const Image = styled.img`
   float: right;
   border-radius: 15px;
   width: 20%;
-  height: 20%;
+  height: auto;
   margin-left: 10px;
+
+  @media (max-width: 527px) {
+    float: none;
+    margin: 0;
+    width: 100%;
+  }
 `;

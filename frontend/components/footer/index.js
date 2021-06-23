@@ -1,26 +1,23 @@
 import Link from "next/link";
 import {
-  Background,
-  Logo,
   Container,
+  Content,
   TextLink,
   Copyright,
   Bar,
   Contact,
-  Title,
   Group,
-  FocusWord,
   Links,
   TextGroup,
   ListItem,
 } from "./styles/Footer";
 
 export default function Footer({ children, ...restProps }) {
-  return <Background {...restProps}>{children}</Background>;
+  return <Container {...restProps}>{children}</Container>;
 }
 
-Footer.Container = function FooterContainer({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
+Footer.Content = function FooterContent({ children, ...restProps }) {
+  return <Content {...restProps}>{children}</Content>;
 };
 
 Footer.Group = function FooterGroup({ children, ...restProps }) {
@@ -41,18 +38,6 @@ Footer.Bar = function FooterBar({ ...restProps }) {
 
 Footer.Copyright = function FooterCopyright({ children, ...restProps }) {
   return <Copyright {...restProps}>{children}</Copyright>;
-};
-
-Footer.Logo = function FooterLogo({ src, ...restProps }) {
-  return <Logo src={src} alt="Logo" {...restProps} />;
-};
-
-Footer.FocusWord = function FooterFocusWord({ children, ...restProps }) {
-  return <FocusWord {...restProps}>{children}</FocusWord>;
-};
-
-Footer.Title = function FooterTitle({ children, ...restProps }) {
-  return <Title {...restProps}>{children}</Title>;
 };
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {

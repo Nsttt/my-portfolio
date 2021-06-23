@@ -4,37 +4,32 @@ import {
   TextLink,
   Container,
   Group,
-  Background,
+  Brand,
   SocialIcon,
   FocusWord,
   Logo,
 } from "./styles/Header";
 
 export default function Header({ children, ...restProps }) {
-  return <Background {...restProps}>{children}</Background>;
-}
-
-Header.Frame = function HeaderFrame({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
-};
+}
 
 Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Header.Title = function HeaderTitle({ ...restProps }) {
+Header.Brand = function HeaderBrand({ src, ...restProps }) {
   return (
     <Link href="/">
-      <Title {...restProps}>
-        <FocusWord>Nst </FocusWord>
-        Lopez
-      </Title>
+      <Brand {...restProps}>
+        <Logo src={src} alt="Logo" />
+        <Title>
+          <FocusWord>Nst </FocusWord>
+          Lopez
+        </Title>
+      </Brand>
     </Link>
   );
-};
-
-Header.Logo = function HeaderLogo({ src, ...restProps }) {
-  return <Logo {...restProps} src={src} alt="Logo" />;
 };
 
 Header.TextLink = function HeaderTextLink({ href, children, ...restProps }) {

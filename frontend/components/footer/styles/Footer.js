@@ -1,31 +1,19 @@
 import styled from "styled-components/";
 
-export const Background = styled.div`
-  padding: 20px 0;
-  background-color: #301934;
-  background-image: radial-gradient(#4f2956 1px, transparent 1px),
-    radial-gradient(#4f2956 1px, transparent 1px);
-  background-position: 0 0, 25px 24px;
-  background-size: 50px 50px;
+export const Container = styled.div`
+  bottom: 0;
 `;
 
-export const Container = styled.div`
+export const Content = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+  padding: 10px 0;
   margin: 0 10%;
-
-  @media (max-width: 527px) {
-  }
-
-  @media (max-width: 1000px) {
-  }
 `;
 
 export const Group = styled.div`
   justify-content: center;
-  padding-right: 50px;
-  padding-top: 30px;
   flex-grow: 2;
 
   @media (max-width: 1000px) {
@@ -36,33 +24,23 @@ export const Group = styled.div`
 export const TextGroup = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 527px) {
     justify-content: center;
   }
 `;
 
 export const Links = styled.ul`
+  display: flex;
+  flex-direction: row;
+
   @media (max-width: 1000px) {
     margin: 0;
-    padding-right: 15px;
-    padding-left: 15px;
   }
-`;
 
-export const FocusWord = styled.h2`
-  display: inline;
-  padding-left: 10px;
-  vertical-align: middle;
-  font-size: 40px;
-  font-family: "BebasNeue";
-  color: #d11c64;
-`;
-
-export const Title = styled.span`
-  font-family: "BebasNeue";
-  color: white;
+  @media (max-width: 527px) {
+    padding: 10px 5px 10px 5px;
+  }
 `;
 
 export const Copyright = styled.p`
@@ -74,12 +52,6 @@ export const Bar = styled.hr`
   margin-bottom: 20px;
   width: 100%;
   border-color: #d11c54;
-`;
-
-export const Logo = styled.img`
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
 `;
 
 export const Contact = styled.a`
@@ -107,6 +79,7 @@ export const TextLink = styled.a`
   color: white;
   font-size: 22px;
   transition: all 0.5s;
+  padding: 5px;
 
   :hover {
     color: #d11c54;
@@ -121,3 +94,23 @@ export const ListItem = styled.li`
     text-align: center;
   }
 `;
+
+// export const FocusWord = styled.h2`
+//   display: inline;
+//   padding-left: 10px;
+//   vertical-align: middle;
+//   font-size: 40px;
+//   font-family: "BebasNeue";
+//   color: #d11c64;
+// `;
+
+// export const Title = styled.span`
+//   font-family: "BebasNeue";
+//   color: white;
+// `;
+
+// export const Logo = styled.img`
+//   vertical-align: middle;
+//   width: 50px;
+//   height: 50px;
+// `;
