@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 350px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+
+  @media (max-width: 527px) {
+    width: 270px;
+  }
 `;
 
 export const Title = styled.h1`
