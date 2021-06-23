@@ -8,14 +8,12 @@ export const Content = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  padding: 20px 0;
+  padding: 10px 0;
   margin: 0 10%;
 `;
 
 export const Group = styled.div`
   justify-content: center;
-  padding-right: 50px;
-  padding-top: 30px;
   flex-grow: 2;
 
   @media (max-width: 1000px) {
@@ -26,18 +24,22 @@ export const Group = styled.div`
 export const TextGroup = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 527px) {
     justify-content: center;
   }
 `;
 
 export const Links = styled.ul`
+  display: flex;
+  flex-direction: row;
+
   @media (max-width: 1000px) {
     margin: 0;
-    padding-right: 15px;
-    padding-left: 15px;
+  }
+
+  @media (max-width: 527px) {
+    padding: 10px 5px 10px 5px;
   }
 `;
 
@@ -77,6 +79,7 @@ export const TextLink = styled.a`
   color: white;
   font-size: 22px;
   transition: all 0.5s;
+  padding: 5px;
 
   :hover {
     color: #d11c54;

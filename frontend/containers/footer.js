@@ -29,17 +29,17 @@ export default function FooterContainer() {
                 <Footer.TextLink href="https://dev.to/nstlopez">
                   Dev.to
                 </Footer.TextLink>
+                <Footer.TextLink href="https://discord.gg/">
+                  Discord
+                </Footer.TextLink>
               </Footer.Links>
-              <Footer.Contact href="/contact">
-                {t("footer_button")}
-              </Footer.Contact>
             </Footer.TextGroup>
             <Footer.Bar />
+            <Footer.Copyright>
+              Copyright {new Date().getFullYear()}. {t("footer_copyright")}
+            </Footer.Copyright>
           </Footer.Group>
         </Footer.Content>
-        <Footer.Copyright>
-          Copyright {new Date().getFullYear()}. {t("footer_copyright")}
-        </Footer.Copyright>
       </Footer>
     </>
   );
