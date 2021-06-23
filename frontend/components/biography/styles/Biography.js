@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 59vh;
   margin: 0 10%;
 
   @media (max-width: 527px) {
