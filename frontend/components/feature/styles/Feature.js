@@ -30,7 +30,7 @@ export const FocusWord1 = styled.span`
   color: white;
   padding: 0 10px 0 10px;
   background-color: #d11c54;
-  max-width: 640px;
+  max-width: 400px;
   font-weight: 500;
   margin: auto;
   @media (max-width: 527px) {
@@ -40,7 +40,7 @@ export const FocusWord1 = styled.span`
 
 export const FocusWord2 = styled.span`
   color: #d11c54;
-  max-width: 640px;
+  max-width: 400px;
   font-weight: 500;
   margin: auto;
   @media (max-width: 527px) {
@@ -53,7 +53,7 @@ export const SubTitle = styled.h2`
   font-size: 26px;
   text-align: center;
   font-weight: normal;
-  max-width: 640px;
+  max-width: 400px;
   margin: 50px 10% 0px 10%;
 
   @media (max-width: 527px) {
