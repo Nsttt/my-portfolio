@@ -1,15 +1,11 @@
-import { useTranslation } from "next-i18next";
 import { Footer } from "../components";
 
 export default function FooterContainer() {
-  const { t } = useTranslation("common");
-
   return (
     <>
       <Footer>
         <Footer.Content>
           <Footer.Group>
-            <Footer.Bar />
             <Footer.TextGroup>
               <Footer.Links>
                 <Footer.TextLink href="https://www.linkedin.com/in/nestorlopezlopez/">
@@ -21,8 +17,6 @@ export default function FooterContainer() {
                 <Footer.TextLink href="https://www.twitter.com/nstlopez/">
                   Twitter
                 </Footer.TextLink>
-              </Footer.Links>
-              <Footer.Links>
                 <Footer.TextLink href="https://www.instagram.com/nstlopez">
                   Instagram
                 </Footer.TextLink>
