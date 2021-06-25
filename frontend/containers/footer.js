@@ -34,10 +34,6 @@ export default function FooterContainer() {
                 </Footer.TextLink>
               </Footer.Links>
             </Footer.TextGroup>
-            <Footer.Bar />
-            <Footer.Copyright>
-              Copyright {new Date().getFullYear()}. {t("footer_copyright")}
-            </Footer.Copyright>
           </Footer.Group>
         </Footer.Content>
       </Footer>

@@ -3,7 +3,6 @@ import {
   Container,
   Content,
   TextLink,
-  Copyright,
   Bar,
   Contact,
   Group,
@@ -34,10 +33,6 @@ Footer.Links = function FooterLinks({ children, ...restProps }) {
 
 Footer.Bar = function FooterBar({ ...restProps }) {
   return <Bar {...restProps} />;
-};
-
-Footer.Copyright = function FooterCopyright({ children, ...restProps }) {
-  return <Copyright {...restProps}>{children}</Copyright>;
 };
 
 Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
