@@ -10,7 +10,6 @@ html, body {
   display: block;
   color: #ffffff;
   height: 100%;
-  overflow: auto;
   font-size: 16px;
   margin: 0;
   padding: 0;
