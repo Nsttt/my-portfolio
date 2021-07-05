@@ -43,10 +43,6 @@ export const Links = styled.ul`
   }
 `;
 
-export const Copyright = styled.p`
-  text-align: center;
-`;
-
 export const Bar = styled.hr`
   margin-top: 20px;
   margin-bottom: 20px;
