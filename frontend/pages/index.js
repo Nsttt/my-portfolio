@@ -12,7 +12,7 @@ export default function Home({ projects, heroproject }) {
   return (
     <>
       <NextSeo title="Home" />
-      <BackToTop />
+      {/* <BackToTop /> */}
       <HeaderContainer />
       <Feature>
         <Feature.MainTitle />
