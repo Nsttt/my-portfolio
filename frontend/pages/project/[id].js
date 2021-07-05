@@ -31,7 +31,7 @@ export default function ProjectPage({ project }) {
           ],
         }}
       />
-      <BackToTop />
+      {/* <BackToTop /> */}
       <HeaderContainer />
       <Project>
         <Project.TopImage src={project.image.url} />

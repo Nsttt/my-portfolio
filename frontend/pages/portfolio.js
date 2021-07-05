@@ -12,7 +12,7 @@ export default function Portfolio({ projects }) {
   return (
     <>
       <NextSeo title="Portfolio" />
-      <BackToTop />
+      {/* <BackToTop /> */}
       <HeaderContainer />
       <Jumbotron>
         <Jumbotron.Title>{t("title")}</Jumbotron.Title>

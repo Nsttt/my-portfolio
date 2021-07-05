@@ -1,10 +1,7 @@
-import Link from "next/link";
 import {
   Container,
-  Content,
   TextLink,
   Bar,
-  Contact,
   Group,
   Links,
   TextGroup,
@@ -14,10 +11,6 @@ import {
 export default function Footer({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
-
-Footer.Content = function FooterContent({ children, ...restProps }) {
-  return <Content {...restProps}>{children}</Content>;
-};
 
 Footer.Group = function FooterGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
@@ -42,13 +35,5 @@ Footer.TextLink = function FooterTextLink({ children, href, ...restProps }) {
         {children}
       </TextLink>
     </ListItem>
-  );
-};
-
-Footer.Contact = function FooterContact({ href, children, ...restProps }) {
-  return (
-    <Link href={href}>
-      <Contact {...restProps}>{children}</Contact>
-    </Link>
   );
 };
