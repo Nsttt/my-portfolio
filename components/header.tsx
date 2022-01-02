@@ -6,14 +6,21 @@ const Header = () => {
   const { t } = useTranslation('common');
 
   return (
-    <header>
-      <div>
-        <Image
-          alt="Logo"
-          src="/android-chrome-192x192.png"
-          width={55}
-          height={55}
-        />
+    <header className="flex mx-10 justify-between items-center">
+      <div className="flex items-center">
+        <Link href="/" passHref>
+          <div className="flex items-center cursor-pointer">
+            <Image
+              alt="Logo"
+              src="/android-chrome-192x192.png"
+              width={55}
+              height={55}
+            />
+            <h2 className="">
+              <span className="text-red-1 hover:text-white">NST</span> Lopez
+            </h2>
+          </div>
+        </Link>
         <Link href="/">{t('header_home')}</Link>
         <Link href="/portfolio">{t('header_portfolio')}</Link>
         <Link href="/about">{t('header_about')}</Link>
