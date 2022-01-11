@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  html,
+  body {
+    @apply text-white;
+  }
+
+  #__next {
+    @apply bg-deep-purple;
+  }
+
+  a {
+    @apply text-very-bright-pink hover:text-white;
+  }
+} ;
