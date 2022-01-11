@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/bebas-neue": "^4.5.0",
     "next": "12.0.7",
     "next-i18next": "^10.1.0",
     "react": "17.0.2",

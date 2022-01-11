@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
+    fontFamily: {
+      sans: ['Arial', ...defaultTheme.fontFamily.sans],
+      bebas: ['"Bebas Neue"'],
+    },
     extend: {
       colors: {
-        'red-1': '#d11c54',
+        'deep-purple': '#301934',
+        'bright-pink': '#d11c54',
+        'very-bright-pink': '#ed2e61',
       },
     },
   },
