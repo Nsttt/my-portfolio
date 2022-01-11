@@ -2,11 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-const Header = () => {
+interface HeaderProps {
+  currentPage: string;
+}
+
+const Header = ({ currentPage }: HeaderProps) => {
   const { t } = useTranslation('common');
 
   return (
-    <header className="flex mx-10 justify-between items-center">
+    <header className="flex my-0 mx-auto justify-between items-center">
       <div className="flex items-center">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
@@ -16,26 +20,26 @@ const Header = () => {
               width={55}
               height={55}
             />
-            <h2 className="">
-              <span className="text-red-1 hover:text-white">NST</span> Lopez
+            <h2 className="px-2 font-bebas">
+              <span className="text-bright-pink hover:text-white transition">
+                NST
+              </span>
+              Lopez
             </h2>
           </div>
         </Link>
-        <Link href="/">{t('header_home')}</Link>
-        <Link href="/portfolio">{t('header_portfolio')}</Link>
-        <Link href="/about">{t('header_about')}</Link>
-        <Link href="/contact">{t('header_contact')}</Link>
-      </div>
-      <div>
-        <a href="https://www.linkedin.com/in/nestorlopezlopez/">
-          <Image alt="LinkedIn" src="/linkedin.svg" width={24} height={24} />
-        </a>
-        <a href="https://github.com/Nsttt/">
-          <Image alt="Github" src="/github.svg" width={24} height={24} />
-        </a>
-        <a href="https://twitter.com/nstlopez/">
-          <Image alt="Twitter" src="/twitter.svg" width={24} height={24} />
-        </a>
+        <Link href="/">
+          <a className="px-1">{t('header_home')}</a>
+        </Link>
+        <Link href="/portfolio">
+          <a className="px-1">{t('header_portfolio')}</a>
+        </Link>
+        <Link href="/about">
+          <a className="px-1">{t('header_about')}</a>
+        </Link>
+        <Link href="/contact">
+          <a className="px-1">{t('header_contact')}</a>
+        </Link>
       </div>
     </header>
   );
