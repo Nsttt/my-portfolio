@@ -3,16 +3,21 @@
 @tailwind utilities;
 
 @layer components {
-  html,
   body {
-    @apply text-white;
+    @apply text-white bg-deep-purple;
   }
 
   #__next {
-    @apply bg-deep-purple;
+    @apply h-full max-w-5xl mx-auto;
   }
 
   a {
     @apply text-very-bright-pink hover:text-white;
   }
-} ;
+}
+
+body {
+  background-image: radial-gradient(#4f2956 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 30px 30px;
+}
