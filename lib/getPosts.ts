@@ -8,11 +8,15 @@ export const getPostsData = () => {
 
     const fileContents = fs.readFileSync(`posts/${fileName}`, 'utf-8');
 
-    const { data: frontmatter } = matter(fileContents);
+    const { data, content } = matter(fileContents);
 
     return {
       slug,
-      title: frontmatter.title,
+      title: data.title,
+      subtitle: data.subtitle,
+      description: data.description,
+      date: data.date,
+      content: content,
     };
   });
 

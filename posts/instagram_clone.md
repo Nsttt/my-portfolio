@@ -9,7 +9,7 @@ This is my second clone of a famous platform. First i started with my [Netflix c
 
 The sole purpose for me to make these clones is to learn how to manage a page that is commonly used in production-ready environments, and since I use Instagram quite a bit, I decided to try to replicate it.
 
-Since I wanted the project to be as straight-forward as possible I decided to use **React** with **create-react-app (CRA). I'm quite used to work with it and it seemed like a good option to build and learn new things on the way.**
+Since I wanted the project to be as straight-forward as possible I decided to use **React** with **create-react-app (CRA)**. I'm quite used to work with it and it seemed like a good option to build and learn new things on the way.
 
 Later on, I realised that [Vite 2.0](https://dev.to/yyx990803/announcing-vite-2-0-2f0a) got released and thought about migrating to it, it did not happen at the end because the project was already sort of half-made already and I was honestly too lazy to move everything.
 
