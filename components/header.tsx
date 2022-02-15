@@ -33,9 +33,6 @@ const Header = () => {
         <Link href="/about">
           <a className="px-1">{t('header_about')}</a>
         </Link>
-        <Link href="/contact">
-          <a className="px-1">{t('header_contact')}</a>
-        </Link>
       </div>
     </header>
   );
