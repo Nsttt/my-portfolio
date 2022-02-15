@@ -1,11 +1,9 @@
-import React from 'react';
-
 const Card = () => {
   return (
     <div>
       <a className="flex flex-col w-full border-4 border-bright-pink rounded-xl m-2 p-5 hover: scale-[1.01]">
-        <h3>Test Post</h3>
-        <p>
+        <h3 className="text-xl">Test Post</h3>
+        <p className="text-sm">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque alias
           nesciunt iusto voluptatem, exercitationem obcaecati tempore rem
           voluptate corrupti asperiores facere saepe, et harum molestiae

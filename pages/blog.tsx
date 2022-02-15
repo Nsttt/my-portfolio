@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
 import Header from '../components/header';
-import { getPostsData } from '../lib/getPosts';
+import { getAllPostsData } from '../lib/getPosts';
 
 interface BlogProps {
   posts: {
@@ -19,7 +19,6 @@ interface BlogProps {
 }
 export default function Blog({ posts }: BlogProps): JSX.Element {
   const { t } = useTranslation(['home', 'common']);
-  console.log(posts);
 
   return (
     <>
@@ -90,7 +89,7 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
 }
 
 export const getStaticProps = async ({ locale }: Record<string, string>) => {
-  const posts = getPostsData();
+  const posts = getAllPostsData();
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'home'])),

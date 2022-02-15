@@ -18,8 +18,10 @@ export default function Home(): JSX.Element {
             <h2 className="font-bebas text-4xl">{t('title')}</h2>
           </div>
           <div className="flex flex-col my-20">
-            <h2>Featured Posts</h2>
+            <h2 className="text-2xl">Featured Posts</h2>
             <div className="grid grid-cols-2 gap-5">
+              <Card />
+              <Card />
               <Card />
               <Card />
             </div>
