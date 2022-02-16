@@ -8,7 +8,7 @@ import { getAllPostsData } from '../lib/getPosts';
 
 interface BlogProps {
   posts: {
-    slug: string;
+    id: string;
     title: string;
     subtitle: string;
     description: string;
@@ -54,9 +54,9 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
         </div>
         <ul>
           {posts.map((frontMatter) => {
-            const { slug, date, title, description } = frontMatter;
+            const { id, date, title, description } = frontMatter;
             return (
-              <li key={slug} className="py-4">
+              <li key={id} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <dl>
                     <dt className="sr-only">Published on</dt>
@@ -67,7 +67,7 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
                   <div className="space-y-3 xl:col-span-3">
                     <div>
                       <h3 className="text-2xl font-bold tracking-tight leading-8">
-                        <Link passHref href={`/blog/${slug}`}>
+                        <Link passHref href={`/blog/${id}`}>
                           <h2 className="text-gray-900 dark:text-gray-100">
                             {title}
                           </h2>
