@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import ReactMarkdown from 'react-markdown';
 import { ParsedUrlQuery } from 'querystring';
+import Header from '../../components/header';
 import { getPostData, getPostsIds } from '../../lib/getPosts';
 
 interface Post {
@@ -17,9 +19,10 @@ interface PostPageProps {
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
   return (
-    <div>
-      <h1>{post.content}</h1>
-    </div>
+    <>
+      <Header />
+      <ReactMarkdown>{post.content}</ReactMarkdown>
+    </>
   );
 };
 

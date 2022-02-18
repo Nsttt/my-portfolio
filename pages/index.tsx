@@ -3,8 +3,21 @@ import { useTranslation } from 'next-i18next';
 
 import Header from '../components/header';
 import Card from '../components/card';
+import { getAllPostsData } from '../lib/getPosts';
 
-export default function Home(): JSX.Element {
+interface BlogProps {
+  posts: {
+    id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    date: string;
+    content: string;
+    data: string;
+  }[];
+}
+
+export default function Home({ posts }: BlogProps): JSX.Element {
   const { t } = useTranslation(['home', 'common']);
 
   return (
@@ -20,10 +33,15 @@ export default function Home(): JSX.Element {
           <div className="flex flex-col my-20">
             <h2 className="text-2xl">Featured Posts</h2>
             <div className="grid grid-cols-2 gap-5">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {posts.map((frontMatter) => {
+                return (
+                  <Card
+                    key={frontMatter.id}
+                    title={frontMatter.title}
+                    description={frontMatter.description}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -32,8 +50,13 @@ export default function Home(): JSX.Element {
   );
 }
 
-export const getStaticProps = async ({ locale }: Record<string, string>) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'home'])),
-  },
-});
+export const getStaticProps = async ({ locale }: Record<string, string>) => {
+  const posts = getAllPostsData();
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'home'])),
+      posts,
+    },
+  };
+};

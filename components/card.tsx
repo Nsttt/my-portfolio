@@ -1,14 +1,16 @@
-const Card = () => {
+interface CardProps {
+  title: string;
+  description: string;
+}
+
+const Card = ({ title, description }: CardProps) => {
   return (
     <div>
-      <a className="flex flex-col w-full border-4 border-bright-pink rounded-xl m-2 p-5 hover: scale-[1.01]">
-        <h3 className="text-xl">Test Post</h3>
-        <p className="text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque alias
-          nesciunt iusto voluptatem, exercitationem obcaecati tempore rem
-          voluptate corrupti asperiores facere saepe, et harum molestiae
-          corporis a, iure doloribus magnam?
-        </p>
+      <div className="flex flex-col p-5 m-2 w-full rounded-xl border-4 border-bright-pink">
+        <h3 className="text-xl hover:text-bright-pink cursor-pointer">
+          {title}
+        </h3>
+        <p className="text-sm">{description}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="self-end m-2 w-5 h-5"
@@ -21,7 +23,7 @@ const Card = () => {
             clipRule="evenodd"
           />
         </svg>
-      </a>
+      </div>
     </div>
   );
 };
