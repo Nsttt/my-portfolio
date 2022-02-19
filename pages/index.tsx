@@ -26,17 +26,24 @@ export default function Home({ posts }: BlogProps): JSX.Element {
       <div className="flex">
         <div className="grid grid-cols-2 gap-20">
           <div className="flex flex-col my-20">
-            <h1 className="font-bebas text-9xl">Néstor López</h1>
-            <h3 className="text-xl">Frontend Engineer at NEXIONA</h3>
-            <h2 className="font-bebas text-4xl">{t('title')}</h2>
+            <h1 className="font-bebas text-5xl">Néstor López</h1>
+            <h2 className="">
+              Frontend Engineer at <b>NEXIONA</b>
+            </h2>
+            <p className="mt-4 text-neutral-400">
+              Helping developers build a faster web. Teaching about web
+              development, serverless, and React / Next.js.
+            </p>
           </div>
-          <div className="flex flex-col my-20">
+          <div className="flex flex-col my-20"></div>
+          <div>
             <h2 className="text-2xl">Featured Posts</h2>
             <div className="grid grid-cols-2 gap-5">
               {posts.map((frontMatter) => {
                 return (
                   <Card
                     key={frontMatter.id}
+                    id={frontMatter.id}
                     title={frontMatter.title}
                     description={frontMatter.description}
                   />
