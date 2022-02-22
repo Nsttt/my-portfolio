@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center my-0 mx-auto">
+    <header className="flex justify-between items-center mx-auto mt-4">
       <div className="flex items-center">
         <Link href="/" passHref>
           <div className="flex items-center cursor-pointer">
@@ -22,13 +22,13 @@ const Header = () => {
           </div>
         </Link>
         <Link href="/">
-          <a className="px-1">Home</a>
+          <a className="px-2">Home</a>
         </Link>
         <Link href="/blog">
-          <a className="px-1">Blog</a>
+          <a className="px-2">Blog</a>
         </Link>
         <Link href="/about">
-          <a className="px-1">About</a>
+          <a className="px-2">About</a>
         </Link>
       </div>
     </header>
