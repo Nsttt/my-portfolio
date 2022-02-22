@@ -22,7 +22,9 @@ export default function Home({ posts }: BlogProps): JSX.Element {
       <div className="flex flex-col">
         <div className="flex my-20">
           <div className="flex flex-col">
-            <h1 className="font-bebas text-5xl">Néstor López</h1>
+            <h1 className="font-bebas text-5xl tracking-wide">
+              Néstor López
+            </h1>
             <h2 className="">
               Frontend Engineer at <b>NEXIONA</b>
             </h2>
@@ -41,19 +43,17 @@ export default function Home({ posts }: BlogProps): JSX.Element {
           </div>
         </div>
         <h2 className="text-2xl">Featured Posts</h2>
-        <div className="grid grid-cols-2 gap-20">
-          <div className="grid grid-cols-2 gap-5">
-            {posts.map((frontMatter) => {
-              return (
-                <Card
-                  key={frontMatter.id}
-                  id={frontMatter.id}
-                  title={frontMatter.title}
-                  description={frontMatter.description}
-                />
-              );
-            })}
-          </div>
+        <div className="grid grid-cols-3 gap-5">
+          {posts.map((frontMatter) => {
+            return (
+              <Card
+                key={frontMatter.id}
+                id={frontMatter.id}
+                title={frontMatter.title}
+                description={frontMatter.description}
+              />
+            );
+          })}
         </div>
       </div>
     </>
