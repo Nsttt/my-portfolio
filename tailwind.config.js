@@ -5,7 +5,7 @@ module.exports = {
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Arial', ...defaultTheme.fontFamily.sans],
+      sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       bebas: ['"Bebas Neue"'],
     },
     extend: {

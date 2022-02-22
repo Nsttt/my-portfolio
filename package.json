@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fontsource/bebas-neue": "^4.5.1",
+    "@fontsource/montserrat": "^4.5.5",
     "gray-matter": "^4.0.3",
     "marked": "^4.0.12",
     "next": "12.1.0",
