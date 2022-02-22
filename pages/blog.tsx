@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import Header from '../components/header';
 import { getAllPostsData } from '../lib/getPosts';
@@ -17,8 +15,6 @@ interface BlogProps {
   }[];
 }
 export default function Blog({ posts }: BlogProps): JSX.Element {
-  const { t } = useTranslation(['home', 'common']);
-
   return (
     <>
       <Header />
@@ -87,11 +83,10 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
   );
 }
 
-export const getStaticProps = async ({ locale }: Record<string, string>) => {
+export const getStaticProps = async () => {
   const posts = getAllPostsData();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'home'])),
       posts,
     },
   };

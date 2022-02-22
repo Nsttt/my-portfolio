@@ -1,10 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
 
 const Header = () => {
-  const { t } = useTranslation('common');
-
   return (
     <header className="flex justify-between items-center my-0 mx-auto">
       <div className="flex items-center">
@@ -25,13 +22,13 @@ const Header = () => {
           </div>
         </Link>
         <Link href="/">
-          <a className="px-1">{t('header_home')}</a>
+          <a className="px-1">Home</a>
         </Link>
         <Link href="/blog">
-          <a className="px-1">{t('header_blog')}</a>
+          <a className="px-1">Blog</a>
         </Link>
         <Link href="/about">
-          <a className="px-1">{t('header_about')}</a>
+          <a className="px-1">About</a>
         </Link>
       </div>
     </header>
