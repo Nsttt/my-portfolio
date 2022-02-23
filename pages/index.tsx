@@ -2,6 +2,7 @@ import Header from '../components/header';
 import Card from '../components/card';
 import { getAllPostsData } from '../lib/getPosts';
 import Image from 'next/image';
+import Footer from '../components/footer';
 
 interface BlogProps {
   posts: {
@@ -23,7 +24,8 @@ export default function Home({ posts }: BlogProps): JSX.Element {
         <div className="flex my-20">
           <div className="flex flex-col">
             <h1 className="font-bebas text-5xl tracking-wide">
-              Néstor López
+              <span className="text-bright-pink">Néstor </span>
+              López
             </h1>
             <h2 className="">
               Frontend Engineer at <b>NEXIONA</b>
@@ -42,7 +44,7 @@ export default function Home({ posts }: BlogProps): JSX.Element {
             />
           </div>
         </div>
-        <h2 className="text-2xl">Featured Posts</h2>
+        <h2 className="text-2xl font-bold">Latests Posts</h2>
         <div className="grid grid-cols-3 gap-5">
           {posts.map((frontMatter) => {
             return (
@@ -50,11 +52,27 @@ export default function Home({ posts }: BlogProps): JSX.Element {
                 key={frontMatter.id}
                 id={frontMatter.id}
                 title={frontMatter.title}
-                description={frontMatter.description}
+                description={frontMatter.subtitle}
+                date={frontMatter.date}
               />
             );
           })}
         </div>
+        <h2 className="mt-8 text-2xl font-bold">Latests Projects</h2>
+        <div className="grid grid-cols-3 gap-5">
+          {posts.map((frontMatter) => {
+            return (
+              <Card
+                key={frontMatter.id}
+                id={frontMatter.id}
+                title={frontMatter.title}
+                description={frontMatter.subtitle}
+                date={frontMatter.date}
+              />
+            );
+          })}
+        </div>
+        <Footer />
       </div>
     </>
   );
