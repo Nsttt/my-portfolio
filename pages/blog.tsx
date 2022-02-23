@@ -23,11 +23,15 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
           <h1 className="font-bebas text-3xl tracking-wide leading-9 text-bright-pink sm:text-4xl sm:leading-10 md:text-6xl">
             Blog
           </h1>
-          <p>Here you can take a peek at the stuff I make, or talk about.</p>
+          <p>
+            A small gallery of recent projects chosen by me. I&apos;ve done them
+            all on my own and with amazing people from around the globe. If you
+            like what you see, you can take a peek at my achievements page.
+          </p>
         </div>
         <ul>
           {posts.map((frontMatter) => {
-            const { id, date, title, description } = frontMatter;
+            const { id, date, title, subtitle } = frontMatter;
             return (
               <li key={id} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -35,16 +39,16 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
                     <div>
                       <h3 className="font-bebas text-3xl font-bold tracking-wide leading-8">
                         <Link passHref href={`/blog/${id}`}>
-                          <span className="text-bright-pink tracking-wide">
+                          <span className="tracking-wide text-bright-pink">
                             {title}
                           </span>
                         </Link>
-                        <span className="pl-2  text-base">Project</span>
+                        <span className="pl-2 text-base">Project</span>
                       </h3>
                       <p className="text-sm">{date} • 10 min read</p>
                     </div>
                     <div className="max-w-none text-gray-500 dark:text-gray-400 prose">
-                      {description}
+                      {subtitle}
                     </div>
                   </div>
                 </article>
