@@ -2,7 +2,7 @@
 title: 'Netflix Clone'
 subtitle: 'A very simple Netflix clone.'
 description: 'A very simple but accurate clone of a famous streaming service. Made with React (custom hooks & context), styled-components and Firebase'
-date: '2020-01-02'
+date: 'February 5, 2021'
 ---
 
 This is essentially a clone of the famous streaming platform Netflix, but built my way.
