@@ -24,11 +24,14 @@ const Header = () => {
         <Link href="/">
           <a className="px-2">Home</a>
         </Link>
+        <Link href="/portfolio">
+          <a className="px-2">Portfolio</a>
+        </Link>
         <Link href="/blog">
           <a className="px-2">Blog</a>
         </Link>
-        <Link href="/about">
-          <a className="px-2">About</a>
+        <Link href="/achievements">
+          <a className="px-2">Achievements</a>
         </Link>
       </div>
     </header>
