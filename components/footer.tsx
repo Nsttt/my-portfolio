@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="container">
-      <div className="flex flex-row justify-between mt-12">
+    <footer className="container my-7">
+      <div className="flex flex-row justify-between ">
         <div className="flex flex-row gap-3">
           <Link href="/">
             <a className="hover:text-white">Github</a>
