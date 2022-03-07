@@ -24,9 +24,9 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
             Blog
           </h1>
           <p>
-            A small gallery of recent projects chosen by me. I&apos;ve done them
-            all on my own and with amazing people from around the globe. If you
-            like what you see, you can take a peek at my achievements page.
+            {
+              "The place where I write about things I'm interested in. I'm not a professional writer, but I try to write about things that I find interesting."
+            }
           </p>
         </div>
         <ul>
