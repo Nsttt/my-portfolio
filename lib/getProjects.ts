@@ -2,13 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const files = fs.readdirSync('public/posts');
+const files = fs.readdirSync('public/projects');
 
-export const getAllPostsData = () => {
+export const getAllProjectsData = () => {
   const allPostsData = files.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
 
-    const fileContents = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+    const fileContents = fs.readFileSync(`public/projects/${fileName}`, 'utf-8');
 
     const { data, content } = matter(fileContents);
 
@@ -25,7 +25,7 @@ export const getAllPostsData = () => {
   return allPostsData;
 };
 
-export const getPostsIds = () => {
+export const getProjectsIds = () => {
   return files.map((fileName) => {
     return {
       params: {
@@ -35,8 +35,8 @@ export const getPostsIds = () => {
   });
 };
 
-export const getPostData = (id: string) => {
-  const fullPath = path.join('./posts', `${id}.md`);
+export const getProjectData = (id: string) => {
+  const fullPath = path.join('public/projects', `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const { data, content } = matter(fileContents);
