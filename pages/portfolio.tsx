@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import Header from '../components/header';
-import { getAllPostsData } from '../lib/getPosts';
+import { getAllProjectsData } from '../lib/getProjects';
 
 interface PortfolioProps {
   projects: {
@@ -24,9 +24,14 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
             Portfolio
           </h1>
           <p>
-            A small gallery of recent projects chosen by me. I&apos;ve done them
-            all on my own and with amazing people from around the globe. If you
-            like what you see, you can take a peek at my achievements page.
+            {
+              "A small gallery of recent projects chosen by me. I've done them all on my own and with help from amazing people around the globe."
+            }
+          </p>
+          <p>
+            If you like what you see, you can take a peek at my
+            <Link href="/achievements"> achievements </Link>
+            page.
           </p>
         </div>
         <ul>
@@ -38,7 +43,7 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
                   <div className="space-y-3 xl:col-span-3">
                     <div>
                       <h3 className="font-bebas text-3xl font-bold tracking-wide leading-8">
-                        <Link passHref href={`/blog/${id}`}>
+                        <Link passHref href={`/portfolio/${id}`}>
                           <span className="tracking-wide text-bright-pink">
                             {title}
                           </span>
@@ -61,7 +66,7 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
 }
 
 export const getStaticProps = async () => {
-  const projects = getAllPostsData();
+  const projects = getAllProjectsData();
   return {
     props: {
       projects,
