@@ -5,5 +5,6 @@
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "tailwindcss"]
+  "plugins": ["@typescript-eslint", "tailwindcss"],
+  "parser": "@typescript-eslint/parser"
 }
