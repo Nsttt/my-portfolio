@@ -8,7 +8,7 @@ export const getAllProjectsData = () => {
   const allPostsData = files.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
 
-    const fileContents = fs.readFileSync(`public/projects/${fileName}`, 'utf-8');
+    const fileContents = fs.readFileSync(`public/projects/${fileName}`,'utf-8');
 
     const { data, content } = matter(fileContents);
 
@@ -18,6 +18,7 @@ export const getAllProjectsData = () => {
       subtitle: data.subtitle,
       description: data.description,
       date: data.date,
+      thumbnail: data.thumbnail,
       content: content,
     };
   });

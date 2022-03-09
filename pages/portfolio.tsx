@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Header from '../components/header';
@@ -12,6 +13,7 @@ interface PortfolioProps {
     date: string;
     content: string;
     data: string;
+    thumbnail: string;
   }[];
 }
 export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
@@ -36,13 +38,22 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
         </div>
         <ul>
           {projects.map((frontMatter) => {
-            const { id, date, title, subtitle } = frontMatter;
+            const { id, date, title, description, thumbnail } = frontMatter;
             return (
               <li key={id} className="py-4">
+                <Link passHref href={`/portfolio/${id}`}>
+                  <Image
+                    src={thumbnail}
+                    alt={id}
+                    width={768}
+                    height={200}
+                    className="object-cover object-top cursor-pointer"
+                  />
+                </Link>
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <div className="space-y-3 xl:col-span-3">
                     <div>
-                      <h3 className="font-bebas text-3xl font-bold tracking-wide leading-8">
+                      <h3 className="font-bebas text-3xl font-bold tracking-wide leading-8 cursor-pointer">
                         <Link passHref href={`/portfolio/${id}`}>
                           <span className="tracking-wide text-bright-pink">
                             {title}
@@ -51,8 +62,8 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
                       </h3>
                       <p className="text-sm">{date} • 10 min read</p>
                     </div>
-                    <div className="max-w-none text-gray-500 dark:text-gray-400 prose">
-                      {subtitle}
+                    <div className=" text-gray-500 dark:text-gray-400 prose">
+                      {description}
                     </div>
                   </div>
                 </article>

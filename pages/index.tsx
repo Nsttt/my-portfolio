@@ -69,6 +69,7 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
           {posts.map((frontMatter) => {
             return (
               <Card
+                type="post"
                 key={frontMatter.id}
                 id={frontMatter.id}
                 title={frontMatter.title}
@@ -83,6 +84,7 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
           {projects.map((frontMatter) => {
             return (
               <Card
+                type="project"
                 key={frontMatter.id}
                 id={frontMatter.id}
                 title={frontMatter.title}
