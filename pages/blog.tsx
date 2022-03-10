@@ -14,6 +14,7 @@ interface BlogProps {
     data: string;
   }[];
 }
+
 export default function Blog({ posts }: BlogProps): JSX.Element {
   return (
     <>
@@ -25,7 +26,7 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
           </h1>
           <p>
             {
-              "The place where I write about things I'm interested in. I'm not a professional writer, but I try to write about things that I find interesting."
+              "The place where I write about things I'm interested in. I'm not a professional writer, but I try to write about things that I find interesting and my own experiences."
             }
           </p>
         </div>

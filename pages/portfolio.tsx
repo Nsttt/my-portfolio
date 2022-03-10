@@ -13,7 +13,6 @@ interface PortfolioProps {
     date: string;
     content: string;
     data: string;
-    thumbnail: string;
   }[];
 }
 export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
@@ -32,37 +31,37 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
           </p>
           <p>
             If you like what you see, you can take a peek at my
-            <Link href="/achievements"> achievements </Link>
+            <Link href="/achievements">&nbsp;achievements&nbsp;</Link>
             page.
           </p>
         </div>
         <ul>
           {projects.map((frontMatter) => {
-            const { id, date, title, description, thumbnail } = frontMatter;
+            const { id, date, title, description } = frontMatter;
             return (
               <li key={id} className="py-4">
                 <Link passHref href={`/portfolio/${id}`}>
                   <Image
-                    src={thumbnail}
+                    src={`/images/projects/${id}.webp`}
                     alt={id}
                     width={768}
                     height={200}
                     className="object-cover object-top cursor-pointer"
                   />
                 </Link>
-                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                  <div className="space-y-3 xl:col-span-3">
+                <article className="mt-2 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  <div className="space-y-3 xl:col-span-4">
                     <div>
-                      <h3 className="font-bebas text-3xl font-bold tracking-wide leading-8 cursor-pointer">
+                      <h3 className="font-bebas text-4xl font-bold tracking-wide leading-8 cursor-pointer">
                         <Link passHref href={`/portfolio/${id}`}>
                           <span className="tracking-wide text-bright-pink">
                             {title}
                           </span>
                         </Link>
                       </h3>
-                      <p className="text-sm">{date} • 10 min read</p>
+                      <p className="text-sm">{date}</p>
                     </div>
-                    <div className=" text-gray-500 dark:text-gray-400 prose">
+                    <div className="text-base text-gray-500 dark:text-gray-400 prose">
                       {description}
                     </div>
                   </div>

@@ -13,7 +13,7 @@ const Header = () => {
               width={55}
               height={55}
             />
-            <h2 className="group pr-5 pl-2 font-bebas text-3xl">
+            <h2 className="group pr-5 pl-2 font-bebas text-4xl">
               <span className="text-bright-pink group-hover:text-white transition">
                 NST
               </span>
@@ -22,16 +22,16 @@ const Header = () => {
           </div>
         </Link>
         <Link href="/">
-          <a className="px-2">Home</a>
+          <a className="px-2 text-lg">Home</a>
         </Link>
         <Link href="/portfolio">
-          <a className="px-2">Portfolio</a>
+          <a className="px-2 text-lg">Portfolio</a>
         </Link>
         <Link href="/blog">
-          <a className="px-2">Blog</a>
+          <a className="px-2 text-lg">Blog</a>
         </Link>
         <Link href="/achievements">
-          <a className="px-2">Achievements</a>
+          <a className="px-2 text-lg">Achievements</a>
         </Link>
       </div>
     </header>

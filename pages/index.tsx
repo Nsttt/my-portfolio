@@ -4,6 +4,7 @@ import { getAllPostsData } from '../lib/getPosts';
 import Image from 'next/image';
 import Footer from '../components/footer';
 import { getAllProjectsData } from '../lib/getProjects';
+import Head from 'next/head';
 
 interface BlogProps {
   posts: {
@@ -29,19 +30,23 @@ interface BlogProps {
 export default function Home({ posts, projects }: BlogProps): JSX.Element {
   return (
     <>
+      <Head>
+        <title>Nstlopez</title>
+        <meta property="og:title" content="Nstlopez" key="title" />
+      </Head>
       <Header />
       <div className="flex flex-col">
         <div className="flex my-20">
           <div className="flex flex-col">
-            <h1 className="font-bebas text-5xl tracking-wide">
+            <h1 className="font-bebas text-6xl tracking-wide">
               <span className="text-bright-pink">Néstor </span>
               López
             </h1>
-            <h4 className="text-xs text-neutral-400">
+            <h4 className="text-sm text-neutral-400">
               Building software for humans.
             </h4>
-            <h2 className="mt-1 text-sm">
-              Frontend Engineer at{' '}
+            <h2 className="mt-1 text-lg">
+              Frontend Engineer at&nbsp;
               <b>
                 <a href="https://nexiona.com/" target="_blank" rel="noreferrer">
                   NEXIONA
@@ -94,8 +99,8 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
             );
           })}
         </div>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 }
