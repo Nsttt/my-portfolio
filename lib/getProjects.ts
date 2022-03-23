@@ -21,6 +21,8 @@ export const getAllProjectsData = () => {
       subtitle: data.subtitle,
       description: data.description,
       date: data.date,
+      link: data.link,
+      source: data.source,
       content: content,
     };
   });
