@@ -2,8 +2,7 @@
 title: 'Netflix Clone'
 subtitle: 'A very simple Netflix clone.'
 description: 'A very simple but accurate clone of a famous streaming service. Made with React (custom hooks & context), styled-components and Firebase'
-date: 'February 5, 2021'
-thumbnail: '/projects/images/instagram.webp'
+date: 'October 16, 2020'
 link: 'https://photos.nstlopez.com'
 source: 'https://github.com/nsttt/instagram-clone'
 ---

@@ -1,0 +1,14 @@
+---
+title: 'Instagram Clone'
+subtitle: 'Black Desert OCR for war scores'
+description: 'A small OCR app to scan nodewar and siege scores from Black Desert Online and transpile them to pdf for easy access and tracking. Made with Tesseract.js'
+date: 'April 22, 2021'
+link: 'https://scores.nstlopez.com'
+source: 'https://github.com/nsttt/BDOScoreAnalyzer'
+---
+
+Although very simple I found nobody had made anything like this before.
+
+In this game people keep track of huge scores of 100+ people MANUALLY to excel pages and other sheets. So I decided to make this app to make their life easier.
+
+Functionally is very basic, just takes a screenshot from one of the scores and Tesseract OCR them into a pdf file so you can actually copy paste its data to anywhere else.

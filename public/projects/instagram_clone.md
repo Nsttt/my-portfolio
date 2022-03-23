@@ -2,7 +2,7 @@
 title: 'Instagram Clone'
 subtitle: 'A simple Instagram clone.'
 description: 'A simple clone of Instagram with very basic functionality.  Made with React, TailwindCSS and Firebase. Including tests with testing-library, Jest and Cypress.'
-date: 'January 1, 2020'
+date: 'April 22, 2021'
 link: 'https://photos.nstlopez.com'
 source: 'https://github.com/nsttt/instagram-clone'
 ---
