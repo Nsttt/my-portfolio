@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center mx-auto mt-4">
+    <header className="mx-auto mt-4 flex items-center justify-between">
       <div className="flex items-center">
         <Link href="/" passHref>
-          <div className="flex items-center cursor-pointer">
+          <div className="flex cursor-pointer items-center">
             <Image
               alt="Logo"
               src="/android-chrome-192x192.png"
@@ -14,7 +14,7 @@ const Header = () => {
               height={55}
             />
             <h2 className="group pr-5 pl-2 font-bebas text-4xl">
-              <span className="text-bright-pink group-hover:text-white transition">
+              <span className="text-bright-pink transition group-hover:text-white">
                 NST
               </span>
               Lopez
