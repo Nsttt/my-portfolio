@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Footer from '../components/footer';
 import { getAllProjectsData } from '../lib/getProjects';
 import Head from 'next/head';
+import Link from 'next/link';
 
 interface BlogProps {
   posts: {
@@ -25,9 +26,22 @@ interface BlogProps {
     content: string;
     data: string;
   }[];
+  projectList: {
+    id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    date: string;
+    content: string;
+    data: string;
+  }[];
 }
 
-export default function Home({ posts, projects }: BlogProps): JSX.Element {
+export default function Home({
+  posts,
+  projects,
+  projectList,
+}: BlogProps): JSX.Element {
   return (
     <>
       <Head>
@@ -36,7 +50,7 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
       </Head>
       <Header />
       <div className="flex flex-col">
-        <div className="flex my-20">
+        <div className="my-20 flex">
           <div className="flex flex-col">
             <h1 className="font-bebas text-6xl tracking-wide">
               <span className="text-bright-pink">Néstor </span>
@@ -65,7 +79,7 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
               alt="Nestor Lopez"
               height={150}
               width={150}
-              className="object-cover rounded-full"
+              className="rounded-full object-cover"
             />
           </div>
         </div>
@@ -85,7 +99,7 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
           })}
         </div>
         <h2 className="mt-8 text-2xl font-bold">Latests Projects</h2>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-5 border-b border-white pb-4">
           {projects.map((frontMatter) => {
             return (
               <Card
@@ -99,6 +113,31 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
             );
           })}
         </div>
+        <ul className="flex flex-col">
+          {projectList.slice(0, 3).map((project) => {
+            return (
+              <li key={project.id}>
+                <article className="mt-2 inline space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  <div className="space-y-3 xl:col-span-4">
+                    <div>
+                      <h3 className="cursor-pointer font-bebas text-2xl font-bold leading-8 tracking-wide">
+                        <Link passHref href={`/portfolio/${project.id}`}>
+                          <span className="tracking-wide text-bright-pink">
+                            {project.title}
+                          </span>
+                        </Link>
+                      </h3>
+                      <p className="text-sm">{project.date}</p>
+                    </div>
+                    <div className="prose text-base text-gray-500 dark:text-gray-400">
+                      {project.subtitle}
+                    </div>
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
       </div>
       <Footer />
     </>
@@ -108,11 +147,13 @@ export default function Home({ posts, projects }: BlogProps): JSX.Element {
 export const getStaticProps = async () => {
   const posts = getAllPostsData();
   const projects = getAllProjectsData();
+  const projectList = getAllProjectsData().splice(2);
 
   return {
     props: {
       posts,
       projects,
+      projectList,
     },
   };
 };
