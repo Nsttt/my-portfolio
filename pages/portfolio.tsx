@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Footer from '../components/footer';
 
 import Header from '../components/header';
 import { getAllProjectsData } from '../lib/getProjects';
@@ -29,11 +30,11 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
               "A small gallery of recent projects chosen by me. I've done them all on my own and with help from amazing people around the globe."
             }
           </p>
-          <p>
+          {/* <p>
             If you like what you see, you can take a peek at my
             <Link href="/achievements">&nbsp;achievements&nbsp;</Link>
             page.
-          </p>
+          </p> */}
         </div>
         <ul>
           {projects.map((frontMatter) => {
@@ -71,6 +72,7 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
           })}
         </ul>
       </div>
+      <Footer />
     </>
   );
 }
