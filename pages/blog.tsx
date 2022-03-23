@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Footer from '../components/footer';
 
 import Header from '../components/header';
 import { getAllPostsData } from '../lib/getPosts';
@@ -31,8 +32,8 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
           </p>
         </div>
         <ul>
-          {posts.map((frontMatter) => {
-            const { id, date, title, subtitle } = frontMatter;
+          {posts.map((post) => {
+            const { id, date, title, subtitle } = post;
             return (
               <li key={id} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -58,6 +59,7 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
           })}
         </ul>
       </div>
+      <Footer />
     </>
   );
 }
