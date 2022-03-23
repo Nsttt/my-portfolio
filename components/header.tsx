@@ -30,9 +30,6 @@ const Header = () => {
         <Link href="/blog">
           <a className="px-2 text-lg">Blog</a>
         </Link>
-        <Link href="/achievements">
-          <a className="px-2 text-lg">Achievements</a>
-        </Link>
       </div>
     </header>
   );
