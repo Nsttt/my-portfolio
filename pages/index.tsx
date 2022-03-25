@@ -3,38 +3,16 @@ import Card from '../components/card';
 import { getAllPostsData } from '../lib/getPosts';
 import Image from 'next/image';
 import Footer from '../components/footer';
-import { getAllProjectsData } from '../lib/getProjects';
+import { getAllProjectsData, getDisplayProjectsData } from '../lib/getProjects';
 import Head from 'next/head';
 import Link from 'next/link';
+import { ProjectList } from '../types/project';
+import { PostList } from '../types/post';
 
 interface BlogProps {
-  posts: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    date: string;
-    content: string;
-    data: string;
-  }[];
-  projects: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    date: string;
-    content: string;
-    data: string;
-  }[];
-  projectList: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    date: string;
-    content: string;
-    data: string;
-  }[];
+  posts: PostList;
+  projects: ProjectList;
+  projectList: ProjectList;
 }
 
 export default function Home({
@@ -50,10 +28,10 @@ export default function Home({
       </Head>
       <Header />
       <div className="flex flex-col">
-        <div className="my-20 flex">
+        <div className="my-6 flex">
           <div className="flex flex-col">
             <h1 className="font-bebas text-6xl tracking-wide">
-              <span className="text-bright-pink">Néstor </span>
+              <span className="text-bright-pink">Néstor&nbsp;</span>
               López
             </h1>
             <h4 className="text-sm text-neutral-400">
@@ -114,26 +92,32 @@ export default function Home({
           })}
         </div>
         <ul className="flex flex-col">
-          {projectList.slice(0, 3).map((project) => {
+          {projectList.map((project, index) => {
             return (
               <li key={project.id}>
-                <article className="mt-2 inline space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                  <div className="space-y-3 xl:col-span-4">
-                    <div>
-                      <h3 className="cursor-pointer font-bebas text-2xl font-bold leading-8 tracking-wide">
-                        <Link passHref href={`/portfolio/${project.id}`}>
-                          <span className="tracking-wide text-bright-pink">
-                            {project.title}
-                          </span>
-                        </Link>
-                      </h3>
-                      <p className="text-sm">{project.date}</p>
-                    </div>
-                    <div className="prose text-base text-gray-500 dark:text-gray-400">
-                      {project.subtitle}
-                    </div>
+                <Link passHref href={`/portfolio/${project.id}`}>
+                  <div className="cursor-pointer rounded-lg hover:bg-light-purple/40">
+                    <article
+                      className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
+                    >
+                      <div className="space-y-3 xl:col-span-4">
+                        <div className="inline-block">
+                          <h3 className="cursor-pointer  text-3xl font-bold leading-8 tracking-wide">
+                            <span className="mr-10 font-bebas tracking-wide text-bright-pink">
+                              {project.title}
+                            </span>
+                            <span className="align-middle text-sm">
+                              {project.subtitle}
+                            </span>
+                          </h3>
+                        </div>
+                      </div>
+                    </article>
                   </div>
-                </article>
+                </Link>
+                {index !== 2 ? (
+                  <div className="border-b border-gray-500" />
+                ) : null}
               </li>
             );
           })}
@@ -146,8 +130,8 @@ export default function Home({
 
 export const getStaticProps = async () => {
   const posts = getAllPostsData();
-  const projects = getAllProjectsData();
-  const projectList = getAllProjectsData().splice(2);
+  const projects = getDisplayProjectsData();
+  const projectList = getAllProjectsData().splice(2).slice(0, 3);
 
   return {
     props: {

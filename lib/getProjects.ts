@@ -30,6 +30,10 @@ export const getAllProjectsData = () => {
   return allPostsData;
 };
 
+export const getDisplayProjectsData = () => {
+  return getAllProjectsData().slice(0, 3);
+};
+
 export const getProjectsIds = () => {
   return files.map((fileName) => {
     return {
