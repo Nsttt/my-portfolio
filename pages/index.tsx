@@ -67,39 +67,39 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
         </div>
         <h2 className="text-2xl font-bold">Latests Posts</h2>
         <div className="grid grid-cols-3 gap-5">
-          {posts.map((frontMatter) => {
+          {posts.map(({ id, date, title, subtitle }) => {
             return (
               <Card
                 type="post"
-                key={frontMatter.id}
-                id={frontMatter.id}
-                title={frontMatter.title}
-                description={frontMatter.subtitle}
-                date={frontMatter.date}
+                key={id}
+                id={id}
+                title={title}
+                description={subtitle}
+                date={date}
               />
             );
           })}
         </div>
         <h2 className="mt-8 text-2xl font-bold">Latests Projects</h2>
         <div className="grid grid-cols-3 gap-5 border-b border-white pb-4">
-          {projects.map((frontMatter) => {
+          {projects.map(({ id, date, title, subtitle }) => {
             return (
               <Card
                 type="project"
-                key={frontMatter.id}
-                id={frontMatter.id}
-                title={frontMatter.title}
-                description={frontMatter.subtitle}
-                date={frontMatter.date}
+                key={id}
+                id={id}
+                title={title}
+                description={subtitle}
+                date={date}
               />
             );
           })}
         </div>
         <ul className="flex flex-col">
-          {projectList.map((project, index) => {
+          {projectList.map(({ id, title, subtitle }, index) => {
             return (
-              <li key={project.id}>
-                <Link passHref href={`/portfolio/${project.id}`}>
+              <li key={id}>
+                <Link passHref href={`/portfolio/${id}`}>
                   <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
                     <article
                       className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
@@ -108,10 +108,10 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
                         <div className="inline-block">
                           <h3 className="cursor-pointer  text-3xl font-bold leading-8 tracking-wide">
                             <span className="mr-10 font-bebas tracking-wide text-bright-pink">
-                              {project.title}
+                              {title}
                             </span>
                             <span className="align-middle text-sm">
-                              {project.subtitle}
+                              {subtitle}
                             </span>
                           </h3>
                         </div>

@@ -26,8 +26,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
           </p>
         </div>
         <ul>
-          {posts.map((post) => {
-            const { id, date, title, subtitle } = post;
+          {posts.map(({ id, date, title, subtitle }) => {
             return (
               <li key={id} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
