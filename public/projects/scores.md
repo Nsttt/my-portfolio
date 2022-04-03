@@ -1,8 +1,8 @@
 ---
-title: 'Instagram Clone'
+title: 'Score Analyzer'
 subtitle: 'Black Desert OCR for war scores'
 description: 'A small OCR app to scan nodewar and siege scores from Black Desert Online and transpile them to pdf for easy access and tracking. Made with Tesseract.js'
-date: 'April 22, 2021'
+date: 'July 16, 2020'
 link: 'https://scores.nstlopez.com'
 source: 'https://github.com/nsttt/BDOScoreAnalyzer'
 ---
