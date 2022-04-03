@@ -1,9 +1,9 @@
 import Header from '../components/header';
 import Card from '../components/card';
-import { getAllPostsData } from '../lib/getPosts';
+import { getAllPostsData } from '../services/getPosts';
 import Image from 'next/image';
 import Footer from '../components/footer';
-import { getAllProjectsData, getDisplayProjectsData } from '../lib/getProjects';
+import { getAllProjectsData, getDisplayProjectsData } from '../services/getProjects';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ProjectList } from '../types/project';
@@ -40,7 +40,12 @@ export default function Home({
             <h2 className="mt-1 text-lg">
               Frontend Engineer at&nbsp;
               <b>
-                <a href="https://nexiona.com/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://nexiona.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition ease-in-out"
+                >
                   NEXIONA
                 </a>
               </b>
@@ -96,7 +101,7 @@ export default function Home({
             return (
               <li key={project.id}>
                 <Link passHref href={`/portfolio/${project.id}`}>
-                  <div className="cursor-pointer rounded-lg hover:bg-light-purple/40">
+                  <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
                     <article
                       className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
                     >
@@ -131,7 +136,7 @@ export default function Home({
 export const getStaticProps = async () => {
   const posts = getAllPostsData();
   const projects = getDisplayProjectsData();
-  const projectList = getAllProjectsData().splice(2).slice(0, 3);
+  const projectList = getAllProjectsData().splice(3).slice(0, 3);
 
   return {
     props: {
