@@ -1,28 +1,24 @@
-import Header from '../components/header';
-import Card from '../components/card';
-import { getAllPostsData } from '../services/getPosts';
+import type { NextPage } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
-import Footer from '../components/footer';
+import Link from 'next/link';
+
+import type { ProjectList, PostList } from '@types';
 import {
+  getAllPostsData,
   getAllProjectsData,
   getDisplayProjectsData,
-} from '../services/getProjects';
-import Head from 'next/head';
-import Link from 'next/link';
-import { ProjectList } from '../types/project';
-import { PostList } from '../types/post';
+} from '@services';
 
-interface BlogProps {
+import { Header, Footer, Card } from '@components';
+
+interface HomeProps {
   posts: PostList;
   projects: ProjectList;
   projectList: ProjectList;
 }
 
-export default function Home({
-  posts,
-  projects,
-  projectList,
-}: BlogProps): JSX.Element {
+const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
   return (
     <>
       <Head>
@@ -134,7 +130,7 @@ export default function Home({
       <Footer />
     </>
   );
-}
+};
 
 export const getStaticProps = async () => {
   const posts = getAllPostsData();
@@ -149,3 +145,5 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+export default Home;

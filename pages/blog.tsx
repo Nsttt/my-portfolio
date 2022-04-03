@@ -1,22 +1,16 @@
+import type { NextPage } from 'next';
 import Link from 'next/link';
-import Footer from '../components/footer';
 
-import Header from '../components/header';
-import { getAllPostsData } from '../services/getPosts';
+import type { PostList } from '@types';
+import { getAllPostsData } from '@services';
+
+import { Header, Footer } from '@components';
 
 interface BlogProps {
-  posts: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    date: string;
-    content: string;
-    data: string;
-  }[];
+  posts: PostList;
 }
 
-export default function Blog({ posts }: BlogProps): JSX.Element {
+const Blog: NextPage<BlogProps> = ({ posts }) => {
   return (
     <>
       <Header />
@@ -62,7 +56,7 @@ export default function Blog({ posts }: BlogProps): JSX.Element {
       <Footer />
     </>
   );
-}
+};
 
 export const getStaticProps = async () => {
   const posts = getAllPostsData();
@@ -72,3 +66,5 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+export default Blog;

@@ -1,8 +1,9 @@
-import Header from '../components/header';
-import Footer from '../components/footer';
+import type { NextPage } from 'next';
 import Link from 'next/link';
 
-export default function NotFound(): JSX.Element {
+import { Header, Footer } from '@components';
+
+const NotFound: NextPage = () => {
   return (
     <>
       <Header />
@@ -22,4 +23,6 @@ export default function NotFound(): JSX.Element {
       <Footer />
     </>
   );
-}
+};
+
+export default NotFound;

@@ -1,12 +1,12 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import ReactMarkdown from 'react-markdown';
-import { ParsedUrlQuery } from 'querystring';
-
-import Header from '../../components/header';
-import { getProjectData, getProjectsIds } from '../../services/getProjects';
-import Footer from '../../components/footer';
-import { Project } from '../../types/project';
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { ParsedUrlQuery } from 'querystring';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+
+import type { Project } from '@types';
+import { getProjectData, getProjectsIds } from '@services';
+
+import { Header, Footer } from '@components';
 
 interface ProjectPageProps {
   project: Project;

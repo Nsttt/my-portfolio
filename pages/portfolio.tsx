@@ -1,22 +1,16 @@
+import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import Footer from '../components/footer';
 
-import Header from '../components/header';
-import { getAllProjectsData } from '../services/getProjects';
+import type { ProjectList } from '@types';
+import { getAllProjectsData } from '@services';
 
+import { Header, Footer } from '@components';
 interface PortfolioProps {
-  projects: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    date: string;
-    content: string;
-    data: string;
-  }[];
+  projects: ProjectList;
 }
-export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
+
+const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
   return (
     <>
       <Header />
@@ -71,7 +65,7 @@ export default function Portfolio({ projects }: PortfolioProps): JSX.Element {
       <Footer />
     </>
   );
-}
+};
 
 export const getStaticProps = async () => {
   const projects = getAllProjectsData();
@@ -81,3 +75,5 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+export default Portfolio;

@@ -1,18 +1,11 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { ParsedUrlQuery } from 'querystring';
 import ReactMarkdown from 'react-markdown';
-import { ParsedUrlQuery } from 'querystring';
-import Header from '../../components/header';
-import { getPostData, getPostsIds } from '../../services/getPosts';
-import Footer from '../../components/footer';
 
-interface Post {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  date: string;
-  content: string;
-}
+import type { Post } from '@types';
+import { getPostData, getPostsIds } from '@services';
+
+import { Header, Footer } from '@components';
 
 interface PostPageProps {
   post: Post;
