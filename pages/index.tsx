@@ -3,7 +3,10 @@ import Card from '../components/card';
 import { getAllPostsData } from '../services/getPosts';
 import Image from 'next/image';
 import Footer from '../components/footer';
-import { getAllProjectsData, getDisplayProjectsData } from '../services/getProjects';
+import {
+  getAllProjectsData,
+  getDisplayProjectsData,
+} from '../services/getProjects';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ProjectList } from '../types/project';
@@ -51,9 +54,9 @@ export default function Home({
               </b>
             </h2>
             <p className="mt-4 max-w-lg text-base">
-              Writing about the present and developing the future.
+              Huge software and engineering enthusiast.
               <br />
-              Huge web developer and software engineering enthusiast.
+              Writing about the present and developing the future.
             </p>
           </div>
           <div className="relative ml-auto">
