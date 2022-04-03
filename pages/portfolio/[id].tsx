@@ -3,17 +3,10 @@ import ReactMarkdown from 'react-markdown';
 import { ParsedUrlQuery } from 'querystring';
 
 import Header from '../../components/header';
-import { getProjectData, getProjectsIds } from '../../lib/getProjects';
+import { getProjectData, getProjectsIds } from '../../services/getProjects';
 import Footer from '../../components/footer';
-
-interface Project {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  date: string;
-  content: string;
-}
+import { Project } from '../../types/project';
+import Image from 'next/image';
 
 interface ProjectPageProps {
   project: Project;
@@ -24,6 +17,13 @@ const Project: NextPage<ProjectPageProps> = ({ project }) => {
     <>
       <Header />
       <div className="container">
+        <Image
+          src={`/images/projects/${project.id}.webp`}
+          alt={project.id}
+          className="object-cover"
+          width={768}
+          height={400}
+        />
         <div className="mt-4 grid grid-cols-2">
           <div>
             <h1 className=" font-bebas text-6xl text-bright-pink">
