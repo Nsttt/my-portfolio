@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Footer from '../components/footer';
 
 import Header from '../components/header';
-import { getAllPostsData } from '../lib/getPosts';
+import { getAllPostsData } from '../services/getPosts';
 
 interface BlogProps {
   posts: {

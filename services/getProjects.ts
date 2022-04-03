@@ -27,7 +27,9 @@ export const getAllProjectsData = () => {
     };
   });
 
-  return allPostsData;
+  return allPostsData.sort((a, b) => {
+    return Date.parse(b.date) - Date.parse(a.date);
+  });
 };
 
 export const getDisplayProjectsData = () => {
