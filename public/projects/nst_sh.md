@@ -2,7 +2,7 @@
 title: 'nst.sh'
 subtitle: 'A personal yet functional URL Shortener'
 description: 'The app was built as a productivity tool for myself, being able to use my domain to go fast to specific pages on all my devices was really something that I find convenient. Its built with a Express backend + MongoDB and a really small Vue frontend'
-date: 'September 22, 2020'
+date: 'Oct 5, 2020'
 link: 'https://photos.nstlopez.com'
 source: 'https://github.com/nsttt/instagram-clone'
 ---

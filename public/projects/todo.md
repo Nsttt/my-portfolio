@@ -2,7 +2,7 @@
 title: 'Yet another React Todo List'
 subtitle: ' A very basic React Todo List somewhat different.'
 description: 'Pretty much one of these everyone has, but with something different. It uses LocalStorage'
-date: 'October 16, 2019'
+date: 'Sep 3, 2019'
 link: 'https://todo.nstlopez.com'
 source: 'https://github.com/nsttt/instagram-clone'
 ---

@@ -2,7 +2,7 @@
 title: 'GitHunter'
 subtitle: 'Starred project hunter for GitHub.'
 description: 'A starred project hunter for Github projects, created because I dislike the at the time awful timeline Github had for exploring new projects. Created using React and ChakraUI.'
-date: 'July 9, 2019'
+date: 'July 9, 2020'
 link: 'https://githunter.nstlopez.com'
 source: 'https://github.com/nsttt/githunter'
 ---
