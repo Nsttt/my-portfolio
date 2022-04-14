@@ -48,8 +48,8 @@ const Project: NextPage<ProjectPageProps> = ({ project }) => {
         <ReactMarkdown className="mt-4 space-y-4">
           {project.content}
         </ReactMarkdown>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 };

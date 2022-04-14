@@ -33,7 +33,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
                   <div className="space-y-3 xl:col-span-3">
                     <div>
                       <h3 className="font-bebas text-3xl font-bold leading-8 tracking-wide">
-                        <Link passHref href={`/blogs/${id}`}>
+                        <Link passHref href={`/blog/${id}`}>
                           <span className="tracking-wide text-bright-pink">
                             {title}
                           </span>
