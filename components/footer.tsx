@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -34,11 +34,11 @@ const Footer = () => {
             Mail
           </a>
         </div>
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           <Link href="/rss/feed.xml">
             <a className="hover:text-white"> RSS</a>
           </Link>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

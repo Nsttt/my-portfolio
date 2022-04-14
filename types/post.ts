@@ -5,8 +5,6 @@ export interface Post {
   description: string;
   date: string;
   content: string;
-  link: string;
-  source: string;
 }
 
 export type PostList = Post[];
