@@ -21,7 +21,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
           </h1>
           <p>
             {
-              "The place where I write about things I'm interested in. I'm not a professional writer, but I try to write about things that I find interesting and my own experiences."
+              "The place where I write about things I'm interested in. I'm not a professional writer, but I enjoy sharing my thoughts."
             }
           </p>
         </div>
@@ -33,14 +33,14 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
                   <div className="space-y-3 xl:col-span-3">
                     <div>
                       <h3 className="font-bebas text-3xl font-bold leading-8 tracking-wide">
-                        <Link passHref href={`/blog/${id}`}>
+                        <Link passHref href={`/blogs/${id}`}>
                           <span className="tracking-wide text-bright-pink">
                             {title}
                           </span>
                         </Link>
-                        <span className="pl-2 text-base">Project</span>
+                        <span className="pl-2 text-base">{title}</span>
                       </h3>
-                      <p className="text-sm">{date} • 10 min read</p>
+                      <p className="text-sm">{date}</p>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                       {subtitle}
