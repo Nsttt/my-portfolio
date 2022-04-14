@@ -137,7 +137,7 @@ export const getStaticProps = async () => {
   const posts = getAllPostsData();
   const projects = getDisplayProjectsData();
   const projectList = getAllProjectsData().splice(3).slice(0, 3);
-  // await generateRssFeed();
+  await generateRssFeed();
 
   return {
     props: {
