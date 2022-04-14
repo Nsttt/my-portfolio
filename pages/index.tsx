@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import type { ProjectList, PostList } from '@types';
 import {
+  generateRssFeed,
   getAllPostsData,
   getAllProjectsData,
   getDisplayProjectsData,
@@ -18,7 +19,7 @@ interface HomeProps {
   projectList: ProjectList;
 }
 
-const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
+const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
   return (
     <>
       <Head>
@@ -65,7 +66,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
             />
           </div>
         </div>
-        <h2 className="text-2xl font-bold">Latests Posts</h2>
+        {/* <h2 className="text-2xl font-bold">Latests Posts</h2>
         <div className="grid grid-cols-3 gap-5">
           {posts.map(({ id, date, title, subtitle }) => {
             return (
@@ -79,7 +80,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
               />
             );
           })}
-        </div>
+        </div> */}
         <h2 className="mt-8 text-2xl font-bold">Latests Projects</h2>
         <div className="grid grid-cols-3 gap-5 border-b border-white pb-4">
           {projects.map(({ id, date, title, subtitle }) => {
@@ -136,6 +137,7 @@ export const getStaticProps = async () => {
   const posts = getAllPostsData();
   const projects = getDisplayProjectsData();
   const projectList = getAllProjectsData().splice(3).slice(0, 3);
+  await generateRssFeed();
 
   return {
     props: {

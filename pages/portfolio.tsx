@@ -25,8 +25,8 @@ const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
           {projects.map(
             ({ id, date, title, description }, index, { length }) => {
               return (
-                <>
-                  <li key={id} className="py-4">
+                <div key={id}>
+                  <li className="py-4">
                     <Link passHref href={`/portfolio/${id}`}>
                       <Image
                         src={`/images/projects/${id}.webp`}
@@ -57,7 +57,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
                   {length - 1 !== index ? (
                     <div className="border-b border-gray-500" />
                   ) : null}
-                </>
+                </div>
               );
             }
           )}
