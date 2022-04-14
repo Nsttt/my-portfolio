@@ -8,7 +8,7 @@ export const getAllPostsData = () => {
   const allPostsData = files.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
 
-    const fileContents = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+    const fileContents = fs.readFileSync(`public/posts/${fileName}`, 'utf-8');
 
     const { data, content } = matter(fileContents);
 
@@ -22,7 +22,9 @@ export const getAllPostsData = () => {
     };
   });
 
-  return allPostsData;
+  return allPostsData.sort((a, b) => {
+    return Date.parse(b.date) - Date.parse(a.date);
+  });
 };
 
 export const getPostsIds = () => {
@@ -36,7 +38,7 @@ export const getPostsIds = () => {
 };
 
 export const getPostData = (id: string) => {
-  const fullPath = path.join('./posts', `${id}.md`);
+  const fullPath = path.join('public/posts', `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const { data, content } = matter(fileContents);

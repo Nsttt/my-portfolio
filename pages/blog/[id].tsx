@@ -15,7 +15,18 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
   return (
     <>
       <Header />
-      <ReactMarkdown>{post.content}</ReactMarkdown>
+      <div className="container">
+        <div className="mt-4 grid grid-cols-2">
+          <div>
+            <h1 className=" font-bebas text-6xl text-bright-pink">
+              {post.title}
+            </h1>
+            <h2 className="text-lg">{post.subtitle}</h2>
+            <h3 className="text-sm text-bright-pink">{post.date}</h3>
+          </div>
+        </div>
+        <ReactMarkdown className="mt-4 space-y-4">{post.content}</ReactMarkdown>
+      </div>
       <Footer />
     </>
   );

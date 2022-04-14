@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 const files = fs.readdirSync('public/projects');
 
 export const getAllProjectsData = () => {
-  const allPostsData = files.map((fileName) => {
+  const allProjecstData = files.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
 
     const fileContents = fs.readFileSync(
@@ -27,7 +27,7 @@ export const getAllProjectsData = () => {
     };
   });
 
-  return allPostsData.sort((a, b) => {
+  return allProjecstData.sort((a, b) => {
     return Date.parse(b.date) - Date.parse(a.date);
   });
 };

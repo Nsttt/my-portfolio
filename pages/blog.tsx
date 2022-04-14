@@ -26,28 +26,32 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
           </p>
         </div>
         <ul>
-          {posts.map(({ id, date, title, subtitle }) => {
+          {posts.map(({ id, date, title, description }, index, { length }) => {
             return (
-              <li key={id} className="py-4">
-                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                  <div className="space-y-3 xl:col-span-3">
-                    <div>
-                      <h3 className="font-bebas text-3xl font-bold leading-8 tracking-wide">
-                        <Link passHref href={`/blogs/${id}`}>
-                          <span className="tracking-wide text-bright-pink">
-                            {title}
-                          </span>
-                        </Link>
-                        <span className="pl-2 text-base">{title}</span>
-                      </h3>
-                      <p className="text-sm">{date}</p>
+              <div key={id}>
+                <li className="py-4">
+                  <article className="mt-2 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                    <div className="space-y-3 xl:col-span-4">
+                      <div>
+                        <h3 className="cursor-pointer font-bebas text-4xl font-bold leading-8 tracking-wide">
+                          <Link passHref href={`/blog/${id}`}>
+                            <span className="tracking-wide text-bright-pink">
+                              {title}
+                            </span>
+                          </Link>
+                        </h3>
+                        <p className="text-sm">{date}</p>
+                      </div>
+                      <div className="prose text-base text-gray-500 dark:text-gray-400">
+                        {description}
+                      </div>
                     </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                      {subtitle}
-                    </div>
-                  </div>
-                </article>
-              </li>
+                  </article>
+                </li>
+                {length - 1 !== index ? (
+                  <div className="border-b border-gray-500" />
+                ) : null}
+              </div>
             );
           })}
         </ul>
