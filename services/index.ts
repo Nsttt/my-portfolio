@@ -1,7 +1,3 @@
-export { getAllPostsData, getPostData, getPostsIds } from './getPosts';
-export {
-  getAllProjectsData,
-  getDisplayProjectsData,
-  getProjectData,
-  getProjectsIds,
-} from './getProjects';
+export * from './getPosts';
+export * from './getProjects';
+export * from './rss';

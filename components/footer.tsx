@@ -35,7 +35,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="flex flex-row">
-          <Link href="/">
+          <Link href="/rss/feed.xml">
             <a className="hover:text-white"> RSS</a>
           </Link>
         </div>
