@@ -1,0 +1,20 @@
+---
+title: 'Vue Covid'
+subtitle: 'A covid tracking app built using Vue 3.'
+description: 'A very basic covid tracking app using Vue3, built mainly to refresh my knowledge of the framework and test out new features.'
+date: 'Jun 19, 2021'
+link: 'https://covid.nstlopez.com'
+source: 'https://github.com/nsttt/covid'
+---
+
+Recently on my **crusade** of learning new stuff I've been reading through a lot of jobs around my local city and nearby. And realized that most of the open offers have a few things in common.
+
+**Either A:** They have some kind of stack hugely related to PHP and Java.
+
+**Or B:** They're about Angular or... surprisingly, **Vue**.
+
+Hey, don't get me wrong, **Vue is pretty cool** I quite like it in fact, it does things differently and, unlike its other two massive pals, Angular and React, it's community-driven which makes it even cooler.
+
+I've never really done anything with it besides practice and check out and how it works. The last time I did that was back when v3 was still in development, when I heard they went live a few months ago, I wanted to give it a try, that's how this app was born.
+
+It's not much of a thing, quite something you could make in an afternoon with little to no effort, but it served me quite well to check out most of the new features v3 adds. Most of them did not make it through to the end, again, it's a really simple app, but you know, it ended up quite nicely. The API is pretty cool as well, it's available at [here](https://covid19api.com/) if you wanna check it out.
