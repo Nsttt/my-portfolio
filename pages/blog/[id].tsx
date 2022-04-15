@@ -1,10 +1,10 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import ReactMarkdown from 'react-markdown';
+import { NextSeo } from 'next-seo';
 
 import type { Post } from '@types';
 import { getPostData, getPostsIds } from '@services';
-
 import { Header, Footer } from '@components';
 
 interface PostPageProps {
@@ -14,6 +14,7 @@ interface PostPageProps {
 const Post: NextPage<PostPageProps> = ({ post }) => {
   return (
     <>
+      <NextSeo title={post.title} />
       <Header />
       <div className="container">
         <div className="mt-4 grid grid-cols-2">

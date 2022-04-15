@@ -2,10 +2,10 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import { NextSeo } from 'next-seo';
 
 import type { Project } from '@types';
 import { getProjectData, getProjectsIds } from '@services';
-
 import { Header, Footer } from '@components';
 
 interface ProjectPageProps {
@@ -15,6 +15,7 @@ interface ProjectPageProps {
 const Project: NextPage<ProjectPageProps> = ({ project }) => {
   return (
     <>
+      <NextSeo title={project.title} />
       <Header />
       <div className="container">
         <Image

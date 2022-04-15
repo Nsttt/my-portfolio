@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 import type { ProjectList } from '@types';
 import { getAllProjectsData } from '@services';
-
 import { Header, Footer } from '@components';
+
 interface PortfolioProps {
   projects: ProjectList;
 }
@@ -13,6 +14,7 @@ interface PortfolioProps {
 const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
   return (
     <>
+      <NextSeo title="Portfolio" />
       <Header />
       <div className="divide-y">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
