@@ -22,10 +22,6 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
   return (
     <>
-      <Head>
-        <title>Nstlopez</title>
-        <meta property="og:title" content="Nstlopez" key="title" />
-      </Head>
       <Header />
       <div className="flex flex-col">
         <div className="my-6 flex">
