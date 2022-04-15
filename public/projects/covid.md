@@ -3,7 +3,7 @@ title: 'Vue Covid'
 subtitle: 'A covid tracking app built using Vue 3.'
 description: 'A very basic covid tracking app using Vue3, built mainly to refresh my knowledge of the framework and test out new features.'
 date: 'Jun 19, 2021'
-link: 'https://covid.nstlopez.com'
+link: 'https://cov.nstlopez.com'
 source: 'https://github.com/nsttt/covid'
 ---
 
