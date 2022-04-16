@@ -14,7 +14,7 @@ interface PortfolioProps {
 const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
   return (
     <>
-      <NextSeo title="Portfolio" />
+      <NextSeo title="Portfolio" canonical={document.URL} />
       <Header />
       <div className="divide-y">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">

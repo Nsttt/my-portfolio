@@ -7,7 +7,7 @@ import { Header, Footer } from '@components';
 const NotFound: NextPage = () => {
   return (
     <>
-      <NextSeo title="Not found" />
+      <NextSeo title="Not found" canonical={document.URL} />
       <Header />
       <div className="flex h-screen flex-col justify-center align-middle">
         <h1 className="text-center font-bebas text-7xl">

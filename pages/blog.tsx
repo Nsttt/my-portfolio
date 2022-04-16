@@ -13,7 +13,7 @@ interface BlogProps {
 const Blog: NextPage<BlogProps> = ({ posts }) => {
   return (
     <>
-      <NextSeo title="Blog" />
+      <NextSeo title="Blog" canonical={document.URL} />
       <Header />
       <div className="divide-y">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
