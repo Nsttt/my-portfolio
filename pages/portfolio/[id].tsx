@@ -2,19 +2,27 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import { NextSeo } from 'next-seo';
 
 import type { Project } from '@types';
 import { getProjectData, getProjectsIds } from '@services';
-
 import { Header, Footer } from '@components';
+import { useRouterPathname } from '@hooks';
 
 interface ProjectPageProps {
   project: Project;
 }
 
 const Project: NextPage<ProjectPageProps> = ({ project }) => {
+  const pathname = useRouterPathname();
+
   return (
     <>
+      <NextSeo
+        title={project.title}
+        description={project.description}
+        canonical={pathname}
+      />
       <Header />
       <div className="container">
         <Image

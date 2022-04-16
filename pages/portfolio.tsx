@@ -1,18 +1,23 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 import type { ProjectList } from '@types';
 import { getAllProjectsData } from '@services';
-
 import { Header, Footer } from '@components';
+import { useRouterPathname } from '@hooks';
+
 interface PortfolioProps {
   projects: ProjectList;
 }
 
 const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
+  const pathname = useRouterPathname();
+
   return (
     <>
+      <NextSeo title="Portfolio" canonical={pathname} />
       <Header />
       <div className="divide-y">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">

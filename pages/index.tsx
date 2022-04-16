@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,7 +9,6 @@ import {
   getAllProjectsData,
   getDisplayProjectsData,
 } from '@services';
-
 import { Header, Footer, Card } from '@components';
 
 interface HomeProps {
@@ -22,10 +20,6 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
   return (
     <>
-      <Head>
-        <title>Nstlopez</title>
-        <meta property="og:title" content="Nstlopez" key="title" />
-      </Head>
       <Header />
       <div className="flex flex-col">
         <div className="my-6 flex">

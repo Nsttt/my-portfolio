@@ -1,11 +1,16 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 import { Header, Footer } from '@components';
+import { useRouterPathname } from '@hooks';
 
 const NotFound: NextPage = () => {
+  const pathname = useRouterPathname();
+
   return (
     <>
+      <NextSeo title="Not found" canonical={pathname} />
       <Header />
       <div className="flex h-screen flex-col justify-center align-middle">
         <h1 className="text-center font-bebas text-7xl">
