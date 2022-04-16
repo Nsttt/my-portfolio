@@ -33,13 +33,15 @@ const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
                 <div key={id}>
                   <li className="py-4">
                     <Link passHref href={`/portfolio/${id}`}>
-                      <Image
-                        src={`/images/projects/${id}.webp`}
-                        alt={id}
-                        width={768}
-                        height={200}
-                        className="cursor-pointer rounded-lg object-cover object-top"
-                      />
+                      <a>
+                        <Image
+                          src={`/images/projects/${id}.webp`}
+                          alt={id}
+                          width={768}
+                          height={200}
+                          className="cursor-pointer rounded-lg object-cover object-top"
+                        />
+                      </a>
                     </Link>
                     <article className="mt-2 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                       <div className="space-y-3 xl:col-span-4">
