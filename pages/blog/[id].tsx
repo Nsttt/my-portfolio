@@ -14,7 +14,11 @@ interface PostPageProps {
 const Post: NextPage<PostPageProps> = ({ post }) => {
   return (
     <>
-      <NextSeo title={post.title} />
+      <NextSeo
+        title={post.title}
+        description={post.description}
+        canonical={document.URL}
+      />
       <Header />
       <div className="container">
         <div className="mt-4 grid grid-cols-2">

@@ -15,7 +15,11 @@ interface ProjectPageProps {
 const Project: NextPage<ProjectPageProps> = ({ project }) => {
   return (
     <>
-      <NextSeo title={project.title} />
+      <NextSeo
+        title={project.title}
+        description={project.description}
+        canonical={document.URL}
+      />
       <Header />
       <div className="container">
         <Image
