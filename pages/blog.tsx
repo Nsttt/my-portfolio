@@ -5,15 +5,18 @@ import { NextSeo } from 'next-seo';
 import type { PostList } from '@types';
 import { getAllPostsData } from '@services';
 import { Header, Footer } from '@components';
+import { useRouterPathname } from '@hooks';
 
 interface BlogProps {
   posts: PostList;
 }
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
+  const pathname = useRouterPathname();
+
   return (
     <>
-      <NextSeo title="Blog" canonical={document.URL} />
+      <NextSeo title="Blog" canonical={pathname} />
       <Header />
       <div className="divide-y">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">

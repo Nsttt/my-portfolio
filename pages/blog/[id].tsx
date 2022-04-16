@@ -6,18 +6,21 @@ import { NextSeo } from 'next-seo';
 import type { Post } from '@types';
 import { getPostData, getPostsIds } from '@services';
 import { Header, Footer } from '@components';
+import { useRouterPathname } from '@hooks';
 
 interface PostPageProps {
   post: Post;
 }
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
+  const pathname = useRouterPathname();
+
   return (
     <>
       <NextSeo
         title={post.title}
         description={post.description}
-        canonical={document.URL}
+        canonical={pathname}
       />
       <Header />
       <div className="container">
