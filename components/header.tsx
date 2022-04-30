@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { Drawer } from './drawer';
 
 const Header = () => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+
+  const openDrawer = () => setDrawerOpen(true);
+  const closeDrawer = () => setDrawerOpen(false);
+
   return (
     <header className="mx-auto mt-4 flex items-center justify-between">
       <div className="flex flex-row text-center">
@@ -37,11 +44,12 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <button className="mr-3 space-y-2 md:hidden">
+      <button className="mr-3 space-y-2 md:hidden" onClick={() => openDrawer()}>
         <span className="block h-0.5 w-8 bg-bright-pink"></span>
         <span className="block h-0.5 w-8 bg-bright-pink"></span>
         <span className="block h-0.5 w-8 bg-bright-pink"></span>
       </button>
+      <Drawer isOpen={isDrawerOpen} close={closeDrawer} />
     </header>
   );
 };
