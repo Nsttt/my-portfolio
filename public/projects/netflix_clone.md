@@ -3,8 +3,8 @@ title: 'Netflix Clone'
 subtitle: 'A very simple Netflix clone.'
 description: 'A very simple but accurate clone of a famous streaming service. Made with React (custom hooks & context), styled-components and Firebase'
 date: 'October 16, 2020'
-link: 'https://photos.nstlopez.com'
-source: 'https://github.com/nsttt/instagram-clone'
+link: 'https://n-clone.nstlopez.com'
+source: 'https://github.com/nsttt/netflix-clone'
 ---
 
 This is essentially a clone of the famous streaming platform Netflix, but built my way.
