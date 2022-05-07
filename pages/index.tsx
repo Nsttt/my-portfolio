@@ -25,6 +25,15 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
         <div className="my-6 flex">
           <div className="flex flex-col">
             <h1 className="font-bebas text-6xl tracking-wide">
+              <div className="ml-auto mb-5 block md:hidden ">
+                <Image
+                  src="/portrait.jpeg"
+                  alt="Nestor Lopez"
+                  height={100}
+                  width={100}
+                  className="rounded-full object-cover"
+                />
+              </div>
               <span className="text-bright-pink">Néstor&nbsp;</span>
               López
             </h1>
@@ -65,7 +74,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
           {posts.map(({ id, title, subtitle }, index) => {
             return (
               <li key={id}>
-                <Link passHref href={`/portfolio/${id}`}>
+                <Link passHref href={`/blog/${id}`}>
                   <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
                     <article
                       className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
@@ -122,9 +131,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
                             <span className="mr-10 font-bebas tracking-wide text-bright-pink">
                               {title}
                             </span>
-                            <span className="align-middle text-sm">
-                              {subtitle}
-                            </span>
+                            <span className="text-sm">{subtitle}</span>
                           </h3>
                         </div>
                       </div>
