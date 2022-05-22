@@ -8,7 +8,7 @@
   }
 
   #__next {
-    @apply h-full max-w-3xl mx-auto;
+    @apply h-full max-w-3xl md:mx-auto mx-3;
   }
 
   a {

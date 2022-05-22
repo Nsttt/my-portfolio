@@ -17,7 +17,7 @@ interface HomeProps {
   projectList: ProjectList;
 }
 
-const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
+const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
   return (
     <>
       <Header />
@@ -25,6 +25,15 @@ const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
         <div className="my-6 flex">
           <div className="flex flex-col">
             <h1 className="font-bebas text-6xl tracking-wide">
+              <div className="ml-auto mb-5 block md:hidden ">
+                <Image
+                  src="/portrait.jpeg"
+                  alt="Nestor Lopez"
+                  height={100}
+                  width={100}
+                  className="rounded-full object-cover"
+                />
+              </div>
               <span className="text-bright-pink">Néstor&nbsp;</span>
               López
             </h1>
@@ -50,7 +59,7 @@ const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
               Writing about the present and developing the future.
             </p>
           </div>
-          <div className="relative ml-auto">
+          <div className="hidden md:relative md:ml-auto md:block">
             <Image
               src="/portrait.jpeg"
               alt="Nestor Lopez"
@@ -60,23 +69,40 @@ const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
             />
           </div>
         </div>
-        {/* <h2 className="text-2xl font-bold">Latests Posts</h2>
-        <div className="grid grid-cols-3 gap-5">
-          {posts.map(({ id, date, title, subtitle }) => {
+        <h2 className="text-2xl font-bold">Latests Posts</h2>
+        <ul className="flex flex-col">
+          {posts.map(({ id, title, subtitle }, index) => {
             return (
-              <Card
-                type="post"
-                key={id}
-                id={id}
-                title={title}
-                description={subtitle}
-                date={date}
-              />
+              <li key={id}>
+                <Link passHref href={`/blog/${id}`}>
+                  <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
+                    <article
+                      className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
+                    >
+                      <div className="space-y-3 xl:col-span-4">
+                        <div className="inline-block">
+                          <h3 className="cursor-pointer  text-3xl font-bold leading-8 tracking-wide">
+                            <span className="mr-10 font-bebas tracking-wide text-bright-pink">
+                              {title}
+                            </span>
+                            <span className="align-middle text-sm">
+                              {subtitle}
+                            </span>
+                          </h3>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </Link>
+                {index !== 2 ? (
+                  <div className="border-b border-gray-500" />
+                ) : null}
+              </li>
             );
           })}
-        </div> */}
+        </ul>
         <h2 className="mt-8 text-2xl font-bold">Latests Projects</h2>
-        <div className="grid grid-cols-3 gap-5 border-b border-white pb-4">
+        <div className="grid border-b border-white pb-4 md:grid-cols-3 md:gap-5">
           {projects.map(({ id, date, title, subtitle }) => {
             return (
               <Card
@@ -105,9 +131,7 @@ const Home: NextPage<HomeProps> = ({ projects, projectList }) => {
                             <span className="mr-10 font-bebas tracking-wide text-bright-pink">
                               {title}
                             </span>
-                            <span className="align-middle text-sm">
-                              {subtitle}
-                            </span>
+                            <span className="text-sm">{subtitle}</span>
                           </h3>
                         </div>
                       </div>

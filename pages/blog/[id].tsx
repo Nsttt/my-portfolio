@@ -24,7 +24,7 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
       />
       <Header />
       <div className="container">
-        <div className="mt-4 grid grid-cols-2">
+        <div className="mt-4">
           <div>
             <h1 className=" font-bebas text-6xl text-bright-pink">
               {post.title}
