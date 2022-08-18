@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/baseLayout.astro";
+import "../styles/base.css";
+---
+
+<BaseLayout>
+  <div class="flex flex-col">
+    <h1 class="text-6xl tracking-wide">
+      <div class="ml-auto mb-5 block md:hidden">
+        <img
+          src="/images/portrait.jpeg"
+          alt="Nestor Lopez"
+          height={100}
+          width={100}
+          class="rounded-full object-cover"
+        />
+      </div>
+      <span class="text-bright-pink">Néstor&nbsp;</span>
+      López
+    </h1>
+    <h4 class="text-sm text-neutral-400">Building software for humans.</h4>
+    <h2 class="mt-1 text-lg">
+      Frontend Engineer at
+      <a
+        href="https://nexiona.com/"
+        target="_blank"
+        rel="noreferrer"
+        class="transition ease-in-out font-bold"
+      >
+        NEXIONA
+      </a>
+    </h2>
+    <p class="mt-4 max-w-lg text-base">
+      Huge software and engineering enthusiast.
+      <br />
+      Writing about the present and developing the future.
+    </p>
+  </div>
+</BaseLayout>

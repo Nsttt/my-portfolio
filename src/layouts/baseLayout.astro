@@ -1,0 +1,51 @@
+---
+import Header from "../components/header.astro";
+
+const siteTitle = "Néstor López - Software Engineer";
+const description = "";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="twitter:image" content="https://nstlopez.com/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@nstlopez" />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://nstlopez/images/twitter.png" />
+    <title>{siteTitle}</title>
+    <meta name="theme-color" content="#000000" />
+  </head>
+
+  <body>
+    <main class="h-full max-w-3xl md:mx-auto mx-3">
+      <Header />
+      <slot />
+    </main>
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+      // @ts-ignore
+      window.localStorage.setItem("theme", theme);
+    </script>
+  </body>
+</html>
