@@ -65,7 +65,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const posts = getAllPostsData();
   return {
     props: {

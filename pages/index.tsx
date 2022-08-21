@@ -76,9 +76,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
               <li key={id}>
                 <Link passHref href={`/blog/${id}`}>
                   <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
-                    <article
-                      className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
-                    >
+                    <article className="my-2 space-y-2 py-2 pl-1 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                       <div className="space-y-3 xl:col-span-4">
                         <div className="inline-block">
                           <h3 className="cursor-pointer  text-3xl font-bold leading-8 tracking-wide">
@@ -122,9 +120,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
               <li key={id}>
                 <Link passHref href={`/portfolio/${id}`}>
                   <div className="cursor-pointer rounded-lg transition ease-in-out hover:bg-light-purple/40">
-                    <article
-                      className={`py-2 my-2 pl-1 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0`}
-                    >
+                    <article className="my-2 space-y-2 py-2 pl-1 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                       <div className="space-y-3 xl:col-span-4">
                         <div className="inline-block">
                           <h3 className="cursor-pointer  text-3xl font-bold leading-8 tracking-wide">
@@ -151,7 +147,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const posts = getAllPostsData();
   const projects = getDisplayProjectsData();
   const projectList = getAllProjectsData().splice(3).slice(0, 3);
