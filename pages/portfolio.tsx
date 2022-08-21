@@ -75,7 +75,7 @@ const Portfolio: NextPage<PortfolioProps> = ({ projects }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const projects = getAllProjectsData();
   return {
     props: {

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface DrawerProps {
@@ -11,8 +10,8 @@ export const Drawer = ({ isOpen, close }: DrawerProps) => {
     <div
       className={`fixed inset-0 z-10 overflow-hidden ease-in-out ${
         isOpen
-          ? 'transition-opacity opacity-100 duration-300 translate-x-0 '
-          : 'transition-all delay-100 opacity-0 translate-x-full '
+          ? 'translate-x-0 opacity-100 transition-opacity duration-300 '
+          : 'translate-x-full opacity-0 transition-all delay-100 '
       }`}
     >
       <div className="absolute inset-0 overflow-hidden">
