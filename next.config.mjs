@@ -5,7 +5,7 @@ import { withPlausibleProxy } from 'next-plausible';
  */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
 };
 
 export default withPlausibleProxy()(nextConfig);
