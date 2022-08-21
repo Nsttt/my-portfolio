@@ -1,8 +1,13 @@
 ---
+import "../styles/base.css";
 import Header from "../components/header.astro";
 
-const siteTitle = "Néstor López - Software Engineer";
-const description = "";
+interface BaseLayoutProps {
+  siteTitle: string;
+  description: string;
+}
+
+const { siteTitle, description } = Astro.props as BaseLayoutProps;
 ---
 
 <html lang="en">
@@ -16,36 +21,49 @@ const description = "";
     <meta name="twitter:creator" content="@nstlopez" />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://nstlopez/images/twitter.png" />
+    <meta property="og:image" content="https://nstlopez.com/images/twitter.png"
+    />
     <title>{siteTitle}</title>
     <meta name="theme-color" content="#000000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
+    />
   </head>
 
-  <body>
+  <body class="bg-gradient dark:bg-gradient-dark antialiased">
     <main class="h-full max-w-3xl md:mx-auto mx-3">
       <Header />
       <slot />
-    </main>
-    <script is:inline>
-      const theme = (() => {
+
+      <script is:inline>
+        function toggleDarkMode() {
+          document.documentElement.classList.toggle("dark");
+          localStorage.theme = document.documentElement.classList.contains(
+            "dark"
+          )
+            ? "dark"
+            : "light";
+        }
+        // @ts-ignore
+        window.toggleDarkMode = toggleDarkMode;
         if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
         ) {
-          return localStorage.getItem("theme");
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
         }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
+        function toggleMenu() {
+          document.getElementById("menu")?.classList.toggle("hidden");
         }
-        return "light";
-      })();
-      if (theme === "light") {
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.add("dark");
-      }
-      // @ts-ignore
-      window.localStorage.setItem("theme", theme);
-    </script>
+        // @ts-ignore
+        window.toggleMenu = toggleMenu;
+      </script>
+    </main>
   </body>
 </html>
