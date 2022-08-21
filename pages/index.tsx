@@ -147,7 +147,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, projectList }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const posts = getAllPostsData();
   const projects = getDisplayProjectsData();
   const projectList = getAllProjectsData().splice(3).slice(0, 3);
