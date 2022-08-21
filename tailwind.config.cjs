@@ -15,7 +15,7 @@ module.exports = {
       primarySecondaryDark: colors.purple[500],
     },
     fontFamily: {
-      sans: ["Iter", ...fontFamily.sans],
+      sans: ["IBM Plex Sans", ...fontFamily.sans],
     },
     extend: {
       typography: (/** @type {(arg0: string) => any} */ theme) => ({
@@ -24,10 +24,6 @@ module.exports = {
             color: theme("colors.gray.200"),
           },
         },
-        "deep-purple": "#301934",
-        "light-purple": "#432349",
-        "bright-pink": "#d11c54",
-        "very-bright-pink": "#ed2e61",
       }),
     },
   },
