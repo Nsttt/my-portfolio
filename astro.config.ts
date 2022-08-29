@@ -1,5 +1,5 @@
 import path from "path";
-import type { AstroUserConfig } from "astro";
+import { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
