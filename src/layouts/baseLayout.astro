@@ -2,12 +2,26 @@
 import "../styles/base.css";
 import Header from "../components/header.astro";
 
-interface BaseLayoutProps {
-  siteTitle: string;
-  description: string;
-}
+const path = new URL(Astro.request.url).pathname;
 
-const { siteTitle, description } = Astro.props as BaseLayoutProps;
+type BaseLayoutProps = {
+  title: string;
+  description: string;
+  openGraph: {
+    title: string;
+    type: string;
+    url: string;
+    description: string;
+    image: string;
+    article?: {
+      publishedTime: string;
+      modifiedTime: string;
+      authors: string[];
+    };
+  };
+};
+
+const { title, description } = Astro.props as BaseLayoutProps;
 ---
 
 <html lang="en">
@@ -19,11 +33,13 @@ const { siteTitle, description } = Astro.props as BaseLayoutProps;
     <meta name="twitter:image" content="https://nstlopez.com/images/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@nstlopez" />
-    <meta property="og:title" content={siteTitle} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://nstlopez.com/images/twitter.png"
+    <meta
+      property="og:image"
+      content="https://nstlopez.com/images/twitter.png"
     />
-    <title>{siteTitle}</title>
+    <title>{title}</title>
     <meta name="theme-color" content="#000000" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,39 +47,38 @@ const { siteTitle, description } = Astro.props as BaseLayoutProps;
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
     />
+    <script is:inline>
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+        localStorage.theme = document.documentElement.classList.contains("dark")
+          ? "dark"
+          : "light";
+      }
+      // @ts-ignore
+      window.toggleDarkMode = toggleDarkMode;
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      function toggleMenu() {
+        document.getElementById("menu")?.classList.toggle("hidden");
+      }
+      // @ts-ignore
+      window.toggleMenu = toggleMenu;
+    </script>
   </head>
 
   <body class="bg-gradient dark:bg-gradient-dark antialiased">
     <main class="h-full max-w-3xl md:mx-auto mx-3">
       <Header />
-      <slot />
-
-      <script is:inline>
-        function toggleDarkMode() {
-          document.documentElement.classList.toggle("dark");
-          localStorage.theme = document.documentElement.classList.contains(
-            "dark"
-          )
-            ? "dark"
-            : "light";
-        }
-        // @ts-ignore
-        window.toggleDarkMode = toggleDarkMode;
-        if (
-          localStorage.theme === "dark" ||
-          (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-        function toggleMenu() {
-          document.getElementById("menu")?.classList.toggle("hidden");
-        }
-        // @ts-ignore
-        window.toggleMenu = toggleMenu;
-      </script>
+      <div class="flex-1">
+        <slot />
+      </div>
     </main>
   </body>
 </html>
