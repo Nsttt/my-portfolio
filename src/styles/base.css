@@ -2,18 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-.bg-gradient {
-  @apply bg-black text-white;
+@layer components {
+  .bg-gradient {
+    @apply bg-white text-black;
 
-  background-image: radial-gradient(#2d2d2d 1px, transparent 1px);
-  background-position: 0 0, 25px 25px;
-  background-size: 30px 30px;
-}
+    background-image: radial-gradient(#cacaca 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 30px 30px;
+  }
 
-.bg-gradient-dark {
-  @apply bg-white text-black;
+  .bg-gradient-dark {
+    @apply bg-black text-white;
 
-  background-image: radial-gradient(#cacaca 1px, transparent 1px);
-  background-position: 0 0, 25px 25px;
-  background-size: 30px 30px;
+    background-image: radial-gradient(#2d2d2d 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 30px 30px;
+  }
 }
