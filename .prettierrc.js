@@ -7,9 +7,11 @@ module.exports = {
     {
       files: "*.astro",
       options: {
+        printWidth: 80,
+        useTabs: false,
         tabWidth: 2,
         semi: true,
-        trailingComma: "es5",
+        trailingComma: "all",
         parser: "astro",
       },
     },
