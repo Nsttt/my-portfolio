@@ -33,10 +33,5 @@ module.exports = {
   plugins: [
     // @ts-ignore
     require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    // @ts-ignore
-    require("@tailwindcss/line-clamp"),
-    // @ts-ignore
-    require("@tailwindcss/aspect-ratio"),
   ],
 };
