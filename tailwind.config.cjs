@@ -7,17 +7,16 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{astro,js,ts}"],
   safelist: ["dark"],
   theme: {
-    colors: {
-      ...colors,
-      primary: colors.purple[700],
-      primaryDark: colors.purple[300],
-      primarySecondary: colors.purple[800],
-      primarySecondaryDark: colors.purple[500],
-    },
     fontFamily: {
       sans: ["IBM Plex Sans", ...fontFamily.sans],
     },
     extend: {
+      colors: {
+        "black-primary": "#141628",
+        "black-secondary": "#1A1D31",
+        "feat-primary": "#F8426E",
+        "feat-secondary": "#FC96AF",
+      },
       typography: (/** @type {(arg0: string) => any} */ theme) => ({
         dark: {
           css: {
