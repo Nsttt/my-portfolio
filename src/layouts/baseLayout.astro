@@ -2,26 +2,12 @@
 import "../styles/base.css";
 import Header from "../components/header.astro";
 
-const path = new URL(Astro.request.url).pathname;
-
-type BaseLayoutProps = {
+interface Props {
   title: string;
   description: string;
-  openGraph: {
-    title: string;
-    type: string;
-    url: string;
-    description: string;
-    image: string;
-    article?: {
-      publishedTime: string;
-      modifiedTime: string;
-      authors: string[];
-    };
-  };
-};
+}
 
-const { title, description } = Astro.props as BaseLayoutProps;
+const { title, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -74,7 +60,7 @@ const { title, description } = Astro.props as BaseLayoutProps;
   </head>
 
   <body class="bg-gradient dark:bg-gradient-dark antialiased">
-    <main class="h-full max-w-3xl md:mx-auto mx-3">
+    <main class="h-full">
       <Header />
       <div class="flex-1">
         <slot />
