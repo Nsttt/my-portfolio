@@ -10,7 +10,7 @@ const { title, description, src, href } = Astro.props;
 ---
 
 <div
-  class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+  class="max-w-sm rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
 >
   <a href="#">
     <img class="rounded-t-lg" src={src} />
@@ -28,12 +28,12 @@ const { title, description, src, href } = Astro.props;
     </p>
     <a
       href={href}
-      class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      class="inline-flex items-center rounded-lg bg-blue-700 py-2 px-3 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
       Read more
       <svg
         aria-hidden="true"
-        class="ml-2 -mr-1 w-4 h-4"
+        class="ml-2 -mr-1 h-4 w-4"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
