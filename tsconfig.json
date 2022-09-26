@@ -1,4 +1,5 @@
 {
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "node",
