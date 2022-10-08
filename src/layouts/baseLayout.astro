@@ -1,6 +1,7 @@
 ---
 import "../styles/base.css";
 import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
 
 interface Props {
   title: string;
@@ -65,6 +66,7 @@ const { title, description } = Astro.props;
       <div class="flex-1">
         <slot />
       </div>
+      <Footer />
     </main>
   </body>
 </html>
