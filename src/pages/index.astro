@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/baseLayout.astro";
 import Card from "../components/card.astro";
 
-const pageTitle = "Néstor López - Software Engineer";
+const pageTitle = "Néstor López";
 const description = "";
 
 interface Frontmatter {
@@ -18,12 +18,12 @@ const projects = await Astro.glob<Frontmatter>("../content/projects/*.md");
 ---
 
 <BaseLayout title={pageTitle} description={description}>
-  <div
-    class="mx-3 my-20 flex max-w-6xl flex-col-reverse items-start px-2 sm:flex-row md:mx-auto"
+  <section
+    class="mx-3 my-20 flex max-w-6xl flex-col-reverse justify-center px-2 sm:flex-row md:mx-auto"
   >
     <div class="my-auto">
       <h1 class="text-5xl font-extrabold tracking-wide">
-        Hey, I'm <span class="text-feat-primary"> Néstor</span>
+        👋 Hey, I'm <span class="text-feat-primary">Néstor</span>
       </h1>
       <h2 class="mt-2 text-lg">
         Frontend Engineer at <a
@@ -35,29 +35,47 @@ const projects = await Astro.glob<Frontmatter>("../content/projects/*.md");
           NEXIONA
         </a> and Typescript wizard.
       </h2>
-      <a
-        href="/projects"
-        class="mt-6 inline-flex items-center rounded-lg bg-feat-primary py-2 px-3 text-center font-medium hover:bg-feat-secondary focus:outline-none focus:ring-4 focus:ring-red-300"
-      >
-        See my work
-        <svg
-          aria-hidden="true"
-          class="ml-2 -mr-1 h-4 w-4"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          ><path
-            fill-rule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clip-rule="evenodd"></path>
-        </svg>
-      </a>
+      <div class="mt-6 flex justify-center gap-10">
+        <a
+          href="/projects"
+          class="inline-flex items-center rounded-lg bg-feat-primary py-2 px-3 text-center font-medium transition ease-in-out hover:bg-feat-secondary focus:outline-none focus:ring-4 focus:ring-red-300"
+        >
+          See my work
+          <svg
+            aria-hidden="true"
+            class="ml-2 -mr-1 h-4 w-4"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a
+          class="inline-flex items-center rounded-lg bg-feat-primary py-2 px-3 text-center font-medium transition ease-in-out hover:bg-feat-secondary focus:outline-none focus:ring-4 focus:ring-red-300"
+          href="https://github.com/nsttt"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Check my Github
+          <svg
+            aria-hidden="true"
+            class="ml-2 -mr-1 h-4 w-4"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
     </div>
-    <div class="ml-auto hidden md:block">
-      <img src="/images/hero.svg" width={650} />
-    </div>
-  </div>
-  <div class="bg-black-secondary py-6">
+  </section>
+  <section class="bg-black-secondary py-6">
     <div class="mx-3 max-w-6xl px-2 md:mx-auto">
       <h3 class="mb-6 text-2xl font-bold md:text-4xl">Lastest Posts</h3>
       <div class="flex flex-row space-x-4">
@@ -69,13 +87,29 @@ const projects = await Astro.glob<Frontmatter>("../content/projects/*.md");
                 title={post.frontmatter.title}
                 description={post.frontmatter.description}
                 src=""
-                href=""
+                href={post.frontmatter.title}
               />
             ))
         }
       </div>
+      <a href="/blog">
+        <h3 class="my-6 inline-flex items-center text-xl font-bold md:text-xl">
+          See More
+          <svg
+            aria-hidden="true"
+            class="ml-2 -mr-1 h-4 w-4"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </h3>
+      </a>
     </div>
-  </div>
+  </section>
   <div class="bg-black-secondary py-6">
     <div class="mx-3 max-w-6xl px-2 md:mx-auto">
       <h3 class="mb-6 text-2xl font-bold md:text-4xl">Featured Works</h3>
@@ -93,6 +127,22 @@ const projects = await Astro.glob<Frontmatter>("../content/projects/*.md");
             ))
         }
       </div>
+      <a href="/projects">
+        <h3 class="my-6 inline-flex items-center text-xl font-bold md:text-xl">
+          See More
+          <svg
+            aria-hidden="true"
+            class="ml-2 -mr-1 h-4 w-4"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </h3>
+      </a>
     </div>
   </div>
 </BaseLayout>
