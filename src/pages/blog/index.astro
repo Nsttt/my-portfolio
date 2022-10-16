@@ -1,0 +1,45 @@
+---
+import PostItem from "../../components/postItem.astro";
+import BaseLayout from "../../layouts/baseLayout.astro";
+
+const pageTitle = "Néstor López";
+const description = "";
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  image: string;
+  subtitle: string;
+  date: string;
+  url: string;
+}
+
+const posts = await Astro.glob<Frontmatter>("../../content/posts/*.md");
+
+export function getStaticPaths() {
+  posts.map((post) => {
+    return {
+      params: {
+        slug: post.url,
+      },
+    };
+  });
+}
+---
+
+<BaseLayout title={pageTitle} description={description}>
+  <section class="max-w-6xl px-6 py-10 md:mx-auto">
+    <h1 class="text-3xl font-semibold capitalize text-white lg:text-4xl">
+      Lastest <span class="text-feat-primary">Posts</span>
+    </h1>
+    {
+      posts.map((post) => (
+        <PostItem
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          url={`/blog/${post.frontmatter.url}`}
+        />
+      ))
+    }
+  </section>
+</BaseLayout>
