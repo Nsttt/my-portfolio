@@ -1,0 +1,26 @@
+---
+---
+
+<button id="toggleButton" title="Toggle color mode"></button>
+
+<script>
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.theme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  };
+
+  if (
+    localStorage.theme === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+
+  const toggleButton = document.getElementById("toggleButton");
+  toggleButton?.addEventListener("click", () => toggleDarkMode());
+</script>

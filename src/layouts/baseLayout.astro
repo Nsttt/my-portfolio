@@ -1,14 +1,6 @@
 ---
 import "../styles/base.css";
 import Header from "../components/header.astro";
-import Footer from "../components/footer.astro";
-
-interface Props {
-  title: string;
-  description: string;
-}
-
-const { title, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -16,17 +8,20 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="description" content={description} />
+    <!-- TODO: Change description and title -->
+    <meta name="title" content="Nstlopez" />
+    <meta name="description" content="Decription" />
     <meta name="twitter:image" content="https://nstlopez.com/images/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@nstlopez" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content="Nstlopez" />
+    <meta property="og:description" content="description" />
     <meta
       property="og:image"
       content="https://nstlopez.com/images/twitter.png"
     />
-    <title>{title}</title>
+    <!-- TODO: Make title dynamic -->
+    <title>Nstlopez</title>
     <meta name="theme-color" content="#000000" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,39 +29,10 @@ const { title, description } = Astro.props;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
     />
-    <script is:inline>
-      function toggleDarkMode() {
-        document.documentElement.classList.toggle("dark");
-        localStorage.theme = document.documentElement.classList.contains("dark")
-          ? "dark"
-          : "light";
-      }
-      // @ts-ignore
-      window.toggleDarkMode = toggleDarkMode;
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-      function toggleMenu() {
-        document.getElementById("menu")?.classList.toggle("hidden");
-      }
-      // @ts-ignore
-      window.toggleMenu = toggleMenu;
-    </script>
   </head>
-
-  <body class="bg-gradient dark:bg-gradient-dark antialiased">
-    <main class="h-full">
-      <Header />
-      <div class="flex-1">
-        <slot />
-      </div>
-      <Footer />
-    </main>
+  <body class="container mx-auto bg-zinc-50 px-4 dark:bg-black sm:px-6 lg:px-8">
+    <Header />
+    <slot />
+    <!-- <Footer /> -->
   </body>
 </html>

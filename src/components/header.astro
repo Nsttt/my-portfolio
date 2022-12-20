@@ -1,35 +1,23 @@
 ---
+import ToggleButton from "./toggleButton.astro";
 ---
 
-<header
-  class="mx-3 flex max-w-6xl flex-col justify-center pl-0 pt-8 pb-16 md:mx-auto"
->
-  <nav class="relative flex w-full items-center justify-between">
+<header class="pointer-events-none relative z-50 flex flex-col">
+  <div>
+    <h1>Nst's Blog</h1>
+    <div>Searchbox here</div>
+    <ToggleButton />
+  </div>
+  <div>
+    <nav>
+      <a>Blog</a>
+      <a>Projects</a>
+      <a>Tags</a>
+      <a>RSS</a>
+    </nav>
     <div>
-      <a
-        href="/"
-        class="hidden rounded-lg p-1 font-semibold text-gray-800 transition-all hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2 md:inline-block"
-      >
-        Home
-      </a>
-      <a
-        href="/blog"
-        class="hidden rounded-lg p-1 font-semibold text-gray-800 transition-all hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2 md:inline-block"
-      >
-        Blog
-      </a>
-      <a
-        href="/projects"
-        class="hidden rounded-lg p-1 font-semibold text-gray-800 transition-all hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2 md:inline-block"
-      >
-        Projects
-      </a>
-      <a
-        href="/about"
-        class="hidden rounded-lg p-1 font-semibold text-gray-800 transition-all hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-800 sm:px-3 sm:py-2 md:inline-block"
-      >
-        About
-      </a>
+      <a>Twitter</a>
+      <a>Github</a>
     </div>
-  </nav>
+  </div>
 </header>
