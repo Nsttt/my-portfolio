@@ -30,7 +30,7 @@ module.exports = {
     extend: { typography: ["dark"] },
   },
   plugins: [
-    // @ts-ignore
+    // @ts-ignore Need to require
     require("@tailwindcss/typography"),
   ],
 };

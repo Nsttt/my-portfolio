@@ -32,15 +32,17 @@
         "parser": "@typescript-eslint/parser",
         "extraFileExtensions": [".astro"]
       },
-      "rules": {
-        // override/add rules settings here, such as:
-        // "astro/no-set-html-directive": "error"
-      }
+      "rules": {}
     }
-    // ...
   ],
   "rules": {
     "prettier/prettier": ["warn"],
     "@typescript-eslint/no-unused-vars": "off"
+    // "@typescript-eslint/ban-ts-comment": [
+    //   "error",
+    //   {
+    //     "ts-ignore": "allow-with-description"
+    //   }
+    // ]
   }
 }
