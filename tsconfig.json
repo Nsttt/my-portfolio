@@ -1,10 +1,9 @@
 {
-  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "node",
     "module": "ESNext",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "dom", "dom.iterable"],
     "target": "ESNext",
     "isolatedModules": true,
     "outDir": "./dist",
@@ -17,6 +16,23 @@
     "noEmit": true,
     "allowJs": true,
     "checkJs": true,
-    "jsx": "preserve"
-  }
+    "jsx": "preserve",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "importsNotUsedAsValues": "error",
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    ".eslintrc.cjs",
+    "astro.config.ts",
+    "tailwind.config.cjs",
+    "src/**/*"
+  ]
 }
