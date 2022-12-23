@@ -29,8 +29,37 @@ import Header from "../components/header.astro";
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap"
     />
+    <script is:inline>
+      const html = document.documentElement;
+      if (window.location.pathname === "/") {
+        html.classList.add("dark");
+      }
+
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      if (theme === "light") {
+        html.classList.remove("dark");
+        html.classList.add("light");
+      } else {
+        html.classList.remove("light");
+        html.classList.add("dark");
+      }
+    </script>
   </head>
-  <body class="container mx-auto bg-zinc-50 px-4 dark:bg-black sm:px-6 lg:px-8">
+  <body
+    class="container mx-auto bg-cool-grey-050 p-4 dark:bg-cool-grey-900 sm:p-6 lg:p-8"
+  >
     <Header />
     <slot />
     <!-- <Footer /> -->

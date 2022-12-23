@@ -2,21 +2,22 @@
 import ToggleButton from "./toggleButton.astro";
 ---
 
-<header class="pointer-events-none relative z-50 flex flex-col">
-  <div>
-    <h1>Nst's Blog</h1>
-    <div>Searchbox here</div>
+<header class="flex flex-col dark:text-white">
+  <div class="flex justify-between">
+    <div class="flex">
+      <h1 class="text-4xl">Néstor's Blog</h1>
+    </div>
     <ToggleButton />
   </div>
-  <div>
+  <div class="mt-4 flex justify-between border-b-[1px] pb-2">
     <nav>
-      <a>Blog</a>
-      <a>Projects</a>
-      <a>Tags</a>
+      <a class="mr-2">Blog</a>
+      <a class="mr-2">Projects</a>
+      <a class="mr-2">Tags</a>
       <a>RSS</a>
     </nav>
     <div>
-      <a>Twitter</a>
+      <a class="mr-2">Twitter</a>
       <a>Github</a>
     </div>
   </div>
