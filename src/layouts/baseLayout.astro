@@ -58,10 +58,12 @@ import Header from "../components/header.astro";
     </script>
   </head>
   <body
-    class="container mx-auto bg-cool-grey-050 p-4 dark:bg-cool-grey-900 sm:p-6 lg:p-8"
+    class="container mx-auto max-w-7xl bg-cool-grey-050 p-4 dark:bg-cool-grey-900 sm:p-6 lg:p-8"
   >
-    <Header />
-    <slot />
-    <!-- <Footer /> -->
+    <div class="mx-auto max-w-5xl">
+      <Header />
+      <slot />
+      <!-- <Footer /> -->
+    </div>
   </body>
 </html>
