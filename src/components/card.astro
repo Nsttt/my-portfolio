@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title = "Test" } = Astro.props;
+---
+
+<div
+  class="rounded-lg border-light-blue-vivid-500 p-2 transition hover:-translate-y-4 hover:border-2"
+>
+  <img
+    class="aspect-w-10 w-full overflow-hidden rounded-lg"
+    src="/images/projects/covid.webp"
+    alt=""
+  />
+  <div class="p-5">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {title}
+    </h5>
+  </div>
+</div>
