@@ -1,6 +1,7 @@
 ---
 import "../styles/base.css";
 import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
 ---
 
 <html lang="en">
@@ -58,12 +59,12 @@ import Header from "../components/header.astro";
     </script>
   </head>
   <body
-    class="container mx-auto max-w-7xl bg-cool-grey-050 p-4 dark:bg-cool-grey-900 sm:p-6 lg:p-8"
+    class="container mx-auto max-w-7xl bg-cool-grey-050 p-4 dark:bg-cool-grey-900 dark:text-slate-50 sm:p-6 lg:p-8"
   >
     <div class="mx-auto max-w-5xl">
       <Header />
       <slot />
-      <!-- <Footer /> -->
+      <Footer />
     </div>
   </body>
 </html>
