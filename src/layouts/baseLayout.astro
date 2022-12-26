@@ -2,6 +2,14 @@
 import "../styles/base.css";
 import Header from "../components/header.astro";
 import Footer from "../components/footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -10,19 +18,22 @@ import Footer from "../components/footer.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
     <!-- TODO: Change description and title -->
-    <meta name="title" content="Nstlopez" />
-    <meta name="description" content="Decription" />
-    <meta name="twitter:image" content="https://nstlopez.com/images/og.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@nstlopez" />
-    <meta property="og:title" content="Nstlopez" />
-    <meta property="og:description" content="description" />
+    <meta name="title" content={title ?? "Nstlopez"} />
+    <meta name="description" content={description ?? "Description"} />
     <meta
-      property="og:image"
+      name="twitter:image"
       content="https://nstlopez.com/images/twitter.png"
     />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@nstlopez" />
+    <meta property="og:title" content={title ?? "Nstlopez"} />
+    <meta property="og:description" content={description ?? "description"} />
+    <meta
+      property="og:image"
+      content={ogImage ?? "https://nstlopez.com/images/og.png"}
+    />
     <!-- TODO: Make title dynamic -->
-    <title>Nstlopez</title>
+    <title>{title ?? "Nstlopez"}</title>
     <meta name="theme-color" content="#000000" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
