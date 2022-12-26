@@ -1,25 +1,39 @@
 ---
+import dayjs from "dayjs";
 interface Props {
+  slug: string;
   title: string;
   image: string;
+  date: string;
+  expectedReadTime: number;
+  tags: string[];
 }
 
-const { title = "Test", image } = Astro.props;
+const { slug, title, image, date, expectedReadTime, tags } = Astro.props;
+const formatedDate = dayjs(date).format("MMMM DD, YYYY");
 ---
 
 <div
   class="rounded-lg border-2 border-light-blue-vivid-500/0 p-2 transition duration-200 ease-linear hover:-translate-y-4 hover:border-light-blue-vivid-500/100"
 >
-  <a>
+  <a href={`/blog/${slug}`}>
     <img
       class="aspect-w-10 w-full overflow-hidden rounded-lg"
       src={image}
-      alt={`${title}-image`}
+      alt={title}
     />
     <div class="py-5">
-      <h5 class="mb-2 text-2xl font-bold">
+      <span class="text-slate-400"
+        >{
+          `${formatedDate} • ${"☕".repeat(
+            expectedReadTime,
+          )} ${expectedReadTime.toString()} min read`
+        }</span
+      >
+      <h3 class="text-2xl font-bold">
         {title}
-      </h5>
+      </h3>
+      <p class="text-slate-400">{tags.join(",")}</p>
     </div>
   </a>
 </div>
