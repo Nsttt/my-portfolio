@@ -1,24 +1,25 @@
 ---
 interface Props {
   title: string;
+  image: string;
 }
 
-const { title = "Test" } = Astro.props;
+const { title = "Test", image } = Astro.props;
 ---
 
 <div
-  class="rounded-lg border-light-blue-vivid-500 p-2 transition hover:-translate-y-4 hover:border-2"
+  class="rounded-lg border-2 border-light-blue-vivid-500/0 p-2 transition duration-200 ease-linear hover:-translate-y-4 hover:border-light-blue-vivid-500/100"
 >
-  <img
-    class="aspect-w-10 w-full overflow-hidden rounded-lg"
-    src="/images/projects/covid.webp"
-    alt=""
-  />
-  <div class="p-5">
-    <h5
-      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-    >
-      {title}
-    </h5>
-  </div>
+  <a>
+    <img
+      class="aspect-w-10 w-full overflow-hidden rounded-lg"
+      src={image}
+      alt={`${title}-image`}
+    />
+    <div class="py-5">
+      <h5 class="mb-2 text-2xl font-bold">
+        {title}
+      </h5>
+    </div>
+  </a>
 </div>
