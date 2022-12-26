@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/baseLayout.astro";
+import type { PostFrontmatter } from "../../types/post.domain";
+import type { MarkdownInstance } from "astro";
+
+interface Props {
+  currentPost: MarkdownInstance<PostFrontmatter> | undefined;
+}
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob<PostFrontmatter>(
+    "../../content/posts/*.md",
+  );
+
+  return allPosts.map((post) => ({
+    params: {
+      post: post.frontmatter.slug,
+    },
+    props: {
+      currentPost: allPosts.find(
+        (p) => p.frontmatter.slug === post.frontmatter.slug,
+      ),
+    },
+  }));
+}
+
+const { currentPost } = Astro.props;
+---
+
+<BaseLayout>
+  <div>{currentPost?.frontmatter.title}</div>
+</BaseLayout>
