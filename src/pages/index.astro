@@ -1,18 +1,13 @@
 ---
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
+import type { PostFrontmatter } from "../types/post.domain";
 
-interface Frontmatter {
-  title: string;
-  description: string;
-  tags: string[];
-}
-
-const posts = await Astro.glob<Frontmatter>("../content/posts/*.md");
+const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
 ---
 
 <BaseLayout>
-  <main class="dark:text-white">
+  <main>
     <section class="mt-40 flex flex-row">
       <img
         class="inline-block h-32 w-32 rounded-full"
@@ -55,7 +50,14 @@ const posts = await Astro.glob<Frontmatter>("../content/posts/*.md");
         role="list"
         class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
       >
-        {posts.map((post) => <Card title={post.frontmatter.title} />)}
+        {
+          posts.map((post) => (
+            <Card
+              title={post.frontmatter.title}
+              image={post.frontmatter.image}
+            />
+          ))
+        }
       </ul>
     </section>
   </main>
