@@ -8,7 +8,7 @@ module.exports = {
   safelist: ["dark"],
   theme: {
     fontFamily: {
-      sans: ["IBM Plex Sans", ...fontFamily.sans],
+      sans: ["Inter", ...fontFamily.sans],
     },
     extend: {
       colors: {
