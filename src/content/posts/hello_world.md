@@ -1,9 +1,8 @@
 ---
 title: "Hello World"
-subtitle: "First step"
 description: "The first step of a journey is often the weirdest."
-date: "Apr 14, 2022"
-url: "hello_world"
+image: "/images/posts/hello-world.webp"
+date: "14-04-2022"
 ---
 
 Hello world. Here I am. Pretty much my very first post so nothing to see here.
