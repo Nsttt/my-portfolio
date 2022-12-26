@@ -13,7 +13,7 @@ const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
         class="inline-block h-32 w-32 rounded-full"
         src="/images/profile.webp"
       />
-      <div class="w-full pl-2 text-xl">
+      <div class="ml-4 w-full text-xl">
         <h1 class="mb-10 text-2xl">Hi 👋, I'm Néstor from Spain</h1>
         <p class="my-3">
           I'm a software engineer with a lot of passion for Typescript and Rust.
@@ -53,8 +53,12 @@ const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
         {
           posts.map((post) => (
             <Card
+              slug={post.frontmatter.slug}
               title={post.frontmatter.title}
               image={post.frontmatter.image}
+              date={post.frontmatter.date}
+              expectedReadTime={post.frontmatter.expectedReadTime}
+              tags={post.frontmatter.tags}
             />
           ))
         }
