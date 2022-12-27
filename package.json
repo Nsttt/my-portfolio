@@ -1,7 +1,15 @@
 {
   "name": "my-portfolio",
+  "description": "My custom made portfolio and blog.",
   "version": "3.0.0",
   "private": true,
+  "keywords": [],
+  "author": "Néstor López",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsttt/my-portfolio"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && tsc --noEmit && astro build",
