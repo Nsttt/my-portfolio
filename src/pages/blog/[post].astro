@@ -4,7 +4,7 @@ import type { PostFrontmatter } from "../../types/post.domain";
 import type { MarkdownInstance } from "astro";
 
 interface Props {
-  currentPost: MarkdownInstance<PostFrontmatter> | undefined;
+  currentPost: MarkdownInstance<PostFrontmatter>;
 }
 
 export async function getStaticPaths() {
@@ -25,8 +25,15 @@ export async function getStaticPaths() {
 }
 
 const { currentPost } = Astro.props;
+
+const Content = currentPost.Content;
 ---
 
 <BaseLayout>
-  <div>{currentPost?.frontmatter.title}</div>
+  <main>
+    <article class="prose prose-slate mt-32 dark:prose-invert lg:prose-xl">
+      <h1>{currentPost.frontmatter.title}</h1>
+      <Content />
+    </article>
+  </main>
 </BaseLayout>
