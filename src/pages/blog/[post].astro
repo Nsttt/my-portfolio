@@ -1,7 +1,9 @@
 ---
+import type { MarkdownInstance } from "astro";
+import dayjs from "dayjs";
+
 import BaseLayout from "../../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../../types/post.domain";
-import type { MarkdownInstance } from "astro";
 
 interface Props {
   currentPost: MarkdownInstance<PostFrontmatter>;
@@ -25,15 +27,31 @@ export async function getStaticPaths() {
 }
 
 const { currentPost } = Astro.props;
+const formatedDate = dayjs(currentPost.frontmatter.date).format(
+  "MMMM DD, YYYY",
+);
 
 const Content = currentPost.Content;
 ---
 
 <BaseLayout>
-  <main>
-    <article class="prose prose-slate mt-32 dark:prose-invert lg:prose-xl">
-      <h1>{currentPost.frontmatter.title}</h1>
-      <Content />
-    </article>
-  </main>
+  <article
+    class="prose prose-slate mt-32 max-w-none dark:prose-invert lg:prose-xl"
+  >
+    <h1>{currentPost.frontmatter.title}</h1>
+    <span>
+      {
+        `${formatedDate} • ${currentPost.frontmatter.tags.join(
+          ", ",
+        )} • ${"☕".repeat(
+          currentPost.frontmatter.expectedReadTime,
+        )} ${currentPost.frontmatter.expectedReadTime.toString()} min read`
+      }
+    </span>
+    <img
+      class="w-full object-cover shadow-lg"
+      src={currentPost.frontmatter.image}
+    />
+    <Content />
+  </article>
 </BaseLayout>
