@@ -6,7 +6,7 @@ import type { PostFrontmatter } from "../../types/post.domain";
 const posts = await Astro.glob<PostFrontmatter>("../../content/posts/*.md");
 ---
 
-<BaseLayout>
+<BaseLayout title="Blog" description="All my blog posts.">
   <h1 class="mt-32 text-6xl font-bold">Blog</h1>
   <ul
     role="list"
