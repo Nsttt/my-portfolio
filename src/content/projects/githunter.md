@@ -1,10 +1,13 @@
 ---
+slug: "githunter"
 title: "GitHunter"
 subtitle: "Starred project hunter for GitHub."
 description: "A starred project hunter for Github projects, created because I dislike the at the time awful timeline Github had for exploring new projects. Created using React and ChakraUI."
 date: "July 9, 2020"
+image: "/images/projects/githunter.webp"
 link: "https://githunter.nstlopez.com"
 source: "https://github.com/nsttt/githunter"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 This was pretty much on of my very early projects. In fact, it was partially broken until not long ago, when I asked a friend to help me out fix it.

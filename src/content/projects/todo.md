@@ -1,10 +1,13 @@
 ---
+slug: "todo"
 title: "Yet another React Todo List"
 subtitle: " A very basic React Todo List somewhat different."
 description: "Pretty much one of these everyone has, but with something different. It uses LocalStorage"
 date: "Sep 3, 2019"
 link: "https://todo.nstlopez.com"
+image: "/images/projects/todo.webp"
 source: "https://github.com/nsttt/react-todo"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 Pretty much one of my very early projects with React, just a simple Todo list with categories.

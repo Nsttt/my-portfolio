@@ -1,10 +1,13 @@
 ---
+slug: "covid"
 title: "Vue Covid"
 subtitle: "A covid tracking app built using Vue 3."
 description: "A very basic covid tracking app using Vue3, built mainly to refresh my knowledge of the framework and test out new features."
 date: "Jun 19, 2021"
+image: "/images/projects/covid.webp"
 link: "https://cov.nstlopez.com"
 source: "https://github.com/nsttt/covid"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 Recently on my **crusade** of learning new stuff I've been reading through a lot of jobs around my local city and nearby. And realized that most of the open offers have a few things in common.

@@ -1,10 +1,13 @@
 ---
+slug: "instagram"
 title: "Instagram Clone"
 subtitle: "A simple Instagram clone."
 description: "A simple clone of Instagram with very basic functionality.  Made with React, TailwindCSS and Firebase. Including tests with testing-library, Jest and Cypress."
 date: "April 22, 2021"
+image: "/images/projects/instagram_clone.webp"
 link: "https://photos.nstlopez.com"
 source: "https://github.com/nsttt/instagram-clone"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 This is my second clone of a famous platform. First i started with my [Netflix clone](https://nstlopez.com/project/streaming-service) and now an Instagram clone.

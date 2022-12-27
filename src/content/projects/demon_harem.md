@@ -1,10 +1,13 @@
 ---
+slug: "demon-harem"
 title: "Demon Harem"
 subtitle: "A Helltaker fanpage"
 description: "A static page made with HTML SCSS and Gulp. Created to practice my styling and basic web development skill without any framework whatsoever."
 date: "September 14, 2020"
+image: "/images/projects/demon_harem.webp"
 link: "https://demonharem.nstlopez.com"
 source: "https://github.com/nsttt/demonharem"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 This project was pretty much born as an excuse for practicing my knowledge on basic HTML + Vanilla JS. It ended up quite nicely I'd say.

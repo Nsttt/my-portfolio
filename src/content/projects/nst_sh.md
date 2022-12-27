@@ -1,10 +1,13 @@
 ---
+slug: "nstsh"
 title: "nst.sh"
 subtitle: "A personal yet functional URL Shortener"
 description: "The app was built as a productivity tool for myself, being able to use my domain to go fast to specific pages on all my devices was really something that I find convenient. Its built with a Express backend + MongoDB and a really small Vue frontend"
 date: "Oct 5, 2020"
 link: "https://nst.sh"
+image: "/images/projects/nst_sh.webp"
 source: "https://github.com/nsttt/nst-sh"
+tags: ["javascript", "node", "backend", "frontend"]
 ---
 
 Time ago, I was in a party with some friends. I told one of them about one of my apps that I had hosted at the time, nothing really big or fancy, but something I wanted to show him.
