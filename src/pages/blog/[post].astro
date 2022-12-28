@@ -34,7 +34,10 @@ const formatedDate = dayjs(currentPost.frontmatter.date).format(
 const Content = currentPost.Content;
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={currentPost.frontmatter.title}
+  ogImage={currentPost.frontmatter.image}
+>
   <article
     class="prose prose-slate mt-32 max-w-none prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline dark:prose-invert lg:prose-xl"
   >
