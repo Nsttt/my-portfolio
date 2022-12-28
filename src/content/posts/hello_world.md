@@ -5,7 +5,7 @@ description: "The first step of a journey is often the weirdest."
 image: "/images/posts/hello-world.webp"
 date: "2022-04-14"
 expectedReadTime: 1
-tags: ["meta", "test"]
+tags: ["meta"]
 ---
 
 Here I am. Pretty much my very first post so nothing to see here.
