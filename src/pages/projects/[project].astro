@@ -37,12 +37,15 @@ const formatedDate = dayjs(currentProject.frontmatter.date).format(
 
 <BaseLayout>
   <article
-    class="prose prose-slate mt-32 max-w-none dark:prose-invert lg:prose-xl"
+    class="prose prose-slate mt-32 max-w-none prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline dark:prose-invert lg:prose-xl"
   >
     <h1>{currentProject.frontmatter.title}</h1>
-    <span>
-      {`${formatedDate} • ${currentProject.frontmatter.tags.join(", ")}`}
-    </span>
+    <div class="flex justify-between">
+      <span>
+        {`${formatedDate} • ${currentProject.frontmatter.tags.join(", ")}`}
+      </span>
+      <a>See</a>
+    </div>
     <img class="w-full object-cover" src={currentProject.frontmatter.image} />
     <Content />
   </article>
