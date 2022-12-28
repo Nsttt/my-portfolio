@@ -16,7 +16,7 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       class="inline-block h-32 w-32 rounded-full"
       src="/images/profile.webp"
     />
-    <div class="ml-4 w-full text-xl">
+    <div class="ml-4 w-full text-xl leading-loose">
       <h1 class="mb-10 text-2xl">Hi 👋, I'm Néstor from Spain</h1>
       <p class="my-3">
         I'm a software engineer with a lot of passion for Typescript and Rust.
@@ -47,7 +47,11 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       class="mt-40 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
     >
       <h2 class="self-baseline text-4xl">Latest posts</h2>
-      <a class="self-baseline text-lg">See all posts</a>
+      <a
+        href="/blog"
+        class="self-baseline text-lg text-light-blue-vivid-500 hover:underline"
+        >See all posts</a
+      >
     </div>
     <ul
       role="list"
@@ -78,7 +82,11 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       class="mt-20 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
     >
       <h2 class="self-baseline text-4xl">Latest Projects</h2>
-      <a class="self-baseline text-lg">See all projects</a>
+      <a
+        href="/projects"
+        class="self-baseline text-lg text-light-blue-vivid-500 hover:underline"
+        >See all projects</a
+      >
     </div>
     <ul
       role="list"
