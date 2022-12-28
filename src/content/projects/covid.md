@@ -7,7 +7,7 @@ date: "Jun 19, 2021"
 image: "/images/projects/covid.webp"
 link: "https://cov.nstlopez.com"
 source: "https://github.com/nsttt/vue-covid"
-tags: ["javascript, "vue", "frontend"]
+tags: ["javascript", "vue", "frontend"]
 ---
 
 Recently on my **crusade** of learning new stuff I've been reading through a lot of jobs around my local city and nearby. And realized that most of the open offers have a few things in common.
