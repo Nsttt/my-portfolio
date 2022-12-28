@@ -14,7 +14,7 @@ tags:
     "cypress",
     "jest",
     "react",
-    "styled-components"
+    "styled-components",
     "firebase",
     "backend",
     "frontend",

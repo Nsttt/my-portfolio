@@ -7,17 +7,18 @@ date: "October 16, 2020"
 image: "/images/projects/netflix_clone.webp"
 link: "https://n-clone.nstlopez.com"
 source: "https://github.com/nsttt/netflix-clone"
-tags: [    
+tags:
+  [
     "javascript",
     "testing-library",
     "cypress",
     "jest",
     "react",
-    "styled-components"
+    "styled-components",
     "firebase",
     "backend",
     "frontend",
-    ]
+  ]
 ---
 
 This is essentially a clone of the famous streaming platform Netflix, but built my way.
