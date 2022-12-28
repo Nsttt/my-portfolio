@@ -7,7 +7,7 @@ date: "July 9, 2020"
 image: "/images/projects/githunter.webp"
 link: "https://githunter.nstlopez.com"
 source: "https://github.com/nsttt/githunter"
-tags: ["javascript", "node", "backend", "frontend"]
+tags: ["javascript", "react", "chakraui", "frontend"]
 ---
 
 This was pretty much on of my very early projects. In fact, it was partially broken until not long ago, when I asked a friend to help me out fix it.

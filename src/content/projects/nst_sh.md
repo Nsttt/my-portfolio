@@ -7,7 +7,7 @@ date: "Oct 5, 2020"
 link: "https://nst.sh"
 image: "/images/projects/nst_sh.webp"
 source: "https://github.com/nsttt/nst-sh"
-tags: ["javascript", "node", "backend", "frontend"]
+tags: ["typescript", "vue", "backend", "frontend"]
 ---
 
 Time ago, I was in a party with some friends. I told one of them about one of my apps that I had hosted at the time, nothing really big or fancy, but something I wanted to show him.

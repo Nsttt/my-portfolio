@@ -7,7 +7,7 @@ date: "April 9, 2019"
 image: "/images/projects/gameboy.webp"
 link: "https://imgur.com/gallery/RBzNijH"
 source: "https://imgur.com/gallery/RBzNijH"
-tags: ["javascript", "node", "backend", "frontend"]
+tags: ["electronic", "raspberry"]
 ---
 
 I made this project around 2016. it's basically a fully capable Raspberry Pi Zero made to play games on Retropie, it features 3 USB A ports (1 outside, 2 inside) and a direct connection to the Pi in case you want to run it to a screen to play with a controller instead of the built-in screen.
