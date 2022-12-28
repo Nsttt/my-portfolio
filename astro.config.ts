@@ -1,8 +1,8 @@
-import path from "path";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
+import path from "path";
 
 const config: AstroUserConfig = {
   // outDir: './dist',       // When running `astro build`, path to final static output
