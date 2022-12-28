@@ -1,40 +1,23 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# vercel
-.vercel
-
-# typescript
+node_modules/
+dist/
 *.tsbuildinfo
+.DS_Store
+.vercel
+_site/
+scripts/smoke/*-main/
+scripts/memory/project/src/pages/
+*.log
+.turbo/
 
-# manual
-/public/rss
+# ignore top-level vscode settings
+/.vscode/settings.json
+
+# do not commit .env files or any files that end with `.env`
+*.env
+
+packages/astro/src/**/*.prebuilt.ts
+!packages/astro/vendor/vite/dist
+packages/integrations/**/.netlify/
+
+# exclude IntelliJ/WebStorm stuff
+.idea

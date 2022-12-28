@@ -1,28 +1,38 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "target": "ESNext",
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "allowJs": true,
+    "checkJs": true,
     "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": ".",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "importsNotUsedAsValues": "error",
-    "paths": {
-      "@components": ["components"],
-      "@services": ["services"],
-      "@types": ["types"],
-      "@hooks": ["hooks"]
-    }
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": [
+    ".eslintrc.cjs",
+    "astro.config.ts",
+    "tailwind.config.cjs",
+    "src/**/*"
+  ]
 }
