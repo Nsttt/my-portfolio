@@ -2,8 +2,12 @@
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../types/post.domain";
+import type { ProjectFrontmatter } from "../types/project.domain";
 
 const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
+const projects = await Astro.glob<ProjectFrontmatter>(
+  "../content/projects/*.md",
+);
 ---
 
 <BaseLayout>
@@ -50,16 +54,52 @@ const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
       class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
     >
       {
-        posts.map((post) => (
-          <Card
-            href={`/blog/${post.frontmatter.slug}`}
-            title={post.frontmatter.title}
-            image={post.frontmatter.image}
-            date={post.frontmatter.date}
-            expectedReadTime={post.frontmatter.expectedReadTime}
-            tags={post.frontmatter.tags}
-          />
-        ))
+        posts
+          .sort(
+            (a, b) =>
+              Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+          )
+          .slice(0, 6)
+          .map((post) => (
+            <Card
+              href={`/blog/${post.frontmatter.slug}`}
+              title={post.frontmatter.title}
+              image={post.frontmatter.image}
+              date={post.frontmatter.date}
+              expectedReadTime={post.frontmatter.expectedReadTime}
+              tags={post.frontmatter.tags}
+            />
+          ))
+      }
+    </ul>
+  </section>
+  <section>
+    <div
+      class="mt-20 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+    >
+      <h2 class="self-baseline text-4xl">Latest Projects</h2>
+      <a class="self-baseline text-lg">See all projects</a>
+    </div>
+    <ul
+      role="list"
+      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
+    >
+      {
+        projects
+          .sort(
+            (a, b) =>
+              Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+          )
+          .slice(0, 3)
+          .map((project) => (
+            <Card
+              href={`/projects/${project.frontmatter.slug}`}
+              title={project.frontmatter.title}
+              image={project.frontmatter.image}
+              date={project.frontmatter.date}
+              tags={project.frontmatter.tags}
+            />
+          ))
       }
     </ul>
   </section>
