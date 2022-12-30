@@ -1,4 +1,5 @@
 ---
+import { Image } from "@astrojs/image/components";
 import dayjs from "dayjs";
 
 interface Props {
@@ -18,8 +19,10 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
   class="rounded-lg border-2 border-light-blue-vivid-500/0 p-2 transition duration-200 ease-linear hover:-translate-y-4 hover:border-light-blue-vivid-500/100"
 >
   <a href={href}>
-    <img
+    <Image
       class="h-52 w-full overflow-hidden rounded-lg object-cover"
+      height={208}
+      width={370}
       src={image}
       alt={title}
     />

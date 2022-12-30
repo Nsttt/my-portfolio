@@ -1,3 +1,4 @@
+import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import type { AstroUserConfig } from "astro";
@@ -15,6 +16,7 @@ const config: AstroUserConfig = {
       },
     }),
     sitemap(),
+    image({ serviceEntryPoint: "@astrojs/image/sharp" }),
   ],
   vite: {
     plugins: [],
