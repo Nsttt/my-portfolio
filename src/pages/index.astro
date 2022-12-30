@@ -1,4 +1,6 @@
 ---
+import { Image } from "@astrojs/image/components";
+
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../types/post.domain";
@@ -12,9 +14,12 @@ const projects = await Astro.glob<ProjectFrontmatter>(
 
 <BaseLayout>
   <section class="mt-40 flex flex-row">
-    <img
+    <Image
       class="inline-block h-32 w-32 rounded-full"
+      width={256}
+      height={256}
       src="/images/profile.webp"
+      alt="Profile picture"
     />
     <div class="ml-4 w-full text-xl leading-loose">
       <h1 class="mb-10 text-2xl">Hi 👋, I'm Néstor from Spain</h1>
@@ -54,7 +59,6 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       >
     </div>
     <ul
-      role="list"
       class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
     >
       {
@@ -65,14 +69,16 @@ const projects = await Astro.glob<ProjectFrontmatter>(
           )
           .slice(0, 6)
           .map((post) => (
-            <Card
-              href={`/blog/${post.frontmatter.slug}`}
-              title={post.frontmatter.title}
-              image={post.frontmatter.image}
-              date={post.frontmatter.date}
-              expectedReadTime={post.frontmatter.expectedReadTime}
-              tags={post.frontmatter.tags}
-            />
+            <li>
+              <Card
+                href={`/blog/${post.frontmatter.slug}`}
+                title={post.frontmatter.title}
+                image={post.frontmatter.image}
+                date={post.frontmatter.date}
+                expectedReadTime={post.frontmatter.expectedReadTime}
+                tags={post.frontmatter.tags}
+              />
+            </li>
           ))
       }
     </ul>
@@ -89,7 +95,6 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       >
     </div>
     <ul
-      role="list"
       class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
     >
       {
@@ -100,13 +105,15 @@ const projects = await Astro.glob<ProjectFrontmatter>(
           )
           .slice(0, 3)
           .map((project) => (
-            <Card
-              href={`/projects/${project.frontmatter.slug}`}
-              title={project.frontmatter.title}
-              image={project.frontmatter.image}
-              date={project.frontmatter.date}
-              tags={project.frontmatter.tags}
-            />
+            <li>
+              <Card
+                href={`/projects/${project.frontmatter.slug}`}
+                title={project.frontmatter.title}
+                image={project.frontmatter.image}
+                date={project.frontmatter.date}
+                tags={project.frontmatter.tags}
+              />
+            </li>
           ))
       }
     </ul>
