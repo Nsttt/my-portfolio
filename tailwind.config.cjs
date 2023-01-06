@@ -8,7 +8,7 @@ module.exports = {
   safelist: ["dark"],
   theme: {
     fontFamily: {
-      sans: ["Inter", ...fontFamily.sans],
+      sans: ["Satoshi", ...fontFamily.sans],
     },
     extend: {
       colors: {

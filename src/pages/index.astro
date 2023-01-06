@@ -1,6 +1,4 @@
 ---
-import { Image } from "@astrojs/image/components";
-
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../types/post.domain";
@@ -13,16 +11,9 @@ const projects = await Astro.glob<ProjectFrontmatter>(
 ---
 
 <BaseLayout>
-  <section class="mt-40 flex flex-row">
-    <Image
-      class="inline-block h-32 w-32 rounded-full"
-      width={256}
-      height={256}
-      src="/images/profile.webp"
-      alt="Profile picture"
-    />
-    <div class="ml-4 w-full text-xl leading-loose">
-      <h1 class="mb-10 text-2xl">Hi 👋, I'm Néstor from Spain</h1>
+  <section class="mt-20 flex">
+    <div class="w-full text-xl">
+      <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor from Spain</h1>
       <p class="my-3">
         I'm a software engineer with a lot of passion for Typescript and Rust.
       </p>
@@ -49,7 +40,7 @@ const projects = await Astro.glob<ProjectFrontmatter>(
   </section>
   <section>
     <div
-      class="mt-40 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+      class="mt-28 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
     >
       <h2 class="self-baseline text-4xl">Latest posts</h2>
       <a
