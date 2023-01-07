@@ -15,7 +15,7 @@ const posts = Object.values(
 export const get = () =>
   rss({
     title: "Néstor's Blog",
-    description: "A humble Astronaut’s guide to the stars",
+    description: "",
     site: import.meta.env.SITE,
     items: posts.map((post) => ({
       link: `blog/${post.frontmatter.slug}`,

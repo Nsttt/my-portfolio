@@ -81,3 +81,10 @@ const {
     html.classList.add("dark");
   }
 </script>
+<script>
+  import flamethrower from "flamethrower-router";
+  export const router = flamethrower({
+    pageTransitions: true,
+    prefetch: "visible",
+  });
+</script>
