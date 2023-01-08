@@ -1,0 +1,44 @@
+---
+import dayjs from "dayjs";
+
+import BaseLayout from "./baseLayout.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    date: string;
+    expectedReadTime: number;
+    image: string;
+    tags: string[];
+  };
+}
+
+const {
+  content: { title, description, date, expectedReadTime, image, tags },
+} = Astro.props;
+
+const formatedDate = dayjs(date).format("MMMM DD, YYYY");
+---
+
+<BaseLayout title={title} description={description} ogImage={image}>
+  <article
+    class="prose prose-slate mt-20 max-w-none prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline dark:prose-invert lg:prose-xl"
+  >
+    <h1>{title}</h1>
+    <div>
+      <time>{formatedDate}</time>
+      •
+      <span>
+        {tags.join(", ")}
+      </span>
+      •
+      <span>
+        {"☕".repeat(expectedReadTime)}
+        {expectedReadTime.toString()} min read
+      </span>
+    </div>
+    <!-- <img class="w-full object-cover shadow-lg" src={image} alt={title} /> -->
+    <slot />
+  </article>
+</BaseLayout>

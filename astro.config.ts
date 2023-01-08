@@ -1,11 +1,11 @@
 import image from "@astrojs/image";
+import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
   markdown: {
@@ -26,6 +26,7 @@ const config: AstroUserConfig = {
     }),
     sitemap(),
     prefetch(),
+    mdx(),
   ],
 };
 
