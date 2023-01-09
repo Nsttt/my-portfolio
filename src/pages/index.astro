@@ -5,12 +5,14 @@ import type { PostFrontmatter } from "../types/post.domain";
 import type { ProjectFrontmatter } from "../types/project.domain";
 
 const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
-  (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
 );
 const projects = (
   await Astro.glob<ProjectFrontmatter>("./projects/*.{md,mdx}")
 ).sort(
-  (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
 );
 ---
 
@@ -59,8 +61,8 @@ const projects = (
               href={post.url}
               title={post.frontmatter.title}
               image={post.frontmatter.image}
-              date={post.frontmatter.date}
-              expectedReadTime={post.frontmatter.expectedReadTime}
+              date={post.frontmatter.pubDate}
+              expectedReadTime={post.frontmatter.readingTime}
             />
           </li>
         ))
@@ -88,7 +90,8 @@ const projects = (
               href={project.url}
               title={project.frontmatter.title}
               image={project.frontmatter.image}
-              date={project.frontmatter.date}
+              date={project.frontmatter.pubDate}
+              expectedReadTime={project.frontmatter.readingTime}
             />
           </li>
         ))

@@ -6,10 +6,14 @@ import tailwind from "@astrojs/tailwind";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+
+import { remarkReadingTime } from "./src/utils/getReadingTime";
+
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
   markdown: {
     extendDefaultPlugins: true,
+    remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypeAutolinkHeadings],
     shikiConfig: {
       theme: "vitesse-dark",

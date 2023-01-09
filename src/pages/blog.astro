@@ -4,7 +4,8 @@ import BaseLayout from "../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../types/post.domain";
 
 const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
-  (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
 );
 ---
 
@@ -20,8 +21,8 @@ const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
           href={post.url}
           title={post.frontmatter.title}
           image={post.frontmatter.image}
-          date={post.frontmatter.date}
-          expectedReadTime={post.frontmatter.expectedReadTime}
+          date={post.frontmatter.pubDate}
+          expectedReadTime={post.frontmatter.readingTime}
         />
       ))
     }

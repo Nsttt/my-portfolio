@@ -7,18 +7,19 @@ export interface Props {
   content: {
     title: string;
     description: string;
-    date: string;
+    pubDate: string;
     image: string;
+    readingTime: string;
     source: string;
     tags: string[];
   };
 }
 
 const {
-  content: { title, description, date, image, source, tags },
+  content: { title, description, pubDate, readingTime, image, source },
 } = Astro.props;
 
-const formatedDate = dayjs(date).format("MMMM DD, YYYY");
+const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 ---
 
 <BaseLayout title={title} description={description} ogImage={image}>
@@ -31,7 +32,8 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
         <time>{formatedDate}</time>
         •
         <span>
-          {tags.join(", ")}
+          {"☕".repeat(parseInt(readingTime))}
+          {readingTime}
         </span>
       </span>
     </div>

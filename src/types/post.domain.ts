@@ -4,8 +4,8 @@ export interface PostFrontmatter {
     slug: string;
     title: string;
     image: string;
-    date: string;
-    expectedReadTime: number;
+    pubDate: string;
+    readingTime: string;
     tags: string[];
   };
 }

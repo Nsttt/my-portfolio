@@ -6,7 +6,8 @@ import type { ProjectFrontmatter } from "../types/project.domain";
 const projects = (
   await Astro.glob<ProjectFrontmatter>("./projects/*.{md,mdx}")
 ).sort(
-  (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
 );
 ---
 
@@ -22,7 +23,8 @@ const projects = (
           href={project.url}
           title={project.frontmatter.title}
           image={project.frontmatter.image}
-          date={project.frontmatter.date}
+          date={project.frontmatter.pubDate}
+          expectedReadTime={project.frontmatter.readingTime}
         />
       ))
     }

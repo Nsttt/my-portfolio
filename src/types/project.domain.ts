@@ -5,7 +5,8 @@ export interface ProjectFrontmatter {
     slug: string;
     image: string;
     description: string;
-    date: string;
+    pubDate: string;
+    readingTime: string;
     link: string;
     source: string;
     tags: string[];
