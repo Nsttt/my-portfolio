@@ -1,10 +1,14 @@
 export interface ProjectFrontmatter {
-  slug: string;
-  title: string;
-  image: string;
-  description: string;
-  date: string;
-  link: string;
-  source: string;
-  tags: string[];
+  url: string;
+  frontmatter: {
+    title: string;
+    slug: string;
+    image: string;
+    description: string;
+    pubDate: string;
+    readingTime: string;
+    link: string;
+    source: string;
+    tags: string[];
+  };
 }

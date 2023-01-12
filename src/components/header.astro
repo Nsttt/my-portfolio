@@ -1,13 +1,22 @@
 ---
-import ToggleButton from "./toggleButton.astro";
+import { Image } from "@astrojs/image/components";
+
+import ToggleButton from "./toggleButton";
 ---
 
 <header class="flex flex-col">
   <div class="flex justify-between">
-    <a class="flex" href="/">
-      <h1 class="text-4xl">Néstor's Blog</h1>
+    <a class="flex gap-3" href="/">
+      <Image
+        class="h-12 w-12 rounded-full"
+        width={48}
+        height={48}
+        src="/images/profile.webp"
+        alt="Profile picture"
+      />
+      <h1 class="self-center text-3xl">Néstor's Blog</h1>
     </a>
-    <ToggleButton />
+    <ToggleButton client:load />
   </div>
   <div
     class="mt-4 flex justify-between border-b-[1px] border-gray-500 pb-4 text-lg dark:text-slate-400"

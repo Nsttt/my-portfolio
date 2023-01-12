@@ -1,30 +1,27 @@
 ---
-import { Image } from "@astrojs/image/components";
-
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 import type { PostFrontmatter } from "../types/post.domain";
 import type { ProjectFrontmatter } from "../types/project.domain";
 
-const posts = await Astro.glob<PostFrontmatter>("../content/posts/*.md");
-const projects = await Astro.glob<ProjectFrontmatter>(
-  "../content/projects/*.md",
+const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
+);
+const projects = (
+  await Astro.glob<ProjectFrontmatter>("./projects/*.{md,mdx}")
+).sort(
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
 );
 ---
 
 <BaseLayout>
-  <section class="mt-40 flex flex-row">
-    <Image
-      class="inline-block h-32 w-32 rounded-full"
-      width={256}
-      height={256}
-      src="/images/profile.webp"
-      alt="Profile picture"
-    />
-    <div class="ml-4 w-full text-xl leading-loose">
-      <h1 class="mb-10 text-2xl">Hi 👋, I'm Néstor from Spain</h1>
+  <section class="mt-20 flex">
+    <div class="w-full text-xl">
+      <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor from Spain</h1>
       <p class="my-3">
-        I'm a software engineer with a lot of passion for Typescript and Rust.
+        I'm a software engineer with passion for Typescript and Rust.
       </p>
       <p class="my-3">
         I currently work at <a
@@ -41,15 +38,11 @@ const projects = await Astro.glob<ProjectFrontmatter>(
           target="_blank">tRPC</a
         >.
       </p>
-      <p class="my-3">
-        Welcome to my blog where I write all my thoughts about software
-        development and show the projects I've worked on
-      </p>
     </div>
   </section>
   <section>
     <div
-      class="mt-40 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+      class="mt-28 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
     >
       <h2 class="self-baseline text-4xl">Latest posts</h2>
       <a
@@ -62,24 +55,17 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
     >
       {
-        posts
-          .sort(
-            (a, b) =>
-              Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
-          )
-          .slice(0, 6)
-          .map((post) => (
-            <li>
-              <Card
-                href={`/blog/${post.frontmatter.slug}`}
-                title={post.frontmatter.title}
-                image={post.frontmatter.image}
-                date={post.frontmatter.date}
-                expectedReadTime={post.frontmatter.expectedReadTime}
-                tags={post.frontmatter.tags}
-              />
-            </li>
-          ))
+        posts.slice(0, 6).map((post) => (
+          <li>
+            <Card
+              href={post.url}
+              title={post.frontmatter.title}
+              image={post.frontmatter.image}
+              date={post.frontmatter.pubDate}
+              expectedReadTime={post.frontmatter.readingTime}
+            />
+          </li>
+        ))
       }
     </ul>
   </section>
@@ -98,23 +84,17 @@ const projects = await Astro.glob<ProjectFrontmatter>(
       class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
     >
       {
-        projects
-          .sort(
-            (a, b) =>
-              Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date),
-          )
-          .slice(0, 3)
-          .map((project) => (
-            <li>
-              <Card
-                href={`/projects/${project.frontmatter.slug}`}
-                title={project.frontmatter.title}
-                image={project.frontmatter.image}
-                date={project.frontmatter.date}
-                tags={project.frontmatter.tags}
-              />
-            </li>
-          ))
+        projects.slice(0, 3).map((project) => (
+          <li>
+            <Card
+              href={project.url}
+              title={project.frontmatter.title}
+              image={project.frontmatter.image}
+              date={project.frontmatter.pubDate}
+              expectedReadTime={project.frontmatter.readingTime}
+            />
+          </li>
+        ))
       }
     </ul>
   </section>
