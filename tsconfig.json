@@ -26,7 +26,8 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false
+    "allowUnusedLabels": false,
+    "jsxImportSource": "solid-js"
   },
   "exclude": ["node_modules"],
   "include": [

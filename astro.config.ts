@@ -2,6 +2,7 @@ import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
@@ -31,7 +32,9 @@ const config: AstroUserConfig = {
     sitemap(),
     prefetch(),
     mdx(),
+    solidJs(),
   ],
 };
 
+// https://astro.build/config
 export default defineConfig(config);
