@@ -56,31 +56,6 @@ const {
 /> -->
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-<!-- Dark mode picker logic -->
-<script is:inline>
-  const html = document.documentElement;
-  if (window.location.pathname === "/") {
-    html.classList.add("dark");
-  }
-
-  const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  })();
-
-  if (theme === "light") {
-    html.classList.remove("dark");
-    html.classList.add("light");
-  } else {
-    html.classList.remove("light");
-    html.classList.add("dark");
-  }
-</script>
 <script>
   import flamethrower from "flamethrower-router";
   export const router = flamethrower({

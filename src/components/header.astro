@@ -1,7 +1,7 @@
 ---
 import { Image } from "@astrojs/image/components";
 
-import ToggleButton from "./toggleButton.astro";
+import ToggleButton from "./toggleButton";
 ---
 
 <header class="flex flex-col">
@@ -16,7 +16,7 @@ import ToggleButton from "./toggleButton.astro";
       />
       <h1 class="self-center text-3xl">Néstor's Blog</h1>
     </a>
-    <ToggleButton />
+    <ToggleButton client:load />
   </div>
   <div
     class="mt-4 flex justify-between border-b-[1px] border-gray-500 pb-4 text-lg dark:text-slate-400"
