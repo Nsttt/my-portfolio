@@ -54,16 +54,14 @@ const projects = (
         >See all posts</a
       >
     </div>
-    <ul
-      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
-    >
+    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
       {
-        posts.slice(0, 6).map((post) => (
+        posts.slice(0, 3).map((post) => (
           <li>
             <Card
               href={post.url}
               title={post.frontmatter.title}
-              image={post.frontmatter.image}
+              description={post.frontmatter.description}
               date={post.frontmatter.pubDate}
               expectedReadTime={post.frontmatter.readingTime}
             />
@@ -83,16 +81,14 @@ const projects = (
         >See all projects</a
       >
     </div>
-    <ul
-      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
-    >
+    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
       {
         projects.slice(0, 3).map((project) => (
           <li>
             <Card
               href={project.url}
               title={project.frontmatter.title}
-              image={project.frontmatter.image}
+              description={project.frontmatter.description}
               date={project.frontmatter.pubDate}
               expectedReadTime={project.frontmatter.readingTime}
             />
