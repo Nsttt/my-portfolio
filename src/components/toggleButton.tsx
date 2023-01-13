@@ -18,7 +18,11 @@ export default function ToggleButton() {
   });
 
   return (
-    <button class="w-fit gap-3" onClick={() => handleClick()}>
+    <button
+      class="w-fit gap-3"
+      aria-label="Toggle theme"
+      onClick={() => handleClick()}
+    >
       {theme() === "dark" ? (
         <label class="cursor-pointer text-light-blue-vivid-400 dark:text-slate-50">
           <svg
