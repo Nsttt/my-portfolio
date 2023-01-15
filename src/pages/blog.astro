@@ -20,7 +20,7 @@ const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
         <Card
           href={post.url}
           title={post.frontmatter.title}
-          image={post.frontmatter.image}
+          description={post.frontmatter.description}
           date={post.frontmatter.pubDate}
           expectedReadTime={post.frontmatter.readingTime}
         />
