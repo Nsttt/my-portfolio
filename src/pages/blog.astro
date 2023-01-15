@@ -13,7 +13,7 @@ const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
   <h1 class="mt-20 text-6xl font-bold">Blog</h1>
   <ul
     role="list"
-    class="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8"
+    class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
   >
     {
       posts.map((post) => (
