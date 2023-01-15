@@ -3,6 +3,7 @@ export interface PostFrontmatter {
   frontmatter: {
     slug: string;
     title: string;
+    description: string;
     image: string;
     pubDate: string;
     readingTime: string;

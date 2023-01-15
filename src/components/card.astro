@@ -1,37 +1,32 @@
 ---
-import { Image } from "@astrojs/image/components";
 import dayjs from "dayjs";
 
 interface Props {
   href: string;
   title: string;
-  image: string;
+  description: string;
   date: string;
   expectedReadTime: string;
 }
 
-const { href, title, image, date, expectedReadTime } = Astro.props;
+const { href, title, description, date, expectedReadTime } = Astro.props;
 const formatedDate = dayjs(date).format("MMMM DD, YYYY");
 ---
 
 <div
-  class="rounded-lg border-2 border-light-blue-vivid-500/0 p-2 transition duration-200 ease-linear hover:-translate-y-4 hover:border-light-blue-vivid-500/100"
+  class="rounded-lg p-2 transition duration-200 ease-linear hover:-translate-y-2 hover:bg-light-blue-vivid-500/20"
 >
   <a href={href}>
-    <Image
-      class="h-52 w-full overflow-hidden rounded-lg object-cover"
-      height={208}
-      width={370}
-      src={image}
-      alt={title}
-    />
-    <div class="py-5">
-      <span class="text-slate-400"
-        >{`${formatedDate} • ${expectedReadTime}`}
-      </span>
-      <h3 class="text-2xl font-bold">
+    <div class="flex flex-col gap-y-2">
+      <h3 class="text-2xl font-bold text-light-blue-vivid-400">
         {title}
       </h3>
+      <p class="text-slate-200">{description}</p>
+      <span class="flex gap-x-4 text-slate-400">
+        <span>{formatedDate}</span>
+        <span>•</span>
+        <span>{expectedReadTime}</span>
+      </span>
     </div>
   </a>
 </div>
