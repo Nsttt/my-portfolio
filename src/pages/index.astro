@@ -48,17 +48,20 @@ const projects = await getCollection("projects");
     </div>
     <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
       {
-        posts.slice(0, 3).map((post) => (
-          <li>
-            <Card
-              href={`/blog/${post.slug}`}
-              title={post.data.title}
-              description={post.data.description}
-              date={post.data.pubDate}
-              expectedReadTime={post.data.expectedReadTime}
-            />
-          </li>
-        ))
+        posts
+          .filter((post) => post.data.draft !== true)
+          .slice(0, 3)
+          .map((post) => (
+            <li>
+              <Card
+                href={`/blog/${post.slug}`}
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.pubDate}
+                expectedReadTime={post.data.expectedReadTime}
+              />
+            </li>
+          ))
       }
     </ul>
   </section>
