@@ -21,6 +21,7 @@ const postCollection = defineCollection({
     pubDate: z.string(),
     expectedReadTime: z.number(),
     tags: z.array(z.string()),
+    draft: z.boolean(),
   }),
 });
 
