@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description: string;
   date: string;
-  expectedReadTime: string;
+  expectedReadTime: number;
 }
 
 const { href, title, description, date, expectedReadTime } = Astro.props;
@@ -21,11 +21,22 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
       <h3 class="text-2xl font-bold text-light-blue-vivid-400">
         {title}
       </h3>
-      <p class="dark:text-slate-200 text-black">{description}</p>
+      <p class="text-black dark:text-slate-200">{description}</p>
       <span class="flex gap-x-4 text-slate-400">
         <span>{formatedDate}</span>
-        <span>•</span>
-        <span>{expectedReadTime}</span>
+        {
+          expectedReadTime > 0 && (
+            <>
+              <>
+                <span>•</span>
+                <span>
+                  {"☕".repeat(expectedReadTime)}
+                  {`${expectedReadTime.toString()} min read`}
+                </span>
+              </>
+            </>
+          )
+        }
       </span>
     </div>
   </a>
