@@ -1,0 +1,61 @@
+---
+title: "Embracing the New World Order of Server Components"
+description: "Exploring the evolving landscape of web development with RSCs and Astro components."
+image: ""
+pubDate: "March 25, 2023"
+expectedReadTime: 8
+tags: ["meta, react, astro"]
+draft: true
+---
+
+**Web development** is a rapidly changing field, with new technologies and frameworks being introduced all the time. It can be challenging to keep up with the latest trends and best practices, but attending events like the recent discussion with [Dan Abramov](https://twitter.com/dan_abramov), [Ryan Carniato](https://twitter.com/RyanCarniato), [Sophie Alpert](https://twitter.com/sophiebits), and others can provide valuable insights into the latest developments.
+
+As someone who contributes to **OSS**, I found the discussion to be particularly interesting and informative. In fact, I have compiled a list of my top takeaways from the event.
+
+From the power of stateless React components to competing patterns and the future of web development, there were many fascinating topics covered. The React team's delicate balance was also discussed, as well as the challenges of teaching server components and the future of them.
+
+The discussion was a pleasure to be a part of, and the collaboration between Dan and Ryan was inspiring. Regardless of whether you're a React user or not, the developments in the world of **React Server Components** and **Astro components** are worth taking note of, as they will undoubtedly shape the future of web development.
+
+## The Power of Stateless React Components
+
+**Stateless React components** can be used in server components, running on the server, or imported in client components to run on the client. This powerful authoring experience, dubbed "_knitting_" by Dan, enables seamless code movement across boundaries. Both RSCs and Astro components share a _server-only mental model_, allowing the use of "top-level await" for data fetching on the server. Data fetched can then be serialized directly to client components as props, making data fetching a part of the component tree.
+
+## Competing Patterns and the Future of Web Development
+
+Although RSCs are becoming increasingly popular, the **loader/action pattern**, championed by Remix Run, SvelteKit, and SolidStart, still has a prominent place in web development. This is because the loader/action pattern has been around for longer and has a proven track record of success.
+
+It is worth noting that just as JSX couldn't completely replace other templating languages, RSCs will not fully replace the loader/action pattern. While RSCs offer many benefits such as seamless code movement across boundaries and support for top-level await for data fetching on the server, the loader/action pattern allows for more control over data fetching and caching.
+
+## React Server Components and the RSC Protocol
+
+The **RSC protocol** allows the server to expose a special endpoint that clients can use to request a part of the tree. The server then generates, serializes, and sends the requested part back to the client. This process enables a **SPA-like routing experience** while still maintaining an **MPA-like architecture**.
+
+In other words, you can have a fast, single-page application that feels like a traditional multi-page application. This is useful when you want to create a seamless user experience that doesn't require page reloads or page transitions.
+
+## The React Team's Delicate Balance
+
+The React team, like any team in charge of a popular software library, must carefully balance their desire to excite their audience with new features with the need to deliver a reliable and consistent product.
+
+On one hand, early promotion of new features can generate buzz and excitement, and can help the team get feedback and improve the product. However, the team must also take into account the risk of changing the implementation later, which can cause confusion and frustration among users who were expecting a different behavior.
+
+On the other hand, waiting for a more confident delivery can help ensure that the product is stable and consistent. However, this can also lead to a lack of excitement and engagement from the community, which can make it harder to get feedback and improve the product.
+
+The React team must carefully weigh these considerations and find a balance that works for them and their users. This delicate balance requires skill, experience, and a deep understanding of both the technical and social aspects of software development.
+
+## Teaching Server Components
+
+The most natural approach to teaching server components is to introduce them first, just as Astro components are taught before client-side interactivity. By starting with the basics of server components, students can gain a solid understanding of the underlying principles and architecture before diving into more complex topics.
+
+There's an alternate history where React started as a **server-side component framework** and only later added client-side functionality. In this alternate scenario, developers would have a more balanced understanding of both server-side and client-side components from the beginning, making it easier to grasp the full potential of the React ecosystem.
+
+## React Ecosystem and Suspense
+
+React's implementation of **Suspense** and related features (transition, `use`) came later in the development process. This was due to the fact that the React team was focused on other areas of the library during the early stages of development. While this approach allowed the team to build a strong foundation for React, it also meant that routers and data fetching solutions weren't built on top of these primitives. This left the ecosystem in a tricky spot compared to Solid, a similar library, where everyone built on top of Suspense from the beginning. Therefore, React developers had to find workarounds and alternative solutions to achieve similar functionality.
+
+## The Future of React Server Components
+
+React Server Components are a hot topic among developers at the moment. Although there are some challenges that the React team is currently facing, such as the potential for slow server rendering times and the need for frameworks to implement the new features, there is a lot of excitement around what this technology can do for the future of web development.
+
+While there is still some uncertainty around how widely these new features will be adopted, the React team remains optimistic. As more developers begin to experiment with them and explore their capabilities, it is likely that we will see more widespread adoption in the community. Overall, the future of React Server Components looks bright, and we can't wait to see what developers will create with this exciting new technology.
+
+> This post has been heavily inspired by [Dan Jutan](https://twitter.com/jutanium) thread of the event.
