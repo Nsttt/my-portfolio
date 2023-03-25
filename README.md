@@ -1,8 +1,4 @@
-<p align="center">
-  <a href="https://nstlopez.com">
-    <img src="./public/android-chrome-192x192.png"  alt="Logo" />
-  </a>
-</p>
+
 <h1 align="center">Personal Portfolio / Blog</h1>
 <p align="center"><a href="https://nstlopez.com">Check it out !</a></p>
 <div align="center">
@@ -19,27 +15,17 @@ Follow the steps below:
 
 Install all required dependencies with the following command:
 
-> We use `yarn` as our package manager.
+> We use `pnpm` as our package manager.
 
 ```bash
-yarn install
+pnpm install
 ```
 
 Afterwards you can run the following command to start the development server:
 
 ```bash
-yarn dev
+pnpm dev
 ```
-
-## Contributions
-
-This project is open to contributions, but I recommend creating an issue or replying in a comment to let me know what you are working on first that way we don't overwrite each other.
-
-Please read the [CONTRIBUTING](./CONTRIBUTING.md) file for details on this project.
-
-## License
-
-See the [LICENSE](./LICENSE) file for licensing information.
 
 ## Contact
 
