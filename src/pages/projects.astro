@@ -1,14 +1,10 @@
 ---
+import { getCollection } from "astro:content";
+
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
-import type { ProjectFrontmatter } from "../types/project.domain";
 
-const projects = (
-  await Astro.glob<ProjectFrontmatter>("./projects/*.{md,mdx}")
-).sort(
-  (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
-);
+const projects = await getCollection("projects");
 ---
 
 <BaseLayout title="Projects" description="All my projects.">
@@ -18,11 +14,11 @@ const projects = (
       projects.map((project) => (
         <li>
           <Card
-            href={project.url}
-            title={project.frontmatter.title}
-            description={project.frontmatter.description}
-            date={project.frontmatter.pubDate}
-            expectedReadTime={project.frontmatter.readingTime}
+            href={`/projects/${project.slug}`}
+            title={project.data.title}
+            description={project.data.description}
+            date={project.data.pubDate}
+            expectedReadTime={0}
           />
         </li>
       ))

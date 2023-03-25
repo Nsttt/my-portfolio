@@ -4,19 +4,18 @@ import dayjs from "dayjs";
 import BaseLayout from "./baseLayout.astro";
 
 export interface Props {
-  content: {
+  frontmatter: {
     title: string;
     description: string;
     pubDate: string;
     image: string;
-    readingTime: string;
     source: string;
     tags: string[];
   };
 }
 
 const {
-  content: { title, description, pubDate, readingTime, image, source },
+  frontmatter: { title, description, pubDate, image, source },
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
@@ -24,17 +23,12 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 
 <BaseLayout title={title} description={description} ogImage={image}>
   <article
-    class="prose prose-slate mt-20 max-w-none prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline dark:prose-invert lg:prose-xl"
+    class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
     <h1>{title}</h1>
     <div class="flex justify-between">
       <span>
         <time>{formatedDate}</time>
-        •
-        <span>
-          {"☕".repeat(parseInt(readingTime))}
-          {readingTime}
-        </span>
       </span>
     </div>
     <img class="w-full object-cover shadow-lg" src={image} alt={title} />

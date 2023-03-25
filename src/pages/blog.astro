@@ -1,29 +1,29 @@
 ---
+import { getCollection } from "astro:content";
+
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
-import type { PostFrontmatter } from "../types/post.domain";
 
-const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
-  (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
-);
+const posts = await getCollection("posts");
 ---
 
 <BaseLayout title="Blog" description="All my blog posts.">
   <h1 class="mt-20 text-6xl font-bold">Blog</h1>
   <ul class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
     {
-      posts.map((post) => (
-        <li>
-          <Card
-            href={post.url}
-            title={post.frontmatter.title}
-            description={post.frontmatter.description}
-            date={post.frontmatter.pubDate}
-            expectedReadTime={post.frontmatter.readingTime}
-          />
-        </li>
-      ))
+      posts
+        .filter((post) => post.data.draft !== true)
+        .map((post) => (
+          <li>
+            <Card
+              href={`/blog/${post.slug}`}
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.pubDate}
+              expectedReadTime={post.data.expectedReadTime}
+            />
+          </li>
+        ))
     }
   </ul>
 </BaseLayout>
