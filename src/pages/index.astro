@@ -1,19 +1,11 @@
 ---
+import { getCollection } from "astro:content";
+
 import Card from "../components/card.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
-import type { PostFrontmatter } from "../types/post.domain";
-import type { ProjectFrontmatter } from "../types/project.domain";
 
-const posts = (await Astro.glob<PostFrontmatter>("./blog/*.{md,mdx}")).sort(
-  (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
-);
-const projects = (
-  await Astro.glob<ProjectFrontmatter>("./projects/*.{md,mdx}")
-).sort(
-  (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate),
-);
+const posts = await getCollection("posts");
+const projects = await getCollection("projects");
 ---
 
 <BaseLayout
@@ -59,11 +51,11 @@ const projects = (
         posts.slice(0, 3).map((post) => (
           <li>
             <Card
-              href={post.url}
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              date={post.frontmatter.pubDate}
-              expectedReadTime={post.frontmatter.readingTime}
+              href={`/blog/${post.slug}`}
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.pubDate}
+              expectedReadTime={post.data.expectedReadTime}
             />
           </li>
         ))
@@ -86,11 +78,11 @@ const projects = (
         projects.slice(0, 3).map((project) => (
           <li>
             <Card
-              href={project.url}
-              title={project.frontmatter.title}
-              description={project.frontmatter.description}
-              date={project.frontmatter.pubDate}
-              expectedReadTime={project.frontmatter.readingTime}
+              href={`/projects/${project.slug}`}
+              title={project.data.title}
+              description={project.data.description}
+              date={project.data.pubDate}
+              expectedReadTime={0}
             />
           </li>
         ))
