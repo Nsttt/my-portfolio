@@ -30,7 +30,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
       <time>{formatedDate}</time>
       •
       <span>
-        {"☕".repeat(expectedReadTime)}
+        {"☕".repeat(expectedReadTime).substring(0, 5)}
         {`${expectedReadTime.toString()} min read`}
       </span>
     </span>
