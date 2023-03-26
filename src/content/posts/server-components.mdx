@@ -10,17 +10,21 @@ draft: true
 
 **Web development** is a rapidly changing field, with new technologies and frameworks being introduced all the time. It can be challenging to keep up with the latest trends and best practices, but attending events like the recent discussion with [Dan Abramov](https://twitter.com/dan_abramov), [Ryan Carniato](https://twitter.com/RyanCarniato), [Sophie Alpert](https://twitter.com/sophiebits), and others can provide valuable insights into the latest developments.
 
-As someone who contributes to **OSS**, I found the discussion to be particularly interesting and informative. In fact, I have compiled a list of my top takeaways from the event.
+As someone who contributes to **OSS**, I found the discussion to be particularly interesting and informative.
 
-From the power of stateless React components to competing patterns and the future of web development, there were many fascinating topics covered. The React team's delicate balance was also discussed, as well as the challenges of teaching server components and the future of them.
+From the power of stateless React components to competing patterns and the future of web development, there were many fascinating topics covered. The React team's delicate balance was also discussed as well as the challenges of teaching server components and the future of them.
 
 The discussion was a pleasure to be a part of, and the collaboration between Dan and Ryan was inspiring. Regardless of whether you're a React user or not, the developments in the world of **React Server Components** and **Astro components** are worth taking note of, as they will undoubtedly shape the future of web development.
+
+In fact, I have compiled a list of my top takeaways from the event.
 
 ## The Power of Stateless React Components
 
 Stateless components are those that do not manage their own state and instead rely on receiving data through props from parent components. These components can be utilized in server components, running on the server, or imported into client components to run on the client-side. This versatile authoring experience, referred to as "knitting" by Dan, allows for smooth code movement across different boundaries.
 
-Both RSCs and Astro components adopt a server-only mental model, which enables the usage of "top-level await" for data fetching on the server side. The fetched data can then be directly serialized and passed to client components as props, integrating data fetching within the component tree itself.
+Both RSCs and Astro components adopt a server-only mental model, which enables the usage of "top-level await" for data fetching on the server side with Astro, and an async function as a React Server Component.The fetched data can be utilized in two different ways, depending on the situation. First, it can be directly serialized and passed to client components as props, integrating data fetching within the component tree itself. This allows for seamless data management within your application.
+
+Alternatively, you can also choose to render a server component directly, which will send HTML to the browser with the data already incorporated. This method is particularly useful when you want to optimize performance and reduce the amount of JavaScript sent to the client, as the server takes care of rendering the component with the fetched data.
 
 To clarify, a stateless component:
 
@@ -32,7 +36,9 @@ To clarify, a stateless component:
 
 Although RSCs are becoming increasingly popular, the **loader/action pattern**, championed by **[Remix Run](https://remix.run/)**, **[SvelteKit](https://kit.svelte.dev/)**, and [**SolidStart**](https://start.solidjs.com/), still has a prominent place in web development. This is because the loader/action pattern has been around for longer and has a proven track record of success.
 
-It is worth noting that just as JSX couldn't completely replace other templating languages, RSCs will not fully replace the loader/action pattern. While RSCs offer many benefits such as seamless code movement across boundaries and support for top-level await for data fetching on the server, the loader/action pattern allows for more control over data fetching and caching.
+It is worth noting that just as JSX couldn't completely replace other templating languages, RSCs will not fully replace the loader/action pattern. While RSCs offer many benefits such as seamless code movement across boundaries and support for top-level await for data fetching on the server, the loader/action pattern provides developers with greater control over data fetching and caching in their applications.
+
+Loaders are responsible for fetching data and preparing it for the components, while actions handle client-side logic, such as user interactions and updating data. This separation of concerns enables more precise control over how data is fetched, manipulated, and cached, allowing for better optimization and customization.
 
 For a deeper understanding of the loader/action pattern, you can refer to the following resources:
 
@@ -60,11 +66,11 @@ The React team must carefully weigh these considerations and find a balance that
 
 The most natural approach to teaching server components is to introduce them first, just as Astro components are taught before client-side interactivity. By starting with the basics of server components, students can gain a solid understanding of the underlying principles and architecture before diving into more complex topics.
 
-There's an alternate history where React started as a **server-side component framework** and only later added client-side functionality. In this alternate scenario, developers would have a more balanced understanding of both server-side and client-side components from the beginning, making it easier to grasp the full potential of the React ecosystem.
+There's an alternate history where React started as a **server-side component framework** and only later added client-side functionality. In this alternate scenario, developers would have a more balanced understanding of both server-side and client-side components from the beginning, making it easier to grasp the full potential of the React ecosystem. But unfortunately that isn't the case.
 
 ## React Ecosystem and Suspense
 
-React's implementation of Suspense and related features (transition, use) came later in the development process, which led to some popular libraries not initially adopting Suspense. This happened because the React team was focused on other areas of the library during the early stages of development. While this approach allowed the team to build a strong foundation for React, it also meant that routers and data fetching solutions weren't built on top of these primitives.
+React's implementation of Suspense and related features ([transition](https://17.reactjs.org/docs/concurrent-mode-reference.html#usetransition), [use](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md?ref=blixt-dev#example-use-in-client-components-and-hooks) came later in the development process, which led to some popular libraries not initially adopting Suspense. This happened because the React team was focused on other areas of the library during the early stages of development. While this approach allowed the team to build a strong foundation for React, it also meant that routers and data fetching solutions weren't built on top of these primitives.
 
 This left the ecosystem in a tricky spot compared to Solid, a similar library, where everyone built on top of Suspense from the beginning. Therefore, React developers had to find workarounds and alternative solutions to achieve similar functionality. Popular libraries that emerged as a result include **[React Query](https://react-query.tanstack.com/)**, which Suspense support is currently experimental, **[SWR](https://swr.vercel.app/)**, another library for data fetching and caching without Suspense, and **[Apollo Client](https://www.apollographql.com/docs/react/)**, a state management library for React applications using GraphQL that also has Suspense in an experimental _alpha_.
 
@@ -83,3 +89,4 @@ This post has been heavily inspired by [Dan Jutan](https://twitter.com/jutanium)
 Also huge thanks to the following people for proofreading the article and giving new ideas.
 
 - [Chris](https://www.c-ehrlich.dev/)
+- [Nexxel](https://www.nexxel.dev/)
