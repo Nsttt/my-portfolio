@@ -49,7 +49,12 @@ const projects = await getCollection("projects");
     <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
       {
         posts
-          .filter((post) => post.data.draft !== true)
+          .filter((post) => !post.data.draft)
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).valueOf() -
+              new Date(a.data.pubDate).valueOf(),
+          )
           .slice(0, 3)
           .map((post) => (
             <li>
@@ -78,17 +83,24 @@ const projects = await getCollection("projects");
     </div>
     <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
       {
-        projects.slice(0, 3).map((project) => (
-          <li>
-            <Card
-              href={`/projects/${project.slug}`}
-              title={project.data.title}
-              description={project.data.description}
-              date={project.data.pubDate}
-              expectedReadTime={0}
-            />
-          </li>
-        ))
+        projects
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).valueOf() -
+              new Date(a.data.pubDate).valueOf(),
+          )
+          .slice(0, 3)
+          .map((project) => (
+            <li>
+              <Card
+                href={`/projects/${project.slug}`}
+                title={project.data.title}
+                description={project.data.description}
+                date={project.data.pubDate}
+                expectedReadTime={0}
+              />
+            </li>
+          ))
       }
     </ul>
   </section>

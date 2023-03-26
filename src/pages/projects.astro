@@ -11,17 +11,23 @@ const projects = await getCollection("projects");
   <h1 class="mt-20 text-6xl font-bold">Projects</h1>
   <ul class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
     {
-      projects.map((project) => (
-        <li>
-          <Card
-            href={`/projects/${project.slug}`}
-            title={project.data.title}
-            description={project.data.description}
-            date={project.data.pubDate}
-            expectedReadTime={0}
-          />
-        </li>
-      ))
+      projects
+        .sort(
+          (a, b) =>
+            new Date(b.data.pubDate).valueOf() -
+            new Date(a.data.pubDate).valueOf(),
+        )
+        .map((project) => (
+          <li>
+            <Card
+              href={`/projects/${project.slug}`}
+              title={project.data.title}
+              description={project.data.description}
+              date={project.data.pubDate}
+              expectedReadTime={0}
+            />
+          </li>
+        ))
     }
   </ul>
 </BaseLayout>
