@@ -18,19 +18,33 @@ The discussion was a pleasure to be a part of, and the collaboration between Dan
 
 ## The Power of Stateless React Components
 
-**Stateless React components** can be used in server components, running on the server, or imported in client components to run on the client. This powerful authoring experience, dubbed "_knitting_" by Dan, enables seamless code movement across boundaries. Both RSCs and Astro components share a _server-only mental model_, allowing the use of "top-level await" for data fetching on the server. Data fetched can then be serialized directly to client components as props, making data fetching a part of the component tree.
+Stateless components are those that do not manage their own state and instead rely on receiving data through props from parent components. These components can be utilized in server components, running on the server, or imported into client components to run on the client-side. This versatile authoring experience, referred to as "knitting" by Dan, allows for smooth code movement across different boundaries.
+
+Both RSCs and Astro components adopt a server-only mental model, which enables the usage of "top-level await" for data fetching on the server side. The fetched data can then be directly serialized and passed to client components as props, integrating data fetching within the component tree itself.
+
+To clarify, a stateless component:
+
+1. Does not manage its own state.
+2. Relies on receiving data through props from parent components.
+3. Can be used in server components or imported into client components.
 
 ## Competing Patterns and the Future of Web Development
 
-Although RSCs are becoming increasingly popular, the **loader/action pattern**, championed by Remix Run, SvelteKit, and SolidStart, still has a prominent place in web development. This is because the loader/action pattern has been around for longer and has a proven track record of success.
+Although RSCs are becoming increasingly popular, the **loader/action pattern**, championed by **[Remix Run](https://remix.run/)**, **[SvelteKit](https://kit.svelte.dev/)**, and [**SolidStart**](https://start.solidjs.com/), still has a prominent place in web development. This is because the loader/action pattern has been around for longer and has a proven track record of success.
 
 It is worth noting that just as JSX couldn't completely replace other templating languages, RSCs will not fully replace the loader/action pattern. While RSCs offer many benefits such as seamless code movement across boundaries and support for top-level await for data fetching on the server, the loader/action pattern allows for more control over data fetching and caching.
 
+For a deeper understanding of the loader/action pattern, you can refer to the following resources:
+
+1. **[Remix Run Documentation](https://remix.run/docs/en/main/pages/philosophy#serverclient-model)**
+2. **[SvelteKit Load Function](https://kit.svelte.dev/docs/load) & [SvelteKit Actions](https://kit.svelte.dev/docs/form-actions)**
+3. **[Solid Start Data Fetching](https://start.solidjs.com/core-concepts/data-loading) & [Solid Start Actions](https://start.solidjs.com/core-concepts/actions)**
+
 ## React Server Components and the RSC Protocol
 
-The **RSC protocol** allows the server to expose a special endpoint that clients can use to request a part of the tree. The server then generates, serializes, and sends the requested part back to the client. This process enables a **SPA-like routing experience** while still maintaining an **MPA-like architecture**.
+The **RSC protocol** enables the server to expose a special endpoint that clients can use to request a part of the component tree. The server then generates, serializes, and sends the requested part back to the client. This process allows for a **SPA-like routing experience** within an **MPA-like architecture**.
 
-In other words, you can have a fast, single-page application that feels like a traditional multi-page application. This is useful when you want to create a seamless user experience that doesn't require page reloads or page transitions.
+In other words, you can create a fast MPA that feels like an SPA because you don't need to send a large amount of JavaScript code all the time, and you can also navigate without a full page reload. This approach combines the best of both worlds, offering the smooth navigation of an SPA while maintaining the performance and efficiency of an MPA.
 
 ## The React Team's Delicate Balance
 
@@ -50,7 +64,11 @@ There's an alternate history where React started as a **server-side component fr
 
 ## React Ecosystem and Suspense
 
-React's implementation of **Suspense** and related features (transition, `use`) came later in the development process. This was due to the fact that the React team was focused on other areas of the library during the early stages of development. While this approach allowed the team to build a strong foundation for React, it also meant that routers and data fetching solutions weren't built on top of these primitives. This left the ecosystem in a tricky spot compared to Solid, a similar library, where everyone built on top of Suspense from the beginning. Therefore, React developers had to find workarounds and alternative solutions to achieve similar functionality.
+React's implementation of Suspense and related features (transition, use) came later in the development process, which led to some popular libraries not initially adopting Suspense. This happened because the React team was focused on other areas of the library during the early stages of development. While this approach allowed the team to build a strong foundation for React, it also meant that routers and data fetching solutions weren't built on top of these primitives.
+
+This left the ecosystem in a tricky spot compared to Solid, a similar library, where everyone built on top of Suspense from the beginning. Therefore, React developers had to find workarounds and alternative solutions to achieve similar functionality. Popular libraries that emerged as a result include **[React Query](https://react-query.tanstack.com/)**, which Suspense support is currently experimental, **[SWR](https://swr.vercel.app/)**, another library for data fetching and caching without Suspense, and **[Apollo Client](https://www.apollographql.com/docs/react/)**, a state management library for React applications using GraphQL that also has Suspense in an experimental **\*\***Alpha**\*\***.
+
+As React continues to evolve and Suspense becomes more widely adopted, it is possible that these libraries may integrate Suspense in the future or that new libraries built on top of Suspense will emerge.
 
 ## The Future of React Server Components
 
@@ -58,4 +76,10 @@ React Server Components are a hot topic among developers at the moment. Although
 
 While there is still some uncertainty around how widely these new features will be adopted, the React team remains optimistic. As more developers begin to experiment with them and explore their capabilities, it is likely that we will see more widespread adoption in the community. Overall, the future of React Server Components looks bright, and we can't wait to see what developers will create with this exciting new technology.
 
-> This post has been heavily inspired by [Dan Jutan](https://twitter.com/jutanium) thread of the event.
+## References & Credits
+
+This post has been heavily inspired by [Dan Jutan](https://twitter.com/jutanium) thread of the event.
+
+Also huge thanks to the following people for proofreading the article and giving new ideas.
+
+- [Chris](https://www.c-ehrlich.dev/)
