@@ -39,6 +39,7 @@ const theme = localStorage.getItem("theme") ?? "dark";
     <img class="w-full object-cover shadow-lg" src={image} alt={title} />
     <slot />
     <script
+      is:inline
       src="https://giscus.app/client.js"
       data-repo="Nsttt/my-portfolio"
       data-repo-id="MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk="
