@@ -19,14 +19,13 @@ const {
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
-const theme = localStorage.getItem("theme") ?? "dark";
 ---
 
 <BaseLayout title={title} description={description} ogImage={image}>
   <article
     class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
-    <h1>{title}</h1>
+    <h1 transition:name={title}>{title}</h1>
     <div class="flex justify-between">
       <span>
         <time>{formatedDate}</time>
@@ -35,22 +34,5 @@ const theme = localStorage.getItem("theme") ?? "dark";
     <img class="w-full object-cover shadow-lg" src={image} alt={title} />
     <a target="_blank" href={source}>View source</a>
     <slot />
-    <script
-      src="https://giscus.app/client.js"
-      data-repo="Nsttt/my-portfolio"
-      data-repo-id="MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk="
-      data-category="Comments"
-      data-category-id="DIC_kwDOEYPwZc4CVJ8A"
-      data-mapping="pathname"
-      data-strict="1"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme={theme === "dark" ? "dark_protanopia" : "light_protanopia"}
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async
-    ></script>
   </article>
 </BaseLayout>
