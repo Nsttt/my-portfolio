@@ -5,7 +5,7 @@ import sanitizeHtml from "sanitize-html";
 const parser = new MarkdownIt();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function get(context: any) {
+export async function GET(context: any) {
   const blog = await getCollection("posts");
 
   return rss({
