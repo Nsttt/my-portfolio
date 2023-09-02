@@ -1,6 +1,7 @@
 ---
 import dayjs from "dayjs";
 
+import Comments from "../components/comments";
 import BaseLayout from "./baseLayout.astro";
 
 export interface Props {
@@ -19,8 +20,6 @@ const {
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
-
-const theme = localStorage.getItem("theme") ?? "dark";
 ---
 
 <BaseLayout title={title} description={description} ogImage={image}>
@@ -30,7 +29,7 @@ const theme = localStorage.getItem("theme") ?? "dark";
     <h1>{title}</h1>
     <span>
       <time>{formatedDate}</time>
-      •
+       •
       <span>
         {"☕".repeat(expectedReadTime).substring(0, 5)}
         {`${expectedReadTime.toString()} min read`}
@@ -38,22 +37,6 @@ const theme = localStorage.getItem("theme") ?? "dark";
     </span>
     <img class="w-full object-cover shadow-lg" src={image} alt={title} />
     <slot />
-    <script
-      src="https://giscus.app/client.js"
-      data-repo="Nsttt/my-portfolio"
-      data-repo-id="MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk="
-      data-category="Comments"
-      data-category-id="DIC_kwDOEYPwZc4CVJ8A"
-      data-mapping="pathname"
-      data-strict="1"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme={theme === "dark" ? "dark_protanopia" : "light_protanopia"}
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async
-    ></script>
+    <Comments client:only />
   </article>
 </BaseLayout>
