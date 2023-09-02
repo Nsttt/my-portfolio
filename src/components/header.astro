@@ -1,5 +1,5 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 
 import ToggleButton from "./toggleButton";
 ---
@@ -16,7 +16,7 @@ import ToggleButton from "./toggleButton";
       />
       <h1 class="self-center text-3xl">Néstor's Blog</h1>
     </a>
-    <ToggleButton client:load />
+    <ToggleButton client:only="solid-js" />
   </div>
   <div
     class="mt-4 flex justify-between border-b-[1px] border-gray-500 pb-4 text-lg dark:text-slate-400"
