@@ -1,4 +1,3 @@
-import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
@@ -13,7 +12,6 @@ import { remarkReadingTime } from "./src/utils/getReadingTime";
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
   markdown: {
-    extendDefaultPlugins: true,
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypeAutolinkHeadings],
     shikiConfig: {
@@ -22,12 +20,7 @@ const config: AstroUserConfig = {
   },
   integrations: [
     tailwind({
-      config: {
-        applyBaseStyles: false,
-      },
-    }),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
+      configFile: "./tailwind.config.cjs",
     }),
     sitemap(),
     prefetch(),
