@@ -1,7 +1,6 @@
 ---
 import dayjs from "dayjs";
 
-import Comments from "../components/comments";
 import BaseLayout from "./baseLayout.astro";
 
 export interface Props {
@@ -26,7 +25,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
   <article
     class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
-    <h1>{title}</h1>
+    <h1 transition:name={title}>{title}</h1>
     <span>
       <time>{formatedDate}</time>
        •
@@ -37,6 +36,5 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     </span>
     <img class="w-full object-cover shadow-lg" src={image} alt={title} />
     <slot />
-    <Comments client:only />
   </article>
 </BaseLayout>
