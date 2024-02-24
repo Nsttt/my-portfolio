@@ -27,7 +27,12 @@
     "exactOptionalPropertyTypes": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
   "exclude": ["node_modules"],
   "include": [

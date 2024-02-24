@@ -33,7 +33,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     <h1 transition:name={title}>{title}</h1>
     <span>
       <time>{formatedDate}</time>
-       •
+      •
       <span>
         {"☕".repeat(expectedReadTime).substring(0, 5)}
         {`${expectedReadTime.toString()} min read`}

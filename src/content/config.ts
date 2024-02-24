@@ -14,15 +14,18 @@ const projectCollection = defineCollection({
 });
 
 const postCollection = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    pubDate: z.string(),
-    expectedReadTime: z.number(),
-    tags: z.array(z.string()),
-    draft: z.boolean(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      image: image().refine((img) => img.width >= 1080, {
+        message: "Image width must be at least 1080px",
+      }),
+      pubDate: z.string(),
+      expectedReadTime: z.number(),
+      tags: z.array(z.string()),
+      draft: z.boolean(),
+    }),
 });
 
 export const collections = {
