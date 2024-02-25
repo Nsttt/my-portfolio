@@ -1,6 +1,5 @@
 ---
 import dayjs from "dayjs";
-
 import BaseLayout from "./baseLayout.astro";
 
 export interface Props {
@@ -8,7 +7,12 @@ export interface Props {
     title: string;
     description: string;
     pubDate: string;
-    image: string;
+    image: {
+      src: string;
+      width: number;
+      height: number;
+      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+    };
     source: string;
     tags: string[];
   };
@@ -21,7 +25,7 @@ const {
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 ---
 
-<BaseLayout title={title} description={description} ogImage={image}>
+<BaseLayout title={title} description={description} ogImage={image.src}>
   <article
     class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
@@ -31,7 +35,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
         <time>{formatedDate}</time>
       </span>
     </div>
-    <img class="w-full object-cover shadow-lg" src={image} alt={title} />
+    <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
     <a target="_blank" href={source}>View source</a>
     <slot />
   </article>
