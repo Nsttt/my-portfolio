@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { fontFamily } = require("tailwindcss/defaultTheme");
+import aspectRatio from "@tailwindcss/aspect-ratio";
+import typography from "@tailwindcss/typography";
+import { type Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: "class",
-  content: ["./public/**/*.html", "./src/**/*.{astro,js,ts,tsx}"],
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   safelist: ["dark"],
   theme: {
     fontFamily: {
@@ -83,8 +84,5 @@ module.exports = {
   variants: {
     extend: { typography: ["dark"] },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
-};
+  plugins: [typography, aspectRatio],
+} satisfies Config;

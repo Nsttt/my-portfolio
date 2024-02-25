@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "module": "ESNext",
     "lib": ["ESNext", "dom", "dom.iterable"],
     "target": "ESNext",
@@ -28,18 +28,21 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "jsxImportSource": "solid-js",
+    "moduleDetection": "force",
+    "incremental": true,
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
       }
     ]
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "include": [
     ".eslintrc.cjs",
-    "astro.config.ts",
-    "tailwind.config.cjs",
-    "next.config.mjs",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
     "src/**/*"
   ]
 }

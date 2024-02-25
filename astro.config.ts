@@ -18,16 +18,7 @@ const config: AstroUserConfig = {
       theme: "vitesse-dark",
     },
   },
-  integrations: [
-    tailwind({
-      configFile: "./tailwind.config.cjs",
-    }),
-    sitemap(),
-    prefetch(),
-    mdx(),
-    solidJs(),
-  ],
+  integrations: [tailwind(), sitemap(), prefetch(), mdx(), solidJs()],
 };
 
-// https://astro.build/config
 export default defineConfig(config);
