@@ -1,4 +1,3 @@
-import { link } from "fs";
 import { defineCollection, z } from "astro:content";
 
 const projectCollection = defineCollection({

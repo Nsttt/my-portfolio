@@ -14,12 +14,25 @@ export interface Props {
       height: number;
       format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
     };
+    revised_by?:
+      | {
+          name: string;
+          link: string;
+        }[]
+      | undefined;
     tags: string[];
   };
 }
 
 const {
-  frontmatter: { title, description, pubDate, expectedReadTime, image },
+  frontmatter: {
+    title,
+    description,
+    pubDate,
+    expectedReadTime,
+    image,
+    revised_by,
+  },
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
@@ -37,10 +50,24 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
         {"☕".repeat(expectedReadTime).substring(0, 5)}
         {`${expectedReadTime.toString()} min read`}
       </span>
-      <span>
-        Revised by: {}
-      </span>
     </span>
+    {
+      revised_by ? (
+        <>
+          <br />
+          <span>
+            Revised by:
+            {revised_by.map((r, index) => (
+              <>
+                <a href={r.link}>{r.name}</a>
+                {index < revised_by.length - 1 ? ", " : ""}
+              </>
+            ))}
+          </span>
+        </>
+      ) : null
+    }
+
     <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
     <slot />
   </article>
