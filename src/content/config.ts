@@ -27,6 +27,14 @@ const postCollection = defineCollection({
       pubDate: z.string(),
       expectedReadTime: z.number(),
       tags: z.array(z.string()),
+      revised_by: z
+        .array(
+          z.object({
+            name: z.string(),
+            link: z.string(),
+          }),
+        )
+        .optional(),
       draft: z.boolean(),
     }),
 });
