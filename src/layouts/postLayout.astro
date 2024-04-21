@@ -1,6 +1,5 @@
 ---
 import dayjs from "dayjs";
-
 import BaseLayout from "./baseLayout.astro";
 
 export interface Props {
@@ -37,6 +36,9 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
       <span>
         {"☕".repeat(expectedReadTime).substring(0, 5)}
         {`${expectedReadTime.toString()} min read`}
+      </span>
+      <span>
+        Revised by: {}
       </span>
     </span>
     <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
