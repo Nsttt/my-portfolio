@@ -28,7 +28,7 @@ pnpm dev
 
 ## Contact
 
-- [@nstlopez](https://twitter.com/nstlopez) on Twitter.
+- [@nstlopez](https://x.com/nstlopez) on X.
 - By [mail](mailto:nestor@nstlopez.com).
 
 <p align="right">(<a href="#top">back to top</a>)</p>

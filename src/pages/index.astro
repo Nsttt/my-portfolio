@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/baseLayout.astro";
 
 const posts = await getCollection("posts");
 const projects = await getCollection("projects");
+const talks = await getCollection("talks");
 ---
 
 <BaseLayout
@@ -15,9 +16,10 @@ const projects = await getCollection("projects");
     <div class="w-full text-xl">
       <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor from Spain 🇪🇸</h1>
       <p class="my-3">
-        I'm a software engineer with passion for functional programming and
-        static typing, specially on TypeScript.
+        I'm a software Architect with passion for functional programming and
+        static typing, and systems design.
       </p>
+
       <p>
         I currently co-maintain <a
           class="text-light-blue-vivid-500 hover:underline"
@@ -30,11 +32,10 @@ const projects = await getCollection("projects");
         > a fullstack Next.JS template for building typesafe applications.
       </p>
       <p class="my-3">
-        As for 2024 I work as software engineer at <a
+        I also do <a
           class="text-light-blue-vivid-500 hover:underline"
-          href="https://www.zenrows.com/"
-          target="_blank">ZenRows</a
-        >.
+          href="/talks">conference talks and workshops</a
+        > about OSS tools, IoT and systems design.
       </p>
     </div>
   </section>
@@ -67,6 +68,40 @@ const projects = await getCollection("projects");
                 description={post.data.description}
                 date={post.data.pubDate}
                 expectedReadTime={post.data.expectedReadTime}
+              />
+            </li>
+          ))
+      }
+    </ul>
+  </section>
+  <section>
+    <div
+      class="mb-10 mt-20 flex justify-between border-b-[1px] border-gray-500 pb-5"
+    >
+      <h2 class="self-baseline text-4xl">Talks and Workshops by me</h2>
+      <a
+        href="/talks"
+        class="self-baseline text-lg text-light-blue-vivid-500 hover:underline"
+        >See all content</a
+      >
+    </div>
+    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
+      {
+        talks
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).valueOf() -
+              new Date(a.data.pubDate).valueOf(),
+          )
+          .slice(0, 3)
+          .map((talk) => (
+            <li>
+              <Card
+                href={`/talks/${talk.slug}`}
+                title={talk.data.title}
+                description={talk.data.description}
+                date={talk.data.pubDate}
+                expectedReadTime={0}
               />
             </li>
           ))

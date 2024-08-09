@@ -39,7 +39,28 @@ const postCollection = defineCollection({
     }),
 });
 
+const talkCollection = defineCollection({
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      place: z.string(),
+      lang: z.string(),
+      mainImage: image().refine((img) => img.width >= 1080, {
+        message: "Image width must be at least 1080px",
+      }),
+      images: z.array(
+        image().refine((img) => img.width >= 1080, {
+          message: "Image width must be at least 1080px",
+        }),
+      ),
+      pubDate: z.string(),
+      tags: z.array(z.string()),
+    }),
+});
+
 export const collections = {
   projects: projectCollection,
   posts: postCollection,
+  talks: talkCollection,
 };
