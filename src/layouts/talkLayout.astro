@@ -1,0 +1,65 @@
+---
+import dayjs from "dayjs";
+import BaseLayout from "./baseLayout.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    place: string;
+    lang: string;
+    mainImage: {
+      src: string;
+      width: number;
+      height: number;
+      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+    };
+    images: {
+      src: string;
+      width: number;
+      height: number;
+      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+    }[];
+  };
+}
+
+const {
+  frontmatter: { title, description, pubDate, images, mainImage, place, lang },
+} = Astro.props;
+
+const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
+---
+
+<BaseLayout title={title} description={description} ogImage={mainImage.src}>
+  <article
+    class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
+  >
+    <h1>{title}</h1>
+    <div class="flex justify-between">
+      <span>
+        <span>{place}</span>
+        •
+        <span>{lang}</span>
+        •
+        <time>{formatedDate}</time>
+      </span>
+    </div>
+    <p>{description}</p>
+    <img
+      class="w-full object-cover shadow-lg"
+      src={mainImage.src}
+      alt={title}
+    />
+    {
+      images.map((image) => (
+        <img
+          class="w-full object-cover shadow-lg"
+          src={image.src}
+          alt={title}
+        />
+      ))
+    }
+    <slot />
+  </article>
+</BaseLayout>
