@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Card from "../components/card.astro";
+import BaseLayout from "../layouts/baseLayout.astro";
+
+const talks = await getCollection("talks");
+---
+
+<BaseLayout title="Talks" description="All the talks and Workshops I've given.">
+  <h1 class="mt-20 text-6xl font-bold">Talks</h1>
+  <ul class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
+    {
+      talks
+        .sort(
+          (a, b) =>
+            new Date(b.data.pubDate).valueOf() -
+            new Date(a.data.pubDate).valueOf(),
+        )
+        .map((talk) => (
+          <li>
+            <Card
+              href={`/talks/${talk.slug}`}
+              title={talk.data.title}
+              description={talk.data.description}
+              date={talk.data.pubDate}
+              expectedReadTime={0}
+            />
+          </li>
+        ))
+    }
+  </ul>
+</BaseLayout>
