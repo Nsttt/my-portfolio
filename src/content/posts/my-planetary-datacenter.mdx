@@ -10,13 +10,13 @@ draft: true
 
 Welcome to the first post in what I’m calling my **_“Planetary Datacenter”_** series. Essentially, I’ve got a **homelab** that I’ve been tinkering with for a while, **building**, **refining**, and sometimes _breaking it (on purpose!)_ to learn how to make it better. Now, I’m ready to share everything I’ve learned so far.
 
-I jokingly refer to my setup as a **_“Planetary Datacenter”_** because it stretches beyond just my house. Thanks to _clever networking_ and tools like **ZeroTier**, I can place services just about anywhere on the globe (hence **_“planetary”_**) and still have them communicate as if they were right next to each other on my local LAN. If you’re into homelabs, networking, or just curious about how to structure your own multi-machine environment, _stick around_.
+I jokingly refer to my setup as a **_“Planetary Datacenter”_** because it stretches beyond just my house. Thanks to _clever networking_ and tools like [**ZeroTier**](https://docs.zerotier.com/), I can place services just about anywhere on the globe (hence **_“planetary”_**) and still have them communicate as if they were right next to each other on my local LAN. If you’re into homelabs, networking, or just curious about how to structure your own multi-machine environment, _stick around_.
 
 I’ll walk you through all of it.
 
 ## What is the _“Planetary Datacenter”_ anyway?
 
-I first introduced this idea at a **CNCF Galicia** talk, where I discussed how I use **ZeroTier** and **WireGuard** to interconnect various machines. Over time, I realized that combining ZeroTier with my local hardware gave me a pretty powerful setup: everything in one _“big” virtual LAN_, accessible anywhere.
+I first introduced this idea at a **CNCF Galicia** talk, where I discussed how I use [**ZeroTier**](https://docs.zerotier.com/) and [**WireGuard**](https://www.wireguard.com/) to interconnect various machines. Over time, I realized that combining ZeroTier with my local hardware gave me a pretty powerful setup: everything in one _“big” virtual LAN_, accessible anywhere.
 
 So, if you picture your typical data center with racks and servers, now shrink it down to something you can manage in your living room or home office, then _magically_ extend it worldwide. That’s basically the idea.
 
@@ -26,7 +26,7 @@ So, if you picture your typical data center with racks and servers, now shrink i
 
 - **Centralizing Services:** With this setup, I can keep my personal data and services under _my_ control, especially stuff like media servers, backups, and specialized containers.
 
-- **Planet-Wide Access:** I can spin up a new service on a VPS, at home, or in a cloud provider. As soon as I hook it up to my **ZeroTier** network, it feels like it’s right there on my LAN. And in a worst case scenario, migrating can be done with a _click of a button_.
+- **Planet-Wide Access:** I can spin up a new service on a VPS, at home, or in a cloud provider. As soon as I hook it up to my [**ZeroTier**](https://docs.zerotier.com/) network, it feels like it’s right there on my LAN. And in a worst case scenario, migrating can be done with a _click of a button_.
 
 ## Physical Infrastructure at Home
 
@@ -34,7 +34,7 @@ I’ll start by breaking down the hardware so you know what I’m working with.
 
 ### ISP Router & Ubiquiti hardware
 
-My ISP router is basically acting as a **pass-through device**. I’ve set it up with DMZ mode pointing straight to my **_UDM Pro Max_** (a Unifi Dream Machine Pro Max). The UDM is the _nerve center_ of my home network. It handles VLANs, firewall rules, and all the fancy Unifi-based management. If you’re familiar with the Unifi ecosystem, you know it’s pretty user-friendly yet powerful enough to do some advanced stuff if you know how to hack it enough.
+My ISP router is basically acting as a **pass-through device**. I’ve set it up with DMZ mode pointing straight to my [**_UDM Pro Max_**](https://ui.com/). The UDM is the _nerve center_ of my home network. It handles VLANs, firewall rules, and all the fancy Unifi-based management. If you’re familiar with the Unifi ecosystem, you know it’s pretty user-friendly yet powerful enough to do some advanced stuff if you know how to hack it enough.
 
 ### Switches & Access Points
 
@@ -46,15 +46,15 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 
 ### Main Machines
 
-1. **NAS (TrueNAS Scale)**
+1. **NAS [TrueNAS Scale](https://www.truenas.com/truenas-scale/)**
 
    - **CPU/RAM**: Intel i5-7600K, 16GB RAM
 
    - **Storage**: 1×1TB SSD for the OS + 4×16TB HDD in a ZFS _“striped mirrors”_ arrangement.
 
-   - **Role**: Holds all my data, shared mainly over _NFSv4.2_. I also install the **ZeroTier** app directly on it so it has a presence on my _global_ network.
+   - **Role**: Holds all my data, shared mainly over [_NFSv4.2_](https://www.rfc-editor.org/rfc/rfc7862.htmll).
 
-2. **MS01 (Proxmox Server)**
+2. **MS01 [Proxmox Server](https://www.proxmox.com)**
 
    - **CPU/RAM**: Intel i9-13900H, 32GB RAM
 
@@ -110,7 +110,7 @@ For example, if I spin up a VPS in some random location, I just install the **Ze
 
 I self-host the **ZeroTier controller** instead of relying on the official ZeroTier infrastructure. Since ZeroTier is open-source, I can run my own controller node on my **Network VM**.
 
-To make management easy, I use a _community-built UI_ that gives me a web dashboard for seeing which devices are connected, assigning IP addresses, and approving or denying new join requests. It’s _containerized_ using the same MacVLAN trick I mentioned, so it’s directly available on VLAN 2 without any weird network hoops.
+To make management easy, I use a _community-built UI_ that gives me a web dashboard for seeing which devices are connected, assigning IP addresses, and approving or denying new join requests. It’s _containerized_ using a _Docker MacVLAN_ trick we will talk later about, so it’s directly available on VLAN 2 without any weird network hoops.
 
 This approach also ensures I’m in _full control_ of my environment: if the official ZeroTier services ever go down, I’m still good to go, and I can customize every aspect of my network as I see fit.
 
@@ -132,42 +132,42 @@ I also have a direct **SFP+** connection between my NAS and the Proxmox server (
 
 This is my “big” server with an **i9-13900H** and **32GB of RAM**. I also popped in a _custom Intel ARC A380 GPU_ for hardware transcoding (like Jellyfin) because Intel excels at that. Here are some highlights:
 
-- **Microcode Patches**: If you’re using a _new-gen_ Intel CPU, you might need microcode patches to avoid weird performance or stability issues.
+- **Microcode Patches**: If you’re using a _new-gen_ Intel CPU, you might need microcode patches to avoid weird performance or stability issues. [Here's the Proxmox microcode script if you want to have a look at it](https://github.com/community-scripts/ProxmoxVE/blob/main/misc/microcode.sh).
 
-- **GPU Passthrough**: Proxmox makes it pretty straightforward. You just enable _Intel IOMMU_ in the grub config, load the vfio modules, and pass the GPU through to whichever VM needs it.
+- **GPU Passthrough**: [Proxmox](<https://pve.proxmox.com/wiki/PCI(e)_Passthrough>) makes it pretty straightforward. You just enable _Intel IOMMU_ in the grub config, load the vfio modules, and pass the GPU through to whichever VM needs it.
 
 - **VMs**: I run four main VMs. Portainer, Network, Media, and Misc.
 
 ## VM setup
 
-One of the **key pieces** of this setup is a _MacVLAN_ approach that allows my containers to attach _directly_ to the ZeroTier VLAN interfaces.  
-It keeps _host networking_ simpler and gives each container a dedicated IP isolated to the ZeroTier VLAN.
+One of the **key pieces** of this setup is a _Docker MacVLAN interface_ approach that allows my containers to attach _directly_ to the ZeroTier VLAN interfaces.  
+It keeps _host_ networking simpler and gives each container a dedicated IP isolated to the ZeroTier VLAN.
 
 #### How it works
 
-In Docker, I create a **macvlan network** bound to the **ZeroTier interface**. That way, each container in that network appears on the ZeroTier VLAN with its own MAC address (and IP) instead of piggybacking on the host OS. This method isolates container traffic _cleanly_ from the VM’s main interface, which helps when bridging or routing across different VLANs.
+In Docker, I create a [**MacVLAN interface**](https://docs.docker.com/network/macvlan/) bound to the **ZeroTier interface**. That way, each container in that network appears on the ZeroTier VLAN with its own MAC address (and IP) instead of piggybacking on the host OS. This method isolates container traffic _cleanly_ from the VM’s main interface, which helps when bridging or routing across different VLANs.
 
 ### Portainer VM
 
-- Runs on **Ubuntu 24** (lightweight, nothing fancy installed).
+- Runs on **Ubuntu 24** nothing fancy installed.
 
-- Docker + **Portainer** so I can have a nice web UI for managing all my containers.
+- Docker + [**Portainer**](https://docs.portainer.io/) so I can have a nice web UI for managing all my containers.
 
 ### Network VM
 
 - Also **Ubuntu 24**, but here’s where I keep _network-related_ containers:
 
-- **ZTNET** (ZeroTier network controller)
+- [**ZTNET**](https://ztnet.network/) a cool community-built ZeroTier controller UI (**built with the T3 Stack!!**)
 
-- **Pi-hole** for DNS
+- [**Pi-hole**](https://pi-hole.net/) for my private DNS.
 
-- **Nginx Proxy Manager** (reverse proxy, sits in the DMZ VLAN)
+- [**Nginx Proxy Manager**](https://nginxproxymanager.com/) reverse proxy for my services.
 
-- **Authentik** (my identity provider, or IDP)
+- [**Authentik**](https://goauthentik.io/) my identity provider, or IDP.
 
 ### Media VM
 
-- This is my _entertainment hub_. It has the full \*Arr suite (**Sonarr**, **Radarr**, **Bazarr**, **Lidarr**) plus **Jellyfin** for streaming, **SABnzbd**, **qBittorrent**, and a **Gluetun** container for VPN.
+- This is my _entertainment hub_. It has the full **\*Arr** suite.
 
 - GPU passthrough is set up here, so **Jellyfin** can do hardware transcoding with the **Intel ARC** card.
 
@@ -177,7 +177,7 @@ In Docker, I create a **macvlan network** bound to the **ZeroTier interface**. T
 
 I’m using **hardlinks** so that I can have a file appear in multiple places (like the _“downloads”_ folder and the final _“TV Shows”_ folder) without doubling the storage cost.
 
-You just have to be consistent with your paths in **Docker Compose** and your \*Arr apps, so everything references the same _“root”_ mount point.
+You just have to be consistent with your paths in **Docker Compose**, **NFS shares** and your **\*Arr apps**, so everything references the same _“root”_ mount point.
 
 ### Misc VM
 
@@ -189,7 +189,7 @@ I’m a huge fan of **Docker Compose** because it’s easy, fast, and reproducib
 
 #### Why not LXC?
 
-While **LXC** can be more lightweight and can potentially yield _better performance_, it’s just trickier to _replicate_ consistently.
+While [**LXC**](https://linuxcontainers.org/) can be more lightweight and can potentially yield _better performance_, it’s just trickier to _replicate_ consistently. If you know a way to make **LXC** more _reproducible_, I’d love to hear it! Hit me up on [Twitter](https://x.com/nstlopez).
 
 Also, hooking up **NFS** inside an LXC can get messy with permission issues and restricted container access.
 
@@ -203,9 +203,7 @@ This was just the _general overview_. In future posts, I’ll dive deeper into s
 
 - **GPU Passthrough Step-by-Step**: The commands and configurations I used in Proxmox.
 
-- **Arr Services**: Detailed setups for me media services.
-
-- **Hardlink Magic**: A deeper guide on making \*Arr apps handle hardlinks smoothly.
+- **Arr Services and Hardlink Magic**: A deeper guide on making \*Arr apps handle hardlinks smoothly.
 
 - **Nginx Proxy Manager + Authentik**: How I secure external services while letting them stay easy to reach from anywhere.
 
