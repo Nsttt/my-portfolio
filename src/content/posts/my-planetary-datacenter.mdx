@@ -32,6 +32,8 @@ So, if you picture your typical data center with racks and servers, now shrink i
 
 I’ll start by breaking down the hardware so you know what I’m working with.
 
+![Image of my hardware](./images/my-planetary-datacenter-II.webp)
+
 ### ISP Router & Ubiquiti hardware
 
 My ISP router is basically acting as a **pass-through device**. I’ve set it up with DMZ mode pointing straight to my [**_UDM Pro Max_**](https://ui.com/). The UDM is the _nerve center_ of my home network. It handles VLANs, firewall rules, and all the fancy Unifi-based management. If you’re familiar with the Unifi ecosystem, you know it’s pretty user-friendly yet powerful enough to do some advanced stuff if you know how to hack it enough.
@@ -65,6 +67,8 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
    - **Role**: Runs **Proxmox**, which hosts multiple VMs for all sorts of services (media, networking, Portainer, etc.).
 
 ## VLANs & Wi-Fi Networks
+
+![VLAN Distribution](./images/vlan-distribution.webp)
 
 **VLANs** (or _Virtual LANs_) let me split up my network into smaller segments, keeping different types of traffic isolated from each other. Here’s what I have:
 
@@ -114,6 +118,8 @@ To make management easy, I use a _community-built UI_ that gives me a web dashbo
 
 This approach also ensures I’m in _full control_ of my environment: if the official ZeroTier services ever go down, I’m still good to go, and I can customize every aspect of my network as I see fit.
 
+![ZeroTier Network](./images/ztnet1.webp)
+
 ## TrueNAS & Proxmox
 
 ### TrueNAS Scale
@@ -142,6 +148,8 @@ This is my “big” server with an **i9-13900H** and **32GB of RAM**. I also po
 
 One of the **key pieces** of this setup is a _Docker MacVLAN interface_ approach that allows my containers to attach _directly_ to the ZeroTier VLAN interfaces.  
 It keeps _host_ networking simpler and gives each container a dedicated IP isolated to the ZeroTier VLAN.
+
+![VM Setup](./images/proxmox1.webp)
 
 #### How it works
 
