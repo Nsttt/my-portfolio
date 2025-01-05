@@ -72,7 +72,7 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 
 **VLANs** (or _Virtual LANs_) let me split up my network into smaller segments, keeping different types of traffic isolated from each other. Here’s what I have:
 
-1. **LAN (VLAN 1)**: The _default network_ for my local machines and most VMs.
+1. **LAN**: The _default network_ for my local machines and most VMs.
 
 2. **Guests**: For visitors, restricted access, minimal privileges.
 
@@ -104,7 +104,9 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 
 I create two VLANs in **ZeroTier**, **VLAN 2** (Services) and **VLAN 3** (DMZ), then I bridge them back into my local Services and DMZ VLANs on the **UDM Pro**.
 
-This bridging is done via some _custom scripts_ and the UDM’s “persistence” system. It’s a bit of a hack but allows ZeroTier traffic to flow in and out of my local VLANs as if they were physically plugged in.
+This bridging is done via some _custom scripts_ and the UDM’s “persistence” system. Because ZeroTier operates at **Layer 2**, it's not just simple routing, it's effectively replicating the broadcast domain. It might be a bit of a hack, but it allows ZeroTier traffic to flow in and out of my local VLANs as if they were physically plugged in.
+
+Additionally, ZeroTier includes a powerful rules engine. This allows me to define custom firewall-like policies, such as disallowing certain VLAN-tagged traffic, restricting specific ports, or enforcing IP-based rules, directly within the ZeroTier network. That means I can shape traffic based on my exact security needs while still giving devices full Layer 2 connectivity when appropriate.
 
 ## Why ZeroTier Is at the Core
 
@@ -133,6 +135,17 @@ On my **NAS**, I’m not using many of TrueNAS’s built-in virtualization featu
 - **Performance**: The 1TB SSD is for the OS, and the 4×16TB EXOS drives are in _ZFS striped mirrors_. This gives a nice balance of capacity, speed, and redundancy.
 
 I also have a direct **SFP+** connection between my NAS and the Proxmox server (**MS01**) for faster data transfers. That means all my VMs can access _NFS_ shares at _10GbE speeds_, which is super handy for big data or media workflows.
+
+#### Why NFSv4.2?
+
+I’m using **NFSv4.2** mainly because it builds on earlier versions while adding a bunch of super handy extras. Here’s a quick rundown:
+
+- **NFSv3** has been around forever and is rock-solid, but it doesn’t include modern security or integrated locking (it relies on separate protocols like NLM).
+- **NFSv4** unified the protocol, locking, and security into one standard, making life easier and reducing extra sideband protocols.
+- **NFSv4.1** introduced **Parallel NFS (pNFS)**, which lets you read and write data in parallel across multiple servers for better performance when you need to scale out.
+- **NFSv4.2** takes it all a step further with features like **server-side copy**, improved sparse file handling, and extended attributes. This makes it especially handy for virtualization and container workloads where you need faster data movement without pounding your network.
+
+Basically, **NFSv4.2** gives me a modern, flexible, and efficient setup, perfect for my homelab needs.
 
 ### Proxmox Server Node (MS01)
 
@@ -171,11 +184,11 @@ In Docker, I create a [**MacVLAN interface**](https://docs.docker.com/network/ma
 
 - [**Nginx Proxy Manager**](https://nginxproxymanager.com/) reverse proxy for my services.
 
-- [**Authentik**](https://goauthentik.io/) my identity provider, or IDP.
+- [**Authentik**](https://goauthentik.io/) my identity provider, or IdP.
 
 ### Media VM
 
-- This is my _entertainment hub_. It has the full **\*Arr** suite.
+- This is my _entertainment hub_. It has the full **\*Arr** suite. If you have no idea what that is, [take a look at the wiki.](https://wiki.servarr.com/)
 
 - GPU passthrough is set up here, so **Jellyfin** can do hardware transcoding with the **Intel ARC** card.
 
@@ -194,6 +207,14 @@ You just have to be consistent with your paths in **Docker Compose**, **NFS shar
 ## GitOps and Docker Compose
 
 I’m a huge fan of **Docker Compose** because it’s easy, fast, and reproducible. I keep a _Git repo_ with all my Compose files and volumes declared. If I ever blow away a VM or want to spin up a new environment, I just clone the repo and run **docker compose up**.
+
+#### Why Portainer?
+
+I like to pair this _Git-based workflow_ with [Portainer](https://www.portainer.io/) because it gives me a **simple, intuitive UI** on top of my Docker environment. While **Docker Compose** keeps everything _version-controlled_ and _scriptable_, **Portainer** ties it together with a **dashboard** that shows all my containers, volumes, networks, and logs in one place.
+
+It even has built-in **GitOps-style features**, like pulling changes directly _every so often_ from your repo or using **webhooks**, so you can keep everything _updated automatically_. That means I don’t have to drop into the _CLI_ just to check container statuses or tweak settings. I can do it all from my **browser**.
+
+If you know of any other tools that offer a **similar UI-driven approach** and integrate well with _GitOps_, [**let me know**](https://x.com/nstlopez)! I’m always on the lookout for **alternatives**.
 
 #### Why not LXC?
 
@@ -223,7 +244,7 @@ This was just the _general overview_. In future posts, I’ll dive deeper into s
 
 ## Wrapping Up
 
-So, that’s the broad overview of my **_Planetary Datacenter_**—my homelab that thinks it can conquer the world (or at least my corner of it).
+So, that’s the broad overview of my **_Planetary Datacenter_**, my homelab that thinks it can conquer the world (or at least my corner of it).
 
 As I keep iterating on this setup, I’ll share everything I learn, _mistakes_, discoveries, and hopefully some _cool tips_. If you have any questions or want to suggest your own improvements, drop a comment (or tweet, or smoke signal, whichever you prefer). I’d love to hear how you’re tackling similar homelab challenges.
 
