@@ -9,18 +9,18 @@ export interface Props {
     pubDate: string;
     place: string;
     lang: string;
-    mainImage: {
+    mainImage?: {
       src: string;
       width: number;
       height: number;
       format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-    };
-    images: {
+    } | undefined;
+    images?: {
       src: string;
       width: number;
       height: number;
       format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-    }[];
+    }[] | undefined;
   };
 }
 
@@ -31,7 +31,7 @@ const {
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 ---
 
-<BaseLayout title={title} description={description} ogImage={mainImage.src}>
+<BaseLayout title={title} description={description} ogImage={mainImage ? mainImage.src : undefined}>
   <article
     class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
@@ -46,13 +46,16 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
       </span>
     </div>
     <p>{description}</p>
-    <img
-      class="w-full object-cover shadow-lg"
-      src={mainImage.src}
-      alt={title}
-    />
+    <slot />
+    {mainImage && (
+      <img
+        class="w-full object-cover shadow-lg"
+        src={mainImage.src}
+        alt={title}
+      />
+    )}
     {
-      images.map((image) => (
+      images && images.map((image) => (
         <img
           class="w-full object-cover shadow-lg"
           src={image.src}
@@ -60,6 +63,5 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
         />
       ))
     }
-    <slot />
   </article>
 </BaseLayout>
