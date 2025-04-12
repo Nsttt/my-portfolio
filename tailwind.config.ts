@@ -1,15 +1,13 @@
 import aspectRatio from "@tailwindcss/aspect-ratio";
 import typography from "@tailwindcss/typography";
 import { type Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
-  safelist: ["dark"],
   theme: {
     fontFamily: {
-      sans: ["Satoshi", ...fontFamily.sans],
+      sans: ["Satoshi"],
     },
     extend: {
       colors: {
@@ -80,9 +78,6 @@ export default {
         "teal-900": "#014D40",
       },
     },
-  },
-  variants: {
-    extend: { typography: ["dark"] },
   },
   plugins: [typography, aspectRatio],
 } satisfies Config;

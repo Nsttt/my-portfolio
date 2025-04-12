@@ -1,7 +1,6 @@
 ---
 import "../styles/base.css";
-
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 export interface Props {
   title?: string | undefined;
@@ -58,4 +57,4 @@ const {
 />
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-<ViewTransitions />
+<ClientRouter />

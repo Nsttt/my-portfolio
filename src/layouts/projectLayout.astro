@@ -26,8 +26,16 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 ---
 
 <BaseLayout title={title} description={description} ogImage={image.src}>
+  <div class="mt-10">
+    <a href="/projects" class="inline-flex items-center gap-2 text-light-blue-vivid-600 hover:underline dark:text-light-blue-vivid-400">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Go Back
+    </a>
+  </div>
   <article
-    class="prose prose-slate mt-20 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
+    class="prose prose-slate mt-6 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
   >
     <h1>{title}</h1>
     <div class="flex justify-between">

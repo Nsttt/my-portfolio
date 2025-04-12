@@ -6,9 +6,9 @@ import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
 
 interface Props {
-  title?: string;
-  description?: string;
-  ogImage?: string;
+  title?: string | undefined;
+  description?: string | undefined;
+  ogImage?: string | undefined;
 }
 
 const { title, description, ogImage } = Astro.props;
