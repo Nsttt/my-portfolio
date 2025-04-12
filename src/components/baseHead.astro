@@ -7,10 +7,16 @@ export interface Props {
   description?: string | undefined;
   image?: string | undefined;
 }
+
+// Get current path to determine OG image URL
+const { pathname } = Astro.url;
+let ogRoute = pathname.replace(/\/$/, ""); // Remove trailing slash if present
+if (ogRoute === "") ogRoute = "index";
+
 const {
   title,
   description,
-  image = "https://nstlopez.com/logo.svg",
+  image = `${Astro.site}open-graph/${ogRoute}.png`,
 } = Astro.props;
 ---
 
