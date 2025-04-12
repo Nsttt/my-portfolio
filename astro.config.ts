@@ -2,11 +2,10 @@ import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
 import { remarkReadingTime } from "./src/utils/getReadingTime";
 
 const config: AstroUserConfig = {
@@ -18,7 +17,10 @@ const config: AstroUserConfig = {
       theme: "vitesse-dark",
     },
   },
-  integrations: [tailwind(), sitemap(), prefetch(), mdx(), solidJs()],
+  integrations: [sitemap(), prefetch(), mdx(), solidJs()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 };
 
 export default defineConfig(config);
