@@ -1,5 +1,9 @@
 @import "tailwindcss";
-@config "../../tailwind.config.ts";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/aspect-ratio";
 
 @font-face {
   font-family: "Satoshi";
@@ -11,4 +15,75 @@
   font-family: "Hack";
   src: url("/fonts/hack-regular.woff2") format("woff2");
   font-display: swap;
+}
+
+@theme {
+  --font-sans: "Satoshi", sans-serif;
+
+  /* Adding monochrome aliases for the redesigned colors */
+  --color-mono-050: #f8f8f8;
+  --color-mono-100: #f0f0f0;
+  --color-mono-200: #e0e0e0;
+  --color-mono-300: #c0c0c0;
+  --color-mono-400: #a0a0a0;
+  --color-mono-500: #808080;
+  --color-mono-600: #606060;
+  --color-mono-700: #404040;
+  --color-mono-800: #202020;
+  --color-mono-900: #101010;
+
+  --color-cool-grey-050: #ffffff;
+  --color-cool-grey-100: #f5f5f5;
+  --color-cool-grey-200: #e5e5e5;
+  --color-cool-grey-300: #d4d4d4;
+  --color-cool-grey-400: #a3a3a3;
+  --color-cool-grey-500: #737373;
+  --color-cool-grey-600: #525252;
+  --color-cool-grey-700: #404040;
+  --color-cool-grey-800: #262626;
+  --color-cool-grey-900: #171717;
+
+  --color-pink-vivid-050: #ffe3ec;
+  --color-pink-vivid-100: #ffb8d2;
+  --color-pink-vivid-200: #ff8cba;
+  --color-pink-vivid-300: #f364a2;
+  --color-pink-vivid-400: #e8368f;
+  --color-pink-vivid-500: #da127d;
+  --color-pink-vivid-600: #bc0a6f;
+  --color-pink-vivid-700: #a30664;
+  --color-pink-vivid-800: #870557;
+  --color-pink-vivid-900: #620042;
+
+  --color-red-vivid-050: #ffe3e3;
+  --color-red-vivid-100: #ffbdbd;
+  --color-red-vivid-200: #ff9b9b;
+  --color-red-vivid-300: #f86a6a;
+  --color-red-vivid-400: #ef4e4e;
+  --color-red-vivid-500: #e12d39;
+  --color-red-vivid-600: #cf1124;
+  --color-red-vivid-700: #ab091e;
+  --color-red-vivid-800: #8a041a;
+  --color-red-vivid-900: #610316;
+
+  --color-yellow-vivid-050: #fffbea;
+  --color-yellow-vivid-100: #fff3c4;
+  --color-yellow-vivid-200: #fce588;
+  --color-yellow-vivid-300: #fadb5f;
+  --color-yellow-vivid-400: #f7c948;
+  --color-yellow-vivid-500: #f0b429;
+  --color-yellow-vivid-600: #de911d;
+  --color-yellow-vivid-700: #cb6e17;
+  --color-yellow-vivid-800: #b44d12;
+  --color-yellow-vivid-900: #8d2b0b;
+
+  --color-teal-050: #effcf6;
+  --color-teal-100: #c6f7e2;
+  --color-teal-200: #8eedc7;
+  --color-teal-300: #65d6ad;
+  --color-teal-400: #3ebd93;
+  --color-teal-500: #27ab83;
+  --color-teal-600: #199473;
+  --color-teal-700: #147d64;
+  --color-teal-800: #0c6b58;
+  --color-teal-900: #014d40;
 }

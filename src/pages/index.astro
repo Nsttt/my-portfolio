@@ -10,42 +10,66 @@ const talks = await getCollection("talks");
 
 <BaseLayout
   title="Néstor's Blog"
-  description="Writting about software development in Typescript and Rust."
+  description="Writing about software architecture, functional programming, and systems design."
 >
   <section class="mt-20 flex">
     <div class="w-full text-xl">
-      <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor from Spain 🇪🇸</h1>
+      <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor, from Spain 🇪🇸</h1>
       <p class="my-3">
-        I'm a software Architect with passion for functional programming and
-        static typing, and systems design.
+        I'm a Software Architect with passion for functional programming and
+        static typing, and systems design. Currently federating stuff at <a
+          class="text-cool-grey-800 dark:text-mono-300 underline"
+          href="https://zephyr-cloud.io/"
+          target="_blank">Zephyr Cloud</a
+        >.
       </p>
-
-      <p>
-        I currently co-maintain <a
-          class="text-light-blue-vivid-500 underline"
-          href="https://trpc.io/"
-          target="_blank">tRPC</a
-        > a next-gen framework for building typesafe APIs with TypeScript, and <a
-          class="text-light-blue-vivid-500 underline"
-          href="https://create.t3.gg/"
-          target="_blank">T3 Stack</a
-        > a fullstack Next.JS template for building typesafe applications.
-      </p>
+      <p class="my-3">I contribute to several open source projects:</p>
+      <ul class="my-3 ml-6 list-disc space-y-2">
+        <li>
+          <a
+            class="text-cool-grey-800 dark:text-mono-300 underline"
+            href="https://trpc.io/"
+            target="_blank">tRPC</a
+          > - A framework for building typesafe APIs with TypeScript
+        </li>
+        <li>
+          <a
+            class="text-cool-grey-800 dark:text-mono-300 underline"
+            href="https://create.t3.gg/"
+            target="_blank">T3 Stack</a
+          > - A fullstack Next.js template for typesafe applications
+        </li>
+        <li>
+          <a
+            class="text-cool-grey-800 dark:text-mono-300 underline"
+            href="https://module-federation.io/"
+            target="_blank">Module Federation</a
+          > - Helping teams build scalable micro-frontend architectures
+        </li>
+      </ul>
       <p class="my-3">
-        I also do <a class="text-light-blue-vivid-500 underline" href="/talks"
-          >conference talks and workshops</a
+        I also do <a
+          class="text-cool-grey-800 dark:text-mono-300 underline"
+          href="/talks">conference talks and workshops</a
         > about OSS tools, IoT and systems design.
+      </p>
+      <p class="my-3">
+        Finally I am part of <a
+          class="text-cool-grey-800 dark:text-mono-300 underline"
+          href="https://industry40.systems/"
+          target="_blank">I40sys</a
+        >, a research group focused on Industry 4.0 and digital transformation.
       </p>
     </div>
   </section>
   <section>
     <div
-      class="mt-28 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+      class="border-cool-grey-400 dark:border-cool-grey-700 mt-28 mb-10 flex justify-between border-b-[1px] pb-5"
     >
       <h2 class="self-baseline text-4xl">Latest posts</h2>
       <a
         href="/blog"
-        class="text-light-blue-vivid-500 self-baseline text-lg underline"
+        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
         >See all posts</a
       >
     </div>
@@ -75,12 +99,12 @@ const talks = await getCollection("talks");
   </section>
   <section>
     <div
-      class="mt-20 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+      class="border-cool-grey-400 dark:border-cool-grey-700 mt-20 mb-10 flex justify-between border-b-[1px] pb-5"
     >
       <h2 class="self-baseline text-4xl">Talks and Workshops</h2>
       <a
         href="/talks"
-        class="text-light-blue-vivid-500 self-baseline text-lg underline"
+        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
         >See all content</a
       >
     </div>
@@ -109,12 +133,12 @@ const talks = await getCollection("talks");
   </section>
   <section>
     <div
-      class="mt-20 mb-10 flex justify-between border-b-[1px] border-gray-500 pb-5"
+      class="border-cool-grey-400 dark:border-cool-grey-700 mt-20 mb-10 flex justify-between border-b-[1px] pb-5"
     >
       <h2 class="self-baseline text-4xl">Things I've built</h2>
       <a
         href="/projects"
-        class="text-light-blue-vivid-500 self-baseline text-lg underline"
+        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
         >See all projects</a
       >
     </div>

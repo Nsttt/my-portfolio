@@ -40,15 +40,28 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 
 <BaseLayout title={title} description={description} ogImage={image.src}>
   <div class="mt-10">
-    <a href="/blog" class="inline-flex items-center gap-2 text-light-blue-vivid-600 hover:underline dark:text-light-blue-vivid-400">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6"/>
+    <a
+      href="/blog"
+      class="text-cool-grey-800 dark:text-mono-100 inline-flex items-center gap-2 hover:underline"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m15 18-6-6 6-6"></path>
       </svg>
       Go Back
     </a>
   </div>
   <article
-    class="prose prose-slate mt-6 max-w-none dark:prose-invert lg:prose-xl prose-a:text-light-blue-vivid-400 prose-a:no-underline hover:prose-a:underline"
+    class="prose prose-slate dark:prose-invert lg:prose-xl prose-a:text-cool-grey-800 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-mono-100 mt-6 max-w-none"
   >
     <h1 transition:name={title}>{title}</h1>
     <span>
@@ -79,21 +92,55 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
     <slot />
   </article>
-  <script
-    is:inline
-    src="https://giscus.app/client.js"
-    data-repo="Nsttt/my-portfolio"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk="
-    data-category="Comments"
-    data-category-id="DIC_kwDOEYPwZc4CVJ8A"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="dark"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async></script>
+  <div class="giscus"></div>
+  <script>
+    const theme = localStorage.getItem("theme") ?? "dark";
+    const giscusTheme = theme === "dark" ? "dark" : "light";
+    
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "Nsttt/my-portfolio");
+    script.setAttribute("data-repo-id", "MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk=");
+    script.setAttribute("data-category", "Comments");
+    script.setAttribute("data-category-id", "DIC_kwDOEYPwZc4CVJ8A");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "top");
+    script.setAttribute("data-theme", giscusTheme);
+    script.setAttribute("data-lang", "en");
+    script.setAttribute("data-loading", "lazy");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+    
+    const giscusContainer = document.querySelector(".giscus");
+    if (giscusContainer) {
+      giscusContainer.appendChild(script);
+    }
+    
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          const isDark = document.documentElement.classList.contains("dark");
+          const newTheme = isDark ? "dark" : "light";
+          
+          // Update Giscus theme
+          const iframe = document.querySelector("iframe.giscus-frame") as HTMLIFrameElement;
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: newTheme } } },
+              "https://giscus.app"
+            );
+          }
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  </script>
 </BaseLayout>
