@@ -19,27 +19,29 @@
 
 @theme {
   --font-sans: "Satoshi", sans-serif;
-  --color-light-blue-vivid-050: #e3f8ff;
-  --color-light-blue-vivid-100: #b3ecff;
-  --color-light-blue-vivid-200: #81defd;
-  --color-light-blue-vivid-300: #5ed0fa;
-  --color-light-blue-vivid-400: #40c3f7;
-  --color-light-blue-vivid-500: #2bb0ed;
-  --color-light-blue-vivid-600: #1992d4;
-  --color-light-blue-vivid-700: #127fbf;
-  --color-light-blue-vivid-800: #0b69a3;
-  --color-light-blue-vivid-900: #035388;
 
-  --color-cool-grey-050: #f5f7fa;
-  --color-cool-grey-100: #e4e7eb;
-  --color-cool-grey-200: #cbd2d9;
-  --color-cool-grey-300: #9aa5b1;
-  --color-cool-grey-400: #7b8794;
-  --color-cool-grey-500: #616e7c;
-  --color-cool-grey-600: #52606d;
-  --color-cool-grey-700: #3e4c59;
-  --color-cool-grey-800: #323f4b;
-  --color-cool-grey-900: #1f2933;
+  /* Adding monochrome aliases for the redesigned colors */
+  --color-mono-050: #f8f8f8;
+  --color-mono-100: #f0f0f0;
+  --color-mono-200: #e0e0e0;
+  --color-mono-300: #c0c0c0;
+  --color-mono-400: #a0a0a0;
+  --color-mono-500: #808080;
+  --color-mono-600: #606060;
+  --color-mono-700: #404040;
+  --color-mono-800: #202020;
+  --color-mono-900: #101010;
+
+  --color-cool-grey-050: #ffffff;
+  --color-cool-grey-100: #f5f5f5;
+  --color-cool-grey-200: #e5e5e5;
+  --color-cool-grey-300: #d4d4d4;
+  --color-cool-grey-400: #a3a3a3;
+  --color-cool-grey-500: #737373;
+  --color-cool-grey-600: #525252;
+  --color-cool-grey-700: #404040;
+  --color-cool-grey-800: #262626;
+  --color-cool-grey-900: #171717;
 
   --color-pink-vivid-050: #ffe3ec;
   --color-pink-vivid-100: #ffb8d2;
