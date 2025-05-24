@@ -92,21 +92,55 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
     <slot />
   </article>
-  <script
-    is:inline
-    src="https://giscus.app/client.js"
-    data-repo="Nsttt/my-portfolio"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk="
-    data-category="Comments"
-    data-category-id="DIC_kwDOEYPwZc4CVJ8A"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="preferred_color_scheme"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async></script>
+  <div class="giscus"></div>
+  <script>
+    const theme = localStorage.getItem("theme") ?? "dark";
+    const giscusTheme = theme === "dark" ? "dark" : "light";
+    
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "Nsttt/my-portfolio");
+    script.setAttribute("data-repo-id", "MDEwOlJlcG9zaXRvcnkyOTM4NTk0Mjk=");
+    script.setAttribute("data-category", "Comments");
+    script.setAttribute("data-category-id", "DIC_kwDOEYPwZc4CVJ8A");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "top");
+    script.setAttribute("data-theme", giscusTheme);
+    script.setAttribute("data-lang", "en");
+    script.setAttribute("data-loading", "lazy");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+    
+    const giscusContainer = document.querySelector(".giscus");
+    if (giscusContainer) {
+      giscusContainer.appendChild(script);
+    }
+    
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          const isDark = document.documentElement.classList.contains("dark");
+          const newTheme = isDark ? "dark" : "light";
+          
+          // Update Giscus theme
+          const iframe = document.querySelector("iframe.giscus-frame") as HTMLIFrameElement;
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: newTheme } } },
+              "https://giscus.app"
+            );
+          }
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  </script>
 </BaseLayout>
