@@ -1,0 +1,77 @@
+---
+title: "IoT Gateway"
+subtitle: "Next-Generation Industrial IoT Platform"
+description: "A comprehensive platform engineered to simplify the deployment, management, and monitoring of Industrial IoT infrastructures with zero-touch provisioning and real-time observability"
+pubDate: "2025-05-24"
+image: "./images/iotgw.webp"
+link: "https://www.industry40.systems/iotgw"
+source: "https://github.com/i40sys/iotgw"
+tags:
+  [
+    "IoT",
+    "Industry 4.0",
+    "Edge Computing",
+    "GitOps",
+    "OpenWRT",
+    "Ansible",
+    "MQTT",
+    "Grafana",
+  ]
+---
+
+**IoT Gateway** is a next-generation platform engineered to simplify the deployment, management, and monitoring of Industrial IoT infrastructures. Built on robust open-source technologies, it delivers a comprehensive solution—from automated provisioning to real-time observability—making it ideal for both remote facilities and industrial deployments.
+
+## Why IoT Gateway?
+
+- **Effortless Deployment:** USB-free, zero-touch setup with network booting and centralized provisioning
+- **Streamlined Management:** Full control over system configuration, container deployment, and network settings through a user-friendly web interface
+- **Robust Observability:** Real-time monitoring, centralized logging, and advanced performance dashboards
+- **Seamless Recovery:** Automated backups, live debugging, and rapid restoration
+- **Flexible Integration:** Connect OT devices with Layer 2 VPN and bidirectional MQTT synchronization
+
+## Core Capabilities
+
+### Provisioning & Automation
+
+- **USB-Free Setup** with iPXE network booting
+- **Automated Provisioning** via Ansible Forms and JSON-configured playbooks
+- **GitOps-Powered Stack Deployment** with automated Notion sync
+- **Customizable OpenWRT Base Image** (~100MB) with modular updates
+
+### Management & Monitoring
+
+- **Intuitive Web-Based System Management** for Docker containers, firewall rules, and network settings
+- **Grafana Alloy Suite** with Mimir and Loki for unified logging and metrics
+- **Uptime Kuma & Autokuma** for automated service monitoring
+- **Real-time dashboards** with Prometheus-compatible endpoints
+
+### Networking & Connectivity
+
+- **Secure Networking** via ZeroTier VPN and bridged networks
+- **Layer 2 VPN** for non-IP-compatible industrial devices
+- **Unified Namespace** with bidirectional MQTT synchronization (Mosquitto ↔ EMQX)
+
+### Recovery & Debugging
+
+- **Automated Backups** with Duplicati for disk imaging and snapshots
+- **Zero-Touch Recovery** via network boot
+- **Remote Live Debugging** with Clonezilla environment and SSH access
+
+## Technical Architecture
+
+IoT Gateway bridges Operational Technology (OT) and cellular networks with:
+
+- Isolated communications for HMIs, PLCs, and manufacturing assets
+- Expandable connectivity with Ethernet switches
+- Layer 2 VPN for remote device discovery and management
+- Git-integrated Node-RED automation
+
+## The Team
+
+Developed by industry experts at Industry 4.0 Systems:
+
+- **Raimon Figueras**
+- **Nestor Lopez**
+- **Oriol Rius**
+
+For more information, visit the [project website](https://www.industry40.systems/iotgw) or explore our [GitHub repository](https://github.com/i40sys/iotgw).
