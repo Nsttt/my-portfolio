@@ -29,21 +29,27 @@ const talks = await getCollection("talks");
           <a
             class="text-cool-grey-800 dark:text-mono-300 underline"
             href="https://trpc.io/"
-            target="_blank">tRPC</a
+            target="_blank"
+            data-s:event="oss_trpc"
+            data-s:event-props="category=framework">tRPC</a
           > - A framework for building typesafe APIs with TypeScript
         </li>
         <li>
           <a
             class="text-cool-grey-800 dark:text-mono-300 underline"
             href="https://create.t3.gg/"
-            target="_blank">T3 Stack</a
+            target="_blank"
+            data-s:event="oss_t3"
+            data-s:event-props="category=template">T3 Stack</a
           > - A fullstack Next.js template for typesafe applications
         </li>
         <li>
           <a
             class="text-cool-grey-800 dark:text-mono-300 underline"
             href="https://module-federation.io/"
-            target="_blank">Module Federation</a
+            target="_blank"
+            data-s:event="oss_module_federation"
+            data-s:event-props="category=architecture">Module Federation</a
           > - Helping teams build scalable micro-frontend architectures
         </li>
       </ul>
@@ -57,7 +63,9 @@ const talks = await getCollection("talks");
         Finally I am part of <a
           class="text-cool-grey-800 dark:text-mono-300 underline"
           href="https://industry40.systems/"
-          target="_blank">I40sys</a
+          target="_blank"
+          data-s:event="oss_industry40"
+          data-s:event-props="category=research">I40sys</a
         >, a research group focused on Industry 4.0 and digital transformation.
       </p>
     </div>
@@ -70,6 +78,7 @@ const talks = await getCollection("talks");
       <a
         href="/blog"
         class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
+        data-s:event="view_all_posts"
         >See all posts</a
       >
     </div>
@@ -91,6 +100,8 @@ const talks = await getCollection("talks");
                 description={post.data.description}
                 date={post.data.pubDate}
                 expectedReadTime={post.data.expectedReadTime}
+                eventName="blog_post_click"
+                eventProps={`title=${post.data.title}`}
               />
             </li>
           ))
@@ -105,6 +116,7 @@ const talks = await getCollection("talks");
       <a
         href="/talks"
         class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
+        data-s:event="view_all_talks"
         >See all content</a
       >
     </div>
@@ -125,6 +137,8 @@ const talks = await getCollection("talks");
                 description={talk.data.description}
                 date={talk.data.pubDate}
                 expectedReadTime={0}
+                eventName="talk_click"
+                eventProps={`title=${talk.data.title}`}
               />
             </li>
           ))
@@ -139,6 +153,7 @@ const talks = await getCollection("talks");
       <a
         href="/projects"
         class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
+        data-s:event="view_all_projects"
         >See all projects</a
       >
     </div>
@@ -159,6 +174,8 @@ const talks = await getCollection("talks");
                 description={project.data.description}
                 date={project.data.pubDate}
                 expectedReadTime={0}
+                eventName="project_click"
+                eventProps={`title=${project.data.title}`}
               />
             </li>
           ))

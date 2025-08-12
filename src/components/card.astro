@@ -7,16 +7,23 @@ interface Props {
   description: string;
   date: string;
   expectedReadTime: number;
+  eventName?: string;
+  eventProps?: string;
 }
 
-const { href, title, description, date, expectedReadTime } = Astro.props;
+const { href, title, description, date, expectedReadTime, eventName, eventProps } = Astro.props;
 const formatedDate = dayjs(date).format("MMMM DD, YYYY");
 ---
 
 <div
   class="rounded-lg p-2 transition duration-200 ease-linear hover:-translate-y-2 hover:bg-mono-300/20 dark:hover:bg-mono-700/20"
 >
-  <a rel="prefetch" href={href}>
+  <a 
+    rel="prefetch" 
+    href={href}
+    data-s:event={eventName}
+    data-s:event-props={eventProps}
+  >
     <div class="flex flex-col gap-y-2">
       <h3 class="text-2xl font-bold text-cool-grey-900 dark:text-mono-100">
         {title}

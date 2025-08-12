@@ -44,7 +44,12 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
       </span>
     </div>
     <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
-    <a target="_blank" href={source}>View source</a>
+    <a 
+      target="_blank" 
+      href={source}
+      data-s:event="project_source_view"
+      data-s:event-props={`title=${title}`}
+    >View source</a>
     <slot />
   </article>
 </BaseLayout>
