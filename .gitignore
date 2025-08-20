@@ -2,7 +2,6 @@ node_modules/
 dist/
 *.tsbuildinfo
 .DS_Store
-.vercel
 _site/
 scripts/smoke/*-main/
 scripts/memory/project/src/pages/
@@ -22,3 +21,4 @@ packages/integrations/**/.netlify/
 # exclude IntelliJ/WebStorm stuff
 .idea
 .astro
+.wrangler

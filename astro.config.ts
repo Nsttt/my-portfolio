@@ -1,3 +1,4 @@
+import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
@@ -10,6 +11,12 @@ import { remarkReadingTime } from "./src/utils/getReadingTime";
 
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
+  adapter: cloudflare({
+    imageService: "cloudflare",
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   markdown: {
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [rehypeAutolinkHeadings],
