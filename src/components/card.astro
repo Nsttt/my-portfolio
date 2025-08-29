@@ -11,21 +11,30 @@ interface Props {
   eventProps?: string;
 }
 
-const { href, title, description, date, expectedReadTime, eventName, eventProps } = Astro.props;
+const {
+  href,
+  title,
+  description,
+  date,
+  expectedReadTime,
+  eventName,
+  eventProps,
+} = Astro.props;
 const formatedDate = dayjs(date).format("MMMM DD, YYYY");
 ---
 
 <div
-  class="rounded-lg p-2 transition duration-200 ease-linear hover:-translate-y-2 hover:bg-mono-300/20 dark:hover:bg-mono-700/20"
+  class="hover:bg-mono-300/20 dark:hover:bg-mono-700/20 rounded-lg p-2 transition duration-200 ease-linear hover:-translate-y-2"
 >
-  <a 
-    rel="prefetch" 
+  <a
+    rel="prefetch"
     href={href}
-    data-s:event={eventName}
-    data-s:event-props={eventProps}
+    onclick={eventName
+      ? `window.umami.track('${eventName}'${eventProps ? `, { ${eventProps.split("=")[0]}: '${eventProps.split("=")[1]?.replace(/'/g, "\\'")}' }` : ""})`
+      : undefined}
   >
     <div class="flex flex-col gap-y-2">
-      <h3 class="text-2xl font-bold text-cool-grey-900 dark:text-mono-100">
+      <h3 class="text-cool-grey-900 dark:text-mono-100 text-2xl font-bold">
         {title}
       </h3>
       <p class="text-black dark:text-slate-200">{description}</p>
@@ -34,11 +43,11 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
         {
           expectedReadTime > 0 && (
             <>
-                <span>•</span>
-                <span>
-                  {"☕".repeat(expectedReadTime).substring(0, 5)}
-                  {`${expectedReadTime.toString()} min read`}
-                </span>
+              <span>•</span>
+              <span>
+                {"☕".repeat(expectedReadTime).substring(0, 5)}
+                {`${expectedReadTime.toString()} min read`}
+              </span>
             </>
           )
         }

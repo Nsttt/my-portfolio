@@ -6,3 +6,9 @@ type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
 declare namespace App {
   interface Locals extends Runtime {}
 }
+
+interface Window {
+  umami?: {
+    track: (event: string, data?: Record<string, unknown>) => void;
+  };
+}
