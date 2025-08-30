@@ -111,6 +111,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     script.setAttribute("data-theme", giscusTheme);
     script.setAttribute("data-lang", "en");
     script.setAttribute("data-loading", "lazy");
+    script.setAttribute("data-origin", window.location.origin);
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
     
