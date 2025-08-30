@@ -8,8 +8,9 @@ const parser = new MarkdownIt();
 export async function GET(context: RSSOptions) {
   const blog = await getCollection("posts");
   const projects = await getCollection("projects");
+  const talks = await getCollection("talks");
 
-  const combined = [...blog, ...projects].sort(
+  const combined = [...blog, ...projects, ...talks].sort(
     (a, b) =>
       new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
   );
@@ -17,7 +18,7 @@ export async function GET(context: RSSOptions) {
   // Sort combined array by pubDate
   return rss({
     title: "Néstor's Blog",
-    description: "Writing about software development in TypeScript and Rust.",
+    description: "Writing about software architecture, functional programming, and systems design.",
     site: context.site,
     items: combined.map((item) => ({
       title: item.data.title,
@@ -26,7 +27,9 @@ export async function GET(context: RSSOptions) {
       link:
         item.collection === "posts"
           ? `/blog/${item.slug}`
-          : `/projects/${item.slug}`,
+          : item.collection === "projects"
+            ? `/projects/${item.slug}`
+            : `/talks/${item.slug}`,
       content: sanitizeHtml(parser.render(item.body)),
     })),
   });

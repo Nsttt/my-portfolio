@@ -46,6 +46,14 @@ const {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={image} />
 
+<!-- RSS Feed -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="Néstor's Blog"
+  href={new URL("rss.xml", Astro.site)}
+/>
+
 <!-- Link Tags -->
 <link
   rel="preload"
