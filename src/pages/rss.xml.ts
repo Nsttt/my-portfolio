@@ -18,7 +18,8 @@ export async function GET(context: RSSOptions) {
   // Sort combined array by pubDate
   return rss({
     title: "Néstor's Blog",
-    description: "Writing about software architecture, functional programming, and systems design.",
+    description:
+      "Writing about software architecture, functional programming, and systems design.",
     site: context.site,
     items: combined.map((item) => ({
       title: item.data.title,
@@ -30,7 +31,7 @@ export async function GET(context: RSSOptions) {
           : item.collection === "projects"
             ? `/projects/${item.slug}`
             : `/talks/${item.slug}`,
-      content: sanitizeHtml(parser.render(item.body)),
+      content: item.body ? sanitizeHtml(parser.render(item.body)) : item.data.description,
     })),
   });
 }
