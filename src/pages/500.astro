@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/baseLayout.astro";
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+
+// Safely extract error message without leaking sensitive information
+const getErrorMessage = (error: unknown): string => {
+  if (error instanceof Error) {
+    // Only show generic error types to avoid leaking implementation details
+    if (error.name === "ValidationError") {
+      return "Invalid request data";
+    }
+    if (error.name === "NotFoundError") {
+      return "Resource not found";
+    }
+    if (error.name === "AuthenticationError") {
+      return "Authentication required";
+    }
+    if (error.name === "AuthorizationError") {
+      return "Access denied";
+    }
+    // For other errors, show a generic message
+    return "An unexpected error occurred";
+  }
+  return "Something went wrong";
+};
+
+const errorMessage = getErrorMessage(error);
+---
+
+<BaseLayout
+  title="500 - Server Error"
+  description="An unexpected error occurred while processing your request."
+>
+  <section class="mt-20 flex min-h-[60vh] flex-col items-center justify-center text-center">
+    <div class="w-full max-w-2xl">
+      <h1 class="mb-8 text-8xl font-bold text-red-400 dark:text-red-500">
+        500
+      </h1>
+      <h2 class="mb-6 text-3xl font-semibold">Server Error</h2>
+      <p class="mb-4 text-xl text-cool-grey-700 dark:text-cool-grey-300">
+        {errorMessage}
+      </p>
+      <p class="mb-8 text-lg text-cool-grey-600 dark:text-cool-grey-400">
+        Please try again later or contact support if the problem persists.
+      </p>
+      <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <a
+          href="/"
+          class="rounded-lg bg-cool-grey-800 px-6 py-3 text-white transition-colors hover:bg-cool-grey-700 dark:bg-cool-grey-200 dark:text-cool-grey-900 dark:hover:bg-cool-grey-100"
+        >
+          Go Home
+        </a>
+        <button
+          onclick="window.location.reload()"
+          class="rounded-lg border border-cool-grey-400 px-6 py-3 text-cool-grey-800 transition-colors hover:bg-cool-grey-100 dark:border-cool-grey-600 dark:text-cool-grey-200 dark:hover:bg-cool-grey-800"
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
