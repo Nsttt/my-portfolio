@@ -1,7 +1,7 @@
 ---
 title: "My Planetary Datacenter I: Architecture"
 description: "Explore my homelab ‘Planetary Datacenter’ where ZeroTier networking, MacVLAN tricks, VLAN segmentation, and GPU passthrough combine for a global, DIY cloud."
-image: "./images/my-planetary-datacenter-I.webp"
+image: "./images/my-planetary-datacenter-I-large.webp"
 pubDate: "January 5, 2025"
 expectedReadTime: 12
 tags: ["homelab", "networking", "virtualization"]
@@ -136,7 +136,7 @@ On my **NAS**, I’m not using many of TrueNAS’s built-in virtualization featu
 
 I also have a direct **SFP+** connection between my NAS and the Proxmox server (**MS01**) for faster data transfers. That means all my VMs can access _NFS_ shares at _10GbE speeds_, which is super handy for big data or media workflows.
 
-#### Why NFSv4.2?
+### Why NFSv4.2?
 
 I’m using **NFSv4.2** mainly because it builds on earlier versions while adding a bunch of super handy extras. Here’s a quick rundown:
 
@@ -164,7 +164,7 @@ It keeps _host_ networking simpler and gives each container a dedicated IP isola
 
 ![VM Setup](./images/proxmox1.webp)
 
-#### How it works
+### How it works
 
 In Docker, I create a [**MacVLAN interface**](https://docs.docker.com/network/macvlan/) bound to the **ZeroTier interface**. That way, each container in that network appears on the ZeroTier VLAN with its own MAC address (and IP) instead of piggybacking on the host OS. This method isolates container traffic _cleanly_ from the VM’s main interface, which helps when bridging or routing across different VLANs.
 
@@ -194,7 +194,7 @@ In Docker, I create a [**MacVLAN interface**](https://docs.docker.com/network/ma
 
 - All config folders and downloads get mapped to the **NAS’s** NFS shares, so everything is in one _central spot_.
 
-#### Hardlinks & NFS
+### Hardlinks & NFS
 
 I’m using **hardlinks** so that I can have a file appear in multiple places (like the _“downloads”_ folder and the final _“TV Shows”_ folder) without doubling the storage cost.
 
@@ -208,7 +208,7 @@ You just have to be consistent with your paths in **Docker Compose**, **NFS shar
 
 I’m a huge fan of **Docker Compose** because it’s easy, fast, and reproducible. I keep a _Git repo_ with all my Compose files and volumes declared. If I ever blow away a VM or want to spin up a new environment, I just clone the repo and run **docker compose up**.
 
-#### Why Portainer?
+### Why Portainer?
 
 I like to pair this _Git-based workflow_ with [Portainer](https://www.portainer.io/) because it gives me a **simple, intuitive UI** on top of my Docker environment. While **Docker Compose** keeps everything _version-controlled_ and _scriptable_, **Portainer** ties it together with a **dashboard** that shows all my containers, volumes, networks, and logs in one place.
 
@@ -216,7 +216,7 @@ It even has built-in **GitOps-style features**, like pulling changes directly _e
 
 If you know of any other tools that offer a **similar UI-driven approach** and integrate well with _GitOps_, [**let me know**](https://x.com/nstlopez)! I’m always on the lookout for **alternatives**.
 
-#### Why not LXC?
+### Why not LXC?
 
 While [**LXC**](https://linuxcontainers.org/) can be more lightweight and can potentially yield _better performance_, it’s just trickier to _replicate_ consistently. If you know a way to make **LXC** more _reproducible_, I’d love to hear it! Hit me up on [Twitter](https://x.com/nstlopez).
 

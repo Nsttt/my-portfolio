@@ -43,7 +43,7 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
         <time>{formatedDate}</time>
       </span>
     </div>
-    <img class="w-full object-cover shadow-lg" src={image.src} alt={title} />
+    <img class="w-full object-cover shadow-lg" src={image.src} alt={title} fetchpriority="high" loading="eager" />
     <a 
       target="_blank" 
       href={source}
