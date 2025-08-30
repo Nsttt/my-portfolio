@@ -21,7 +21,7 @@ const posts = await getCollection("posts");
         .map((post) => (
           <li>
             <Card
-              href={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}/`}
               title={post.data.title}
               description={post.data.description}
               date={post.data.pubDate}

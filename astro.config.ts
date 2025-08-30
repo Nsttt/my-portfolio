@@ -14,7 +14,6 @@ import { remarkReadingTime } from "./src/utils/getReadingTime";
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
   adapter: cloudflare({
-    imageService: "cloudflare",
     platformProxy: {
       enabled: true,
     },

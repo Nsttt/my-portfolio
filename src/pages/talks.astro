@@ -19,7 +19,7 @@ const talks = await getCollection("talks");
         .map((talk) => (
           <li>
             <Card
-              href={`/talks/${talk.slug}`}
+              href={`/talks/${talk.slug}/`}
               title={talk.data.title}
               description={talk.data.description}
               date={talk.data.pubDate}
