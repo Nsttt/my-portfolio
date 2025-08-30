@@ -7,6 +7,8 @@ import tailwindcss from "@tailwindcss/vite";
 import type { AstroUserConfig } from "astro";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import astroLlmsTxt from "./src/integrations/llms-txt";
 import { remarkReadingTime } from "./src/utils/getReadingTime";
 
 const config: AstroUserConfig = {
@@ -19,12 +21,16 @@ const config: AstroUserConfig = {
   }),
   markdown: {
     remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [rehypeAutolinkHeadings],
+    rehypePlugins: [
+      rehypeSlug,
+      // @ts-ignore
+      [rehypeAutolinkHeadings, { behavior: "append" }],
+    ],
     shikiConfig: {
       theme: "vitesse-dark",
     },
   },
-  integrations: [sitemap(), prefetch(), mdx(), solidJs()],
+  integrations: [sitemap(), prefetch(), mdx(), solidJs(), astroLlmsTxt()],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,4 +1,4 @@
-<h1 align="center">Personal Portfolio / Blog</h1>
+<h1 align="center">Personal Blog</h1>
 <p align="center"><a href="https://nstlopez.com">Check it out !</a></p>
 <div align="center">
 
