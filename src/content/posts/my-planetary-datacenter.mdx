@@ -49,7 +49,6 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 ### Main Machines
 
 1. **NAS [TrueNAS Scale](https://www.truenas.com/truenas-scale/)**
-
    - **CPU/RAM**: Intel i5-7600K, 16GB RAM
 
    - **Storage**: 1×1TB SSD for the OS + 4×16TB HDD in a ZFS _“striped mirrors”_ arrangement.
@@ -57,7 +56,6 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
    - **Role**: Holds all my data, shared mainly over [_NFSv4.2_](https://www.rfc-editor.org/rfc/rfc7862.html).
 
 2. **MS01 [Proxmox Server](https://www.proxmox.com)**
-
    - **CPU/RAM**: Intel i9-13900H, 32GB RAM
 
    - **Storage**: 2×1TB NVME in _RAID1_
@@ -77,7 +75,6 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 2. **Guests**: For visitors, restricted access, minimal privileges.
 
 3. **IoT** & **IoT Private**:
-
    - _IoT_: For general smart bulbs, plugs, and devices that _do_ need internet access.
 
    - _IoT Private_: For devices that are strictly local (no external communication needed).
@@ -93,7 +90,6 @@ My ISP router is basically acting as a **pass-through device**. I’ve set it up
 2. **Cardinal Guest**: Segregated, on the Guest VLAN.
 
 3. **Cardinal IoT**: A 2.4GHz-only SSID for IoT devices. It uses _pre-shared keys_ for network segregation based on SSID password.
-
    - **Cardinal IoT**: For IoT devices that uses the internet somehow.
 
    - **Cardinal IoT Private**: For local-only IoT devices with no internet access.
