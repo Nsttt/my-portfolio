@@ -1,0 +1,148 @@
+---
+title: "From Light Bulbs to AI Agents"
+description: "Turns out the Internet of Agents just needs the same boring stack we trusted to keep the porch light on."
+image: "./images/from-light-bulbs-to-agents.webp"
+pubDate: "October 1 2025"
+expectedReadTime: 8
+tags: ["mqtt", "ai", "iot", "orchestration"]
+draft: false
+---
+
+Remember debugging MQTT topics for smart-home gateways?
+
+- `kitchen/temp` → 21.5 °C
+- `garage/door` → closed…
+
+The reason we loved MQTT back then was dead-simple:
+
+- One broker, n-many clients
+- Pub/sub decouples who talks to whom
+- Wildcards + retained messages give discovery for free
+
+In my opinion, those same three super-powers turn out to be exactly what large-scale AI systems are crying for today.
+
+When every micro-service, RAG pipeline, and LLM wrapper can show up, disappear, or change price in seconds, you need a routing layer that is:
+
+1. Stateless on the broker side
+2. Embeddable in fire-walled environments
+3. Able to notify 500k nodes in sub-linear time
+
+Sound familiar? It's called `MQTT`.
+
+## The Problem No One Tells You About "AI Orchestration"
+
+Classic tool-chaining frameworks are stuck in the HTTP era:
+
+- A central router holds open connections to every worker → _file descriptor explosion_
+- "Who can do what?" becomes a never-ending polling loop → _rate-limit hell_
+- Exactly-once and redelivery? DIY retries, exponential back-off, circuit-breakers… all in _your_ code base
+
+We fixed these pains for thermostats years ago by moving to MQTT.
+
+It's about time to apply the same medicine to language models and vector stores.
+
+## Agent Resumés As Retained Topics
+
+Publishing a sensor value is old news. Publish an agent's capabilities the same way:
+
+`agents/{agentId}/resume` ← retained JSON:
+
+```json
+{
+  "skills": ["sql-optimiser", "nl2chart"],
+  "cost": { "usd": 0.02, "p95_ms": 350 },
+  "region": "eu-central-1",
+  "accredit": ["ISO27001", "gdpr"]
+}
+```
+
+Any orchestrator (or CLI) that subscribes to `agents/+/resume` builds a real-time registry without HTTP calls, without polling, without a single line of server code.
+
+## Task Requests Fly Over Wildcards
+
+1. A client publishes a complex request to `tasks/{uuid}/request`
+2. Capable agents auto-reply with proposed sub-task DAGs onto `tasks/{uuid}/proposal/+/`  
+   _(wildcard plus means anyone can read, but only proposal-owner can write)_
+3. The orchestrator chooses the merged DAG and publishes individual assignments under `tasks/{uuid}/assign/{agentId}` with QoS 2
+4. Results come back via `tasks/{uuid}/output/{stepId}` – again retained, so late-join nodes never miss state
+
+Because MQTT has three built-in QoS levels, the _exactly-once_ path for critical steps costs you one flag, not a weekend of re-write.
+
+## Scaling To 100k Clients Without Boiling the Broker
+
+Eclipse Mosquitto 2.x already demonstrated 200k+ concurrent connections on a $5 VM. Memory usage per idle client? &lt;4 kB.
+
+Publish payload for a capability update or intermediate JSON result is typically under 2 kB, smaller than the average JPEG thumbnail we once pushed for camera snapshots.
+
+If your broker handled 100k temperature sensors, it will handle 100k agents without breaking a sweat.
+
+## Security & Compliance Out-of-the-Box
+
+Topic ACLs support wildcards, so a hospital can forbid any agent advertising `gdpr=false` from subscribing to PHI topics:
+
+```bash
+pattern readwrite +/gdpr/false/#
+pattern deny +/patient-data/#
+```
+
+Add X.509 client certs and you've got mutual TLS plus topic-level policy enforcement, all broker-native.
+
+## From the Edge to the Cloud With Shared Subscriptions
+
+Need a GPU-heavy task but the edge device is a Pi? Create a shared subscription group:
+
+```bash
+$share/gpu/tasks/+/heavy
+```
+
+Cloud nodes join the group, messages are load-balanced among them yet still replied to over the original task UUID.
+
+### Another personal example
+
+A video encoding job came in while I was traveling with just my laptop. My home server cluster was idle but my laptop battery was running low.
+
+I prefixed the topic:
+
+```bash
+$share/media/encode/+/video
+```
+
+The home servers in the same share group picked up the encoding task, my laptop stayed cool and quiet, and the processed video was ready when I got back online.
+
+Shared subscriptions are MQTT’s built-in load balancer.
+
+- No HA-proxy of any kind
+- No Kubernetes service mesh
+
+Just a dollar sign.
+
+## What You Must Actually Reconfigure
+
+Nothing. Your favourite broker (Mosquitto, EMQX, HiveMQ, Nanomq) already supports every pattern above.
+
+All that changes is perspective:
+
+- Retained messages → the single source of truth
+- Wildcards → declarative queries
+- QoS levels → reliability without code
+- ACLs → policy enforcement at wire-speed
+
+## Take from someone who already speaks MQTT
+
+Today the "things" are no longer light bulbs, they're containerised LLMs that spin up in Ohio, complain about GPU quota, then vanish.
+
+The chatter is still:
+
+- birth message → “I exist, here’s what I can do”
+
+- telemetry → “this is my current cost, latency, license”
+
+- command → “execute sub-task 7”
+
+- last-will → “I died, don’t route to me”
+
+Your old topic patterns already cover 90% of that lifecycle.
+
+The only new ingredient is intent: instead of °C you publish embeddings, instead of toggling a relay you toggle a 4-bit quantised model.
+
+Turns out the Internet of Agents just needs the same boring stack we trusted to keep the porch light on.
