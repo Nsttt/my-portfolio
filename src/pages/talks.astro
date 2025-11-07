@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Card from "../components/card.astro";
+import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
 const talks = await getCollection("talks");
@@ -8,7 +9,18 @@ const talks = await getCollection("talks");
 
 <BaseLayout title="Talks" description="All the talks and Workshops I've given.">
   <h1 class="mt-20 text-6xl font-bold">Talks</h1>
-  <ul class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
+
+  <Search
+    client:only="solid-js"
+    placeholder="Search talks..."
+    itemClass="talk-item"
+    containerId="talks-container"
+  />
+
+  <ul
+    id="talks-container"
+    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
+  >
     {
       talks
         .sort(
@@ -17,7 +29,12 @@ const talks = await getCollection("talks");
             new Date(a.data.pubDate).valueOf(),
         )
         .map((talk) => (
-          <li>
+          <li
+            class="talk-item"
+            data-title={talk.data.title.toLowerCase()}
+            data-description={talk.data.description.toLowerCase()}
+            data-tags={talk.data.tags?.join(" ").toLowerCase() || ""}
+          >
             <Card
               href={`/talks/${talk.slug}/`}
               title={talk.data.title}
@@ -29,4 +46,10 @@ const talks = await getCollection("talks");
         ))
     }
   </ul>
+
+  <div id="no-results" class="hidden py-12 text-center">
+    <p class="text-lg text-neutral-600 dark:text-neutral-500">
+      No results found
+    </p>
+  </div>
 </BaseLayout>

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 
 import Card from "../components/card.astro";
+import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
 const posts = await getCollection("posts");
@@ -9,7 +10,18 @@ const posts = await getCollection("posts");
 
 <BaseLayout title="Blog" description="All my blog posts.">
   <h1 class="mt-20 text-6xl font-bold">Blog</h1>
-  <ul class="mt-10 flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8">
+
+  <Search
+    client:only="solid-js"
+    placeholder="Search posts..."
+    itemClass="post-item"
+    containerId="posts-container"
+  />
+
+  <ul
+    id="posts-container"
+    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
+  >
     {
       posts
         .filter((post) => !post.data.draft)
@@ -19,7 +31,12 @@ const posts = await getCollection("posts");
             new Date(a.data.pubDate).valueOf(),
         )
         .map((post) => (
-          <li>
+          <li
+            class="post-item"
+            data-title={post.data.title.toLowerCase()}
+            data-description={post.data.description.toLowerCase()}
+            data-tags={post.data.tags?.join(" ").toLowerCase() || ""}
+          >
             <Card
               href={`/blog/${post.slug}/`}
               title={post.data.title}
@@ -31,4 +48,10 @@ const posts = await getCollection("posts");
         ))
     }
   </ul>
+
+  <div id="no-results" class="hidden py-12 text-center">
+    <p class="text-lg text-neutral-600 dark:text-neutral-500">
+      No results found
+    </p>
+  </div>
 </BaseLayout>

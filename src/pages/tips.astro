@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import Card from "../components/card.astro";
+import Search from "../components/search";
+import BaseLayout from "../layouts/baseLayout.astro";
+
+const tips = await getCollection("tips");
+---
+
+<BaseLayout title="Tips" description="Quick tips and snippets.">
+  <h1 class="mt-20 text-6xl font-bold">Tips</h1>
+
+  <Search
+    client:only="solid-js"
+    placeholder="Search tips..."
+    itemClass="tip-item"
+    containerId="tips-container"
+  />
+
+  <ul
+    id="tips-container"
+    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
+  >
+    {
+      tips
+        .sort(
+          (a, b) =>
+            new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+        )
+        .map((tip) => (
+          <li
+            class="tip-item"
+            data-title={tip.data.title.toLowerCase()}
+            data-description={tip.data.description.toLowerCase()}
+            data-tags={tip.data.tags?.join(" ").toLowerCase() || ""}
+          >
+            <Card
+              href={`/tips/${tip.slug}/`}
+              title={tip.data.title}
+              description={tip.data.description}
+              date={tip.data.date.toISOString()}
+            />
+          </li>
+        ))
+    }
+  </ul>
+
+  <div id="no-results" class="hidden py-12 text-center">
+    <p class="text-lg text-neutral-600 dark:text-neutral-500">
+      No results found
+    </p>
+  </div>
+</BaseLayout>

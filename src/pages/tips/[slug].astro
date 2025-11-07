@@ -1,0 +1,72 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import dayjs from "dayjs";
+
+import BaseLayout from "../../layouts/baseLayout.astro";
+
+export async function getStaticPaths() {
+  const tips = await getCollection("tips");
+  return tips.map((tip) => ({
+    params: { slug: tip.slug },
+    props: { tip },
+  }));
+}
+
+interface Props {
+  tip: CollectionEntry<"tips">;
+}
+
+const { tip } = Astro.props;
+const { Content } = await tip.render();
+
+const formattedDate = dayjs(tip.data.date).format("MMMM DD, YYYY");
+---
+
+<BaseLayout title={tip.data.title} description={tip.data.description}>
+  <div class="mt-10">
+    <a
+      href="/tips"
+      class="text-cool-grey-800 dark:text-mono-100 inline-flex items-center gap-2 hover:underline"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+      Go Back
+    </a>
+  </div>
+
+  <article
+    class="prose prose-slate dark:prose-invert lg:prose-xl prose-a:text-cool-grey-800 prose-a:no-underline prose-a:hover:underline dark:prose-a:text-mono-100 mt-6 max-w-none"
+  >
+    <h1 transition:name={tip.data.title}>{tip.data.title}</h1>
+    <div class="flex flex-wrap items-center gap-2 text-sm">
+      <time datetime={tip.data.date.toISOString()}>{formattedDate}</time>
+      {
+        tip.data.tags && tip.data.tags.length > 0 && (
+          <>
+            <span>•</span>
+            <div class="flex flex-wrap gap-2">
+              {tip.data.tags.map((tag) => (
+                <span class="text-neutral-600 dark:text-neutral-400">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </>
+        )
+      }
+    </div>
+
+    <Content />
+  </article>
+</BaseLayout>

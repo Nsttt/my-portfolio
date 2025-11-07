@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description: string;
   date: string;
-  expectedReadTime: number;
+  expectedReadTime?: number;
   eventName?: string;
   eventProps?: string;
 }
@@ -38,10 +38,10 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
         {title}
       </h3>
       <p class="text-black dark:text-slate-200">{description}</p>
-      <span class="flex gap-x-4 text-cool-grey-600 dark:text-cool-grey-400">
+      <span class="text-cool-grey-600 dark:text-cool-grey-400 flex gap-x-4">
         <span>{formatedDate}</span>
         {
-          expectedReadTime > 0 && (
+          expectedReadTime && expectedReadTime > 0 && (
             <>
               <span>•</span>
               <span>
