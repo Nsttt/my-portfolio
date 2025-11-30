@@ -40,17 +40,15 @@ const formatedDate = dayjs(date).format("MMMM DD, YYYY");
       <p class="text-black dark:text-slate-200">{description}</p>
       <span class="text-cool-grey-600 dark:text-cool-grey-400 flex gap-x-4">
         <span>{formatedDate}</span>
-        {
-          expectedReadTime && expectedReadTime > 0 && (
-            <>
-              <span>•</span>
-              <span>
-                {"☕".repeat(expectedReadTime).substring(0, 5)}
-                {`${expectedReadTime.toString()} min read`}
-              </span>
-            </>
-          )
-        }
+        {expectedReadTime > 0 && (
+          <>
+            <span>•</span>
+            <span>
+              {"☕".repeat(expectedReadTime).substring(0, 5)}
+              {`${expectedReadTime.toString()} min read`}
+            </span>
+          </>
+        )}
       </span>
     </div>
   </a>
