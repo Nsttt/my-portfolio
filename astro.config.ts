@@ -9,6 +9,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import astroLlmsTxt from "./src/integrations/llms-txt";
 import { remarkReadingTime } from "./src/utils/getReadingTime";
+import { withZephyr } from "zephyr-astro-integration";
 
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
@@ -23,7 +24,7 @@ const config: AstroUserConfig = {
       theme: "vitesse-dark",
     },
   },
-  integrations: [sitemap(), prefetch(), mdx(), solidJs(), astroLlmsTxt()],
+  integrations: [sitemap(), prefetch(), mdx(), solidJs(), astroLlmsTxt(), process.env.ZE ? withZephyr() : undefined],
   vite: {
     plugins: [tailwindcss()],
   },

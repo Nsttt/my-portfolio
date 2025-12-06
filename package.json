@@ -74,6 +74,7 @@
     "typescript": "^5.9.2",
     "unified": "^11.0.5",
     "unist-util-remove": "^4.0.0",
-    "wrangler": "^4.33.1"
+    "wrangler": "^4.33.1",
+    "zephyr-astro-integration": "^0.1.2"
   }
 }
