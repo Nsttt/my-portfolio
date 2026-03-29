@@ -36,7 +36,7 @@ const talks = await getCollection("talks");
             data-tags={talk.data.tags?.join(" ").toLowerCase() || ""}
           >
             <Card
-              href={`/talks/${talk.slug}/`}
+              href={`/talks/${talk.id}/`}
               title={talk.data.title}
               description={talk.data.description}
               date={talk.data.pubDate}

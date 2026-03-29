@@ -35,7 +35,7 @@ const tips = await getCollection("tips");
             data-tags={tip.data.tags?.join(" ").toLowerCase() || ""}
           >
             <Card
-              href={`/tips/${tip.slug}/`}
+              href={`/tips/${tip.id}/`}
               title={tip.data.title}
               description={tip.data.description}
               date={tip.data.date.toISOString()}

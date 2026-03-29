@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import dayjs from "dayjs";
 
 import BaseLayout from "../../layouts/baseLayout.astro";
@@ -7,7 +7,7 @@ import BaseLayout from "../../layouts/baseLayout.astro";
 export async function getStaticPaths() {
   const tips = await getCollection("tips");
   return tips.map((tip) => ({
-    params: { slug: tip.slug },
+    params: { slug: tip.id },
     props: { tip },
   }));
 }
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { tip } = Astro.props;
-const { Content } = await tip.render();
+const { Content } = await render(tip);
 
 const formattedDate = dayjs(tip.data.date).format("MMMM DD, YYYY");
 ---

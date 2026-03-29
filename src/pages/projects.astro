@@ -37,7 +37,7 @@ const projects = await getCollection("projects");
             data-tags={project.data.tags?.join(" ").toLowerCase() || ""}
           >
             <Card
-              href={`/projects/${project.slug}/`}
+              href={`/projects/${project.id}/`}
               title={project.data.title}
               description={project.data.description}
               date={project.data.pubDate}

@@ -1,11 +1,11 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import MarkdownTalkLayout from "../../layouts/talkLayout.astro";
 
 export async function getStaticPaths() {
   const talkEntries = await getCollection("talks");
   return talkEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
@@ -14,7 +14,7 @@ interface Props {
   entry: CollectionEntry<"talks">;
 }
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <MarkdownTalkLayout frontmatter={entry.data}>

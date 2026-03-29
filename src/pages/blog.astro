@@ -38,7 +38,7 @@ const posts = await getCollection("posts");
             data-tags={post.data.tags?.join(" ").toLowerCase() || ""}
           >
             <Card
-              href={`/blog/${post.slug}/`}
+              href={`/blog/${post.id}/`}
               title={post.data.title}
               description={post.data.description}
               date={post.data.pubDate}

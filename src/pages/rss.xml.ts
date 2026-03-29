@@ -27,10 +27,10 @@ export async function GET(context: RSSOptions) {
       pubDate: new Date(item.data.pubDate),
       link:
         item.collection === "posts"
-          ? `/blog/${item.slug}`
+          ? `/blog/${item.id}`
           : item.collection === "projects"
-            ? `/projects/${item.slug}`
-            : `/talks/${item.slug}`,
+            ? `/projects/${item.id}`
+            : `/talks/${item.id}`,
       content: item.body ? sanitizeHtml(parser.render(item.body)) : item.data.description,
     })),
   });
