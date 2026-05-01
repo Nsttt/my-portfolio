@@ -15,7 +15,9 @@ import { withZephyr } from "zephyr-astro-integration";
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
   output: "server",
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: { build: "compile", runtime: "cloudflare-binding" },
+  }),
   markdown: {
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [
