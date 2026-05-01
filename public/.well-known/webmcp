@@ -4,32 +4,116 @@
   "description": "Discover and browse Néstor López's writing, projects, talks, and technical tips.",
   "tools": [
     {
-      "name": "browse-blog-posts",
-      "description": "Browse technical blog posts by Néstor López.",
+      "name": "browse_blog_posts",
+      "description": "Browse or search technical blog posts by Néstor López.",
       "url": "/blog",
       "method": "GET",
-      "parameters": []
+      "parameters": [
+        {
+          "name": "q",
+          "type": "string",
+          "description": "Optional keyword query for blog post titles, descriptions, and tags.",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 120
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Optional keyword query for blog post titles, descriptions, and tags.",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        },
+        "additionalProperties": false
+      }
     },
     {
-      "name": "browse-talks",
-      "description": "Browse talks, workshops, podcasts, and speaking appearances by Néstor López.",
+      "name": "browse_talks",
+      "description": "Browse or search talks, workshops, podcasts, and speaking appearances by Néstor López.",
       "url": "/talks",
       "method": "GET",
-      "parameters": []
+      "parameters": [
+        {
+          "name": "q",
+          "type": "string",
+          "description": "Optional keyword query for talk titles, venues, categories, and tags.",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 120
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Optional keyword query for talk titles, venues, categories, and tags.",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        },
+        "additionalProperties": false
+      }
     },
     {
-      "name": "browse-projects",
-      "description": "Browse software projects and demos by Néstor López.",
+      "name": "browse_projects",
+      "description": "Browse or search software projects and demos by Néstor López.",
       "url": "/projects",
       "method": "GET",
-      "parameters": []
+      "parameters": [
+        {
+          "name": "q",
+          "type": "string",
+          "description": "Optional keyword query for project titles, descriptions, and tags.",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 120
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Optional keyword query for project titles, descriptions, and tags.",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        },
+        "additionalProperties": false
+      }
     },
     {
-      "name": "browse-tips",
-      "description": "Browse quick technical tips and snippets by Néstor López.",
+      "name": "browse_tips",
+      "description": "Browse or search quick technical tips and snippets by Néstor López.",
       "url": "/tips",
       "method": "GET",
-      "parameters": []
+      "parameters": [
+        {
+          "name": "q",
+          "type": "string",
+          "description": "Optional keyword query for technical tip titles, descriptions, and tags.",
+          "required": false,
+          "minLength": 1,
+          "maxLength": 120
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Optional keyword query for technical tip titles, descriptions, and tags.",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ]
 }

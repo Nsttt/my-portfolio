@@ -11,10 +11,12 @@ const tips = await getCollection("tips");
   <h1 class="mt-20 text-6xl font-bold">Tips</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search tips..."
     itemClass="tip-item"
     containerId="tips-container"
+    toolName="filter_tips"
+    toolDescription="Filter visible technical tips and snippets by title, description, and tags."
   />
 
   <ul id="tips-container" class="flex flex-col gap-5">

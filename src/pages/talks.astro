@@ -14,10 +14,12 @@ const talks = (await getCollection("talks")).sort(
   <h1 class="mt-20 text-6xl font-bold">Talks</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search talks..."
     itemClass="talk-item"
     containerId="talks-container"
+    toolName="filter_talks"
+    toolDescription="Filter visible talks, workshops, podcasts, and speaking appearances."
   />
 
   <ul id="talks-container" class="flex flex-col gap-5">

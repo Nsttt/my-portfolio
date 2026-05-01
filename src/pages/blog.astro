@@ -11,10 +11,12 @@ const posts = await getCollection("posts");
   <h1 class="mt-20 text-6xl font-bold">Blog</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search posts..."
     itemClass="post-item"
     containerId="posts-container"
+    toolName="filter_blog_posts"
+    toolDescription="Filter visible blog posts by title, description, and tags."
   />
 
   <ul id="posts-container" class="flex flex-col gap-5">

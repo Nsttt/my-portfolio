@@ -11,10 +11,12 @@ const projects = await getCollection("projects");
   <h1 class="mt-20 text-6xl font-bold">Projects</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search projects..."
     itemClass="project-item"
     containerId="projects-container"
+    toolName="filter_projects"
+    toolDescription="Filter visible software projects by title, description, and tags."
   />
 
   <ul id="projects-container" class="flex flex-col gap-5">

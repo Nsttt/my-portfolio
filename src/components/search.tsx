@@ -8,6 +8,8 @@ interface SearchProps {
   toolDescription?: string;
 }
 
+const toSnakeCase = (value: string) => value.replaceAll("-", "_");
+
 export default function Search(props: SearchProps) {
   const [searchTerm, setSearchTerm] = createSignal("");
   let items: NodeListOf<Element>;
@@ -15,6 +17,9 @@ export default function Search(props: SearchProps) {
   let container: HTMLElement | null;
 
   onMount(() => {
+    const query = new URLSearchParams(window.location.search).get("q");
+    if (query) setSearchTerm(query);
+
     items = document.querySelectorAll(`.${props.itemClass}`);
     noResults = document.getElementById("no-results");
     container = document.getElementById(props.containerId);
@@ -62,7 +67,8 @@ export default function Search(props: SearchProps) {
     }
   });
 
-  const toolName = () => props.toolName || `filter-${props.containerId}`;
+  const toolName = () =>
+    props.toolName || `filter_${toSnakeCase(props.containerId)}`;
   const toolDescription = () =>
     props.toolDescription ||
     "Filter the visible content list by title, description, metadata, or tags.";
@@ -71,13 +77,14 @@ export default function Search(props: SearchProps) {
     <form
       class="mt-10 mb-8"
       role="search"
-      onSubmit={(event) => event.preventDefault()}
+      method="get"
       tool-name={toolName()}
       tool-description={toolDescription()}
     >
       <input
-        name="query"
+        name="q"
         type="text"
+        autocomplete="off"
         placeholder={props.placeholder || "Search..."}
         value={searchTerm()}
         onInput={(e) => setSearchTerm(e.currentTarget.value)}
