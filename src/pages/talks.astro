@@ -1,10 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
-const talks = await getCollection("talks");
+const talks = (await getCollection("talks")).sort(
+  (a, b) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+);
 ---
 
 <BaseLayout title="Talks" description="All the talks and Workshops I've given.">
@@ -17,33 +20,39 @@ const talks = await getCollection("talks");
     containerId="talks-container"
   />
 
-  <ul
-    id="talks-container"
-    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-  >
+  <ul id="talks-container" class="flex flex-col gap-5">
     {
-      talks
-        .sort(
-          (a, b) =>
-            new Date(b.data.pubDate).valueOf() -
-            new Date(a.data.pubDate).valueOf(),
-        )
-        .map((talk) => (
-          <li
-            class="talk-item"
-            data-title={talk.data.title.toLowerCase()}
-            data-description={talk.data.description.toLowerCase()}
-            data-tags={talk.data.tags?.join(" ").toLowerCase() || ""}
-          >
-            <Card
-              href={`/talks/${talk.id}/`}
-              title={talk.data.title}
-              description={talk.data.description}
-              date={talk.data.pubDate}
-              expectedReadTime={0}
-            />
-          </li>
-        ))
+      talks.map((talk) => (
+        <li
+          class="talk-item"
+          data-title={talk.data.title.toLowerCase()}
+          data-description={talk.data.description.toLowerCase()}
+          data-place={talk.data.place.toLowerCase()}
+          data-lang={talk.data.lang.toLowerCase()}
+          data-category={talk.data.category.toLowerCase()}
+          data-tags={talk.data.tags?.join(" ").toLowerCase() || ""}
+        >
+          <ContentCard
+            href={`/talks/${talk.id}/`}
+            title={talk.data.title}
+            description={talk.data.description}
+            date={talk.data.pubDate}
+            eyebrow={
+              {
+                conference: "Conference",
+                meetup: "Meetup",
+                workshop: "Workshop",
+                podcast: "Podcast / Radio",
+                campus: "Campus Session",
+              }[talk.data.category]
+            }
+            primaryMeta={talk.data.place}
+            secondaryMeta={talk.data.lang}
+            accent={talk.data.category}
+            tags={talk.data.tags}
+          />
+        </li>
+      ))
     }
   </ul>
 

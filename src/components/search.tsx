@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onMount } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 
 interface SearchProps {
   placeholder?: string;
@@ -28,11 +28,17 @@ export default function Search(props: SearchProps) {
     items.forEach((item) => {
       const title = item.getAttribute("data-title") || "";
       const description = item.getAttribute("data-description") || "";
+      const place = item.getAttribute("data-place") || "";
+      const lang = item.getAttribute("data-lang") || "";
+      const category = item.getAttribute("data-category") || "";
       const tags = item.getAttribute("data-tags") || "";
 
       const matches =
         title.includes(searchLower) ||
         description.includes(searchLower) ||
+        place.includes(searchLower) ||
+        lang.includes(searchLower) ||
+        category.includes(searchLower) ||
         tags.includes(searchLower);
 
       if (matches) {

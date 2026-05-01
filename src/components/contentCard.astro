@@ -1,0 +1,140 @@
+---
+import dayjs from "dayjs";
+
+type Accent =
+  | "neutral"
+  | "conference"
+  | "meetup"
+  | "workshop"
+  | "podcast"
+  | "campus";
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  date: string | Date;
+  eyebrow: string;
+  primaryMeta?: string;
+  secondaryMeta?: string;
+  expectedReadTime?: number;
+  tags?: string[] | undefined;
+  accent?: Accent;
+  eventName?: string;
+  eventProps?: string;
+}
+
+const {
+  href,
+  title,
+  description,
+  date,
+  eyebrow,
+  primaryMeta,
+  secondaryMeta,
+  expectedReadTime = 0,
+  tags = [],
+  accent = "neutral",
+  eventName,
+  eventProps,
+} = Astro.props;
+
+const formatedDate = dayjs(date).format("MMM DD, YYYY");
+const readTime =
+  expectedReadTime > 0 ? `${expectedReadTime} min read` : undefined;
+const meta = [primaryMeta, formatedDate, secondaryMeta, readTime].filter(
+  Boolean,
+);
+const accents = {
+  neutral: {
+    rail: "border-cool-grey-300 dark:border-cool-grey-700",
+    badge:
+      "border-cool-grey-300 bg-cool-grey-100 text-cool-grey-900 dark:border-cool-grey-600 dark:bg-cool-grey-700 dark:text-cool-grey-100",
+  },
+  conference: {
+    rail: "border-yellow-vivid-500 dark:border-yellow-vivid-300",
+    badge:
+      "border-yellow-vivid-300 bg-yellow-vivid-050 text-yellow-vivid-900 dark:border-yellow-vivid-600 dark:bg-yellow-vivid-900/30 dark:text-yellow-vivid-100",
+  },
+  meetup: {
+    rail: "border-teal-500 dark:border-teal-300",
+    badge:
+      "border-teal-300 bg-teal-050 text-teal-900 dark:border-teal-600 dark:bg-teal-900/30 dark:text-teal-100",
+  },
+  workshop: {
+    rail: "border-pink-vivid-500 dark:border-pink-vivid-300",
+    badge:
+      "border-pink-vivid-300 bg-pink-vivid-050 text-pink-vivid-900 dark:border-pink-vivid-600 dark:bg-pink-vivid-900/30 dark:text-pink-vivid-100",
+  },
+  podcast: {
+    rail: "border-red-vivid-500 dark:border-red-vivid-300",
+    badge:
+      "border-red-vivid-300 bg-red-vivid-050 text-red-vivid-900 dark:border-red-vivid-600 dark:bg-red-vivid-900/30 dark:text-red-vivid-100",
+  },
+  campus: {
+    rail: "border-cool-grey-500 dark:border-cool-grey-300",
+    badge:
+      "border-cool-grey-300 bg-cool-grey-100 text-cool-grey-900 dark:border-cool-grey-600 dark:bg-cool-grey-700 dark:text-cool-grey-100",
+  },
+} as const;
+const accentStyle = accents[accent];
+---
+
+<a
+  rel="prefetch"
+  href={href}
+  onclick={eventName
+    ? `window.umami.track('${eventName}'${eventProps ? `, { ${eventProps.split("=")[0]}: '${eventProps.split("=")[1]?.replace(/'/g, "\\'")}' }` : ""})`
+    : undefined}
+  class="group border-cool-grey-300 bg-cool-grey-050 hover:bg-cool-grey-100/70 dark:border-cool-grey-700 dark:bg-cool-grey-800/40 dark:hover:bg-cool-grey-800 hover:border-cool-grey-500 dark:hover:border-cool-grey-500 relative block overflow-hidden rounded-lg border p-5 transition duration-200 ease-linear hover:-translate-y-1"
+>
+  <div
+    class:list={["absolute top-0 left-0 h-full border-l-4", accentStyle.rail]}
+  >
+  </div>
+  <div class="flex flex-col gap-4 pl-2">
+    <div class="flex flex-wrap items-center gap-2">
+      <span
+        class:list={[
+          "inline-flex rounded-full border px-2.5 py-1 text-xs font-black uppercase",
+          accentStyle.badge,
+        ]}
+      >
+        {eyebrow}
+      </span>
+      <span
+        class="text-cool-grey-600 dark:text-cool-grey-400 flex flex-wrap gap-x-2 text-sm"
+      >
+        {
+          meta.map((item, index) => (
+            <>
+              {index > 0 && <span>•</span>}
+              <span>{item}</span>
+            </>
+          ))
+        }
+      </span>
+    </div>
+    <div>
+      <h3
+        class="text-cool-grey-900 dark:text-mono-100 text-2xl leading-tight font-bold"
+      >
+        {title}
+      </h3>
+      <p class="text-cool-grey-700 mt-3 dark:text-slate-300">
+        {description}
+      </p>
+    </div>
+    {
+      tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.slice(0, 4).map((tag) => (
+            <span class="bg-cool-grey-100 text-cool-grey-700 dark:bg-cool-grey-700 dark:text-cool-grey-100 rounded-full px-3 py-1 text-xs font-semibold">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>

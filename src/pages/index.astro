@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 
 const posts = await getCollection("posts");
@@ -95,12 +95,14 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((post) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/blog/${post.id}/`}
                 title={post.data.title}
                 description={post.data.description}
                 date={post.data.pubDate}
+                eyebrow="Post"
                 expectedReadTime={post.data.expectedReadTime}
+                tags={post.data.tags}
                 eventName="blog_post_click"
                 eventProps={`title=${post.data.title}`}
               />
@@ -120,7 +122,7 @@ const talks = await getCollection("talks");
         data-s:event="view_all_talks">See all content</a
       >
     </div>
-    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
+    <ul class="flex flex-col gap-5">
       {
         talks
           .sort(
@@ -131,12 +133,24 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((talk) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/talks/${talk.id}/`}
                 title={talk.data.title}
                 description={talk.data.description}
                 date={talk.data.pubDate}
-                expectedReadTime={0}
+                eyebrow={
+                  {
+                    conference: "Conference",
+                    meetup: "Meetup",
+                    workshop: "Workshop",
+                    podcast: "Podcast / Radio",
+                    campus: "Campus Session",
+                  }[talk.data.category]
+                }
+                primaryMeta={talk.data.place}
+                secondaryMeta={talk.data.lang}
+                accent={talk.data.category}
+                tags={talk.data.tags}
                 eventName="talk_click"
                 eventProps={`title=${talk.data.title}`}
               />
@@ -167,12 +181,13 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((project) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/projects/${project.id}/`}
                 title={project.data.title}
                 description={project.data.description}
                 date={project.data.pubDate}
-                expectedReadTime={0}
+                eyebrow="Project"
+                tags={project.data.tags}
                 eventName="project_click"
                 eventProps={`title=${project.data.title}`}
               />

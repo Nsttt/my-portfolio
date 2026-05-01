@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
@@ -17,10 +17,7 @@ const tips = await getCollection("tips");
     containerId="tips-container"
   />
 
-  <ul
-    id="tips-container"
-    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-  >
+  <ul id="tips-container" class="flex flex-col gap-5">
     {
       tips
         .sort(
@@ -34,11 +31,13 @@ const tips = await getCollection("tips");
             data-description={tip.data.description.toLowerCase()}
             data-tags={tip.data.tags?.join(" ").toLowerCase() || ""}
           >
-            <Card
+            <ContentCard
               href={`/tips/${tip.id}/`}
               title={tip.data.title}
               description={tip.data.description}
               date={tip.data.date.toISOString()}
+              eyebrow="Tip"
+              tags={tip.data.tags}
             />
           </li>
         ))
