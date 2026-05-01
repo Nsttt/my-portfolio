@@ -36,18 +36,27 @@ const {
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const webpageId = new URL("#webpage", Astro.url).href;
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": `${Astro.url.href}#article`,
   headline: title,
   description,
-  image: new URL(image.src, Astro.site).toString(),
+  image: new URL(image.src, siteUrl).toString(),
   datePublished: new Date(pubDate).toISOString(),
   dateModified: new Date(pubDate).toISOString(),
-  author: { "@id": `${Astro.site}#person` },
-  publisher: { "@id": `${Astro.site}#person` },
-  mainEntityOfPage: { "@id": `${Astro.url.href}#webpage` },
+  author: {
+    "@type": "Person",
+    "@id": personId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+  },
+  publisher: { "@id": organizationId },
+  mainEntityOfPage: { "@id": webpageId },
 };
 ---
 

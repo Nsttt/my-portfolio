@@ -9,18 +9,38 @@ export interface Props {
     pubDate: string;
     place: string;
     lang: string;
-    mainImage?: {
-      src: string;
-      width: number;
-      height: number;
-      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-    } | undefined;
-    images?: {
-      src: string;
-      width: number;
-      height: number;
-      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-    }[] | undefined;
+    mainImage?:
+      | {
+          src: string;
+          width: number;
+          height: number;
+          format:
+            | "png"
+            | "jpg"
+            | "jpeg"
+            | "tiff"
+            | "webp"
+            | "gif"
+            | "svg"
+            | "avif";
+        }
+      | undefined;
+    images?:
+      | {
+          src: string;
+          width: number;
+          height: number;
+          format:
+            | "png"
+            | "jpg"
+            | "jpeg"
+            | "tiff"
+            | "webp"
+            | "gif"
+            | "svg"
+            | "avif";
+        }[]
+      | undefined;
   };
 }
 
@@ -29,13 +49,54 @@ const {
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "@id": `${Astro.url.href}#event`,
+  name: title,
+  description,
+  startDate: new Date(pubDate).toISOString(),
+  inLanguage: lang,
+  location: {
+    "@type": "Place",
+    name: place,
+  },
+  performer: {
+    "@type": "Person",
+    "@id": personId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+  },
+  organizer: { "@id": organizationId },
+};
 ---
 
-<BaseLayout title={title} description={description} ogImage={mainImage ? mainImage.src : undefined}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={mainImage ? mainImage.src : undefined}
+  jsonLd={[eventJsonLd]}
+>
   <div class="mt-10">
-    <a href="/talks" class="inline-flex items-center gap-2 text-cool-grey-800 hover:underline dark:text-mono-100">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m15 18-6-6 6-6"/>
+    <a
+      href="/talks"
+      class="inline-flex items-center gap-2 text-cool-grey-800 hover:underline dark:text-mono-100"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m15 18-6-6 6-6"></path>
       </svg>
       Go Back
     </a>
@@ -55,23 +116,26 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     </div>
     <p>{description}</p>
     <slot />
-    {mainImage && (
-      <img
-        class="w-full object-cover shadow-lg"
-        src={mainImage.src}
-        alt={title}
-        fetchpriority="high"
-        loading="eager"
-      />
-    )}
     {
-      images && images.map((image) => (
+      mainImage && (
         <img
           class="w-full object-cover shadow-lg"
-          src={image.src}
+          src={mainImage.src}
           alt={title}
+          fetchpriority="high"
+          loading="eager"
         />
-      ))
+      )
+    }
+    {
+      images &&
+        images.map((image) => (
+          <img
+            class="w-full object-cover shadow-lg"
+            src={image.src}
+            alt={title}
+          />
+        ))
     }
   </article>
 </BaseLayout>

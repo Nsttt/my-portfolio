@@ -22,45 +22,121 @@ const pageDescription =
   description ??
   "Néstor López writes about software architecture, distributed systems, Module Federation, and developer tooling.";
 const modifiedAt = new Date().toISOString();
-const globalJsonLd = [
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const websiteId = new URL("#website", siteUrl).href;
+const webpageId = new URL("#webpage", Astro.url).href;
+const sameAs = [
+  "https://x.com/nstlopez",
+  "https://github.com/nsttt",
+  "https://linkedin.com/in/nstlopez",
+];
+const stripContext = (schema: Record<string, unknown>) => {
+  const node = { ...schema };
+  delete node["@context"];
+
+  return node;
+};
+const breadcrumbNames: Record<string, string> = {
+  blog: "Blog",
+  projects: "Projects",
+  talks: "Talks",
+  tips: "Tips",
+};
+const titleFromSlug = (slug: string) =>
+  slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const breadcrumbJsonLd =
+  pathSegments.length > 0
+    ? {
+        "@type": "BreadcrumbList",
+        "@id": new URL("#breadcrumb", Astro.url).href,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl.toString(),
+          },
+          ...pathSegments.map((segment, index) => {
+            const path = `/${pathSegments.slice(0, index + 1).join("/")}/`;
+            const isCurrentPage = index === pathSegments.length - 1;
+
+            return {
+              "@type": "ListItem",
+              position: index + 2,
+              name:
+                breadcrumbNames[segment] ??
+                (isCurrentPage && title ? title : titleFromSlug(segment)),
+              item: new URL(path, siteUrl).href,
+            };
+          }),
+        ],
+      }
+    : undefined;
+const graphJsonLd = [
   {
-    "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${siteUrl}#person`,
+    "@id": personId,
     name: "Néstor López",
     alternateName: "nstlopez",
     url: siteUrl.toString(),
     image: new URL("/images/profile.webp", siteUrl).toString(),
     jobTitle: "Software Engineer",
-    sameAs: [
-      "https://x.com/nstlopez",
-      "https://github.com/nsttt",
-      "https://linkedin.com/in/nstlopez",
-    ],
+    sameAs,
   },
   {
-    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": organizationId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+    logo: new URL("/logo.svg", siteUrl).toString(),
+    sameAs,
+    founder: { "@id": personId },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "nestor@nstlopez.com",
+      contactType: "personal inquiries",
+    },
+  },
+  {
     "@type": "WebSite",
-    "@id": `${siteUrl}#website`,
+    "@id": websiteId,
     name: "Néstor's Blog",
     url: siteUrl.toString(),
-    author: { "@id": `${siteUrl}#person` },
-    publisher: { "@id": `${siteUrl}#person` },
+    author: { "@id": personId },
+    publisher: { "@id": organizationId },
     dateModified: modifiedAt,
   },
   {
-    "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${pageUrl}#webpage`,
+    "@id": webpageId,
     url: pageUrl,
     name: pageTitle,
     description: pageDescription,
-    isPartOf: { "@id": `${siteUrl}#website` },
-    author: { "@id": `${siteUrl}#person` },
+    isPartOf: { "@id": websiteId },
+    author: {
+      "@type": "Person",
+      "@id": personId,
+      name: "Néstor López",
+      url: siteUrl.toString(),
+    },
+    publisher: { "@id": organizationId },
     dateModified: modifiedAt,
+    ...(breadcrumbJsonLd
+      ? { breadcrumb: { "@id": breadcrumbJsonLd["@id"] } }
+      : {}),
   },
-  ...jsonLd,
+  ...(breadcrumbJsonLd ? [breadcrumbJsonLd] : []),
+  ...jsonLd.map(stripContext),
 ];
+const structuredDataEntries = graphJsonLd.map((schema) => ({
+  "@context": "https://schema.org",
+  ...schema,
+}));
 ---
 
 <!-- Global Metadata -->
@@ -126,8 +202,12 @@ const globalJsonLd = [
 
 <ClientRouter />
 
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(globalJsonLd)}
-/>
+{
+  structuredDataEntries.map((schema) => (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(schema)}
+    />
+  ))
+}
