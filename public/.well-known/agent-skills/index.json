@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "browse-content",
+      "type": "skill-md",
+      "description": "Discover, cite, and navigate Néstor López's public technical writing, talks, projects, and tips.",
+      "url": "https://nstlopez.com/.well-known/agent-skills/browse-content/SKILL.md",
+      "digest": "sha256:d9fdc92d8d7bcdc1322e2f39174c6eff7fad61d2db51f3ae27de39aeefe2c1e3"
+    }
+  ]
+}

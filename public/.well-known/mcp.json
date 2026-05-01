@@ -1,4 +1,23 @@
 {
+  "serverInfo": {
+    "name": "Néstor López Content Discovery",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "https",
+    "endpoint": "https://nstlopez.com/llms.txt"
+  },
+  "capabilities": {
+    "resources": {
+      "listChanged": false
+    },
+    "tools": {
+      "listChanged": false
+    },
+    "prompts": {
+      "listChanged": false
+    }
+  },
   "mcpServers": {
     "nstlopez-content": {
       "name": "Néstor López Content",

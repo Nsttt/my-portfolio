@@ -1,0 +1,29 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://nstlopez.com/",
+      "service-desc": [
+        {
+          "href": "https://nstlopez.com/.well-known/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://nstlopez.com/llms.txt",
+          "type": "text/markdown"
+        },
+        {
+          "href": "https://nstlopez.com/llms-full.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://nstlopez.com/.well-known/status.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

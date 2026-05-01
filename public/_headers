@@ -1,4 +1,5 @@
 /*
+  Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </.well-known/openapi.json>; rel="service-desc"; type="application/openapi+json", </llms.txt>; rel="service-doc"; type="text/markdown", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://analytics.nstlopez.com https://giscus.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://analytics.nstlopez.com https://giscus.app; frame-src https://giscus.app https://www.youtube.com https://www.ivoox.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://cal.com
   X-Content-Type-Options: nosniff
@@ -8,6 +9,15 @@
 
 /.well-known/*
   Content-Type: application/json; charset=utf-8
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; charset=utf-8
+
+/.well-known/agent-skills/*
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/agent-skills/*.md
+  Content-Type: text/markdown; charset=utf-8
 
 /agents.json
   Content-Type: application/json; charset=utf-8

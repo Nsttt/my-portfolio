@@ -1,0 +1,39 @@
+{
+  "serverInfo": {
+    "name": "Néstor López Content Discovery",
+    "version": "1.0.0"
+  },
+  "description": "Static agent discovery metadata for Néstor López's blog, talks, projects, and technical tips.",
+  "transport": {
+    "type": "https",
+    "endpoint": "https://nstlopez.com/llms.txt"
+  },
+  "capabilities": {
+    "resources": {
+      "listChanged": false
+    },
+    "tools": {
+      "listChanged": false
+    },
+    "prompts": {
+      "listChanged": false
+    }
+  },
+  "resources": [
+    {
+      "uri": "https://nstlopez.com/llms.txt",
+      "name": "LLM content index",
+      "mimeType": "text/markdown"
+    },
+    {
+      "uri": "https://nstlopez.com/llms-full.txt",
+      "name": "Full content export",
+      "mimeType": "text/markdown"
+    },
+    {
+      "uri": "https://nstlopez.com/.well-known/openapi.json",
+      "name": "OpenAPI description",
+      "mimeType": "application/json"
+    }
+  ]
+}
