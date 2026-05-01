@@ -13,6 +13,7 @@
   "paths": {
     "/": {
       "get": {
+        "operationId": "getHomepage",
         "summary": "Homepage",
         "responses": {
           "200": {
@@ -23,6 +24,7 @@
     },
     "/blog": {
       "get": {
+        "operationId": "listBlogPosts",
         "summary": "Blog index",
         "responses": {
           "200": {
@@ -33,6 +35,7 @@
     },
     "/talks": {
       "get": {
+        "operationId": "listTalks",
         "summary": "Talks index",
         "responses": {
           "200": {
@@ -43,6 +46,7 @@
     },
     "/projects": {
       "get": {
+        "operationId": "listProjects",
         "summary": "Projects index",
         "responses": {
           "200": {
@@ -53,6 +57,7 @@
     },
     "/tips": {
       "get": {
+        "operationId": "listTips",
         "summary": "Tips index",
         "responses": {
           "200": {
@@ -63,6 +68,7 @@
     },
     "/llms.txt": {
       "get": {
+        "operationId": "getLlmsIndex",
         "summary": "LLM content index",
         "responses": {
           "200": {
@@ -73,6 +79,7 @@
     },
     "/llms-full.txt": {
       "get": {
+        "operationId": "getLlmsFullExport",
         "summary": "Full LLM content export",
         "responses": {
           "200": {
@@ -83,6 +90,7 @@
     },
     "/rss.xml": {
       "get": {
+        "operationId": "getRssFeed",
         "summary": "RSS feed",
         "responses": {
           "200": {
@@ -93,6 +101,7 @@
     },
     "/sitemap-index.xml": {
       "get": {
+        "operationId": "getSitemapIndex",
         "summary": "Sitemap index",
         "responses": {
           "200": {
