@@ -57,32 +57,6 @@ const faqJsonLd = {
         >.
       </p>
       <p class="my-3">I contribute to several open source projects:</p>
-      <form
-        class="sr-only"
-        action="/blog"
-        method="get"
-        role="search"
-        aria-label="Search blog posts"
-        tool-name="search_blog_posts"
-        tool-description="Search Néstor López's technical blog posts by keyword."
-      >
-        <label class="sr-only" for="homepage-search">Search blog posts</label>
-        <input
-          id="homepage-search"
-          name="q"
-          type="search"
-          autocomplete="off"
-          placeholder="Search blog posts..."
-          tool-param-description="Keyword query for blog post titles, descriptions, and tags."
-          class="border-cool-grey-300 dark:border-cool-grey-700 dark:bg-cool-grey-800 min-w-0 flex-1 rounded-md border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-neutral-500 focus:outline-none"
-        />
-        <button
-          class="bg-cool-grey-900 dark:bg-mono-100 dark:text-cool-grey-900 rounded-md px-5 py-3 text-base font-medium text-white"
-          type="submit"
-        >
-          Search
-        </button>
-      </form>
       <ul class="my-3 ml-6 list-disc space-y-2">
         <li>
           <a
@@ -112,6 +86,32 @@ const faqJsonLd = {
           > - Helping teams build scalable micro-frontend architectures
         </li>
       </ul>
+      <form
+        class="sr-only"
+        action="/blog"
+        method="get"
+        role="search"
+        aria-label="Search blog posts"
+        tool-name="search_blog_posts"
+        tool-description="Search Néstor López's technical blog posts by keyword."
+      >
+        <label class="sr-only" for="homepage-search">Search blog posts</label>
+        <input
+          id="homepage-search"
+          name="q"
+          type="search"
+          autocomplete="off"
+          placeholder="Search blog posts..."
+          tool-param-description="Keyword query for blog post titles, descriptions, and tags."
+          class="border-cool-grey-300 dark:border-cool-grey-700 dark:bg-cool-grey-800 min-w-0 flex-1 rounded-md border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-neutral-500 focus:outline-none"
+        />
+        <button
+          class="bg-cool-grey-900 dark:bg-mono-100 dark:text-cool-grey-900 rounded-md px-5 py-3 text-base font-medium text-white"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
       <p class="my-3">
         I also do <a
           class="text-cool-grey-800 dark:text-mono-300 underline"

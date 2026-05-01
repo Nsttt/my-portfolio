@@ -17,12 +17,12 @@ export default function Search(props: SearchProps) {
   let container: HTMLElement | null;
 
   onMount(() => {
-    const query = new URLSearchParams(window.location.search).get("q");
-    if (query) setSearchTerm(query);
-
     items = document.querySelectorAll(`.${props.itemClass}`);
     noResults = document.getElementById("no-results");
     container = document.getElementById(props.containerId);
+
+    const query = new URLSearchParams(window.location.search).get("q");
+    if (query) setSearchTerm(query);
   });
 
   createEffect(() => {

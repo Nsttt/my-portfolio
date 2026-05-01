@@ -99,6 +99,17 @@
         }
       }
     },
+    "/sitemap.xml": {
+      "get": {
+        "operationId": "getSitemap",
+        "summary": "XML sitemap",
+        "responses": {
+          "200": {
+            "description": "XML sitemap"
+          }
+        }
+      }
+    },
     "/sitemap-index.xml": {
       "get": {
         "operationId": "getSitemapIndex",

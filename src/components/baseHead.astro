@@ -153,23 +153,23 @@ const structuredDataEntries = graphJsonLd.map((schema) => ({
   data-website-id="13fd83d3-ccd7-4995-b8e6-2eef859b99c0"></script>
 
 <!-- Primary Meta Tags -->
-<title>{title ? `${title} | Néstor's Blog` : "Néstor's Blog"}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={pageDescription} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Néstor's Blog" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
 <meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
+<meta property="twitter:title" content={pageTitle} />
+<meta property="twitter:description" content={pageDescription} />
 <meta property="twitter:image" content={image} />
 
 <!-- RSS Feed -->
