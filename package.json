@@ -15,7 +15,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "lint": "astro check",
-    "preview": "astro build && wrangler dev",
+    "preview": "astro build && astro preview",
     "fix": "prettier --write . --plugin=prettier-plugin-astro",
     "typecheck": "tsc --noEmit",
     "deploy": "astro build && wrangler deploy",
@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
-    "@astrojs/cloudflare": "^13.1.4",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/prefetch": "^0.4.1",
     "@astrojs/rss": "^4.0.18",

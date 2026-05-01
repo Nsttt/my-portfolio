@@ -28,7 +28,7 @@ pnpm dev
 
 ### Deploy
 
-This site deploys to Cloudflare Workers with Astro SSR.
+This site builds as static Astro output and deploys to Cloudflare Workers assets.
 
 ```bash
 pnpm build
