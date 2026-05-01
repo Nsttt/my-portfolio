@@ -35,7 +35,7 @@ pnpm build
 pnpm exec wrangler deploy
 ```
 
-GitHub Actions expects `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
+Deploys are run manually with Wrangler.
 
 ## Contact
 
