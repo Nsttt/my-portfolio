@@ -6,12 +6,61 @@ export interface Props {
   title?: string | undefined;
   description?: string | undefined;
   image?: string | undefined;
+  jsonLd?: Record<string, unknown>[] | undefined;
 }
 const {
   title,
   description,
   image = "https://nstlopez.com/logo.svg",
+  jsonLd = [],
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const pageUrl = Astro.url.href;
+const pageTitle = title ? `${title} | Néstor's Blog` : "Néstor's Blog";
+const pageDescription =
+  description ??
+  "Néstor López writes about software architecture, distributed systems, Module Federation, and developer tooling.";
+const modifiedAt = new Date().toISOString();
+const globalJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteUrl}#person`,
+    name: "Néstor López",
+    alternateName: "nstlopez",
+    url: siteUrl.toString(),
+    image: new URL("/images/profile.webp", siteUrl).toString(),
+    jobTitle: "Software Engineer",
+    sameAs: [
+      "https://x.com/nstlopez",
+      "https://github.com/nsttt",
+      "https://linkedin.com/in/nstlopez",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}#website`,
+    name: "Néstor's Blog",
+    url: siteUrl.toString(),
+    author: { "@id": `${siteUrl}#person` },
+    publisher: { "@id": `${siteUrl}#person` },
+    dateModified: modifiedAt,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    isPartOf: { "@id": `${siteUrl}#website` },
+    author: { "@id": `${siteUrl}#person` },
+    dateModified: modifiedAt,
+  },
+  ...jsonLd,
+];
 ---
 
 <!-- Global Metadata -->
@@ -19,6 +68,7 @@ const {
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
+<meta name="author" content="Néstor López" />
 <script
   is:inline
   data-astro-rerun
@@ -75,3 +125,9 @@ const {
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 <ClientRouter />
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(globalJsonLd)}
+/>

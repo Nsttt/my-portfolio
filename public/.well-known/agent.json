@@ -1,0 +1,24 @@
+{
+  "name": "Néstor López Website Agent Card",
+  "description": "Agent-discoverable entry point for Néstor López's technical writing, talks, projects, and tips.",
+  "url": "https://nstlopez.com",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "skills": [
+    {
+      "id": "browse-content",
+      "name": "Browse Content",
+      "description": "Find blog posts, talks, projects, and tips published on nstlopez.com."
+    },
+    {
+      "id": "technical-profile",
+      "name": "Technical Profile",
+      "description": "Understand Néstor López's work across Module Federation, distributed systems, and developer tooling."
+    }
+  ],
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/html", "text/markdown", "application/json"]
+}

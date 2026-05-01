@@ -6,11 +6,43 @@ import BaseLayout from "../layouts/baseLayout.astro";
 const posts = await getCollection("posts");
 const projects = await getCollection("projects");
 const talks = await getCollection("talks");
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${Astro.site}#faq`,
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Who is Néstor López?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Néstor López is a software engineer writing about software architecture, distributed systems, Module Federation, edge-native deployments, developer tooling, and infrastructure.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What topics does Néstor López write and speak about?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "He writes and speaks about Module Federation, microfrontends, distributed systems, edge infrastructure, TypeScript, developer tooling, IoT, and systems design.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I contact Néstor López?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can contact Néstor López through the booking link on nstlopez.com, X at @nstlopez, GitHub at nsttt, or LinkedIn at nstlopez.",
+      },
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="Néstor's Blog"
   description="Writing about software architecture, distributed systems, Module Federation, and developer tooling."
+  jsonLd={[faqJsonLd]}
 >
   <section class="mt-20 flex">
     <div class="w-full text-xl">

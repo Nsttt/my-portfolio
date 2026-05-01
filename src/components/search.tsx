@@ -4,6 +4,8 @@ interface SearchProps {
   placeholder?: string;
   itemClass: string;
   containerId: string;
+  toolName?: string;
+  toolDescription?: string;
 }
 
 export default function Search(props: SearchProps) {
@@ -60,15 +62,28 @@ export default function Search(props: SearchProps) {
     }
   });
 
+  const toolName = () => props.toolName || `filter-${props.containerId}`;
+  const toolDescription = () =>
+    props.toolDescription ||
+    "Filter the visible content list by title, description, metadata, or tags.";
+
   return (
-    <div class="mt-10 mb-8">
+    <form
+      class="mt-10 mb-8"
+      role="search"
+      onSubmit={(event) => event.preventDefault()}
+      tool-name={toolName()}
+      tool-description={toolDescription()}
+    >
       <input
+        name="query"
         type="text"
         placeholder={props.placeholder || "Search..."}
         value={searchTerm()}
         onInput={(e) => setSearchTerm(e.currentTarget.value)}
+        tool-param-description="Search query used to filter visible page content."
         class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50 dark:placeholder:text-neutral-500"
       />
-    </div>
+    </form>
   );
 }

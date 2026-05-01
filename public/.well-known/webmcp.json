@@ -1,0 +1,35 @@
+{
+  "spec": "webmcp/0.1",
+  "name": "Néstor López Website",
+  "description": "Discover and browse Néstor López's writing, projects, talks, and technical tips.",
+  "tools": [
+    {
+      "name": "browse-blog-posts",
+      "description": "Browse technical blog posts by Néstor López.",
+      "url": "/blog",
+      "method": "GET",
+      "parameters": []
+    },
+    {
+      "name": "browse-talks",
+      "description": "Browse talks, workshops, podcasts, and speaking appearances by Néstor López.",
+      "url": "/talks",
+      "method": "GET",
+      "parameters": []
+    },
+    {
+      "name": "browse-projects",
+      "description": "Browse software projects and demos by Néstor López.",
+      "url": "/projects",
+      "method": "GET",
+      "parameters": []
+    },
+    {
+      "name": "browse-tips",
+      "description": "Browse quick technical tips and snippets by Néstor López.",
+      "url": "/tips",
+      "method": "GET",
+      "parameters": []
+    }
+  ]
+}

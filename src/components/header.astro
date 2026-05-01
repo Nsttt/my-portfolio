@@ -1,6 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import ToggleButton from "./toggleButton";
+
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/talks", label: "Talks" },
+  { href: "/projects", label: "Projects" },
+  { href: "/tips", label: "Tips" },
+];
+
+const isCurrent = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <header class="flex flex-col">
@@ -14,50 +27,40 @@ import ToggleButton from "./toggleButton";
         alt="profile"
         loading="eager"
       />
-      <h1 class="self-center text-3xl">Néstor's Blog</h1>
+      <span class="self-center text-3xl">Néstor's Blog</span>
     </a>
     <ToggleButton client:only="solid-js" />
   </div>
   <div
     class="border-cool-grey-400 text-cool-grey-700 dark:border-cool-grey-700 mt-4 flex justify-between border-b-[1px] pb-4 text-lg dark:text-slate-400"
   >
-    <nav>
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="/">Home</a
-      >
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="/blog">Blog</a
-      >
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="/talks">Talks</a
-      >
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="/projects">Projects</a
-      >
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="/tips">Tips</a
-      >
+    <nav aria-label="Primary navigation">
+      {
+        links.map((link) => (
+          <a
+            class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
+            href={link.href}
+            aria-current={isCurrent(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
       <a
         class="hover:text-cool-grey-900 mr-2 animate-pulse font-semibold hover:underline dark:hover:text-slate-100"
         href="https://cal.com/nstlopez"
         target="_blank">Let's Talk</a
       >
     </nav>
-    <div>
+    <nav aria-label="Social links">
       <a
         class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="https://x.com/nstlopez"
-        >X</a
+        href="https://x.com/nstlopez">X</a
       >
       <a
         class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
         href="https://github.com/nsttt">GitHub</a
       >
-    </div>
+    </nav>
   </div>
 </header>

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "nstlopez-content": {
+      "name": "Néstor López Content",
+      "description": "Static content discovery for Néstor López's blog, talks, projects, and tips.",
+      "url": "https://nstlopez.com/llms.txt",
+      "transport": "https"
+    }
+  }
+}
