@@ -1,3 +1,4 @@
+import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
@@ -13,6 +14,8 @@ import { withZephyr } from "zephyr-astro-integration";
 
 const config: AstroUserConfig = {
   site: "https://nstlopez.com",
+  output: "server",
+  adapter: cloudflare(),
   markdown: {
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [
@@ -24,7 +27,14 @@ const config: AstroUserConfig = {
       theme: "vitesse-dark",
     },
   },
-  integrations: [sitemap(), prefetch(), mdx(), solidJs(), astroLlmsTxt(), process.env.ZE ? withZephyr() : undefined],
+  integrations: [
+    sitemap(),
+    prefetch(),
+    mdx(),
+    solidJs(),
+    astroLlmsTxt(),
+    process.env.ZE ? withZephyr() : undefined,
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
