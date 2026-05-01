@@ -2,6 +2,8 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import MarkdownTalkLayout from "../../layouts/talkLayout.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const talkEntries = await getCollection("talks");
   return talkEntries.map((entry) => ({

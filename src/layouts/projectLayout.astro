@@ -27,9 +27,34 @@ const {
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
 const projectLink = link || source;
 const hasDistinctSource = Boolean(source && source !== projectLink);
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": `${Astro.url.href}#software`,
+  name: title,
+  description,
+  url: projectLink || Astro.url.href,
+  image: new URL(image.src, siteUrl).toString(),
+  datePublished: new Date(pubDate).toISOString(),
+  author: {
+    "@type": "Person",
+    "@id": personId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+  },
+  publisher: { "@id": organizationId },
+};
 ---
 
-<BaseLayout title={title} description={description} ogImage={image.src}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={image.src}
+  jsonLd={[softwareJsonLd]}
+>
   <div class="mt-10">
     <a
       href="/projects"

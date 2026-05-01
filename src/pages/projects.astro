@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
@@ -12,16 +11,15 @@ const projects = await getCollection("projects");
   <h1 class="mt-20 text-6xl font-bold">Projects</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search projects..."
     itemClass="project-item"
     containerId="projects-container"
+    toolName="filter_projects"
+    toolDescription="Filter visible software projects by title, description, and tags."
   />
 
-  <ul
-    id="projects-container"
-    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-  >
+  <ul id="projects-container" class="flex flex-col gap-5">
     {
       projects
         .sort(
@@ -36,12 +34,13 @@ const projects = await getCollection("projects");
             data-description={project.data.description.toLowerCase()}
             data-tags={project.data.tags?.join(" ").toLowerCase() || ""}
           >
-            <Card
+            <ContentCard
               href={`/projects/${project.id}/`}
               title={project.data.title}
               description={project.data.description}
               date={project.data.pubDate}
-              expectedReadTime={0}
+              eyebrow="Project"
+              tags={project.data.tags}
             />
           </li>
         ))

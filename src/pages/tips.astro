@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
@@ -11,16 +11,15 @@ const tips = await getCollection("tips");
   <h1 class="mt-20 text-6xl font-bold">Tips</h1>
 
   <Search
-    client:only="solid-js"
+    client:load
     placeholder="Search tips..."
     itemClass="tip-item"
     containerId="tips-container"
+    toolName="filter_tips"
+    toolDescription="Filter visible technical tips and snippets by title, description, and tags."
   />
 
-  <ul
-    id="tips-container"
-    class="flex flex-col gap-x-4 gap-y-8 sm:gap-x-6 xl:gap-x-8"
-  >
+  <ul id="tips-container" class="flex flex-col gap-5">
     {
       tips
         .sort(
@@ -34,11 +33,13 @@ const tips = await getCollection("tips");
             data-description={tip.data.description.toLowerCase()}
             data-tags={tip.data.tags?.join(" ").toLowerCase() || ""}
           >
-            <Card
+            <ContentCard
               href={`/tips/${tip.id}/`}
               title={tip.data.title}
               description={tip.data.description}
               date={tip.data.date.toISOString()}
+              eyebrow="Tip"
+              tags={tip.data.tags}
             />
           </li>
         ))

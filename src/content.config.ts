@@ -54,6 +54,13 @@ const talkCollection = defineCollection({
       images: z.array(image()).optional(),
       pubDate: z.string(),
       tags: z.array(z.string()),
+      category: z.enum([
+        "conference",
+        "meetup",
+        "workshop",
+        "podcast",
+        "campus",
+      ]),
     }),
 });
 

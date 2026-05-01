@@ -6,12 +6,137 @@ export interface Props {
   title?: string | undefined;
   description?: string | undefined;
   image?: string | undefined;
+  jsonLd?: Record<string, unknown>[] | undefined;
 }
 const {
   title,
   description,
   image = "https://nstlopez.com/logo.svg",
+  jsonLd = [],
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const pageUrl = Astro.url.href;
+const pageTitle = title ? `${title} | Néstor's Blog` : "Néstor's Blog";
+const pageDescription =
+  description ??
+  "Néstor López writes about software architecture, distributed systems, Module Federation, and developer tooling.";
+const modifiedAt = new Date().toISOString();
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const websiteId = new URL("#website", siteUrl).href;
+const webpageId = new URL("#webpage", Astro.url).href;
+const sameAs = [
+  "https://x.com/nstlopez",
+  "https://github.com/nsttt",
+  "https://linkedin.com/in/nstlopez",
+];
+const stripContext = (schema: Record<string, unknown>) => {
+  const node = { ...schema };
+  delete node["@context"];
+
+  return node;
+};
+const breadcrumbNames: Record<string, string> = {
+  blog: "Blog",
+  projects: "Projects",
+  talks: "Talks",
+  tips: "Tips",
+};
+const titleFromSlug = (slug: string) =>
+  slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const breadcrumbJsonLd =
+  pathSegments.length > 0
+    ? {
+        "@type": "BreadcrumbList",
+        "@id": new URL("#breadcrumb", Astro.url).href,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl.toString(),
+          },
+          ...pathSegments.map((segment, index) => {
+            const path = `/${pathSegments.slice(0, index + 1).join("/")}/`;
+            const isCurrentPage = index === pathSegments.length - 1;
+
+            return {
+              "@type": "ListItem",
+              position: index + 2,
+              name:
+                breadcrumbNames[segment] ??
+                (isCurrentPage && title ? title : titleFromSlug(segment)),
+              item: new URL(path, siteUrl).href,
+            };
+          }),
+        ],
+      }
+    : undefined;
+const graphJsonLd = [
+  {
+    "@type": "Person",
+    "@id": personId,
+    name: "Néstor López",
+    alternateName: "nstlopez",
+    url: siteUrl.toString(),
+    image: new URL("/images/profile.webp", siteUrl).toString(),
+    jobTitle: "Software Engineer",
+    sameAs,
+  },
+  {
+    "@type": "Organization",
+    "@id": organizationId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+    logo: new URL("/logo.svg", siteUrl).toString(),
+    sameAs,
+    founder: { "@id": personId },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "nestor@nstlopez.com",
+      contactType: "personal inquiries",
+    },
+  },
+  {
+    "@type": "WebSite",
+    "@id": websiteId,
+    name: "Néstor's Blog",
+    url: siteUrl.toString(),
+    author: { "@id": personId },
+    publisher: { "@id": organizationId },
+    dateModified: modifiedAt,
+  },
+  {
+    "@type": "WebPage",
+    "@id": webpageId,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    isPartOf: { "@id": websiteId },
+    author: {
+      "@type": "Person",
+      "@id": personId,
+      name: "Néstor López",
+      url: siteUrl.toString(),
+    },
+    publisher: { "@id": organizationId },
+    dateModified: modifiedAt,
+    ...(breadcrumbJsonLd
+      ? { breadcrumb: { "@id": breadcrumbJsonLd["@id"] } }
+      : {}),
+  },
+  ...(breadcrumbJsonLd ? [breadcrumbJsonLd] : []),
+  ...jsonLd.map(stripContext),
+];
+const structuredDataEntries = graphJsonLd.map((schema) => ({
+  "@context": "https://schema.org",
+  ...schema,
+}));
 ---
 
 <!-- Global Metadata -->
@@ -19,6 +144,7 @@ const {
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 <meta name="generator" content={Astro.generator} />
+<meta name="author" content="Néstor López" />
 <script
   is:inline
   data-astro-rerun
@@ -27,23 +153,23 @@ const {
   data-website-id="13fd83d3-ccd7-4995-b8e6-2eef859b99c0"></script>
 
 <!-- Primary Meta Tags -->
-<title>{title ? `${title} | Néstor's Blog` : "Néstor's Blog"}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={pageDescription} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Néstor's Blog" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
 <meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
+<meta property="twitter:title" content={pageTitle} />
+<meta property="twitter:description" content={pageDescription} />
 <meta property="twitter:image" content={image} />
 
 <!-- RSS Feed -->
@@ -75,3 +201,13 @@ const {
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 <ClientRouter />
+
+{
+  structuredDataEntries.map((schema) => (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(schema)}
+    />
+  ))
+}

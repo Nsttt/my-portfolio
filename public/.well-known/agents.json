@@ -1,0 +1,10 @@
+{
+  "agents": [
+    {
+      "name": "Néstor López Website Agent Card",
+      "description": "Agent-discoverable metadata for nstlopez.com.",
+      "url": "https://nstlopez.com/.well-known/agent.json",
+      "protocol": "a2a"
+    }
+  ]
+}

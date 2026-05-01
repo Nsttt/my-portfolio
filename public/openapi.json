@@ -1,0 +1,125 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Néstor López Website Content API",
+    "version": "1.0.0",
+    "description": "Public read-only endpoints for Néstor López's website content."
+  },
+  "servers": [
+    {
+      "url": "https://nstlopez.com"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getHomepage",
+        "summary": "Homepage",
+        "responses": {
+          "200": {
+            "description": "Homepage HTML"
+          }
+        }
+      }
+    },
+    "/blog": {
+      "get": {
+        "operationId": "listBlogPosts",
+        "summary": "Blog index",
+        "responses": {
+          "200": {
+            "description": "Blog index HTML"
+          }
+        }
+      }
+    },
+    "/talks": {
+      "get": {
+        "operationId": "listTalks",
+        "summary": "Talks index",
+        "responses": {
+          "200": {
+            "description": "Talks index HTML"
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "operationId": "listProjects",
+        "summary": "Projects index",
+        "responses": {
+          "200": {
+            "description": "Projects index HTML"
+          }
+        }
+      }
+    },
+    "/tips": {
+      "get": {
+        "operationId": "listTips",
+        "summary": "Tips index",
+        "responses": {
+          "200": {
+            "description": "Tips index HTML"
+          }
+        }
+      }
+    },
+    "/llms.txt": {
+      "get": {
+        "operationId": "getLlmsIndex",
+        "summary": "LLM content index",
+        "responses": {
+          "200": {
+            "description": "Markdown index for AI agents"
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "operationId": "getLlmsFullExport",
+        "summary": "Full LLM content export",
+        "responses": {
+          "200": {
+            "description": "Full markdown content export for AI agents"
+          }
+        }
+      }
+    },
+    "/rss.xml": {
+      "get": {
+        "operationId": "getRssFeed",
+        "summary": "RSS feed",
+        "responses": {
+          "200": {
+            "description": "RSS feed XML"
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "operationId": "getSitemap",
+        "summary": "XML sitemap",
+        "responses": {
+          "200": {
+            "description": "XML sitemap"
+          }
+        }
+      }
+    },
+    "/sitemap-index.xml": {
+      "get": {
+        "operationId": "getSitemapIndex",
+        "summary": "Sitemap index",
+        "responses": {
+          "200": {
+            "description": "Sitemap index XML"
+          }
+        }
+      }
+    }
+  }
+}

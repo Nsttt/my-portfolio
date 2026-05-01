@@ -1,16 +1,48 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/card.astro";
+import ContentCard from "../components/contentCard.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 
 const posts = await getCollection("posts");
 const projects = await getCollection("projects");
 const talks = await getCollection("talks");
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${Astro.site}#faq`,
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Who is Néstor López?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Néstor López is a software engineer writing about software architecture, distributed systems, Module Federation, edge-native deployments, developer tooling, and infrastructure.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What topics does Néstor López write and speak about?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "He writes and speaks about Module Federation, microfrontends, distributed systems, edge infrastructure, TypeScript, developer tooling, IoT, and systems design.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I contact Néstor López?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can contact Néstor López through the booking link on nstlopez.com, X at @nstlopez, GitHub at nsttt, or LinkedIn at nstlopez.",
+      },
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="Néstor's Blog"
   description="Writing about software architecture, distributed systems, Module Federation, and developer tooling."
+  jsonLd={[faqJsonLd]}
 >
   <section class="mt-20 flex">
     <div class="w-full text-xl">
@@ -54,6 +86,32 @@ const talks = await getCollection("talks");
           > - Helping teams build scalable micro-frontend architectures
         </li>
       </ul>
+      <form
+        class="sr-only"
+        action="/blog"
+        method="get"
+        role="search"
+        aria-label="Search blog posts"
+        tool-name="search_blog_posts"
+        tool-description="Search Néstor López's technical blog posts by keyword."
+      >
+        <label class="sr-only" for="homepage-search">Search blog posts</label>
+        <input
+          id="homepage-search"
+          name="q"
+          type="search"
+          autocomplete="off"
+          placeholder="Search blog posts..."
+          tool-param-description="Keyword query for blog post titles, descriptions, and tags."
+          class="border-cool-grey-300 dark:border-cool-grey-700 dark:bg-cool-grey-800 min-w-0 flex-1 rounded-md border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-neutral-500 focus:outline-none"
+        />
+        <button
+          class="bg-cool-grey-900 dark:bg-mono-100 dark:text-cool-grey-900 rounded-md px-5 py-3 text-base font-medium text-white"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
       <p class="my-3">
         I also do <a
           class="text-cool-grey-800 dark:text-mono-300 underline"
@@ -95,12 +153,14 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((post) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/blog/${post.id}/`}
                 title={post.data.title}
                 description={post.data.description}
                 date={post.data.pubDate}
+                eyebrow="Post"
                 expectedReadTime={post.data.expectedReadTime}
+                tags={post.data.tags}
                 eventName="blog_post_click"
                 eventProps={`title=${post.data.title}`}
               />
@@ -120,7 +180,7 @@ const talks = await getCollection("talks");
         data-s:event="view_all_talks">See all content</a
       >
     </div>
-    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
+    <ul class="flex flex-col gap-5">
       {
         talks
           .sort(
@@ -131,12 +191,24 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((talk) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/talks/${talk.id}/`}
                 title={talk.data.title}
                 description={talk.data.description}
                 date={talk.data.pubDate}
-                expectedReadTime={0}
+                eyebrow={
+                  {
+                    conference: "Conference",
+                    meetup: "Meetup",
+                    workshop: "Workshop",
+                    podcast: "Podcast / Radio",
+                    campus: "Campus Session",
+                  }[talk.data.category]
+                }
+                primaryMeta={talk.data.place}
+                secondaryMeta={talk.data.lang}
+                accent={talk.data.category}
+                tags={talk.data.tags}
                 eventName="talk_click"
                 eventProps={`title=${talk.data.title}`}
               />
@@ -167,12 +239,13 @@ const talks = await getCollection("talks");
           .slice(0, 3)
           .map((project) => (
             <li>
-              <Card
+              <ContentCard
                 href={`/projects/${project.id}/`}
                 title={project.data.title}
                 description={project.data.description}
                 date={project.data.pubDate}
-                expectedReadTime={0}
+                eyebrow="Project"
+                tags={project.data.tags}
                 eventName="project_click"
                 eventProps={`title=${project.data.title}`}
               />

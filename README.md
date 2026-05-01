@@ -26,6 +26,17 @@ Afterwards you can run the following command to start the development server:
 pnpm dev
 ```
 
+### Deploy
+
+This site deploys to Cloudflare Workers with Astro SSR.
+
+```bash
+pnpm build
+pnpm exec wrangler deploy
+```
+
+GitHub Actions expects `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
+
 ## Contact
 
 - [@nstlopez](https://x.com/nstlopez) on X.

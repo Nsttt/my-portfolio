@@ -3,6 +3,8 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 
 import MarkdownPostLayout from "../../layouts/projectLayout.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const blogEntries = await getCollection("projects");
   return blogEntries.map((entry) => ({

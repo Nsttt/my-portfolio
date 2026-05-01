@@ -36,9 +36,36 @@ const {
 } = Astro.props;
 
 const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
+const siteUrl = Astro.site ?? new URL("https://nstlopez.com");
+const personId = new URL("#person", siteUrl).href;
+const organizationId = new URL("#organization", siteUrl).href;
+const webpageId = new URL("#webpage", Astro.url).href;
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${Astro.url.href}#article`,
+  headline: title,
+  description,
+  image: new URL(image.src, siteUrl).toString(),
+  datePublished: new Date(pubDate).toISOString(),
+  dateModified: new Date(pubDate).toISOString(),
+  author: {
+    "@type": "Person",
+    "@id": personId,
+    name: "Néstor López",
+    url: siteUrl.toString(),
+  },
+  publisher: { "@id": organizationId },
+  mainEntityOfPage: { "@id": webpageId },
+};
 ---
 
-<BaseLayout title={title} description={description} ogImage={image.src}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={image.src}
+  jsonLd={[articleJsonLd]}
+>
   <div class="mt-10">
     <a
       href="/blog"
@@ -89,14 +116,20 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
       ) : null
     }
 
-    <img class="w-full object-cover shadow-lg" src={image.src} alt={title} fetchpriority="high" loading="eager" />
+    <img
+      class="w-full object-cover shadow-lg"
+      src={image.src}
+      alt={title}
+      fetchpriority="high"
+      loading="eager"
+    />
     <slot />
   </article>
   <div class="giscus"></div>
   <script>
     const theme = localStorage.getItem("theme") ?? "dark";
     const giscusTheme = theme === "dark" ? "dark" : "light";
-    
+
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.setAttribute("data-repo", "Nsttt/my-portfolio");
@@ -114,34 +147,39 @@ const formatedDate = dayjs(pubDate).format("MMMM DD, YYYY");
     script.setAttribute("data-origin", window.location.origin);
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
-    
+
     const giscusContainer = document.querySelector(".giscus");
     if (giscusContainer) {
       giscusContainer.appendChild(script);
     }
-    
+
     // Listen for theme changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
+        ) {
           const isDark = document.documentElement.classList.contains("dark");
           const newTheme = isDark ? "dark" : "light";
-          
+
           // Update Giscus theme
-          const iframe = document.querySelector("iframe.giscus-frame") as HTMLIFrameElement;
+          const iframe = document.querySelector(
+            "iframe.giscus-frame",
+          ) as HTMLIFrameElement;
           if (iframe && iframe.contentWindow) {
             iframe.contentWindow.postMessage(
               { giscus: { setConfig: { theme: newTheme } } },
-              "https://giscus.app"
+              "https://giscus.app",
             );
           }
         }
       });
     });
-    
+
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["class"]
+      attributeFilter: ["class"],
     });
   </script>
 </BaseLayout>

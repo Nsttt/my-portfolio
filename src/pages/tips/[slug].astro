@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 
 import BaseLayout from "../../layouts/baseLayout.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const tips = await getCollection("tips");
   return tips.map((tip) => ({
