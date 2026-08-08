@@ -1,0 +1,31 @@
+---
+title: "Federated Nuxt: Module Federation Meets SSR"
+description: "A ViteConf Shanghai talk on bringing Module Federation to Nuxt without giving up server-side rendering."
+pubDate: "July 18, 2026"
+place: "ViteConf 2026, Shanghai"
+lang: "English"
+category: "conference"
+mainImage: "./images/viteconf-shanghai-1.webp"
+images:
+  [
+    "./images/viteconf-shanghai-2.webp",
+    "./images/viteconf-shanghai-3.webp",
+    "./images/viteconf-shanghai-4.webp",
+    "./images/viteconf-shanghai-5.webp",
+    "./images/viteconf-shanghai-6.webp",
+    "./images/viteconf-shanghai-7.webp",
+    "./images/viteconf-shanghai-8.webp",
+    "./images/viteconf-shanghai-9.webp",
+  ]
+tags: ["module-federation", "nuxt", "vue", "ssr", "vite", "zephyr", "bad-apple"]
+---
+
+At ViteConf 2026 in Shanghai, I showed how Nuxt applications can consume independently deployed Vue applications without giving up server-side rendering.
+
+I start with the organizational cost of a frontend monolith, then introduce Module Federation as a runtime sharing contract between a Nuxt host and its remotes. From there, I walk through how `@module-federation/nuxt` connects both sides of Nuxt's build: browser bundles for the client and Node-compatible remote entries for Nitro.
+
+The hard part is keeping both runtimes on the same remote version. I cover SSR loading, shared dependencies, Nuxt payload hydration, graceful client recovery, and the lessons learned while making federated components feel like ordinary Nuxt components.
+
+I close with the deployment model: immutable remote versions, movable environment pointers, instant rollback, and teams shipping independently through Zephyr Cloud.
+
+The final demo was [Bad Apple on Module Federation](/projects/bad-apple-module-federation/): an intentionally ridiculous stress test with 5,258 microfrontends loaded and unloaded at 24fps. Every frame runs through the same federation machinery used by real applications, turning an abstract runtime model into something the whole room could watch keep playing.
