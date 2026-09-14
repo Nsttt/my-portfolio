@@ -20,6 +20,16 @@ images:
 tags: ["module-federation", "nuxt", "vue", "ssr", "vite", "zephyr", "bad-apple"]
 ---
 
+<iframe
+  class="w-full"
+  height="450"
+  src="https://player.bilibili.com/player.html?isOutside=true&aid=116992744887449&bvid=BV1Li3c6oEs5&cid=40649100783&p=1"
+  title="Bilibili video player"
+  scrolling="no"
+  frameborder="0"
+  allowfullscreen
+></iframe>
+
 At ViteConf 2026 in Shanghai, I showed how Nuxt applications can consume independently deployed Vue applications without giving up server-side rendering.
 
 I start with the organizational cost of a frontend monolith, then introduce Module Federation as a runtime sharing contract between a Nuxt host and its remotes. From there, I walk through how `@module-federation/nuxt` connects both sides of Nuxt's build: browser bundles for the client and Node-compatible remote entries for Nitro.
