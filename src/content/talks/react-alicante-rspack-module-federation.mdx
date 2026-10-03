@@ -1,0 +1,31 @@
+---
+title: "Rspack and Module Federation: The modern path to distributed microfrontends"
+description: "A React Alicante lightning talk on independent frontend releases with Rsbuild, Rspack, and Module Federation."
+pubDate: "September 26, 2026"
+place: "React Alicante 2026, Alicante, Spain"
+lang: "English"
+category: "conference"
+tags:
+  [
+    "react",
+    "rspack",
+    "rsbuild",
+    "module-federation",
+    "microfrontends",
+    "zephyr",
+  ]
+---
+
+A faster build is useful. Being able to ship checkout without rebuilding the whole shop changes how teams work.
+
+At React Alicante 2026, I gave a lightning talk about that distinction. Search, checkout, and account pages can belong to different teams while still getting bundled into one shared release. Each team can finish its work independently, but everyone waits for the same deployment. That's the problem I start with, before getting into the tooling.
+
+Rsbuild, Rspack, and Module Federation handle different parts of the solution. Rsbuild provides the application build workflow. Rspack is the Rust-powered bundler underneath it. Module Federation lets a running application load modules from another application that was built and deployed separately.
+
+I walk through a shop host and a checkout remote. The checkout team exposes its component, the host consumes it through the federation runtime, and a new checkout deployment doesn't require rebuilding the host. The application still looks like one product, but its release schedule no longer has to be one queue.
+
+Independent deployments still need agreed interfaces and compatible shared dependencies. The useful boundary is a product responsibility that a team can own, rather than an arbitrary collection of components. I close with how Zephyr Cloud fits into that delivery workflow, connecting the build to the deployed remote assets.
+
+The takeaway is simple: build speed and release independence solve different problems. Rsbuild and Rspack make building practical; Module Federation changes when separately built code comes together.
+
+[React Alicante 2026 schedule](https://reactalicante.es/#schedule)
