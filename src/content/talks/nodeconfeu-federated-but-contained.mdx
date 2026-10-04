@@ -1,0 +1,31 @@
+---
+title: "Federated, but Contained: Exploring ShadowRealm and SES for Module Federation on Node.js"
+description: "A NodeConf EU talk on updating federated Node.js modules, retiring old module graphs, and the limits of ShadowRealm and SES."
+pubDate: "September 30, 2026"
+place: "NodeConf EU 2026, Bologna, Italy"
+lang: "English"
+category: "conference"
+tags:
+  [
+    "nodejs",
+    "module-federation",
+    "esm",
+    "shadowrealm",
+    "ses",
+    "memory-management",
+  ]
+---
+
+Loading new code into a running Node.js process is only half the job. What happens to the old code?
+
+At NodeConf EU 2026 in Bologna, I spoke about the lifecycle problem behind server-side Module Federation. A checkout service can load pricing rules that another team deploys independently. But if that service keeps loading new versions, it also needs a way to retire the old module graphs without keeping their memory forever.
+
+I start with the federation model, then use a pricing-module workload to explore repeated updates in a long-lived process. CommonJS and ESM retain modules differently. Loading an ESM module under a new URL can give you another version, but it doesn't unload the previous one. Clearing a federation cache doesn't prove that the underlying graph has become collectible either.
+
+From there, I explore ShadowRealm and SES Compartments. ShadowRealm offers a separate JavaScript realm and module graph. SES focuses on controlling the capabilities available to code. Both are interesting directions, but neither is a shortcut to guaranteed memory reclamation, and capability restrictions don't provide CPU or memory limits.
+
+The talk compares experiments around startup, repeated updates, and releasing references, then looks at worker-based replacement. The distinction matters: a small workload can teach us about retention, but it doesn't establish a production guarantee for arbitrary federated applications.
+
+The lifecycle I want is explicit. Load a new version alongside the old one, route new requests to it, let existing requests finish, and retire the old generation. Independent deployment is useful on the server only if the host can manage what it loads and what it keeps.
+
+[Talk abstract and conference program](https://www.nodeconf.eu/program#federated-but-contained)

@@ -1,0 +1,44 @@
+---
+title: "The Road to Rspack: A History of Frontend Bundlers"
+description: "An Alicante Frontend meetup talk on how frontend bundlers evolved and why build performance and webpack compatibility led to Rspack."
+pubDate: "September 24, 2026"
+place: "Alicante Frontend Meetup, ULab, Alicante, Spain"
+lang: "English"
+category: "meetup"
+mainImage: "./images/alicante-frontend-1.webp"
+images:
+  [
+    "./images/alicante-frontend-2.webp",
+    "./images/alicante-frontend-3.webp",
+    "./images/alicante-frontend-4.webp",
+    "./images/alicante-frontend-5.webp",
+    "./images/alicante-frontend-6.webp",
+    "./images/alicante-frontend-7.webp",
+    "./images/alicante-frontend-8.webp",
+  ]
+tags:
+  [
+    "meetup",
+    "javascript",
+    "frontend-tooling",
+    "webpack",
+    "rollup",
+    "esbuild",
+    "vite",
+    "rspack",
+  ]
+---
+
+Every few years, another bundler arrives. The interesting question is what made the previous approach stop working.
+
+At the Alicante Frontend meetup at ULab, I gave a talk tracing that history, starting with scripts concatenated by hand and following the ideas that changed how we build frontend applications. Browserify brought CommonJS modules to the browser. Webpack treated JavaScript and other assets as one dependency graph. Rollup made static ES modules central to its approach. Later tools explored faster native builds and different development workflows.
+
+This isn't a ranking where the newest tool wins. Each approach makes tradeoffs, and an existing application brings its own constraints. A build can depend on years of loaders, plugins, framework integrations, and assumptions about its output. "Just switch bundlers" gets harder when you're responsible for migrating all of that.
+
+The second half follows the constraints behind Rspack. ByteDance's Web Infra team needed faster builds for large applications, but speed alone wasn't enough. The replacement also had to work with the webpack ecosystem those applications already relied on. I cover the earlier attempts, why the team changed direction, and how a Rust-powered engine with webpack compatibility addressed that migration problem.
+
+The point is to understand the choices rather than memorize a timeline. A faster build matters, but so does whether the team can adopt it without rewriting the application around it.
+
+This was a separate meetup talk from my [React Alicante conference lightning talk on Rspack and Module Federation](/talks/react-alicante-rspack-module-federation/).
+
+[Alicante Frontend meetup event](https://ulab.es/evento/the-road-to-rspack-a-history-of-frontend-bundlers/)
