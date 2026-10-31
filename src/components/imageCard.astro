@@ -1,0 +1,35 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  href: string;
+  title: string;
+  image?: ImageMetadata | undefined;
+  meta?: string | undefined;
+  /** Shown in place of the image when there is none, e.g. an event name. */
+  placeholder?: string | undefined;
+  eventName?: string | undefined;
+}
+
+const { href, title, image, meta, placeholder, eventName } = Astro.props;
+const onclick = eventName
+  ? `window.umami?.track(${JSON.stringify(eventName)}, ${JSON.stringify({ title })})`
+  : undefined;
+---
+
+<a class="card" rel="prefetch" href={href} onclick={onclick}>
+  {
+    image ? (
+      <Image src={image} alt="" width={480} loading="lazy" />
+    ) : (
+      <div class="card-placeholder" aria-hidden="true">
+        {placeholder ?? title}
+      </div>
+    )
+  }
+  <div class="card-label">
+    <h3>{title}</h3>
+    {meta && <span class="card-meta">{meta}</span>}
+  </div>
+</a>

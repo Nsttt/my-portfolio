@@ -29,7 +29,7 @@ const webpageId = new URL("#webpage", Astro.url).href;
 const sameAs = [
   "https://x.com/nstlopez",
   "https://github.com/nsttt",
-  "https://linkedin.com/in/nstlopez",
+  "https://bsky.app/profile/nst.blue",
 ];
 const stripContext = (schema: Record<string, unknown>) => {
   const node = { ...schema };
@@ -41,7 +41,6 @@ const breadcrumbNames: Record<string, string> = {
   blog: "Blog",
   projects: "Projects",
   talks: "Talks",
-  tips: "Tips",
 };
 const titleFromSlug = (slug: string) =>
   slug
@@ -96,11 +95,6 @@ const graphJsonLd = [
     logo: new URL("/logo.svg", siteUrl).toString(),
     sameAs,
     founder: { "@id": personId },
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: "nestor@nstlopez.com",
-      contactType: "personal inquiries",
-    },
   },
   {
     "@type": "WebSite",
@@ -142,7 +136,10 @@ const structuredDataEntries = graphJsonLd.map((schema) => ({
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.json" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content="Néstor López" />
 <script
@@ -184,21 +181,7 @@ const structuredDataEntries = graphJsonLd.map((schema) => ({
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Link Tags -->
-<link
-  rel="preload"
-  href="/fonts/Satoshi-Variable.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/hack-regular.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="color-scheme" content="light dark" />
 
 <ClientRouter />
 

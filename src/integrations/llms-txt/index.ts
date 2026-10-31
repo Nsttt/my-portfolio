@@ -237,6 +237,11 @@ async function autoDetectExternalLinks(
       },
       { domain: "x.com", label: "X", description: "Updates and thoughts" },
       {
+        domain: "bsky.app",
+        label: "Bluesky",
+        description: "Updates and thoughts",
+      },
+      {
         domain: "instagram.com",
         label: "Instagram",
         description: "Photos and stories",

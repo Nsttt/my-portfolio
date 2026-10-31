@@ -1,8 +1,16 @@
 ---
 import { getCollection } from "astro:content";
-import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
+import Timeline from "../components/timeline.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const categoryLabels = {
+  conference: "Conference",
+  meetup: "Meetup",
+  workshop: "Workshop",
+  podcast: "Podcast / Radio",
+  campus: "Campus Session",
+};
 
 const talks = (await getCollection("talks")).sort(
   (a, b) =>
@@ -11,56 +19,41 @@ const talks = (await getCollection("talks")).sort(
 ---
 
 <BaseLayout title="Talks" description="All the talks and Workshops I've given.">
-  <h1 class="mt-20 text-6xl font-bold">Talks</h1>
+  <div class="page">
+    <h1 class="page-title">Talks</h1>
 
-  <Search
-    client:load
-    placeholder="Search talks..."
-    itemClass="talk-item"
-    containerId="talks-container"
-    toolName="filter_talks"
-    toolDescription="Filter visible talks, workshops, podcasts, and speaking appearances."
-  />
+    <Search
+      client:load
+      placeholder="Search talks..."
+      itemClass="talk-item"
+      containerId="talks-container"
+      toolName="filter_talks"
+      toolDescription="Filter visible talks, workshops, podcasts, and speaking appearances."
+    />
 
-  <ul id="talks-container" class="flex flex-col gap-5">
-    {
-      talks.map((talk) => (
-        <li
-          class="talk-item"
-          data-title={talk.data.title.toLowerCase()}
-          data-description={talk.data.description.toLowerCase()}
-          data-place={talk.data.place.toLowerCase()}
-          data-lang={talk.data.lang.toLowerCase()}
-          data-category={talk.data.category.toLowerCase()}
-          data-tags={talk.data.tags?.join(" ").toLowerCase() || ""}
-        >
-          <ContentCard
-            href={`/talks/${talk.id}/`}
-            title={talk.data.title}
-            description={talk.data.description}
-            date={talk.data.pubDate}
-            eyebrow={
-              {
-                conference: "Conference",
-                meetup: "Meetup",
-                workshop: "Workshop",
-                podcast: "Podcast / Radio",
-                campus: "Campus Session",
-              }[talk.data.category]
-            }
-            primaryMeta={talk.data.place}
-            secondaryMeta={talk.data.lang}
-            accent={talk.data.category}
-            tags={talk.data.tags}
-          />
-        </li>
-      ))
-    }
-  </ul>
+    <Timeline
+      id="talks-container"
+      itemClass="talk-item"
+      items={talks.map((talk) => ({
+        href: `/talks/${talk.id}/`,
+        title: talk.data.title,
+        date: talk.data.pubDate,
+        meta: [
+          categoryLabels[talk.data.category],
+          talk.data.place,
+          talk.data.lang,
+        ].join(" · "),
+        searchData: {
+          title: talk.data.title.toLowerCase(),
+          description: talk.data.description.toLowerCase(),
+          place: talk.data.place.toLowerCase(),
+          lang: talk.data.lang.toLowerCase(),
+          category: talk.data.category.toLowerCase(),
+          tags: talk.data.tags.join(" ").toLowerCase(),
+        },
+      }))}
+    />
 
-  <div id="no-results" class="hidden py-12 text-center">
-    <p class="text-lg text-neutral-600 dark:text-neutral-500">
-      No results found
-    </p>
+    <p id="no-results" class="no-results hidden">No results found</p>
   </div>
 </BaseLayout>
