@@ -1,0 +1,82 @@
+---
+interface Repo {
+  name: string;
+  description: string;
+  language: string;
+  stars?: number | undefined;
+}
+
+interface Props {
+  repos: Repo[];
+}
+
+interface GitHubRepoResponse {
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+}
+
+// Live data is a nicety; the fallbacks keep rate-limited builds working.
+const fetchRepo = async (repo: Repo): Promise<Repo> => {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo.name}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!response.ok) return repo;
+    const data = (await response.json()) as GitHubRepoResponse;
+
+    return {
+      ...repo,
+      description: data.description ?? repo.description,
+      language: data.language ?? repo.language,
+      stars: data.stargazers_count,
+    };
+  } catch {
+    return repo;
+  }
+};
+
+const languageColors: Record<string, string> = {
+  JavaScript: "#f1e05a",
+  Rust: "#dea584",
+  TypeScript: "#3178c6",
+};
+const repos = await Promise.all(Astro.props.repos.map(fetchRepo));
+const formatStars = (stars: number) =>
+  new Intl.NumberFormat("en", { notation: "compact" }).format(stars);
+---
+
+<ul class="repo-grid" role="list">
+  {
+    repos.map((repo) => (
+      <li>
+        <a
+          class="repo-card"
+          href={`https://github.com/${repo.name}`}
+          onclick={`window.umami?.track("github_repo_click", ${JSON.stringify({ repo: repo.name })})`}
+        >
+          <span class="repo-name">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.05A2.5 2.5 0 0 1 2 11.5zm10.5-1h-8a1 1 0 0 0-1 1v6.71A2.5 2.5 0 0 1 4.5 9h8zM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.09a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2z" />
+            </svg>
+            {repo.name}
+          </span>
+          <span class="repo-description">{repo.description}</span>
+          <span class="repo-meta">
+            <span>
+              <span
+                class="repo-language"
+                style={`--language-color: ${languageColors[repo.language] ?? "currentColor"}`}
+              />
+              {repo.language}
+            </span>
+            {repo.stars !== undefined && (
+              <span>★ {formatStars(repo.stars)}</span>
+            )}
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -48,13 +48,17 @@ export default function Search(props: SearchProps) {
         category.includes(searchLower) ||
         tags.includes(searchLower);
 
-      if (matches) {
-        (item as HTMLElement).style.display = "block";
-        visibleCount++;
-      } else {
-        (item as HTMLElement).style.display = "none";
-      }
+      (item as HTMLElement).hidden = !matches;
+      if (matches) visibleCount++;
     });
+
+    container
+      ?.querySelectorAll<HTMLElement>("[data-search-group]")
+      .forEach((group) => {
+        group.hidden = !group.querySelector(
+          `.${props.itemClass}:not([hidden])`,
+        );
+      });
 
     if (noResults && container) {
       if (visibleCount === 0) {
@@ -75,7 +79,7 @@ export default function Search(props: SearchProps) {
 
   return (
     <form
-      class="mt-10 mb-8"
+      class="search"
       role="search"
       method="get"
       tool-name={toolName()}
@@ -83,13 +87,13 @@ export default function Search(props: SearchProps) {
     >
       <input
         name="q"
-        type="text"
+        type="search"
+        aria-label={props.placeholder || "Search"}
         autocomplete="off"
         placeholder={props.placeholder || "Search..."}
         value={searchTerm()}
         onInput={(e) => setSearchTerm(e.currentTarget.value)}
         tool-param-description="Search query used to filter visible page content."
-        class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50 dark:placeholder:text-neutral-500"
       />
     </form>
   );

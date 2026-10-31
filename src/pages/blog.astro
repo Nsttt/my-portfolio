@@ -1,57 +1,46 @@
 ---
 import { getCollection } from "astro:content";
-import ContentCard from "../components/contentCard.astro";
 import Search from "../components/search";
+import Timeline from "../components/timeline.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 
-const posts = await getCollection("posts");
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+  );
 ---
 
 <BaseLayout title="Blog" description="All my blog posts.">
-  <h1 class="mt-20 text-6xl font-bold">Blog</h1>
+  <div class="page">
+    <h1 class="page-title">Blog</h1>
 
-  <Search
-    client:load
-    placeholder="Search posts..."
-    itemClass="post-item"
-    containerId="posts-container"
-    toolName="filter_blog_posts"
-    toolDescription="Filter visible blog posts by title, description, and tags."
-  />
+    <Search
+      client:load
+      placeholder="Search posts..."
+      itemClass="post-item"
+      containerId="posts-container"
+      toolName="filter_blog_posts"
+      toolDescription="Filter visible blog posts by title, description, and tags."
+    />
 
-  <ul id="posts-container" class="flex flex-col gap-5">
-    {
-      posts
-        .filter((post) => !post.data.draft)
-        .sort(
-          (a, b) =>
-            new Date(b.data.pubDate).valueOf() -
-            new Date(a.data.pubDate).valueOf(),
-        )
-        .map((post) => (
-          <li
-            class="post-item"
-            data-title={post.data.title.toLowerCase()}
-            data-description={post.data.description.toLowerCase()}
-            data-tags={post.data.tags?.join(" ").toLowerCase() || ""}
-          >
-            <ContentCard
-              href={`/blog/${post.id}/`}
-              title={post.data.title}
-              description={post.data.description}
-              date={post.data.pubDate}
-              eyebrow="Post"
-              expectedReadTime={post.data.expectedReadTime}
-              tags={post.data.tags}
-            />
-          </li>
-        ))
-    }
-  </ul>
+    <Timeline
+      id="posts-container"
+      itemClass="post-item"
+      items={posts.map((post) => ({
+        href: `/blog/${post.id}/`,
+        title: post.data.title,
+        date: post.data.pubDate,
+        meta: `${post.data.expectedReadTime} min read`,
+        searchData: {
+          title: post.data.title.toLowerCase(),
+          description: post.data.description.toLowerCase(),
+          tags: post.data.tags.join(" ").toLowerCase(),
+        },
+      }))}
+    />
 
-  <div id="no-results" class="hidden py-12 text-center">
-    <p class="text-lg text-neutral-600 dark:text-neutral-500">
-      No results found
-    </p>
+    <p id="no-results" class="no-results hidden">No results found</p>
   </div>
 </BaseLayout>

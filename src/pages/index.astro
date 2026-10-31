@@ -1,11 +1,77 @@
 ---
 import { getCollection } from "astro:content";
-import ContentCard from "../components/contentCard.astro";
+import GithubRepos from "../components/githubRepos.astro";
+import ImageCard from "../components/imageCard.astro";
+import { socials } from "../data/socials";
 import BaseLayout from "../layouts/baseLayout.astro";
 
-const posts = await getCollection("posts");
-const projects = await getCollection("projects");
-const talks = await getCollection("talks");
+const byNewest = (a: { data: { pubDate: string } }, b: typeof a) =>
+  new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf();
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort(byNewest)
+  .slice(0, 4);
+const talks = (await getCollection("talks")).sort(byNewest).slice(0, 4);
+const projects = (await getCollection("projects")).sort(byNewest).slice(0, 4);
+const pinnedRepos = [
+  {
+    name: "module-federation/core",
+    description:
+      "Share code and resources across multiple JavaScript applications.",
+    language: "JavaScript",
+    stars: 2674,
+  },
+  {
+    name: "web-infra-dev/rspack",
+    description:
+      "Fast Rust-based bundler for the web with a modernized webpack API.",
+    language: "Rust",
+    stars: 12964,
+  },
+  {
+    name: "vitejs/vite",
+    description: "Next generation frontend tooling. It's fast!",
+    language: "TypeScript",
+    stars: 83635,
+  },
+  {
+    name: "module-federation/tanstack",
+    description: "Module Federation plugin for TanStack Start.",
+    language: "TypeScript",
+    stars: 25,
+  },
+  {
+    name: "module-federation/nuxt",
+    description: "Module Federation plugin for Nuxt.",
+    language: "TypeScript",
+    stars: 23,
+  },
+  {
+    name: "module-federation/astro",
+    description: "Module Federation on Astro components and runtime.",
+    language: "TypeScript",
+    stars: 8,
+  },
+];
+const iconNav: {
+  href: string;
+  label: string;
+  icon: string;
+  event?: string;
+  filled?: boolean;
+}[] = [
+  {
+    href: "/blog",
+    label: "Blog",
+    icon: "M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h8",
+  },
+  ...socials.map((social) => ({ ...social, filled: true })),
+  {
+    href: "/rss.xml",
+    label: "RSS",
+    icon: "M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M5 19h.01",
+  },
+];
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -32,7 +98,7 @@ const faqJsonLd = {
       name: "How can I contact Néstor López?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can contact Néstor López through the booking link on nstlopez.com, X at @nstlopez, GitHub at nsttt, or LinkedIn at nstlopez.",
+        text: "You can contact Néstor López through the booking link on nstlopez.com, X at @nstlopez, GitHub at nsttt, or Bluesky at nst.blue.",
       },
     },
   ],
@@ -43,51 +109,66 @@ const faqJsonLd = {
   title="Néstor's Blog"
   description="Writing about software architecture, distributed systems, Module Federation, and developer tooling."
   jsonLd={[faqJsonLd]}
+  home
 >
-  <section class="mt-20 flex">
-    <div class="w-full text-xl">
-      <h1 class="mb-10 text-3xl">Hi 👋, I'm Néstor, from Spain 🇪🇸</h1>
-      <p class="my-3">
-        I'm a Software Engineer building typesafe, scalable systems. Currently
-        working on Module Federation, edge-native deployments, and weird
-        infrastructure ideas at <a
-          class="text-cool-grey-800 dark:text-mono-300 underline"
+  <article class="homepage">
+    <nav class="icon-nav" aria-label="Explore the site">
+      <ul role="list">
+        {
+          iconNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                onclick={
+                  item.event
+                    ? `window.umami?.track('${item.event}', { type: 'social' })`
+                    : undefined
+                }
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  {...(item.filled
+                    ? { fill: "currentColor" }
+                    : {
+                        fill: "none",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                      })}
+                >
+                  <path d={item.icon} />
+                </svg>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <section class="intro divided">
+      <header>
+        <h1 class="greeting">
+          Hi, I'm Néstor
+          <img
+            class="pixel-art"
+            src="/images/suica-sprite.gif"
+            alt=""
+            width="84"
+            height="70"
+            loading="eager"
+          />
+        </h1>
+      </header>
+      <p>
+        Software engineer from Spain 🇪🇸 building typesafe, scalable systems. I
+        work on Module Federation and edge infrastructure at <a
           href="https://zephyr-cloud.io/"
           target="_blank">Zephyr Cloud</a
         >.
       </p>
-      <p class="my-3">
-        Most of my open source time goes into the bundler ecosystem:
-      </p>
-      <ul class="my-3 ml-6 list-disc space-y-2">
-        <li>
-          <a
-            class="text-cool-grey-800 dark:text-mono-300 underline"
-            href="https://module-federation.io/"
-            target="_blank"
-            data-s:event="oss_module_federation"
-            data-s:event-props="category=architecture">Module Federation</a
-          > - Helping teams build scalable micro-frontend architectures
-        </li>
-        <li>
-          <a
-            class="text-cool-grey-800 dark:text-mono-300 underline"
-            href="https://rsbuild.rs/"
-            target="_blank"
-            data-s:event="oss_rsbuild"
-            data-s:event-props="category=bundler">Rsbuild</a
-          > - A fast, Rspack-powered build tool for web apps
-        </li>
-        <li>
-          <a
-            class="text-cool-grey-800 dark:text-mono-300 underline"
-            href="https://vite.dev/"
-            target="_blank"
-            data-s:event="oss_vite"
-            data-s:event-props="category=bundler">Vite</a
-          > - Next generation frontend tooling
-        </li>
-      </ul>
       <form
         class="sr-only"
         action="/blog"
@@ -105,152 +186,137 @@ const faqJsonLd = {
           autocomplete="off"
           placeholder="Search blog posts..."
           tool-param-description="Keyword query for blog post titles, descriptions, and tags."
-          class="border-cool-grey-300 dark:border-cool-grey-700 dark:bg-cool-grey-800 min-w-0 flex-1 rounded-md border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-neutral-500 focus:outline-none"
         />
-        <button
-          class="bg-cool-grey-900 dark:bg-mono-100 dark:text-cool-grey-900 rounded-md px-5 py-3 text-base font-medium text-white"
-          type="submit"
-        >
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
-      <p class="my-3">
-        I also do <a
-          class="text-cool-grey-800 dark:text-mono-300 underline"
-          href="/talks">conference talks and workshops</a
-        > about Module Federation, infrastructure, OSS tools, IoT, and systems design.
+      <p>Off the clock: homelab tinkering and arcade games.</p>
+      <img
+        class="portrait"
+        src="/images/profile-320.webp"
+        alt="Néstor López"
+        width="160"
+        height="160"
+        loading="eager"
+      />
+    </section>
+
+    <section class="divided">
+      <header>
+        <h2>Writing</h2>
+      </header>
+      <p>
+        Long-form posts about software architecture, distributed systems,
+        developer tooling, and the occasional personal detour.
       </p>
-      <p class="my-3">
-        I'm a big fan of infrastructure, at work and at home. If it involves
-        servers, networks or a homelab, I'm probably tinkering with it. Outside
-        of work, you'll usually find me playing video games, with a soft spot
-        for arcade games. I also help people and teams through consulting and
-        mentoring.
-      </p>
-    </div>
-  </section>
-  <section>
-    <div
-      class="border-cool-grey-400 dark:border-cool-grey-700 mt-28 mb-10 flex justify-between border-b-[1px] pb-5"
-    >
-      <h2 class="self-baseline text-4xl">Latest posts</h2>
-      <a
-        href="/blog"
-        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
-        data-s:event="view_all_posts">See all posts</a
-      >
-    </div>
-    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
-      {
-        posts
-          .filter((post) => !post.data.draft)
-          .sort(
-            (a, b) =>
-              new Date(b.data.pubDate).valueOf() -
-              new Date(a.data.pubDate).valueOf(),
-          )
-          .slice(0, 3)
-          .map((post) => (
+      <ul class="card-grid" role="list">
+        {
+          posts.map((post) => (
             <li>
-              <ContentCard
+              <ImageCard
                 href={`/blog/${post.id}/`}
                 title={post.data.title}
-                description={post.data.description}
-                date={post.data.pubDate}
-                eyebrow="Post"
-                expectedReadTime={post.data.expectedReadTime}
-                tags={post.data.tags}
+                image={post.data.image}
+                meta={`${post.data.expectedReadTime} min read`}
                 eventName="blog_post_click"
-                eventProps={`title=${post.data.title}`}
               />
             </li>
           ))
-      }
-    </ul>
-  </section>
-  <section>
-    <div
-      class="border-cool-grey-400 dark:border-cool-grey-700 mt-20 mb-10 flex justify-between border-b-[1px] pb-5"
-    >
-      <h2 class="self-baseline text-4xl">Talks and Workshops</h2>
-      <a
-        href="/talks"
-        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
-        data-s:event="view_all_talks">See all content</a
-      >
-    </div>
-    <ul class="flex flex-col gap-5">
-      {
-        talks
-          .sort(
-            (a, b) =>
-              new Date(b.data.pubDate).valueOf() -
-              new Date(a.data.pubDate).valueOf(),
-          )
-          .slice(0, 3)
-          .map((talk) => (
+        }
+      </ul>
+      <p class="see-all">
+        <a href="/blog" data-s:event="view_all_posts">See all posts</a>
+      </p>
+    </section>
+
+    <section class="divided">
+      <header>
+        <h2>Talks</h2>
+      </header>
+      <p>
+        I do conference talks and workshops about Module Federation,
+        infrastructure, OSS tools, IoT, and systems design.
+      </p>
+      <ul class="card-grid" role="list">
+        {
+          talks.map((talk) => (
             <li>
-              <ContentCard
+              <ImageCard
                 href={`/talks/${talk.id}/`}
                 title={talk.data.title}
-                description={talk.data.description}
-                date={talk.data.pubDate}
-                eyebrow={
-                  {
-                    conference: "Conference",
-                    meetup: "Meetup",
-                    workshop: "Workshop",
-                    podcast: "Podcast / Radio",
-                    campus: "Campus Session",
-                  }[talk.data.category]
-                }
-                primaryMeta={talk.data.place}
-                secondaryMeta={talk.data.lang}
-                accent={talk.data.category}
-                tags={talk.data.tags}
+                image={talk.data.mainImage ?? talk.data.images?.[0]}
+                placeholder={talk.data.place.split(",")[0]}
+                meta={talk.data.place}
                 eventName="talk_click"
-                eventProps={`title=${talk.data.title}`}
               />
             </li>
           ))
-      }
-    </ul>
-  </section>
-  <section>
-    <div
-      class="border-cool-grey-400 dark:border-cool-grey-700 mt-20 mb-10 flex justify-between border-b-[1px] pb-5"
-    >
-      <h2 class="self-baseline text-4xl">Things I've built</h2>
-      <a
-        href="/projects"
-        class="text-cool-grey-800 dark:text-mono-300 self-baseline text-lg underline"
-        data-s:event="view_all_projects">See all projects</a
-      >
-    </div>
-    <ul class="flex flex-col gap-x-2 gap-y-8 sm:gap-x-4 xl:gap-x-6">
-      {
-        projects
-          .sort(
-            (a, b) =>
-              new Date(b.data.pubDate).valueOf() -
-              new Date(a.data.pubDate).valueOf(),
-          )
-          .slice(0, 3)
-          .map((project) => (
+        }
+      </ul>
+      <p class="see-all">
+        <a href="/talks" data-s:event="view_all_talks">See all talks</a>
+      </p>
+    </section>
+
+    <section class="divided">
+      <header>
+        <h2>Projects</h2>
+      </header>
+      <p>
+        Side projects, experiments, and the occasional terrible idea that turned
+        out to work.
+      </p>
+      <ul class="card-grid" role="list">
+        {
+          projects.map((project) => (
             <li>
-              <ContentCard
+              <ImageCard
                 href={`/projects/${project.id}/`}
                 title={project.data.title}
-                description={project.data.description}
-                date={project.data.pubDate}
-                eyebrow="Project"
-                tags={project.data.tags}
+                image={project.data.image}
+                meta={project.data.subtitle}
                 eventName="project_click"
-                eventProps={`title=${project.data.title}`}
               />
             </li>
           ))
-      }
-    </ul>
-  </section>
+        }
+      </ul>
+      <p class="see-all">
+        <a href="/projects" data-s:event="view_all_projects">See all projects</a
+        >
+      </p>
+    </section>
+
+    <section class="divided">
+      <header>
+        <h2>Open source</h2>
+      </header>
+      <p>
+        Most of my open source time goes into the bundler ecosystem. These are
+        the repositories I spend it in; the rest lives on <a
+          href="https://github.com/nsttt"
+          data-s:event="view_github">GitHub</a
+        >.
+      </p>
+      <GithubRepos repos={pinnedRepos} />
+    </section>
+
+    <section class="divided intro">
+      <header>
+        <h2>Let's talk</h2>
+      </header>
+      <p>
+        I help people and teams through consulting and mentoring. If you want to
+        chat about architecture, infrastructure, or anything in between, grab a
+        slot.
+      </p>
+      <p class="see-all button-row">
+        <a
+          class="button"
+          href="https://cal.com/nstlopez"
+          target="_blank"
+          rel="noopener noreferrer">Book a call</a
+        >
+      </p>
+    </section>
+  </article>
 </BaseLayout>
