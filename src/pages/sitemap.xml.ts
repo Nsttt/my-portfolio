@@ -1,5 +1,5 @@
-import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { getCollection } from "astro:content";
 
 type SitemapEntry = {
   path: string;
@@ -51,11 +51,10 @@ const renderURL = (baseURL: URL, entry: SitemapEntry) => {
 
 export const GET: APIRoute = async ({ site }) => {
   const baseURL = site ?? new URL("https://nstlopez.com");
-  const [posts, projects, talks, tips] = await Promise.all([
+  const [posts, projects, talks] = await Promise.all([
     getCollection("posts", ({ data }) => !data.draft),
     getCollection("projects"),
     getCollection("talks"),
-    getCollection("tips"),
   ]);
 
   const contentEntries: SitemapEntry[] = [
@@ -72,11 +71,6 @@ export const GET: APIRoute = async ({ site }) => {
     ...talks.map((talk) => ({
       path: `/talks/${talk.id}/`,
       lastmod: toLastmodDate(talk.data.pubDate),
-      changefreq: "monthly" as const,
-    })),
-    ...tips.map((tip) => ({
-      path: `/tips/${tip.id}/`,
-      lastmod: toLastmodDate(tip.data.date),
       changefreq: "monthly" as const,
     })),
   ];
@@ -105,12 +99,6 @@ export const GET: APIRoute = async ({ site }) => {
       path: "/projects/",
       lastmod: indexLastmod,
       changefreq: "monthly",
-      priority: "0.8",
-    },
-    {
-      path: "/tips/",
-      lastmod: indexLastmod,
-      changefreq: "weekly",
       priority: "0.8",
     },
     ...contentEntries,

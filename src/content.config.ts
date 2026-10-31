@@ -64,19 +64,8 @@ const talkCollection = defineCollection({
     }),
 });
 
-const tipsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/tips" }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.date(),
-    tags: z.array(z.string()).optional(),
-  }),
-});
-
 export const collections = {
   projects: projectCollection,
   posts: postCollection,
   talks: talkCollection,
-  tips: tipsCollection,
 };
