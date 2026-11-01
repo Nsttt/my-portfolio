@@ -1,55 +1,48 @@
 ---
 import { getCollection } from "astro:content";
-import ContentCard from "../components/contentCard.astro";
+import ImageCard from "../components/imageCard.astro";
 import Search from "../components/search";
 import BaseLayout from "../layouts/baseLayout.astro";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort(
+  (a, b) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+);
 ---
 
 <BaseLayout title="Projects" description="All my projects.">
-  <h1 class="mt-20 text-6xl font-bold">Projects</h1>
+  <div class="page">
+    <h1 class="page-title">Projects</h1>
 
-  <Search
-    client:load
-    placeholder="Search projects..."
-    itemClass="project-item"
-    containerId="projects-container"
-    toolName="filter_projects"
-    toolDescription="Filter visible software projects by title, description, and tags."
-  />
+    <Search
+      client:load
+      placeholder="Search projects..."
+      itemClass="project-item"
+      containerId="projects-container"
+      toolName="filter_projects"
+      toolDescription="Filter visible software projects by title, description, and tags."
+    />
 
-  <ul id="projects-container" class="flex flex-col gap-5">
-    {
-      projects
-        .sort(
-          (a, b) =>
-            new Date(b.data.pubDate).valueOf() -
-            new Date(a.data.pubDate).valueOf(),
-        )
-        .map((project) => (
+    <ul id="projects-container" class="card-grid" role="list">
+      {
+        projects.map((project) => (
           <li
             class="project-item"
             data-title={project.data.title.toLowerCase()}
             data-description={project.data.description.toLowerCase()}
-            data-tags={project.data.tags?.join(" ").toLowerCase() || ""}
+            data-tags={project.data.tags.join(" ").toLowerCase()}
           >
-            <ContentCard
+            <ImageCard
               href={`/projects/${project.id}/`}
               title={project.data.title}
-              description={project.data.description}
-              date={project.data.pubDate}
-              eyebrow="Project"
-              tags={project.data.tags}
+              image={project.data.image}
+              meta={project.data.subtitle}
             />
           </li>
         ))
-    }
-  </ul>
+      }
+    </ul>
 
-  <div id="no-results" class="hidden py-12 text-center">
-    <p class="text-lg text-neutral-600 dark:text-neutral-500">
-      No results found
-    </p>
+    <p id="no-results" class="no-results hidden">No results found</p>
   </div>
 </BaseLayout>

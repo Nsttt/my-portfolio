@@ -1,67 +1,53 @@
 ---
-import { Image } from "astro:assets";
+import { socials } from "../data/socials";
 import ToggleButton from "./toggleButton";
 
 const pathname = Astro.url.pathname;
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/talks", label: "Talks" },
-  { href: "/projects", label: "Projects" },
-  { href: "/tips", label: "Tips" },
-];
+const links = [{ href: "/blog", label: "Blog" }];
 
-const isCurrent = (href: string) =>
-  href === "/" ? pathname === "/" : pathname.startsWith(href);
+const isCurrent = (href: string) => pathname.startsWith(href);
 ---
 
-<header class="flex flex-col">
-  <div class="flex justify-between">
-    <a class="flex gap-3" href="/">
-      <Image
-        class="h-12 w-12 rounded-full"
-        width={96}
-        height={96}
-        src="/images/profile-96.webp"
-        alt="profile"
-        loading="eager"
-      />
-      <span class="self-center text-3xl">Néstor's Blog</span>
-    </a>
-    <ToggleButton client:only="solid-js" />
+<nav class="topnav" aria-label="Site navigation">
+  <a class="topnav-home" href="/">
+    <img
+      class="pixel-art"
+      src="/images/suica-sprite.gif"
+      alt=""
+      width="42"
+      height="35"
+      loading="eager"
+    />
+    <span>Néstor López</span>
+  </a>
+  <div class="topnav-links">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={isCurrent(link.href) ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
   </div>
-  <div
-    class="border-cool-grey-400 text-cool-grey-700 dark:border-cool-grey-700 mt-4 flex justify-between border-b-[1px] pb-4 text-lg dark:text-slate-400"
-  >
-    <nav aria-label="Primary navigation">
-      {
-        links.map((link) => (
-          <a
-            class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-            href={link.href}
-            aria-current={isCurrent(link.href) ? "page" : undefined}
-          >
-            {link.label}
-          </a>
-        ))
-      }
-      <a
-        class="text-cool-grey-900 mr-2 font-semibold hover:underline dark:text-slate-100"
-        href="https://cal.com/nstlopez"
-        target="_blank"
-        rel="noopener noreferrer">Let's Talk</a
-      >
-    </nav>
-    <nav aria-label="Social links">
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="https://x.com/nstlopez">X</a
-      >
-      <a
-        class="hover:text-cool-grey-900 mr-2 hover:underline dark:hover:text-slate-100"
-        href="https://github.com/nsttt">GitHub</a
-      >
-    </nav>
+  <div class="topnav-social">
+    {
+      socials.map((social) => (
+        <a
+          href={social.href}
+          aria-label={social.label}
+          title={social.label}
+          onclick={`window.umami?.track('${social.event}', { type: 'social' })`}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d={social.icon} />
+          </svg>
+        </a>
+      ))
+    }
   </div>
-</header>
+  <ToggleButton client:only="solid-js" />
+</nav>

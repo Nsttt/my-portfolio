@@ -55,17 +55,6 @@
         }
       }
     },
-    "/tips": {
-      "get": {
-        "operationId": "listTips",
-        "summary": "Tips index",
-        "responses": {
-          "200": {
-            "description": "Tips index HTML"
-          }
-        }
-      }
-    },
     "/llms.txt": {
       "get": {
         "operationId": "getLlmsIndex",

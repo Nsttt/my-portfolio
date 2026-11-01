@@ -80,46 +80,19 @@ const eventJsonLd = {
   ogImage={mainImage ? mainImage.src : undefined}
   jsonLd={[eventJsonLd]}
 >
-  <div class="mt-10">
-    <a
-      href="/talks"
-      class="inline-flex items-center gap-2 text-cool-grey-800 hover:underline dark:text-mono-100"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-      Go Back
-    </a>
-  </div>
-  <article
-    class="prose prose-slate mt-6 max-w-none dark:prose-invert lg:prose-xl prose-a:text-cool-grey-800 prose-a:no-underline prose-a:hover:underline dark:prose-a:text-mono-100"
-  >
+  <header class="post-header">
     <h1>{title}</h1>
-    <div class="flex justify-between">
-      <span>
-        <span>{place}</span>
-        •
-        <span>{lang}</span>
-        •
-        <time>{formatedDate}</time>
-      </span>
-    </div>
-    <p>{description}</p>
+    <p class="subheading">{description}</p>
+    <span class="post-meta">
+      {place} &middot; {lang} &middot;
+      <time datetime={dayjs(pubDate).format("YYYY-MM-DD")}>{formatedDate}</time>
+    </span>
+  </header>
+  <article class="content">
     <slot />
     {
       mainImage && (
         <img
-          class="w-full object-cover shadow-lg"
           src={mainImage.src}
           alt={title}
           fetchpriority="high"
@@ -127,15 +100,6 @@ const eventJsonLd = {
         />
       )
     }
-    {
-      images &&
-        images.map((image) => (
-          <img
-            class="w-full object-cover shadow-lg"
-            src={image.src}
-            alt={title}
-          />
-        ))
-    }
+    {images && images.map((image) => <img src={image.src} alt={title} />)}
   </article>
 </BaseLayout>

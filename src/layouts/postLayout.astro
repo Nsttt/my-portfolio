@@ -66,66 +66,33 @@ const articleJsonLd = {
   ogImage={image.src}
   jsonLd={[articleJsonLd]}
 >
-  <div class="mt-10">
-    <a
-      href="/blog"
-      class="text-cool-grey-800 dark:text-mono-100 inline-flex items-center gap-2 hover:underline"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-      Go Back
-    </a>
-  </div>
-  <article
-    class="prose prose-slate dark:prose-invert lg:prose-xl prose-a:text-cool-grey-800 prose-a:no-underline prose-a:hover:underline dark:prose-a:text-mono-100 mt-6 max-w-none"
-  >
+  <header class="post-header">
     <h1 transition:name={title}>{title}</h1>
-    <span>
-      <time>{formatedDate}</time>
-      •
-      <span>
-        {"☕".repeat(expectedReadTime).substring(0, 5)}
-        {`${expectedReadTime.toString()} min read`}
-      </span>
+    <span class="post-meta">
+      <time datetime={dayjs(pubDate).format("YYYY-MM-DD")}>{formatedDate}</time>
+      &middot; {`${expectedReadTime.toString()} min read`}
     </span>
     {
       revised_by ? (
-        <>
-          <br />
-          <span>
-            Revised by:
-            {revised_by.map((r, index) => (
-              <>
-                <a href={r.link}>{r.name}</a>
-                {index < revised_by.length - 1 ? ", " : ""}
-              </>
-            ))}
-          </span>
-        </>
+        <span class="post-meta">
+          Revised by{" "}
+          {revised_by.map((r, index) => (
+            <>
+              <a href={r.link}>{r.name}</a>
+              {index < revised_by.length - 1 ? ", " : ""}
+            </>
+          ))}
+        </span>
       ) : null
     }
-
-    <img
-      class="w-full object-cover shadow-lg"
-      src={image.src}
-      alt={title}
-      fetchpriority="high"
-      loading="eager"
-    />
+  </header>
+  <figure class="post-hero-image">
+    <img src={image.src} alt={title} fetchpriority="high" loading="eager" />
+  </figure>
+  <article class="content">
     <slot />
   </article>
-  <div class="giscus"></div>
+  <div class="giscus comments"></div>
   <script>
     const theme = localStorage.getItem("theme") ?? "dark";
     const giscusTheme = theme === "dark" ? "dark" : "light";

@@ -8,18 +8,18 @@
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-256x256.png?",
+      "src": "/android-chrome-256x256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png?",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "theme_color": "#d11c54",
-  "background_color": "#301934",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/?utm_source=web_app_manifest"
 }

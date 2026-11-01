@@ -1,30 +1,22 @@
-<footer
-  class="border-cool-grey-400 text-cool-grey-700 dark:border-cool-grey-700 mt-32 flex justify-between border-t-[1px] pt-4 dark:text-slate-400"
->
-  <div>
+<footer class="site-footer">
+  <nav class="footer-links" aria-label="Social links">
     <a
-      class="hover:text-cool-grey-900 mr-2 transition-colors hover:underline dark:hover:text-slate-100"
       href="https://x.com/nstlopez"
-      onclick="window.umami?.track('external_twitter', { type: 'social' })"
-      >X
-    </a>
+      onclick="window.umami?.track('external_twitter', { type: 'social' })">X</a
+    >
     <a
-      class="hover:text-cool-grey-900 mr-2 transition-colors hover:underline dark:hover:text-slate-100"
       href="https://github.com/nsttt"
       onclick="window.umami?.track('external_github', { type: 'social' })"
       >GitHub</a
     >
     <a
-      class="hover:text-cool-grey-900 mr-2 transition-colors hover:underline dark:hover:text-slate-100"
-      href="https://linkedin.com/in/nstlopez"
-      onclick="window.umami?.track('external_linkedin', { type: 'social' })"
-      >LinkedIn</a
+      href="https://bsky.app/profile/nst.blue"
+      onclick="window.umami?.track('external_bluesky', { type: 'social' })"
+      >Bluesky</a
     >
-  </div>
-  <div>
-    <a
-      class="hover:text-cool-grey-900 mr-2 transition-colors hover:underline dark:hover:text-slate-100"
-      href="/rss.xml">RSS</a
+    <a href="/rss.xml">RSS</a>
+    <a href="https://cal.com/nstlopez" target="_blank" rel="noopener noreferrer"
+      >Let's Talk</a
     >
-  </div>
+  </nav>
 </footer>

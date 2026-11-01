@@ -3,15 +3,17 @@ import "../styles/base.css";
 import BaseHead from "../components/baseHead.astro";
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
+import ToggleButton from "../components/toggleButton";
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
   ogImage?: string | undefined;
   jsonLd?: Record<string, unknown>[] | undefined;
+  home?: boolean | undefined;
 }
 
-const { title, description, ogImage, jsonLd } = Astro.props;
+const { title, description, ogImage, jsonLd, home = false } = Astro.props;
 ---
 
 <html lang="en">
@@ -23,36 +25,35 @@ const { title, description, ogImage, jsonLd } = Astro.props;
       jsonLd={jsonLd}
     />
     <script is:inline>
-      const theme = (() => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme") ?? "dark";
+      const applyTheme = () => {
+        let theme = localStorage.getItem("theme");
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
         }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
-      })();
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        localStorage.setItem("theme", theme);
+      };
 
-      if (theme === "light") {
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.add("dark");
-      }
-      window.localStorage.setItem("theme", theme);
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
     </script>
   </head>
-  <body
-    class="bg-cool-grey-050 text-cool-grey-900 dark:bg-cool-grey-900 container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 dark:text-slate-50"
-  >
-    <div class="mx-auto max-w-3xl">
-      <Header />
-      <main>
-        <slot />
-      </main>
-      <Footer />
-    </div>
+  <body>
+    <a href="#content" class="skip-link">Skip to main content</a>
+    {
+      home ? (
+        <div class="home-theme-toggle">
+          <ToggleButton client:only="solid-js" />
+        </div>
+      ) : (
+        <Header />
+      )
+    }
+    <main id="content" class="site-main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

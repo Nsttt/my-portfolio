@@ -3,7 +3,7 @@
     "name": "Néstor López Content Discovery",
     "version": "1.0.0"
   },
-  "description": "Static agent discovery metadata for Néstor López's blog, talks, projects, and technical tips.",
+  "description": "Static agent discovery metadata for Néstor López's blog, talks, and projects.",
   "transport": {
     "type": "https",
     "endpoint": "https://nstlopez.com/llms.txt"

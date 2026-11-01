@@ -22,7 +22,10 @@ const config: AstroUserConfig = {
       [rehypeAutolinkHeadings, { behavior: "append" }],
     ],
     shikiConfig: {
-      theme: "vitesse-dark",
+      themes: {
+        light: "github-light",
+        dark: "vitesse-dark",
+      },
     },
   },
   integrations: [

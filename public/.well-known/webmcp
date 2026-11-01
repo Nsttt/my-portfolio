@@ -1,7 +1,7 @@
 {
   "spec": "webmcp/0.1",
   "name": "Néstor López Website",
-  "description": "Discover and browse Néstor López's writing, projects, talks, and technical tips.",
+  "description": "Discover and browse Néstor López's writing, projects, and talks.",
   "tools": [
     {
       "name": "browse_blog_posts",
@@ -80,34 +80,6 @@
           "q": {
             "type": "string",
             "description": "Optional keyword query for project titles, descriptions, and tags.",
-            "minLength": 1,
-            "maxLength": 120
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "browse_tips",
-      "description": "Browse or search quick technical tips and snippets by Néstor López.",
-      "url": "/tips",
-      "method": "GET",
-      "parameters": [
-        {
-          "name": "q",
-          "type": "string",
-          "description": "Optional keyword query for technical tip titles, descriptions, and tags.",
-          "required": false,
-          "minLength": 1,
-          "maxLength": 120
-        }
-      ],
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "q": {
-            "type": "string",
-            "description": "Optional keyword query for technical tip titles, descriptions, and tags.",
             "minLength": 1,
             "maxLength": 120
           }

@@ -1,0 +1,60 @@
+---
+import dayjs from "dayjs";
+
+export interface TimelineItem {
+  href: string;
+  title: string;
+  date: string | Date;
+  meta?: string | undefined;
+  searchData?: Record<string, string> | undefined;
+}
+
+interface Props {
+  id: string;
+  itemClass: string;
+  items: TimelineItem[];
+}
+
+const { id, itemClass, items } = Astro.props;
+
+const years = new Map<number, TimelineItem[]>();
+for (const item of items) {
+  const year = dayjs(item.date).year();
+  years.set(year, [...(years.get(year) ?? []), item]);
+}
+
+const toDataAttributes = (data: Record<string, string> = {}) =>
+  Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [`data-${key}`, value]),
+  );
+---
+
+<div id={id} class="timeline">
+  {
+    [...years].map(([year, yearItems]) => (
+      <section
+        class="timeline-year divided"
+        aria-labelledby={`${id}-${year}`}
+        data-search-group
+      >
+        <h2 id={`${id}-${year}`}>{year}</h2>
+        <ul class="timeline-list" role="list">
+          {yearItems.map((item) => (
+            <li class={itemClass} {...toDataAttributes(item.searchData)}>
+              <time datetime={dayjs(item.date).format("YYYY-MM-DD")}>
+                {dayjs(item.date).format("MMMM D")}
+              </time>
+              <span aria-hidden="true">&middot;</span>
+              <span>
+                <a rel="prefetch" href={item.href}>
+                  {item.title}
+                </a>
+                {item.meta && <span class="timeline-meta">{item.meta}</span>}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>

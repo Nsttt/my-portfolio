@@ -1,6 +1,6 @@
 # Browse Néstor López Content
 
-Use this skill when an agent needs to discover, cite, or navigate Néstor López's public technical writing, talks, projects, and tips on nstlopez.com.
+Use this skill when an agent needs to discover, cite, or navigate Néstor López's public technical writing, talks, and projects on nstlopez.com.
 
 ## Resources
 

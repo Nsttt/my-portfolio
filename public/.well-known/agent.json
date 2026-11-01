@@ -1,6 +1,6 @@
 {
   "name": "Néstor López Website Agent Card",
-  "description": "Agent-discoverable entry point for Néstor López's technical writing, talks, projects, and tips.",
+  "description": "Agent-discoverable entry point for Néstor López's technical writing, talks, and projects.",
   "url": "https://nstlopez.com",
   "capabilities": {
     "streaming": false,
@@ -11,7 +11,7 @@
     {
       "id": "browse-content",
       "name": "Browse Content",
-      "description": "Find blog posts, talks, projects, and tips published on nstlopez.com."
+      "description": "Find blog posts, talks, and projects published on nstlopez.com."
     },
     {
       "id": "technical-profile",
