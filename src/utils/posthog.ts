@@ -1,21 +1,18 @@
 /**
+ * Public by design: the token ships in the page HTML and can only send
+ * events, so it lives in the repo rather than in build-time configuration.
+ */
+export const POSTHOG_PROJECT_TOKEN =
+  "phc_CfjqeZdkveo9XEzKzxei2JH3EgnL9GVVy5QHrwoMWCjT";
+
+/** PostHog Cloud region the project lives in. */
+export const POSTHOG_REGION = "eu";
+
+/**
  * Same-origin path the Worker forwards to PostHog Cloud. Going through it
  * keeps the CSP at 'self' and survives blockers that match PostHog hostnames.
- * The region follows the prefix, e.g. `/relay/eu/static/array.js`.
  */
 export const POSTHOG_PROXY_PATH = "/relay";
-
-export type PosthogRegion = "eu" | "us";
-
-const CLOUD_HOST = /^https:\/\/(eu|us)\.i\.posthog\.com\/?$/;
-
-/** Region of a PostHog Cloud ingestion host, e.g. `https://eu.i.posthog.com`. */
-export const posthogRegion = (
-  host: string | undefined,
-): PosthogRegion | undefined => {
-  const region = host?.match(CLOUD_HOST)?.[1];
-  return region === "eu" || region === "us" ? region : undefined;
-};
 
 /** Inline `onclick` handler that captures a PostHog event. */
 export const trackClick = (

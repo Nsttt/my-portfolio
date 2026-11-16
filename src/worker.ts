@@ -1,6 +1,6 @@
-import { POSTHOG_PROXY_PATH } from "./utils/posthog";
+import { POSTHOG_PROXY_PATH, POSTHOG_REGION } from "./utils/posthog";
 
-const POSTHOG_ROUTE = new RegExp(`^${POSTHOG_PROXY_PATH}/(eu|us)(/.*)?$`);
+const POSTHOG_ROUTE = new RegExp(`^${POSTHOG_PROXY_PATH}(/.*)?$`);
 
 const DISCOVERY_LINKS = [
   '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
@@ -174,18 +174,19 @@ interface PosthogUpstream {
 }
 
 const posthogUpstream = (requestURL: URL): PosthogUpstream | undefined => {
-  const [, region, path = "/"] = requestURL.pathname.match(POSTHOG_ROUTE) ?? [];
+  const match = requestURL.pathname.match(POSTHOG_ROUTE);
 
-  if (!region) {
+  if (!match) {
     return undefined;
   }
 
   // The SDK bundle and remote config live on PostHog's asset host; everything
   // else (events, flags) goes to the ingestion host.
+  const path = match[1] ?? "/";
   const isAsset = path.startsWith("/static/") || path.startsWith("/array/");
   const host = isAsset
-    ? `${region}-assets.i.posthog.com`
-    : `${region}.i.posthog.com`;
+    ? `${POSTHOG_REGION}-assets.i.posthog.com`
+    : `${POSTHOG_REGION}.i.posthog.com`;
 
   return { url: `https://${host}${path}${requestURL.search}`, isAsset };
 };
