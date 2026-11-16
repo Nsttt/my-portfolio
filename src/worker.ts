@@ -1,7 +1,3 @@
-import { POSTHOG_PROXY_PATH, POSTHOG_REGION } from "./utils/posthog";
-
-const POSTHOG_ROUTE = new RegExp(`^${POSTHOG_PROXY_PATH}(/.*)?$`);
-
 const DISCOVERY_LINKS = [
   '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
   '</.well-known/openapi.json>; rel="service-desc"; type="application/openapi+json"',
@@ -168,85 +164,8 @@ const markdownResponse = async (request: Request, response: Response) => {
   });
 };
 
-interface PosthogUpstream {
-  url: string;
-  isAsset: boolean;
-}
-
-const posthogUpstream = (requestURL: URL): PosthogUpstream | undefined => {
-  const match = requestURL.pathname.match(POSTHOG_ROUTE);
-
-  if (!match) {
-    return undefined;
-  }
-
-  // The SDK bundle and remote config live on PostHog's asset host; everything
-  // else (events, flags) goes to the ingestion host.
-  const path = match[1] ?? "/";
-  const isAsset = path.startsWith("/static/") || path.startsWith("/array/");
-  const host = isAsset
-    ? `${POSTHOG_REGION}-assets.i.posthog.com`
-    : `${POSTHOG_REGION}.i.posthog.com`;
-
-  return { url: `https://${host}${path}${requestURL.search}`, isAsset };
-};
-
-const proxyPosthog = async (
-  request: Request,
-  upstream: PosthogUpstream,
-  ctx: ExecutionContext,
-) => {
-  if (upstream.isAsset && request.method === "GET") {
-    // tsconfig loads DOM types next to the Workers ones, and DOM's
-    // CacheStorage has no `default`.
-    const edgeCache = (caches as unknown as { default: Cache }).default;
-    const cached = await edgeCache.match(request);
-
-    if (cached) {
-      return cached;
-    }
-
-    const response = await fetch(upstream.url);
-
-    if (response.ok) {
-      ctx.waitUntil(edgeCache.put(request, response.clone()));
-    }
-
-    return response;
-  }
-
-  const headers = new Headers(request.headers);
-  const hasBody = request.method !== "GET" && request.method !== "HEAD";
-
-  // Site cookies and credentials are none of PostHog's business.
-  headers.delete("cookie");
-  if (!/^Bearer ph[csx]_/.test(headers.get("authorization") ?? "")) {
-    headers.delete("authorization");
-  }
-  // Cookieless mode counts visitors from a server-side hash of the client IP,
-  // so PostHog has to see the visitor's address rather than the Worker's.
-  headers.set("X-Forwarded-For", request.headers.get("CF-Connecting-IP") ?? "");
-
-  return fetch(upstream.url, {
-    method: request.method,
-    headers,
-    body: hasBody ? await request.arrayBuffer() : null,
-    redirect: request.redirect,
-  });
-};
-
 export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext,
-  ): Promise<Response> {
-    const upstream = posthogUpstream(new URL(request.url));
-
-    if (upstream) {
-      return proxyPosthog(request, upstream, ctx);
-    }
-
+  async fetch(request: Request, env: Env): Promise<Response> {
     const response = await env.ASSETS.fetch(request);
 
     if (wantsMarkdown(request) && isHTML(response)) {
