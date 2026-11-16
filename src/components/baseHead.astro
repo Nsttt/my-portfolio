@@ -1,6 +1,7 @@
 ---
 import "../styles/base.css";
 import { ClientRouter } from "astro:transitions";
+import PostHog from "./posthog.astro";
 
 export interface Props {
   title?: string | undefined;
@@ -142,12 +143,7 @@ const structuredDataEntries = graphJsonLd.map((schema) => ({
 <link rel="manifest" href="/manifest.json" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content="Néstor López" />
-<script
-  is:inline
-  data-astro-rerun
-  defer
-  src="https://analytics.nstlopez.com/kebab-de-pollo"
-  data-website-id="13fd83d3-ccd7-4995-b8e6-2eef859b99c0"></script>
+<PostHog />
 
 <!-- Primary Meta Tags -->
 <title>{pageTitle}</title>

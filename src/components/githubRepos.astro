@@ -1,4 +1,6 @@
 ---
+import { trackClick } from "../utils/posthog";
+
 interface Repo {
   name: string;
   description: string;
@@ -54,7 +56,7 @@ const formatStars = (stars: number) =>
         <a
           class="repo-card"
           href={`https://github.com/${repo.name}`}
-          onclick={`window.umami?.track("github_repo_click", ${JSON.stringify({ repo: repo.name })})`}
+          onclick={trackClick("github_repo_click", { repo: repo.name })}
         >
           <span class="repo-name">
             <svg viewBox="0 0 16 16" aria-hidden="true">

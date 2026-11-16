@@ -1,5 +1,6 @@
 ---
 import { socials } from "../data/socials";
+import { trackClick } from "../utils/posthog";
 import ToggleButton from "./toggleButton";
 
 const pathname = Astro.url.pathname;
@@ -40,7 +41,7 @@ const isCurrent = (href: string) => pathname.startsWith(href);
           href={social.href}
           aria-label={social.label}
           title={social.label}
-          onclick={`window.umami?.track('${social.event}', { type: 'social' })`}
+          onclick={trackClick(social.event, { type: "social" })}
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d={social.icon} />

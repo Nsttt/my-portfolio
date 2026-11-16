@@ -3,7 +3,7 @@
 /// <reference types="astro/client" />
 
 interface Window {
-  umami?: {
-    track: (event: string, data?: Record<string, unknown>) => void;
+  posthog?: {
+    capture: (event: string, properties?: Record<string, unknown>) => void;
   };
 }

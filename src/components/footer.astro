@@ -1,18 +1,20 @@
+---
+import { trackClick } from "../utils/posthog";
+---
+
 <footer class="site-footer">
   <nav class="footer-links" aria-label="Social links">
     <a
       href="https://x.com/nstlopez"
-      onclick="window.umami?.track('external_twitter', { type: 'social' })">X</a
+      onclick={trackClick("external_twitter", { type: "social" })}>X</a
     >
     <a
       href="https://github.com/nsttt"
-      onclick="window.umami?.track('external_github', { type: 'social' })"
-      >GitHub</a
+      onclick={trackClick("external_github", { type: "social" })}>GitHub</a
     >
     <a
       href="https://bsky.app/profile/nst.blue"
-      onclick="window.umami?.track('external_bluesky', { type: 'social' })"
-      >Bluesky</a
+      onclick={trackClick("external_bluesky", { type: "social" })}>Bluesky</a
     >
     <a href="/rss.xml">RSS</a>
     <a href="https://cal.com/nstlopez" target="_blank" rel="noopener noreferrer"

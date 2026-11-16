@@ -4,6 +4,7 @@ import GithubRepos from "../components/githubRepos.astro";
 import ImageCard from "../components/imageCard.astro";
 import { socials } from "../data/socials";
 import BaseLayout from "../layouts/baseLayout.astro";
+import { trackClick } from "../utils/posthog";
 
 const byNewest = (a: { data: { pubDate: string } }, b: typeof a) =>
   new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf();
@@ -121,7 +122,7 @@ const faqJsonLd = {
                 href={item.href}
                 onclick={
                   item.event
-                    ? `window.umami?.track('${item.event}', { type: 'social' })`
+                    ? trackClick(item.event, { type: "social" })
                     : undefined
                 }
               >
