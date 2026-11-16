@@ -1,0 +1,53 @@
+---
+import { POSTHOG_PROXY_PATH, posthogRegion } from "../utils/posthog";
+
+const token = import.meta.env.PUBLIC_POSTHOG_PROJECT_TOKEN;
+const host = import.meta.env.PUBLIC_POSTHOG_HOST;
+const region = posthogRegion(host);
+
+const missing = !token
+  ? "PUBLIC_POSTHOG_PROJECT_TOKEN"
+  : !region
+    ? "PUBLIC_POSTHOG_HOST"
+    : undefined;
+
+// Analytics must never break the site, so an unconfigured build ships without
+// PostHog. In development that would be easy to miss, so say it loudly.
+if (missing && import.meta.env.DEV) {
+  console.error(
+    `${missing} variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once ${missing} is configured`,
+  );
+}
+
+// `null` leaves the inline script inert, so an unconfigured build still works.
+const config = missing
+  ? null
+  : {
+      token,
+      options: {
+        // `astro dev` has no Worker in front of it, so it talks to PostHog
+        // directly.
+        api_host: import.meta.env.DEV
+          ? host
+          : `${POSTHOG_PROXY_PATH}/${region}`,
+        ui_host: `https://${region}.posthog.com`,
+        defaults: "2026-05-30",
+        // ClientRouter navigations are history changes, not page loads.
+        capture_pageview: "history_change",
+        // No cookies or browser storage, so the site needs no consent banner.
+        cookieless_mode: "always",
+      },
+    };
+---
+
+<script is:inline define:vars={{ config }}>
+  // @ts-nocheck -- `checkJs` would otherwise type-check PostHog's minified loader.
+  // ClientRouter can re-run inline scripts; initialising twice overflows the
+  // stack.
+  if (config && !window.__posthog_initialized) {
+    window.__posthog_initialized = true;
+    // prettier-ignore
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init(config.token, config.options);
+  }
+</script>

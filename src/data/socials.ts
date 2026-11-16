@@ -1,7 +1,7 @@
 export interface Social {
   href: string;
   label: string;
-  /** Umami event fired on click. */
+  /** Analytics event captured on click. */
   event: string;
   /** Path data for a filled 24x24 brand icon. */
   icon: string;
