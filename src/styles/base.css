@@ -1088,6 +1088,19 @@
     width: 100%;
     max-width: var(--layout-content-max-width);
     padding: 0 var(--space-4) var(--space-8);
+
+    /* Mirrors giscus.app/default.css so the frame never falls back to the
+       300px iframe default if that stylesheet fails to load. */
+    .giscus-frame {
+      width: 100%;
+      min-height: 150px;
+      border: none;
+      color-scheme: light dark;
+    }
+
+    .giscus-frame--loading {
+      opacity: 0;
+    }
   }
 
   /* Footer */
