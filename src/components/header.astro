@@ -8,9 +8,35 @@ const pathname = Astro.url.pathname;
 const links = [{ href: "/blog", label: "Blog" }];
 
 const isCurrent = (href: string) => pathname.startsWith(href);
+
+// Every page except the home gets a back button to its parent section,
+// e.g. /blog/hello-world/ -> /blog and /talks/ -> /.
+const segments = pathname.split("/").filter(Boolean);
+const backHref =
+  segments.length > 0 ? `/${segments.slice(0, -1).join("/")}` : undefined;
+const backLabel =
+  backHref === "/" ? "home" : (segments.at(-2) ?? "home").replace(/-/g, " ");
+
+// The back button already leads out of the current section, so a link to
+// that same section would only repeat it.
+const visibleLinks = links.filter((link) => !isCurrent(link.href));
 ---
 
 <nav class="topnav" aria-label="Site navigation">
+  {
+    backHref && (
+      <a
+        class="topnav-back"
+        href={backHref}
+        aria-label={`Back to ${backLabel}`}
+        title={`Back to ${backLabel}`}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7" />
+        </svg>
+      </a>
+    )
+  }
   <a class="topnav-home" href="/">
     <img
       class="pixel-art"
@@ -24,7 +50,7 @@ const isCurrent = (href: string) => pathname.startsWith(href);
   </a>
   <div class="topnav-links">
     {
-      links.map((link) => (
+      visibleLinks.map((link) => (
         <a
           href={link.href}
           aria-current={isCurrent(link.href) ? "page" : undefined}
