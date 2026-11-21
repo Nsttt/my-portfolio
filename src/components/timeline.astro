@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import dayjs from "dayjs";
 
 export interface TimelineItem {
@@ -6,6 +8,9 @@ export interface TimelineItem {
   title: string;
   date: string | Date;
   meta?: string | undefined;
+  image?: ImageMetadata | undefined;
+  /** Shown in place of the image when there is none, e.g. an event name. */
+  placeholder?: string | undefined;
   searchData?: Record<string, string> | undefined;
 }
 
@@ -41,11 +46,26 @@ const toDataAttributes = (data: Record<string, string> = {}) =>
         <ul class="timeline-list" role="list">
           {yearItems.map((item) => (
             <li class={itemClass} {...toDataAttributes(item.searchData)}>
+              {/* The title link carries the name; this one is a pointer
+                  shortcut, so it stays out of the tab order. */}
+              <a
+                class="timeline-thumb"
+                href={item.href}
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                {item.image ? (
+                  <Image src={item.image} alt="" width={240} loading="lazy" />
+                ) : (
+                  <span class="timeline-placeholder">
+                    {item.placeholder ?? item.title}
+                  </span>
+                )}
+              </a>
               <time datetime={dayjs(item.date).format("YYYY-MM-DD")}>
                 {dayjs(item.date).format("MMMM D")}
               </time>
-              <span aria-hidden="true">&middot;</span>
-              <span>
+              <span class="timeline-text">
                 <a rel="prefetch" href={item.href}>
                   {item.title}
                 </a>

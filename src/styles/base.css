@@ -700,28 +700,34 @@
 
   .timeline-list li {
     display: grid;
-    grid-template-columns: 7rem auto minmax(0, 1fr);
-    column-gap: var(--space-2);
-    align-items: baseline;
+    grid-template-areas: "date thumb text";
+    grid-template-columns: 7rem 7.5rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    align-items: center;
 
     + li {
       margin-block-start: var(--space-5);
     }
 
     time {
+      grid-area: date;
       text-align: end;
       white-space: nowrap;
       color: var(--color-text-secondary);
       font-size: var(--type-caption-size);
     }
 
-    a {
-      text-decoration: underline;
-      text-underline-offset: 0.12em;
-      overflow-wrap: anywhere;
+    .timeline-text {
+      grid-area: text;
 
-      &:visited {
-        color: var(--color-link-visited);
+      a {
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+        overflow-wrap: anywhere;
+
+        &:visited {
+          color: var(--color-link-visited);
+        }
       }
     }
 
@@ -732,9 +738,58 @@
     }
   }
 
+  .timeline-thumb {
+    grid-area: thumb;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-band);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      img {
+        transform: scale(1.04);
+      }
+    }
+  }
+
+  .timeline-placeholder {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: var(--space-1);
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-heading);
+    font-size: 0.8rem;
+    line-height: 1.15;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* Narrow screens: the date moves under the title next to the image. */
   @media (max-width: 480px) {
     .timeline-list li {
-      grid-template-columns: 5.5rem auto minmax(0, 1fr);
+      grid-template-areas:
+        "thumb text"
+        "thumb date";
+      grid-template-columns: 6rem minmax(0, 1fr);
+      column-gap: var(--space-3);
+      row-gap: var(--space-1);
+      align-items: start;
+
+      time {
+        text-align: start;
+      }
     }
   }
 

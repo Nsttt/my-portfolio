@@ -33,6 +33,7 @@ const posts = (await getCollection("posts"))
         title: post.data.title,
         date: post.data.pubDate,
         meta: `${post.data.expectedReadTime} min read`,
+        image: post.data.image,
         searchData: {
           title: post.data.title.toLowerCase(),
           description: post.data.description.toLowerCase(),
