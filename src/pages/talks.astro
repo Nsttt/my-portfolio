@@ -43,6 +43,8 @@ const talks = (await getCollection("talks")).sort(
           talk.data.place,
           talk.data.lang,
         ].join(" · "),
+        image: talk.data.mainImage ?? talk.data.images?.[0],
+        placeholder: talk.data.place.split(",")[0],
         searchData: {
           title: talk.data.title.toLowerCase(),
           description: talk.data.description.toLowerCase(),
