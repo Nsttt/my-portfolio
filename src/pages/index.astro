@@ -2,9 +2,7 @@
 import { getCollection } from "astro:content";
 import GithubRepos from "../components/githubRepos.astro";
 import ImageCard from "../components/imageCard.astro";
-import { socials } from "../data/socials";
 import BaseLayout from "../layouts/baseLayout.astro";
-import { trackClick } from "../utils/posthog";
 
 const byNewest = (a: { data: { pubDate: string } }, b: typeof a) =>
   new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf();
@@ -54,19 +52,22 @@ const pinnedRepos = [
     stars: 8,
   },
 ];
-const iconNav: {
-  href: string;
-  label: string;
-  icon: string;
-  event?: string;
-  filled?: boolean;
-}[] = [
+const iconNav: { href: string; label: string; icon: string }[] = [
   {
     href: "/blog",
     label: "Blog",
     icon: "M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h8",
   },
-  ...socials.map((social) => ({ ...social, filled: true })),
+  {
+    href: "/talks",
+    label: "Talks",
+    icon: "M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2M12 19v3",
+  },
+  {
+    href: "/projects",
+    label: "Projects",
+    icon: "M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+  },
   {
     href: "/rss.xml",
     label: "RSS",
@@ -118,26 +119,15 @@ const faqJsonLd = {
         {
           iconNav.map((item) => (
             <li>
-              <a
-                href={item.href}
-                onclick={
-                  item.event
-                    ? trackClick(item.event, { type: "social" })
-                    : undefined
-                }
-              >
+              <a href={item.href}>
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
-                  {...(item.filled
-                    ? { fill: "currentColor" }
-                    : {
-                        fill: "none",
-                        stroke: "currentColor",
-                        "stroke-width": "2",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                      })}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
                   <path d={item.icon} />
                 </svg>
