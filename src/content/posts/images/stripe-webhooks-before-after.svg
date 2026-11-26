@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 430" width="820" height="430" role="img" aria-labelledby="title-ba desc-ba">
+  <title id="title-ba">Before and after: per-PR Stripe endpoints vs. one shared fan-out router</title>
+  <desc id="desc-ba">Comparison showing 16 per-environment Stripe endpoints hitting the test-mode cap at environment 17 versus one shared Stripe endpoint fanning out through a router Lambda to 20 or more preview environments.</desc>
+  <defs>
+    <style>
+      .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    </style>
+    <marker id="arr-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#7c756c"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#e06324"/>
+    </marker>
+    <marker id="arr-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#56b4e9"/>
+    </marker>
+  </defs>
+
+  <!-- Outer card -->
+  <rect x="0.5" y="0.5" width="819" height="429" rx="16" fill="#181715" stroke="#302d29"/>
+
+  <!-- ================= BEFORE PANEL ================= -->
+  <rect x="20" y="20" width="780" height="184" rx="12" fill="#201e1b" stroke="#34302b"/>
+
+  <!-- Header badge -->
+  <rect x="36" y="34" width="66" height="22" rx="11" fill="#3a2319" stroke="#e06324" stroke-opacity="0.6"/>
+  <text x="69" y="49" text-anchor="middle" class="sans" font-size="11" font-weight="600" fill="#f39362">BEFORE</text>
+  <text x="114" y="49" class="sans" font-size="13" font-weight="600" fill="#f5f2eb">1 Stripe endpoint per PR environment</text>
+  <text x="784" y="49" text-anchor="end" class="mono" font-size="11" fill="#e06324">16 copies of the same firehose</text>
+
+  <!-- Stripe box (Before) -->
+  <rect x="36" y="76" width="164" height="106" rx="10" fill="#272420" stroke="#a78bfa" stroke-opacity="0.7" stroke-width="1.2"/>
+  <text x="118" y="102" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Stripe Test Mode</text>
+  <text x="118" y="122" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Every endpoint gets</text>
+  <text x="118" y="137" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">every account event</text>
+  <rect x="52" y="150" width="132" height="22" rx="6" fill="#3a2319" stroke="#e06324" stroke-opacity="0.5"/>
+  <text x="118" y="165" text-anchor="middle" class="mono" font-size="10.5" font-weight="600" fill="#f39362">cap: 16 endpoints</text>
+
+  <!-- Connector paths (Before) -->
+  <path d="M 200 108 C 258 108, 270 86, 336 86" fill="none" stroke="#7c756c" stroke-width="1.5" marker-end="url(#arr-muted)"/>
+  <path d="M 200 122 C 258 122, 270 118, 336 118" fill="none" stroke="#7c756c" stroke-width="1.5" marker-end="url(#arr-muted)"/>
+  <path d="M 200 136 C 258 136, 270 148, 336 148" fill="none" stroke="#7c756c" stroke-width="1.5" marker-end="url(#arr-muted)"/>
+  <path d="M 200 156 C 258 156, 268 176, 336 176" fill="none" stroke="#e06324" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr-red)"/>
+
+  <!-- Middle label -->
+  <text x="268" y="68" text-anchor="middle" class="mono" font-size="10" fill="#857f76">16 separate</text>
+  <text x="268" y="80" text-anchor="middle" class="mono" font-size="10" fill="#857f76">registrations</text>
+
+  <!-- Targets (Before) -->
+  <rect x="344" y="72" width="218" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="356" y="89" class="mono" font-size="11" fill="#e5e0d8">pr-101.preview.example.com</text>
+  <text x="580" y="89" class="mono" font-size="10.5" fill="#857f76">endpoint #1</text>
+
+  <rect x="344" y="104" width="218" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="356" y="121" class="mono" font-size="11" fill="#e5e0d8">pr-102.preview.example.com</text>
+  <text x="580" y="121" class="mono" font-size="10.5" fill="#857f76">endpoint #2 ... #15</text>
+
+  <rect x="344" y="135" width="218" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="356" y="152" class="mono" font-size="11" fill="#e5e0d8">pr-116.preview.example.com</text>
+  <text x="580" y="152" class="mono" font-size="10.5" fill="#e69f00">endpoint #16 (cap hit)</text>
+
+  <rect x="344" y="165" width="218" height="26" rx="6" fill="#321f18" stroke="#e06324" stroke-dasharray="4 3"/>
+  <text x="356" y="182" class="mono" font-size="11" fill="#f39362">pr-117.preview.example.com</text>
+  <text x="580" y="182" class="sans" font-size="11" font-weight="600" fill="#f39362">create fails (cap: 16)</text>
+
+  <!-- ================= AFTER PANEL ================= -->
+  <rect x="20" y="220" width="780" height="190" rx="12" fill="#201e1b" stroke="#34302b"/>
+
+  <!-- Header badge -->
+  <rect x="36" y="234" width="60" height="22" rx="11" fill="#14322a" stroke="#00b887" stroke-opacity="0.6"/>
+  <text x="66" y="249" text-anchor="middle" class="sans" font-size="11" font-weight="600" fill="#4fd9ae">AFTER</text>
+  <text x="108" y="249" class="sans" font-size="13" font-weight="600" fill="#f5f2eb">1 shared endpoint + internal fan-out router</text>
+  <text x="784" y="249" text-anchor="end" class="mono" font-size="11" fill="#4fd9ae">1 of 16 used, N envs supported</text>
+
+  <!-- Stripe box (After) -->
+  <rect x="36" y="280" width="164" height="104" rx="10" fill="#272420" stroke="#a78bfa" stroke-opacity="0.8" stroke-width="1.2"/>
+  <text x="118" y="307" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Stripe Test Mode</text>
+  <text x="118" y="328" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Single shared</text>
+  <text x="118" y="343" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">webhook endpoint</text>
+  <rect x="60" y="354" width="116" height="20" rx="6" fill="#14322a" stroke="#00b887" stroke-opacity="0.5"/>
+  <text x="118" y="368" text-anchor="middle" class="mono" font-size="10.5" font-weight="600" fill="#4fd9ae">1 / 16 endpoints</text>
+
+  <!-- Arrow Stripe -> Router -->
+  <line x1="200" y1="332" x2="274" y2="332" stroke="#a78bfa" stroke-width="2" marker-end="url(#arr-violet)"/>
+  <text x="237" y="323" text-anchor="middle" class="mono" font-size="10" fill="#c4b5fd">1 POST</text>
+
+  <!-- Router box -->
+  <rect x="284" y="280" width="176" height="104" rx="10" fill="#1c2730" stroke="#56b4e9" stroke-width="1.4"/>
+  <text x="372" y="306" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Router Lambda</text>
+  <text x="372" y="326" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Verify signature once</text>
+  <text x="372" y="342" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Look up active envs</text>
+  <text x="372" y="358" text-anchor="middle" class="sans" font-size="11" fill="#56b4e9">Fan out raw payload</text>
+
+  <!-- Fan-out connectors -->
+  <path d="M 460 312 C 504 312, 504 286, 548 286" fill="none" stroke="#56b4e9" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <path d="M 460 326 C 504 326, 504 318, 548 318" fill="none" stroke="#56b4e9" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <path d="M 460 340 C 504 340, 504 350, 548 350" fill="none" stroke="#56b4e9" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <path d="M 460 354 C 504 354, 504 382, 548 382" fill="none" stroke="#56b4e9" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+  <!-- Targets (After) -->
+  <rect x="556" y="273" width="224" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="568" y="290" class="mono" font-size="11" fill="#e5e0d8">pr-101.preview.example.com</text>
+
+  <rect x="556" y="305" width="224" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="568" y="322" class="mono" font-size="11" fill="#e5e0d8">pr-102.preview.example.com</text>
+
+  <rect x="556" y="337" width="224" height="26" rx="6" fill="#292622" stroke="#44403a"/>
+  <text x="568" y="354" class="mono" font-size="11" fill="#e5e0d8">pr-117.preview.example.com</text>
+
+  <rect x="556" y="369" width="224" height="26" rx="6" fill="#182a24" stroke="#00b887" stroke-opacity="0.7"/>
+  <text x="568" y="386" class="mono" font-size="11" fill="#4fd9ae">pr-120+.preview.example.com</text>
+</svg>

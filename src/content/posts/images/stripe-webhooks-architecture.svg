@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 556" width="820" height="556" role="img" aria-labelledby="title-arch desc-arch">
+  <title id="title-arch">Webhook router architecture and request path</title>
+  <desc id="desc-arch">End-to-end request flow from Stripe through a zero-trust edge IP allowlist, tunnel, internal ALB, router Lambda with DynamoDB lifecycle lookup, and back through the internal ALB with Host header routing to each preview environment.</desc>
+  <defs>
+    <style>
+      .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    </style>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#56b4e9"/>
+    </marker>
+    <marker id="a-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#e69f00"/>
+    </marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#00b887"/>
+    </marker>
+  </defs>
+
+  <!-- Outer card -->
+  <rect x="0.5" y="0.5" width="819" height="555" rx="16" fill="#181715" stroke="#302d29"/>
+
+  <!-- Section header -->
+  <text x="28" y="36" class="sans" font-size="14" font-weight="700" fill="#f5f2eb">Request Path: Stripe to Every Active Preview API</text>
+  <text x="792" y="36" text-anchor="end" class="mono" font-size="11" fill="#857f76">Host: stripe-webhooks.preview.example.com</text>
+
+  <!-- ROW 1: Ingress chain -->
+  <!-- 1. Stripe -->
+  <rect x="28" y="56" width="156" height="72" rx="10" fill="#272420" stroke="#a78bfa" stroke-width="1.3"/>
+  <text x="106" y="84" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Stripe</text>
+  <text x="106" y="102" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">1 shared endpoint</text>
+  <text x="106" y="117" text-anchor="middle" class="mono" font-size="10" fill="#c4b5fd">test mode</text>
+
+  <line x1="184" y1="92" x2="220" y2="92" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-violet)"/>
+
+  <!-- 2. CDN / Zero-Trust Edge -->
+  <rect x="228" y="56" width="194" height="72" rx="10" fill="#272420" stroke="#44403a" stroke-width="1.2"/>
+  <text x="325" y="82" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">CDN / Zero-Trust Edge</text>
+  <text x="325" y="101" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Stripe IP allowlist</text>
+  <text x="325" y="116" text-anchor="middle" class="mono" font-size="10" fill="#857f76">synced automatically</text>
+
+  <line x1="422" y1="92" x2="458" y2="92" stroke="#56b4e9" stroke-width="1.8" marker-end="url(#a-blue)"/>
+
+  <!-- 3. Tunnel -->
+  <rect x="466" y="56" width="110" height="72" rx="10" fill="#272420" stroke="#44403a" stroke-width="1.2"/>
+  <text x="521" y="87" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Tunnel</text>
+  <text x="521" y="106" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">private ingress</text>
+
+  <line x1="576" y1="92" x2="612" y2="92" stroke="#56b4e9" stroke-width="1.8" marker-end="url(#a-blue)"/>
+
+  <!-- 4. Internal ALB (Ingress) -->
+  <rect x="620" y="56" width="172" height="72" rx="10" fill="#1c2730" stroke="#56b4e9" stroke-width="1.3"/>
+  <text x="706" y="82" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Internal ALB</text>
+  <text x="706" y="100" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Host-header rule</text>
+  <text x="706" y="116" text-anchor="middle" class="mono" font-size="10" fill="#56b4e9">Lambda target group</text>
+
+  <!-- Connector ALB down to Router Lambda -->
+  <path d="M 706 128 L 706 156 L 268 156 L 268 182" fill="none" stroke="#56b4e9" stroke-width="1.8" marker-end="url(#a-blue)"/>
+  <text x="488" y="149" text-anchor="middle" class="mono" font-size="10.5" fill="#857f76">HTTPS POST + raw body + Stripe-Signature</text>
+
+  <!-- ROW 2: Router Lambda + DynamoDB sidecar -->
+  <rect x="28" y="190" width="480" height="162" rx="12" fill="#1c2730" stroke="#56b4e9" stroke-width="1.5"/>
+  <text x="46" y="216" class="sans" font-size="13.5" font-weight="700" fill="#f5f2eb">Router Lambda</text>
+  <text x="490" y="216" text-anchor="end" class="mono" font-size="10.5" fill="#56b4e9">Node 24 · raw .ts · zero build</text>
+
+  <!-- Step 1 -->
+  <rect x="44" y="230" width="448" height="32" rx="7" fill="#232c34" stroke="#394957"/>
+  <circle cx="62" cy="246" r="9" fill="#56b4e9" fill-opacity="0.2" stroke="#56b4e9"/>
+  <text x="62" y="250" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#56b4e9">1</text>
+  <text x="80" y="250" class="sans" font-size="11.5" fill="#f5f2eb">Verify Stripe-Signature (HMAC-SHA256, 300s window, constant-time)</text>
+
+  <!-- Step 2 -->
+  <rect x="44" y="270" width="448" height="32" rx="7" fill="#232c34" stroke="#394957"/>
+  <circle cx="62" cy="286" r="9" fill="#e69f00" fill-opacity="0.2" stroke="#e69f00"/>
+  <text x="62" y="290" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#e69f00">2</text>
+  <text x="80" y="290" class="sans" font-size="11.5" fill="#f5f2eb">Load active envs (skip rows with own endpoint ID; 30s cache)</text>
+
+  <!-- Step 3 -->
+  <rect x="44" y="310" width="448" height="32" rx="7" fill="#232c34" stroke="#394957"/>
+  <circle cx="62" cy="326" r="9" fill="#00b887" fill-opacity="0.2" stroke="#00b887"/>
+  <text x="62" y="330" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#00b887">3</text>
+  <text x="80" y="330" class="sans" font-size="11.5" fill="#f5f2eb">Enforce single-label host regex, then fan out untouched bytes</text>
+
+  <!-- DynamoDB box -->
+  <rect x="564" y="216" width="228" height="114" rx="12" fill="#272420" stroke="#e69f00" stroke-opacity="0.8" stroke-width="1.2"/>
+  <text x="678" y="244" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">DynamoDB lifecycle table</text>
+  <text x="678" y="266" text-anchor="middle" class="mono" font-size="11" fill="#e69f00">GSI: status = active</text>
+  <line x1="584" y1="278" x2="772" y2="278" stroke="#3a3630"/>
+  <text x="678" y="297" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">returns hostname + optional</text>
+  <text x="678" y="313" text-anchor="middle" class="mono" font-size="10.5" fill="#b5afa6">stripeEndpointId (legacy)</text>
+
+  <!-- Bidirectional query arrow Lambda <-> DynamoDB -->
+  <line x1="508" y1="286" x2="556" y2="286" stroke="#e69f00" stroke-width="1.6" marker-end="url(#a-amber)" marker-start="url(#a-amber)"/>
+  <text x="536" y="276" text-anchor="middle" class="mono" font-size="9.5" fill="#e69f00">30s</text>
+
+  <!-- Connector Lambda down to Internal ALB (Egress fan-out) -->
+  <line x1="268" y1="352" x2="268" y2="394" stroke="#00b887" stroke-width="1.8" marker-end="url(#a-green)"/>
+  <text x="280" y="378" class="mono" font-size="10.5" fill="#4fd9ae">unchanged raw body + original Stripe-Signature</text>
+
+  <!-- ROW 3: Internal ALB (Host Routing) -> Preview Envs -->
+  <rect x="28" y="402" width="320" height="126" rx="12" fill="#201e1b" stroke="#00b887" stroke-opacity="0.8" stroke-width="1.3"/>
+  <text x="46" y="428" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Same Internal ALB (Reused)</text>
+  <text x="46" y="451" class="mono" font-size="11" fill="#b5afa6">TLS SNI:  alb-origin.internal</text>
+  <text x="46" y="471" class="mono" font-size="11" fill="#4fd9ae">Host:     pr-123.preview.example.com</text>
+  <line x1="46" y1="485" x2="330" y2="485" stroke="#35322d"/>
+  <text x="46" y="505" class="sans" font-size="11" fill="#857f76">Reuses existing per-PR host listener rules.</text>
+  <text x="46" y="519" class="sans" font-size="11" fill="#857f76">Zero separate service discovery needed.</text>
+
+  <!-- Fan-out arrows to preview environments -->
+  <path d="M 348 436 C 402 436, 408 420, 464 420" fill="none" stroke="#00b887" stroke-width="1.6" marker-end="url(#a-green)"/>
+  <path d="M 348 465 C 402 465, 408 465, 464 465" fill="none" stroke="#00b887" stroke-width="1.6" marker-end="url(#a-green)"/>
+  <path d="M 348 494 C 402 494, 408 510, 464 510" fill="none" stroke="#00b887" stroke-width="1.6" marker-end="url(#a-green)"/>
+
+  <!-- Env 1 -->
+  <rect x="472" y="402" width="320" height="36" rx="8" fill="#292622" stroke="#44403a"/>
+  <text x="486" y="424" class="mono" font-size="11" fill="#f5f2eb">pr-123.preview.example.com</text>
+  <text x="778" y="424" text-anchor="end" class="mono" font-size="10.5" fill="#4fd9ae">/stripe/webhook</text>
+
+  <!-- Env 2 -->
+  <rect x="472" y="447" width="320" height="36" rx="8" fill="#292622" stroke="#44403a"/>
+  <text x="486" y="469" class="mono" font-size="11" fill="#f5f2eb">pr-124.preview.example.com</text>
+  <text x="778" y="469" text-anchor="end" class="mono" font-size="10.5" fill="#4fd9ae">/stripe/webhook</text>
+
+  <!-- Env 3 -->
+  <rect x="472" y="492" width="320" height="36" rx="8" fill="#292622" stroke="#44403a"/>
+  <text x="486" y="514" class="mono" font-size="11" fill="#f5f2eb">pr-125.preview.example.com</text>
+  <text x="778" y="514" text-anchor="end" class="mono" font-size="10.5" fill="#4fd9ae">/stripe/webhook</text>
+</svg>
