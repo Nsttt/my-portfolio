@@ -1,0 +1,285 @@
+---
+title: "One Stripe Webhook for Every Preview Environment"
+description: "Stripe test mode caps you at 16 webhook endpoints. Collapse them into one router Lambda, fan out yourself, and stop letting environment #16 break your PR pipeline."
+image: "./images/stripe-webhooks-for-ephemeral-environments.webp"
+pubDate: "November 26, 2026"
+expectedReadTime: 11
+tags: ["stripe", "aws", "infrastructure", "webhooks", "typescript"]
+draft: false
+---
+
+Nothing kills a Friday deploy vibe faster than opening a pull request and watching your preview environment fail to boot because... Stripe said no.
+
+At work, every PR spins up a full ephemeral environment: its own API, its own database, and its own URL like `pr-123.preview.example.com`. That setup is awesome for testing billing flows end to end. Right up until you hit a number nobody puts on the pricing page: **16**.
+
+Stripe test mode caps an account at 16 webhook endpoints. Our preview platform allowed 20 concurrent environments.
+
+You don't need a distributed systems PhD to do that math.
+
+## The Ceiling You Can't Prune Your Way Out Of
+
+For a while, every preview environment did the obvious thing on boot:
+
+1. Call the Stripe API to register a new webhook endpoint pointing at `https://pr-123.preview.example.com/stripe/webhook`
+2. Store that endpoint's unique signing secret for the branch
+3. Delete the endpoint when the PR closes
+
+In theory, clean. In practice, we kept slamming into the 16-endpoint wall.
+
+At first, we blamed leaks. Cancelled builds and half-failed creates left orphaned endpoints sitting in Stripe, so we bolted on a prune-on-create sweep to clean up stale ones before registering a new one. That bought us some breathing room, until the team got busy enough to actually run 16+ PRs at the same time.
+
+Then creates started failing with zero leaks. Just pure, stubborn arithmetic.
+
+## The Realization: We Were Duplicating the Same Firehose
+
+Here's the part that made me laugh once it clicked.
+
+A Stripe webhook endpoint doesn't filter by environment. It receives **every** event in the test account.
+
+When `pr-123` triggered a checkout event, `pr-123` received it—and so did `pr-124`, `pr-125`, and thirteen other preview environments that had nothing to do with it. Every single environment was already drinking from the exact same account-wide firehose and ignoring the records it didn't own.
+
+> Sixteen webhook endpoints weren't giving us isolation. They were just sixteen copies of the same firehose.
+
+Once you see that, the fix is almost embarrassingly obvious: stop registering an endpoint per environment. Register **one** shared Stripe webhook endpoint, point it at a tiny router you own, and fan out the events yourself.
+
+Suddenly, the 16-endpoint limit stops existing.
+
+## The Architecture
+
+The whole router is a small AWS Lambda sitting behind our internal Application Load Balancer at a fixed hostname, say `stripe-webhooks.preview.example.com`.
+
+Here is the path an event takes from Stripe to every active preview API:
+
+```text
+Stripe (1 shared test-mode endpoint)
+  │
+  ▼
+CDN / Zero-Trust Edge
+  │  (allowlist synced with Stripe's published webhook IPs)
+  ▼
+Tunnel ──► Internal ALB
+             │  Host: stripe-webhooks.preview.example.com
+             │  (host-header rule → Lambda target group)
+             ▼
+       Router Lambda
+         ├─ 1. Verify Stripe-Signature (HMAC-SHA256, 300s window)
+         ├─ 2. Query lifecycle table (DynamoDB GSI, ~30s cache)
+         └─ 3. Fan out raw body + original header via ALB
+               ├──► pr-123.preview.example.com/stripe/webhook
+               ├──► pr-124.preview.example.com/stripe/webhook
+               └──► pr-125.preview.example.com/stripe/webhook
+```
+
+Three design choices here saved us a ton of complexity:
+
+**1. Verify at the router, forward untouched.** The router verifies the `Stripe-Signature` header itself—parsing `t=...` and `v1=...`, computing HMAC-SHA256 over `` `${t}.${rawBody}` ``, enforcing a 300-second timestamp window, and comparing digests in constant time with `crypto.timingSafeEqual`. Bad signature? Immediate `400`.
+
+If it passes, the router forwards the **exact raw body bytes** and the **original `Stripe-Signature` header** downstream. Because every preview environment gets that same shared signing secret, each API still verifies Stripe signatures the exact same way it always did. Zero changes to application-level signature verification.
+
+**2. Reuse the internal ALB's host routing.** We don't maintain a separate service-discovery map of container IPs or internal ports. The router posts straight back into the same internal ALB with TLS SNI set to the ALB's origin hostname, and sets the HTTP `Host` header to `pr-123.preview.example.com`. All the existing per-environment host-header listener rules do the rest.
+
+**3. Never build an accidental open proxy.** Target hostnames come from a DynamoDB `lifecycle` table (via a GSI on `status = active`, cached in memory for ~30 seconds so bursts of webhooks don't hammer the table). Before sending anything, the router checks that each hostname is strictly a single DNS label under the preview domain—think `^[a-z0-9-]+\.preview\.example\.com$`. A corrupted or unexpected row in DynamoDB shouldn't be able to trick your Lambda into firing signed requests at arbitrary internal hosts.
+
+## The Router in ~40 Lines
+
+To keep testing painless, the handler takes its I/O dependencies as arguments (`fetchSecret`, `listTargets`, `send`, `now`). No mocking half of the AWS SDK just to test a retry branch.
+
+Strip away the boilerplate and the core looks roughly like this:
+
+```ts
+const ATTEMPT_TIMEOUT_MS = 4_000;
+const TOTAL_BUDGET_MS = 8_000;
+const RETRYABLE_STATUS = new Set([502, 503, 504]);
+const PREVIEW_HOST = /^[a-z0-9-]+\.preview\.example\.com$/;
+
+export function createHandler(deps: RouterDeps) {
+  return async (event: AlbEvent) => {
+    const secret = await deps.fetchSecret();
+    if (!secret || secret === "PLACEHOLDER") {
+      return { statusCode: 503, body: "router secret not seeded" };
+    }
+
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body ?? "", "base64").toString("utf8")
+      : (event.body ?? "");
+    const sig = event.headers?.["stripe-signature"];
+
+    if (!sig || !verifyStripeSignature(rawBody, sig, secret, deps.now())) {
+      return { statusCode: 400, body: "invalid signature" };
+    }
+
+    let targets: EnvTarget[];
+    try {
+      targets = await deps.listTargets();
+    } catch {
+      return { statusCode: 500, body: "target discovery failed" };
+    }
+
+    const active = targets.filter(
+      (t) => !t.stripeEndpointId && PREVIEW_HOST.test(t.host),
+    );
+    const deadline = deps.now() + TOTAL_BUDGET_MS;
+
+    const results = await Promise.all(
+      active.map((t) =>
+        deliverOnceOrRetry(deps, t.host, rawBody, sig, deadline),
+      ),
+    );
+
+    emitEmfMetrics(results);
+    return { statusCode: 200, body: "ok" };
+  };
+}
+
+async function deliverOnceOrRetry(
+  deps: RouterDeps,
+  host: string,
+  rawBody: string,
+  sig: string,
+  deadline: number,
+): Promise<boolean> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const remaining = deadline - deps.now();
+    if (remaining <= 0) return false;
+
+    const res = await deps.send({
+      host,
+      rawBody,
+      sig,
+      timeoutMs: Math.min(ATTEMPT_TIMEOUT_MS, remaining),
+    });
+
+    if (res.ok) return true;
+    if (res.timedOut) return false; // Never retry a timeout
+    if (!res.connectionError && !RETRYABLE_STATUS.has(res.status ?? 0)) {
+      return false;
+    }
+  }
+  return false;
+}
+```
+
+That's the whole brain of it. The interesting part isn't the code—it's the failure semantics hidden inside those ten lines of `deliverOnceOrRetry`.
+
+## Delivery Semantics: Why We Return 200 Even When Downstream Fails
+
+If you've built webhook consumers before, your first instinct might be: "Wait, if a downstream environment returns `500`, shouldn't the router return `500` to Stripe so Stripe retries?"
+
+Nope. Don't do that.
+
+If the router returns `5xx` to Stripe, Stripe retries the webhook against the **router**, which means the router fans it out to **every** active preview environment all over again.
+
+Worse: in a shared-account test setup, an environment that doesn't own a subscription might legitimately `500` on an event type it wasn't expecting, or someone's half-finished PR branch might simply be crashing on `/stripe/webhook`. One broken PR should never cause retry storms across nineteen healthy ones.
+
+So the contract is clean:
+
+- **Invalid signature → `400`.** Drop it at the door.
+- **Signing secret still a placeholder → `503`.** Fail closed before the router is seeded.
+- **Target discovery (DynamoDB) fails → `500`.** This *is* a router outage; let Stripe retry once DynamoDB recovers.
+- **Fan-out was attempted → always `200`.** Even if some or all downstream environments failed.
+
+And what if a preview environment was restarting when an event arrived? It misses the event. In test mode, that's a completely fine tradeoff—you can hit replay in the Stripe dashboard whenever you actually care.
+
+### The Timeout Trap We Caught in Review
+
+Stripe gives webhook endpoints roughly 10 seconds to respond before giving up. That's why we enforce a **4-second per-attempt timeout** and an **8-second total budget** across the fan-out, leaving comfortable headroom for Lambda overhead and response serialization.
+
+We retry once, and only on connection errors or `502`/`503`/`504` gateway blips.
+
+**We never retry a timeout.**
+
+The first version of the router *did* retry timeouts, and someone caught it in code review. Good catch, too: a connection error or a `502` from the ALB tells you the app never handled the request. A timeout tells you the app *might* have already accepted the request and is still chugging through a slow database transaction. Retrying it risks applying the same billing event twice.
+
+We locked that behavior down with a dead-simple test: spin up a local fake HTTP server that accepts the connection, reads the request, and never sends a response. Run the handler against it, wait for the timeout, and assert the server received **exactly one** `POST`.
+
+For observability, we didn't bother pulling in a metrics client. Each invocation writes a single CloudWatch Embedded Metric Format (EMF) JSON line to stdout with `targets`, `delivered`, and `failed` counts. CloudWatch turns those log lines into metrics asynchronously, with zero extra network calls on the hot path.
+
+## The App-Side Bug This Surfaced
+
+Fanning out one Stripe account to twenty preview environments is a great stress test for a rule you probably *thought* your webhook handlers already followed:
+
+> Check local ownership before causing any external side effects.
+
+We found out the hard way that one of our admin paths ("force tier") called the Stripe API to mutate a subscription *before* checking whether that organization existed in the environment's own database.
+
+With one endpoint per environment, you might stumble over this occasionally. With fan-out enabled, it became immediately obvious: one event arrived, every active preview environment ran the handler, and every environment that didn't even have that org in its database fired off a Stripe API mutation against the exact same shared test subscription.
+
+Not great!
+
+The fix took ten lines: look up the organization in the local database first. If this environment doesn't own it, log a line and return `200` early without touching Stripe. Then add a regression test that feeds an unknown org into the handler and asserts zero calls hit the Stripe client.
+
+If you're adopting a shared test-mode fan-out architecture, audit your webhook handlers for outbound API calls first. Idempotency alone isn't enough if unrelated environments are mutating shared upstream state.
+
+## Migrating Without Breaking Open PRs
+
+You can't just rip out per-environment endpoints in one commit without breaking every preview environment that's already open.
+
+The trick was letting both models coexist cleanly while old PRs drained:
+
+1. **Skip legacy rows in the router.** Legacy environments already had their own `stripeEndpointId` stored in the `lifecycle` table. The router skips any row with that field set, so legacy environments keep receiving events directly from Stripe and never get duplicates.
+2. **Keep per-env secret overrides on top.** Preview environments resolve their Stripe signing secret with per-branch overrides taking precedence over the shared secret. Old branches keep using their own secret untouched.
+3. **Decouple seeding from publishing.** Consumers fail closed if a secret contains a placeholder value. Publishing the shared secret to preview environments had to be its own explicit toggle, flipped only *after* the real signing secret was seeded.
+
+That gave us a boring, reversible five-step rollout:
+
+1. Provision the secret shell (with a placeholder) and config keys.
+2. Deploy the router Lambda. Until seeded, it answers `503`.
+3. Run a small idempotent operator CLI to create the shared Stripe endpoint and seed its signing secret. Make it refuse `sk_live_` keys outright and look up any existing endpoint by metadata before creating a new one, so re-running it is always safe.
+4. Flip the flag to publish the seeded shared secret to new environments.
+5. Ship the platform change that stops creating per-environment Stripe endpoints.
+
+If anything went sideways at step 5, rollback was literally reverting that one change.
+
+To smoke-test before flipping step 4, we ran:
+
+```sh
+stripe trigger customer.subscription.updated
+```
+
+Then we tailed the router logs. Every legacy preview environment showed up as skipped (`own_endpoint`), and our single new-style test environment answered `400` because it didn't have the shared secret published yet. Honestly, seeing that `400` was the best feeling—it proved the request crossed the edge, hit the router, passed signature verification, traversed the internal ALB with the right `Host` header, and landed in the right API container, failing *only* where it was supposed to fail.
+
+Once step 4 and step 5 were live and happy, all the per-environment create and prune-on-create code had zero callers. We deleted roughly 800 lines of it. Only the teardown cleanup stayed behind so existing legacy environments still clean up their endpoints when their PRs merge.
+
+## Implementation Notes & Infra Gotchas
+
+A few small details from actually shipping this that I wish someone had written down for me:
+
+### Zero-Build TypeScript on Lambda
+
+Node 24 strips TypeScript types natively. We shipped raw `.ts` files straight into the Lambda zip behind a one-line `lambda.mjs` entry point:
+
+```js
+export { handler } from "./src/index.ts";
+```
+
+Pair that with `erasableSyntaxOnly: true` and `.ts` import extensions in `tsconfig.json`. Because the Lambda runtime already includes the AWS SDK, our package ended up with zero runtime dependencies—just types and tests in `devDependencies`. Before deploying, we verified the exact zip locally against the official Lambda Node 24 base image and the Runtime Interface Emulator (RIE) to be 100% sure native type stripping behaved identically inside the container.
+
+### Deterministic Zip Packaging
+
+If you package a Lambda zip in CI and hand it to Terraform, build it deterministically: sorted file entries, fixed timestamps, and explicit permissions. Otherwise Terraform sees a brand-new hash on every single plan.
+
+Watch file modes, too. We hit a sneaky bug where files got zipped with `0600` permissions and the Lambda runtime couldn't read them. Explicitly forcing `0644` inside the zip script fixed it permanently.
+
+### The Terraform & AWS Rakes We Stepped On
+
+None of these are hard, all of them are annoying:
+
+- **Cross-stack bootstrap ordering.** Our router's Terraform root read config keys that only exist *after* the main platform stack applies. Until that first platform apply ran, CI plans for the router failed. Enable the new target after the upstream keys exist.
+- **Saved-plan bucket allowlists.** Our CI artifact bucket had a per-target prefix allowlist in its IAM policy. Adding a new Terraform target meant `terraform plan` passed, and then uploading the saved plan file failed with an explicit deny. Check your CI bucket policies when adding a new root.
+- **Default Lambda concurrency quota is 10.** On a fresh AWS account, the default account-wide concurrency limit is 10—shared across *every* Lambda in that account. Easy to forget when you add a second function. File the quota increase early.
+- **Keep inline security group ingress empty.** Leave the security group module's inline ingress list empty so other stacks can attach rules additively instead of fighting each other on apply.
+- **Tag the shared endpoint distinctly.** Give the shared Stripe endpoint its own metadata—like `managed_by=webhook-router`—completely distinct from whatever `managed_by` tag your legacy per-env endpoints used. That way, old cleanup and prune scripts can *never* accidentally delete the one endpoint keeping all your preview environments alive.
+
+## If You're Building This Yourself
+
+Here's the short checklist to steal:
+
+- **One endpoint, one router.** Stop creating Stripe webhook endpoints per PR; fan out from a single router behind your existing internal load balancer.
+- **Forward raw bytes + `Stripe-Signature`.** Share the signing secret across preview environments so your app's verification code doesn't have to change at all.
+- **Validate target hostnames strictly.** Lock routing to a single DNS label under your preview domain so a bad DB row never becomes an SSRF vector.
+- **Always return `200` after attempting fan-out.** Never let one broken PR trigger Stripe retries across every other environment.
+- **Stay under Stripe's 10s clock, and never retry timeouts.** Retry once on connection errors or `502`/`503`/`504` only; write a hanging-server test to prove timeouts send a single `POST`.
+- **Audit handlers for external side effects.** In a shared-account world, every handler must check local DB ownership *before* calling Stripe back.
+- **Tag your shared endpoint separately** so legacy teardown scripts can't touch it while old environments drain.
+
+Deleting ~800 lines of endpoint-juggling and prune hacks—and never thinking about the number 16 again—was easily worth a tiny Lambda.
