@@ -1,24 +1,30 @@
 ---
 title: "One Stripe Webhook for Every Preview Environment"
-description: "Stripe test mode caps you at 16 webhook endpoints. Collapse them into one router Lambda, fan out yourself, and stop letting per-PR webhooks fight basic arithmetic."
+description: "Coding agents turn 5 concurrent PRs into 20. Stripe test mode still caps you at 16 webhook endpoints. Collapse them into one router Lambda and fan out yourself."
 image: "./images/stripe-webhooks-for-ephemeral-environments.webp"
 pubDate: "November 26, 2026"
 expectedReadTime: 10
-tags: ["stripe", "aws", "infrastructure", "webhooks", "typescript"]
+tags: ["stripe", "aws", "infrastructure", "webhooks", "typescript", "ai"]
 draft: false
 ---
 
-Here is a slightly dumb math problem we ran into at work.
+When humans open pull requests one at a time, a limit of 16 Stripe test-mode webhook endpoints sounds generous.
 
-Every pull request gets its own ephemeral preview environment. Its own API, its own database, its own URL like `pr-123.preview.example.com`. Our platform allowed 20 concurrent environments. Stripe test mode allows 16 webhook endpoints per account.
+You have a handful of branches in flight, maybe six or eight preview environments running at once, and if a cancelled CI job leaks an endpoint here and there, you clean it up and move on. You never really think about the ceiling.
 
-You can probably guess what happened once the team got busy. Creates started failing at environment 16, even when every single teardown ran cleanly and zero endpoints leaked.
+Then AI coding agents become part of how your team works every day, and the cadence changes overnight.
 
-The obvious story here is "we hit a vendor quota and built a proxy around it."
+Nobody is working on one branch at a time anymore. Engineers kick off two, three, or four tasks in parallel. Agents write code, open PRs, spin up full ephemeral preview environments (each with its own API, its own database, and its own URL like `pr-123.preview.example.com`), verify flows against them, and iterate. The concurrency graph stops looking like a gentle daytime curve and starts sitting pinned near whatever limit your platform allows.
+
+At work, our preview platform allowed 20 concurrent environments. Stripe test mode allows 16 webhook endpoints per account.
+
+Once our AI-driven PR cadence made 16+ live environments a normal Tuesday afternoon, creates started failing at environment 16 even when every single teardown ran cleanly and zero endpoints leaked.
+
+The obvious story here is "AI made us open more PRs, we hit a vendor quota, and we built a proxy around it."
 
 I don't think that's the interesting story.
 
-The interesting story is that giving every preview environment its own Stripe webhook endpoint was an illusion of isolation from day one. Once you see what Stripe is actually delivering, the fix stops looking like a workaround and starts looking like the architecture you probably should have built first.
+The interesting story is how fast agent-speed cadence exposes old architectural shortcuts. Giving every preview environment its own Stripe webhook endpoint was always an illusion of isolation. Human-speed PR volume just kept us comfortably below the line where it broke. Once you see what Stripe is actually delivering, the fix stops looking like a quota workaround and starts looking like the architecture you probably should have built first.
 
 ## Sixteen Endpoints Was Always Sixteen Copies of the Same Firehose
 
@@ -30,7 +36,7 @@ For a long time, our environment creation script did the intuitive thing:
 
 Clean enough on paper. Annoying in real life.
 
-Cancelled workflows and half-failed creates left orphaned endpoints sitting in Stripe, which meant we hit the 16-endpoint wall way earlier than 16 active PRs. At one point we added a prune-on-create sweep just to clear stale endpoints before registering a new one. That patched the leak problem. It did nothing about the fact that 20 is still bigger than 16.
+Cancelled workflows and half-failed creates left orphaned endpoints sitting in Stripe, which meant we hit the 16-endpoint wall way earlier than 16 active PRs. When you are using AI agents to spin up, test, and throw away branches all day, that churn only gets louder. At one point we added a prune-on-create sweep just to clear stale endpoints before registering a new one. That patched the leak problem. It did nothing about the fact that 20 concurrent environments is still bigger than 16, and nothing is more annoying than an agent loop stalling because Stripe refused to mint endpoint number 17.
 
 Then a very obvious fact finally landed.
 
@@ -180,7 +186,7 @@ Once every preview environment reliably receives every test-mode event, two rule
 
 We hit a real bug on an admin path ("force tier") that called the Stripe API to mutate a subscription *before* checking whether that organization existed in the environment's local database.
 
-Under shared-account fan-out, every active preview environment received the event, and every environment that had no record of that organization still called Stripe to mutate the exact same shared subscription.
+Under shared-account fan-out, every active preview environment received the event, and every environment that had no record of that organization still called Stripe to mutate the exact same shared subscription. When you have 15 or 20 human and agent-opened preview environments alive at the same time, one test checkout stops being a harmless stray call and turns into a miniature stampede against the same subscription object.
 
 Messy. Also very easy to fix once you see it.
 
@@ -253,12 +259,12 @@ If you want to steal the pattern for your own preview stack, here is the checkli
 - Audit webhook handlers so every external API call happens *after* a local database ownership check.
 - Roll out behind distinct `managed_by` metadata and skip legacy rows that still own their own endpoint ID.
 
-## Quotas Are Usually Telling You Something
+## Human-Speed Quotas Don't Survive Agent-Speed Cadence
 
-We started this project because 20 is bigger than 16 and PR creates were failing.
+We started this project because our AI-driven PR cadence pushed us past 16 concurrent environments and creates started failing.
 
 By the end, we had deleted ~800 lines of endpoint-provisioning and pruning code, uncovered a real ownership bug in our billing handlers, and replaced a flaky per-PR Stripe mutation step with a tiny stateless Lambda.
 
-I keep coming back to how often third-party limits work like that. You hit a cap, your first instinct is to ask for a quota increase or write a cleanup cron, and then you look one layer deeper and realize the quota was mostly exposing an isolation boundary you drew in the wrong place.
+I keep coming back to how much of our preview infrastructure was quietly sized for human speed. Fixed webhook caps, per-branch third-party registrations, cleanup scripts that assume only a handful of PRs exist at once. When you use AI to work across several branches in parallel all day, concurrency stops being a rare peak and becomes your baseline.
 
-That seems like a decent rule of thumb for preview infra in general. Whenever every PR is mutating a shared vendor account on boot, there's probably a smaller router waiting to replace it.
+That seems like a useful rule of thumb for preview infra now. If every PR has to register and tear down a finite resource inside a shared vendor account just to boot, agent-speed cadence is going to walk straight into that wall. And usually, there's a smaller router waiting to replace it.
