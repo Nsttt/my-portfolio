@@ -32,7 +32,7 @@ So we stopped creating endpoints per PR. One shared test-mode endpoint points at
 
 ## Routing Behind the Load Balancer We Already Had
 
-An operator creates the single Stripe endpoint once, pointed at a fixed hostname like `stripe-webhooks.preview.example.com`. Inbound events hit our CDN and zero-trust edge (where an IP allowlist stays synced with Stripe's published webhook IPs), go over the tunnel to our internal ALB, match a host-header listener rule, and invoke the router Lambda target group.
+An operator creates the single Stripe endpoint once, pointed at a fixed URL like `https://stripe-webhooks.preview.example.com/stripe/webhook`. Inbound events hit our CDN and zero-trust edge (where an IP allowlist stays synced with Stripe's published webhook IPs), go over the tunnel to our internal ALB, and invoke the router Lambda target group only when a listener rule matches both the host header and the `/stripe/webhook` path. Scoping the rule to that path at the ALB stops stray traffic and probes from invoking the Lambda and running up unnecessary cost.
 
 ![Request path from Stripe through the zero-trust edge, tunnel, internal ALB, router Lambda with DynamoDB lifecycle lookup, and back through the ALB to each preview API](./images/stripe-webhooks-architecture.svg)
 
@@ -124,11 +124,13 @@ If a downstream preview environment returns `500`, propagating that `500` back t
 
 So gate errors answer Stripe directly (`503` if the signing secret is still a placeholder, `400` on bad signature, `500` if DynamoDB fails so Stripe retries the router). Once fan-out starts, the router always returns `200`.
 
+There is a real tradeoff here. Returning `200` unconditionally gives up Stripe's built-in retry engine and puts delivery reliability on your side. For production traffic, I would only return `200` on actual `2xx` deliveries and distinguish between different `500`s, because a real crash on a billing mutation is very different from an environment rejecting an event it doesn't own. For test-mode preview environments, keeping the router simple is an easy trade.
+
 Each delivery attempt gets a 4-second timeout inside an 8-second total budget, leaving headroom below Stripe's ~10-second expectation. We retry once on connection errors and `502`/`503`/`504`, and **never retry a timeout**.
 
 Our first draft retried timeouts, and code review caught it. A connection error or `502` means the app never saw the request, while a timeout means it might still be midway through handling it and a retry could double-apply the event. We locked that behavior down with a test that points the router at a fake HTTP server that accepts the request and hangs forever, then asserts it received one `POST`.
 
-If an environment is down when an event arrives, it misses that event. For test mode, replaying from the Stripe dashboard when you actually care is an easy tradeoff that avoids maintaining a queue. For observability, each invocation writes one CloudWatch EMF JSON line (`targets`, `delivered`, `failed`) to stdout instead of pulling in a metrics client.
+If an environment is down when an event arrives, it misses that event. For test mode, replaying from the Stripe dashboard when you actually care is an easy tradeoff that avoids maintaining a queue. For observability, each invocation writes one CloudWatch EMF JSON line (`targets`, `delivered`, `failed`) to stdout instead of pulling in a metrics client, with CloudWatch log retention capped at 7 days or less so ephemeral test traffic doesn't rack up log storage costs.
 
 ## Check Ownership Before Side Effects
 
@@ -151,6 +153,8 @@ The rollout took five steps (with rollback being a revert of step 5):
 5. Ship the platform change that stops creating per-environment Stripe endpoints.
 
 Before step 4, we ran `stripe trigger customer.subscription.updated` with the test key and tailed the router logs. Legacy environments showed up as skipped (`own_endpoint`), and our single new-style environment returned `400` because it didn't have the shared secret yet. That `400` proved the whole path from edge to ALB to container worked.
+
+If you are putting a router in front of an endpoint that already carries live test traffic, an even safer ramp is deploying the Lambda in passthrough mode first (forwarding requests untouched with no routing logic so other ephemeral environments stay unaffected), then turning fan-out on gradually via a feature flag, an SSM Parameter Store toggle, or a custom header on test-mode requests.
 
 After step 5 settled, the per-environment create and prune code had no callers, so we deleted ~800 lines of it. Teardown stays until the last legacy PR closes.
 
