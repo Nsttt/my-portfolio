@@ -1,6 +1,6 @@
 ---
 title: "One Stripe Webhook for Every Preview Environment"
-description: "Coding agents push a small team past Stripe's 16 test-mode webhook limit fast. Collapse per-PR endpoints into one router Lambda and fan out yourself."
+description: "Human-speed vendor quotas break fast once coding agents run 20 preview environments at once. Here is how we replaced per-PR Stripe webhooks with one fan-out router Lambda."
 image: "./images/stripe-webhooks-for-ephemeral-environments.webp"
 pubDate: "November 26, 2026"
 expectedReadTime: 7
@@ -8,13 +8,13 @@ tags: ["stripe", "aws", "infrastructure", "webhooks", "typescript", "ai"]
 draft: false
 ---
 
-When everyone opens pull requests one at a time, Stripe's limit of 16 test-mode webhook endpoints feels plenty big. You might have six or eight preview environments up at once, and if a cancelled CI run leaves a stale endpoint behind, you prune it and move on.
+A lot of preview infrastructure assumes human concurrency. Fixed vendor quotas, per-branch third-party registrations, and cleanup scripts all hold up fine when everyone opens one pull request at a time and six or eight environments are alive at once.
 
-Then you start shipping with AI coding agents all day.
+Coding agents break those assumptions fast.
 
-At work, most engineers now have multiple agent sessions going in parallel. Each branch spins up a full ephemeral preview environment (its own API, database, and URL like `pr-123.preview.example.com`) so we and the agents can test real flows before merging. Our preview platform allowed 20 concurrent environments. Stripe test mode caps an account at 16 webhook endpoints.
+At work, most engineers now run multiple agent sessions in parallel all day. Agents open branches, spin up full ephemeral preview environments (each with its own API, database, and URL like `pr-123.preview.example.com`), run real flows against them, and throw branches away when an approach misses. Twenty concurrent preview environments is just a normal Tuesday now.
 
-Once agent-paced PRs made 16+ live environments a normal Tuesday afternoon, environment creates started failing at number 16 with zero leaks.
+Whenever every PR has to register and tear down a finite resource inside a shared vendor account just to boot, agent cadence walks straight into the ceiling. The first wall we hit was Stripe test mode. Our preview platform allowed 20 concurrent environments, Stripe caps a test-mode account at 16 webhook endpoints, and environment creates started failing at number 16 with zero leaks.
 
 ## Sixteen Endpoints Was Sixteen Copies of the Same Stream
 
@@ -118,7 +118,7 @@ export const routeWebhook = (event: AlbEvent) =>
 
 ## Return 200 Always, and Never Retry a Timeout
 
-If a downstream preview environment returns `500`, propagating that `500` back to Stripe is a trap. Stripe will retry the webhook against the router, which fans it out to **every** active environment again. In a shared test account, an environment that doesn't own a subscription may return `500` on certain events, or someone's half-finished branch might simply be crashing on `/stripe/webhook`. One broken PR should never cause duplicate deliveries across nineteen healthy ones.
+If a downstream preview environment returns `500`, propagating that `500` back to Stripe is a trap. Stripe will retry the webhook against the router, which fans it out to **every** active environment again. With 15 or 20 human and agent branches running at the same time, several of them are always mid-iteration or legitimately returning `500` on events for subscriptions they don't own. One broken PR should never cause duplicate deliveries across nineteen healthy ones.
 
 ![Failure and retry boundaries showing gate error codes versus per-environment fan-out outcomes and the always-200 rule](./images/stripe-webhooks-delivery-semantics.svg)
 
@@ -160,12 +160,12 @@ After step 5 settled, the per-environment create and prune code had no callers, 
 - **Deterministic zips and file modes.** Sort zip entries, pin timestamps, and force `0644` permissions so Terraform doesn't diff every plan and Lambda can actually read the files (we hit a bug where files got zipped as `0600`).
 - **Cross-stack bootstrap order.** The router's Terraform root reads config keys created by the main platform apply, so CI plans failed until the router target was enabled after that apply.
 - **CI plan bucket allowlists.** Our saved-plan artifact bucket had a per-target prefix allowlist. Adding a new Terraform target meant `terraform plan` passed and uploading the plan got an explicit deny.
-- **Account Lambda concurrency.** Fresh AWS accounts default to a concurrency quota of 10, shared across every Lambda in the account. Request the bump before you need it.
+- **Account Lambda concurrency.** Fresh AWS accounts default to a concurrency quota of 10, shared across every Lambda in the account. Another human-speed default worth bumping before you need it.
 - **Empty inline security group ingress.** Keep the security group module's inline ingress list empty so other stacks can attach rules additively instead of overwriting each other.
 - **Distinct endpoint metadata.** Tag the shared Stripe endpoint with its own `managed_by` value (like `managed_by=webhook-router`) so legacy cleanup and prune logic can never touch it.
 
-## Human-Speed Limits Break Fast at Agent Cadence
+## Stop Registering Shared Vendor State Per PR
 
-I keep thinking about how much preview infrastructure assumes human concurrency. Fixed webhook caps and per-branch third-party registrations work fine when a team has six PRs open. Once everyone runs coding agents across multiple branches all day, 20 concurrent environments is just a normal Tuesday.
+Stripe's 16-endpoint limit was just the first place agent-paced concurrency caught up with our preview stack. The pattern generalizes to any boot step that registers a per-branch webhook, OAuth client, or sandbox resource inside a shared vendor account.
 
-Whenever every PR has to mutate a finite resource in a shared vendor account just to boot, agent cadence is going to hit that ceiling. A small router behind the load balancer you already run ends up simpler than fighting the cap.
+You can't prune your way past a hard quota when 20 parallel branches are genuinely alive. Pulling the fan-out behind the load balancer you already run removed ~800 lines of endpoint juggling, exposed a real billing ownership bug, and took the cap off the table for good.
