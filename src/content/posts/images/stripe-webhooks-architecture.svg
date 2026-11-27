@@ -54,7 +54,7 @@
   <!-- 4. Internal ALB (Ingress) -->
   <rect x="620" y="56" width="172" height="72" rx="10" fill="#1c2730" stroke="#56b4e9" stroke-width="1.3"/>
   <text x="706" y="82" text-anchor="middle" class="sans" font-size="13" font-weight="700" fill="#f5f2eb">Internal ALB</text>
-  <text x="706" y="100" text-anchor="middle" class="sans" font-size="11" fill="#b5afa6">Host-header rule</text>
+  <text x="706" y="100" text-anchor="middle" class="mono" font-size="10" fill="#b5afa6">Host + /stripe/webhook</text>
   <text x="706" y="116" text-anchor="middle" class="mono" font-size="10" fill="#56b4e9">Lambda target group</text>
 
   <!-- Connector ALB down to Router Lambda -->
