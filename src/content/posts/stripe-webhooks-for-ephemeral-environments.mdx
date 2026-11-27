@@ -44,17 +44,42 @@ Target environments come from a DynamoDB `lifecycle` table (a GSI on `status = a
 
 ## The Router Code
 
-We pass I/O dependencies into the handler (`fetchSecret`, `listTargets`, `send`, `now`) so unit tests run fast without mocking AWS. Leaving out imports and signature parsing, the core is about 40 lines:
+Modeling the router with [Effect](https://effect.website/) (v4) makes the error boundaries, timeouts, and retry rules explicit in one place. I/O dependencies live behind a `Context.Service`, so unit tests supply in-memory fakes and `TestClock` without mocking AWS:
 
 ```ts
-const ATTEMPT_TIMEOUT_MS = 4_000;
-const TOTAL_BUDGET_MS = 8_000;
-const RETRYABLE_STATUS = new Set([502, 503, 504]);
-const PREVIEW_HOST = /^[a-z0-9-]+\.preview\.example\.com$/;
+import { Clock, Context, Effect } from "effect";
 
-export function createHandler(deps: RouterDeps) {
-  return async (event: AlbEvent) => {
-    const secret = await deps.fetchSecret();
+const PREVIEW_HOST = /^[a-z0-9-]+\.preview\.example\.com$/;
+const RETRYABLE_STATUS = new Set([502, 503, 504]);
+
+class RouterDeps extends Context.Service<
+  RouterDeps,
+  RouterServices
+>()("RouterDeps") {}
+
+const deliverToEnv = (
+  send: RouterServices["send"],
+  host: string,
+  rawBody: string,
+  sig: string,
+) =>
+  send({ host, rawBody, sig }).pipe(
+    Effect.timeout("4 seconds"),
+    Effect.retry({
+      times: 1,
+      while: (err) =>
+        err._tag === "ConnectionError" ||
+        (err._tag === "HttpError" && RETRYABLE_STATUS.has(err.status)),
+    }),
+    Effect.timeout("8 seconds"),
+    Effect.as(true),
+    Effect.catch(() => Effect.succeed(false)),
+  );
+
+export const routeWebhook = (event: AlbEvent) =>
+  Effect.gen(function* () {
+    const deps = yield* RouterDeps;
+    const secret = yield* deps.fetchSecret;
     if (!secret || secret === "PLACEHOLDER") {
       return { statusCode: 503, body: "router secret not seeded" };
     }
@@ -63,60 +88,32 @@ export function createHandler(deps: RouterDeps) {
       ? Buffer.from(event.body ?? "", "base64").toString("utf8")
       : (event.body ?? "");
     const sig = event.headers?.["stripe-signature"];
+    const now = yield* Clock.currentTimeMillis;
 
-    if (!sig || !verifyStripeSignature(rawBody, sig, secret, deps.now())) {
+    if (!sig || !verifyStripeSignature(rawBody, sig, secret, now)) {
       return { statusCode: 400, body: "invalid signature" };
     }
 
-    let targets: EnvTarget[];
-    try {
-      targets = await deps.listTargets();
-    } catch {
-      return { statusCode: 500, body: "target discovery failed" };
-    }
-
+    const targets = yield* deps.listTargets.pipe(
+      Effect.mapError(() => ({ _tag: "DiscoveryFailed" as const })),
+    );
     const active = targets.filter(
       (t) => !t.stripeEndpointId && PREVIEW_HOST.test(t.host),
     );
-    const deadline = deps.now() + TOTAL_BUDGET_MS;
 
-    const results = await Promise.all(
-      active.map((t) =>
-        deliverOnceOrRetry(deps, t.host, rawBody, sig, deadline),
-      ),
+    const results = yield* Effect.forEach(
+      active,
+      (t) => deliverToEnv(deps.send, t.host, rawBody, sig),
+      { concurrency: "unbounded" },
     );
 
     emitEmfMetrics(results);
     return { statusCode: 200, body: "ok" };
-  };
-}
-
-async function deliverOnceOrRetry(
-  deps: RouterDeps,
-  host: string,
-  rawBody: string,
-  sig: string,
-  deadline: number,
-): Promise<boolean> {
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const remaining = deadline - deps.now();
-    if (remaining <= 0) return false;
-
-    const res = await deps.send({
-      host,
-      rawBody,
-      sig,
-      timeoutMs: Math.min(ATTEMPT_TIMEOUT_MS, remaining),
-    });
-
-    if (res.ok) return true;
-    if (res.timedOut) return false;
-    if (!res.connectionError && !RETRYABLE_STATUS.has(res.status ?? 0)) {
-      return false;
-    }
-  }
-  return false;
-}
+  }).pipe(
+    Effect.catchTag("DiscoveryFailed", () =>
+      Effect.succeed({ statusCode: 500, body: "target discovery failed" }),
+    ),
+  );
 ```
 
 ## Return 200 Always, and Never Retry a Timeout
@@ -159,7 +156,7 @@ After step 5 settled, the per-environment create and prune code had no callers, 
 
 ## Implementation Notes and Infra Gotchas
 
-- **Zero-build TypeScript on Lambda.** Node 24 strips types natively, so we zip raw `.ts` files behind a one-line `lambda.mjs` (`export { handler } from "./src/index.ts";`), enable `erasableSyntaxOnly` and `.ts` import paths in `tsconfig.json`, and rely on the runtime's bundled AWS SDK. Dependencies are just types and tests. We verified the exact zip locally against the official Lambda Node 24 base image and the Runtime Interface Emulator (RIE).
+- **Zero-build TypeScript on Lambda.** Node 24 strips types natively, so you can zip raw `.ts` files behind a one-line `lambda.mjs` (`export { handler } from "./src/index.ts";`), enable `erasableSyntaxOnly` and `.ts` import paths in `tsconfig.json`, and rely on the runtime's bundled AWS SDK instead of bundling it yourself. We verified the exact zip locally against the official Lambda Node 24 base image and the Runtime Interface Emulator (RIE).
 - **Deterministic zips and file modes.** Sort zip entries, pin timestamps, and force `0644` permissions so Terraform doesn't diff every plan and Lambda can actually read the files (we hit a bug where files got zipped as `0600`).
 - **Cross-stack bootstrap order.** The router's Terraform root reads config keys created by the main platform apply, so CI plans failed until the router target was enabled after that apply.
 - **CI plan bucket allowlists.** Our saved-plan artifact bucket had a per-target prefix allowlist. Adding a new Terraform target meant `terraform plan` passed and uploading the plan got an explicit deny.
